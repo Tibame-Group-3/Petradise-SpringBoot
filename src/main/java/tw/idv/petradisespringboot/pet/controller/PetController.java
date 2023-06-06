@@ -3,31 +3,41 @@ package tw.idv.petradisespringboot.pet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 @RestController
-@RequestMapping("pet")
 public class PetController {
 
-    @Autowired
     private PetRepository repository;
 
-    @GetMapping(path = "/all")
+    public PetController(PetRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/pets")
     @ResponseBody
-    List<Pet> getAll() {
+    List<Pet> all() {
         return repository.findAll();
     }
 
-    @PostMapping(path = "/add")
-    Pet addPet(@RequestBody Pet pet) {
+    @PostMapping("/pets")
+    Pet newPet(@RequestBody Pet pet) {
         return repository.save(pet);
     }
+
+    @GetMapping("/pets/{id}")
+    Pet one(@PathVariable Integer id) {
+        return repository.findById(id).orElseThrow(() -> new PetNotFoundException(id));
+    }
+}
+
+class PetNotFoundException extends RuntimeException {
+
+    PetNotFoundException(Integer id) {
+        super("找不到寵物ID: " + id);
+    }
+
 }

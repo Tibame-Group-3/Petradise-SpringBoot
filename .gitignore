@@ -18,3 +18,5 @@ buildNumber.properties
 .settings
 .factorypath
 launch.json
+.idea
+.vscode

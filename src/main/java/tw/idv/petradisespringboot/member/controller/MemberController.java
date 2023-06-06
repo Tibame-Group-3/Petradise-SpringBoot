@@ -3,32 +3,37 @@ package tw.idv.petradisespringboot.member.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import tw.idv.petradisespringboot.member.repo.MemberRepository;
+import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 @RestController
-@RequestMapping("member")
 class MemberController {
 
-	@Autowired
-	private MemberRepository repository;
+    private MemberService service;
 
-	@GetMapping(path = "/all")
-	@ResponseBody
-	List<Member> getAllMembers() {
-		return repository.findAll();
-	}
+    public MemberController(MemberService service) {
+        this.service = service;
+    }
 
-	@PostMapping(path = "/add")
-	Member addMember(@RequestBody Member member) {
-		System.out.println(member);
-		return repository.save(member);
-	}
+    @GetMapping("/members/all")
+    List<Member> all() {
+        return service.getAllMembers();
+    }
+
+    @PostMapping("/members/signUp")
+    Member signUp(@RequestBody Member member) {
+        return service.signUp(member);
+    }
+
+    @GetMapping("/members/id/{id}")
+    Member one(@PathVariable Integer id) {
+        return service.findMemberById(id);
+    }
+
+    @GetMapping("/members/account/{account}")
+    Member findByAccount(@PathVariable String account) { return service.findMemberByAccount(account); }
 }
+
