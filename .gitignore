@@ -17,3 +17,7 @@ buildNumber.properties
 .classpath
 .settings
 .factorypath
+launch.json
+.idea
+.vscode
+Petradise-SpringBoot.iml
