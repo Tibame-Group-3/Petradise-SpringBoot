@@ -10,6 +10,7 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 class MemberController {
 
     private MemberService service;
