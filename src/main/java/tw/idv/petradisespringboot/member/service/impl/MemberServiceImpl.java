@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    private MemberRepository repository;
+    private final MemberRepository repository;
 
     MemberServiceImpl(MemberRepository repository) {
         this.repository = repository;
@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findMemberByEmail(String email) {
-        return null;
+        return repository.findByMemEmail(email);
     }
 }
 

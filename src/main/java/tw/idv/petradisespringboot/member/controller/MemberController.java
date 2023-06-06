@@ -10,31 +10,38 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 class MemberController {
 
-    private MemberService service;
+    private final MemberService service;
 
     public MemberController(MemberService service) {
         this.service = service;
     }
 
     @GetMapping("/members/all")
+    @ResponseBody
     List<Member> all() {
         return service.getAllMembers();
     }
 
     @PostMapping("/members/signUp")
+    @ResponseBody
     Member signUp(@RequestBody Member member) {
         return service.signUp(member);
     }
 
     @GetMapping("/members/id/{id}")
+    @ResponseBody
     Member one(@PathVariable Integer id) {
         return service.findMemberById(id);
     }
 
     @GetMapping("/members/account/{account}")
+    @ResponseBody
     Member findByAccount(@PathVariable String account) { return service.findMemberByAccount(account); }
+
+    @GetMapping("/members/email/{email}")
+    @ResponseBody
+    Member findByEmail(@PathVariable String email) { return service.findMemberByEmail(email); }
 }
 

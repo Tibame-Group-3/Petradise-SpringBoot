@@ -11,7 +11,7 @@ import tw.idv.petradisespringboot.pet.vo.Pet;
 @RestController
 public class PetController {
 
-    private PetRepository repository;
+    private final PetRepository repository;
 
     public PetController(PetRepository repository) {
         this.repository = repository;
