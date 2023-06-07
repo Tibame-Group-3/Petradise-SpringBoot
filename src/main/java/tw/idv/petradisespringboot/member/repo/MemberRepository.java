@@ -9,10 +9,10 @@ import tw.idv.petradisespringboot.member.vo.Member;
 @Component
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
-    Member findByMemAccount(String account);
+    Member findByAccount(String account);
 
-    Member findByMemName(String name);
+    Member findByName(String name);
 
-    Member findByMemEmail(String email);
+    Member findByEmail(String email);
 
 }

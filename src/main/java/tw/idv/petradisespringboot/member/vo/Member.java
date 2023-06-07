@@ -25,31 +25,31 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_id")
-    private Integer memID;
+    private Integer id;
     @Column(name = "mem_name")
-    private String memName;
+    private String name;
     @Column(name = "mem_account")
-    private String memAccount;
+    private String account;
     @Column(name = "mem_password")
-    private String memPassword;
+    private String password;
     @Column(name = "mem_birthday")
-    private Date memBirthday;
+    private Date birthday;
     @Column(name = "mem_phone")
-    private String memPhone;
+    private String phone;
     @Column(name = "mem_email")
-    private String memEmail;
+    private String email;
     @Column(name = "mem_address")
-    private String memAddress;
+    private String address;
     @Column(name = "mem_access", insertable = false)
-    private Character memAccess;
+    private Character access;
     @Column(name = "mem_bonus", insertable = false)
-    private Integer memBonus;
+    private Integer bonus;
 
     @Override
     public String toString() {
-        return "Member [memID=" + memID + ", memName=" + memName + ", memAccount=" + memAccount + ", memPassword="
-                + memPassword + ", memBirthday=" + memBirthday + ", memPhone=" + memPhone + ", memEmail=" + memEmail
-                + ", memAddress=" + memAddress + ", memAccess=" + memAccess + ", memBonus=" + memBonus + "]";
+        return "Member [memID=" + id + ", memName=" + name + ", memAccount=" + account + ", memPassword="
+                + password + ", memBirthday=" + birthday + ", memPhone=" + phone + ", memEmail=" + email
+                + ", memAddress=" + address + ", memAccess=" + access + ", memBonus=" + bonus + "]";
     }
 
 }
