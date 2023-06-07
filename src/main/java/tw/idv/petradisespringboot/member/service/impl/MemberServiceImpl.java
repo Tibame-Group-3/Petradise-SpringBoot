@@ -40,12 +40,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findMemberByAccount(String account) {
-        return repository.findByMemAccount(account);
+        return repository.findByAccount(account);
     }
 
     @Override
     public Member findMemberByEmail(String email) {
-        return repository.findByMemEmail(email);
+        return repository.findByEmail(email);
     }
 }
 
