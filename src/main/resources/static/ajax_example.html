@@ -4,23 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>AJAX</title>
+
+    <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
-            <table class="table table-striped">
-                <thead>
+    <div class="container">
+        <div class="bd-example-snippet bd-code-snippet">
+            <div class="bd-example m-0 border-0">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">NAME</th>
                         <th scope="col">ACCOUNT</th>
                         <th scope="col">PASSWORD</th>
                     </tr>
-                </thead>
-                <tbody id="table-b">
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="table-b">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -30,15 +34,10 @@
         $(document).ready(function () {
             const tableBody = document.getElementById('table-b');
             console.log(tableBody)
-            $.ajax({
-                url: "http://localhost:8080/members/all",
-                type: "GET",
-                dataType: "json",
-                success: onReceivedJSON,
-                error: function (xhr, status, error) {
-                    console.log("AJAX Error" + error);
-                }
-            });
+
+            fetch('http://localhost:8080/members/all')
+                .then((res) => res.json())
+                .then((json) => onReceivedJSON(json));
 
             function onReceivedJSON(data) {
                 console.log(data);
@@ -61,7 +60,7 @@
 
 
     </script>
-
+    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
