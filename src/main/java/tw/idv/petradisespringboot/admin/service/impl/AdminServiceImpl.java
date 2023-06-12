@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.admin.service.impl;
+package tw.idv.petradisespringboot.admin.service.Impl;
 
 import tw.idv.petradisespringboot.admin.repo.AdminDAO;
 import tw.idv.petradisespringboot.admin.service.AdminService;
