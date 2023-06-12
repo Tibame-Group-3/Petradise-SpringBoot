@@ -15,7 +15,7 @@ public class AdminDAOImpl implements AdminDAO {
     String pw = "123";
 
     public static final String FIND = "select * from admin where admin_id = ?;";
-    public static final String INSERT = "insert into admin (admin_name, admin_account, admin_password, admin_phone, admin_address, admin_email, admin_title) values (?, ?, ?, ?, ?, ?, ?);";
+    public static final String INSERT = "insert into admin (admin_name, admin_account, admin_password, admin_email, admin_title) values (?, ?, ?, ?, ?);";
     public static final String DELETE = "delete from admin where admin_id= ?;";
     public static final String UPDATE = "update admin set admin_name = ?, admin_account = ?, admin_password = ?, admin_phone = ?, admin_address = ?, admin_email = ?, admin_title = ?, admin_status = ? where admin_id = ?;";
     public static final String ALL = "select * from admin order by admin_title;";
@@ -59,8 +59,8 @@ public class AdminDAOImpl implements AdminDAO {
             ps.setString(1, admin.getName());
             ps.setString(2, admin.getAccount());
             ps.setString(3, admin.getPassword());
-            ps.setString(6, admin.getEmail());
-            ps.setString(7, String.valueOf(admin.getTitle()));
+            ps.setString(4, admin.getEmail());
+            ps.setString(5, String.valueOf(admin.getTitle()));
             ps.executeUpdate();
 
             return admin;
