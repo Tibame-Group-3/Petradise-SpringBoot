@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 public class RoomController {
 
-    RoomService service;
+    private final RoomService service;
 
     RoomController(RoomService service) {
         this.service = service;
