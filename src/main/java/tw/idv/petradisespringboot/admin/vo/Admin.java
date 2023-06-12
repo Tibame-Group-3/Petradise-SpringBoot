@@ -34,7 +34,7 @@ public class Admin {
     @Column(name = "admin_email")
     private String email;
     @Column(name = "admin_title")
-    private String title;
+    private Character title;
     @Column(name = "admin_status", insertable = false)
     private Character status;
 

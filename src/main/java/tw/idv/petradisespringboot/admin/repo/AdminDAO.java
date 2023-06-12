@@ -2,6 +2,8 @@ package tw.idv.petradisespringboot.admin.repo;
 
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
+import java.util.List;
+
 public interface AdminDAO {
 
     // 查
@@ -15,5 +17,7 @@ public interface AdminDAO {
 
     // 改
     Admin update(Admin newAdmin);
+
+    List<Admin> getAll();
 
 }

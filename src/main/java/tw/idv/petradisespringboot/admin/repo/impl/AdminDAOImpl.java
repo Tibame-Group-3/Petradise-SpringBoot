@@ -4,6 +4,8 @@ import tw.idv.petradisespringboot.admin.repo.AdminDAO;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminDAOImpl implements AdminDAO {
 
@@ -16,35 +18,12 @@ public class AdminDAOImpl implements AdminDAO {
     public static final String INSERT = "insert into admin (admin_name, admin_account, admin_password, admin_phone, admin_address, admin_email, admin_title) values (?, ?, ?, ?, ?, ?, ?);";
     public static final String DELETE = "delete from admin where admin_id= ?;";
     public static final String UPDATE = "update admin set admin_name = ?, admin_account = ?, admin_password = ?, admin_phone = ?, admin_address = ?, admin_email = ?, admin_title = ?, admin_status = ? where admin_id = ?;";
-
-
-    public static void main(String[] args) {
-
-//        AdminDAOImpl run = new AdminDAOImpl();
-//        System.out.println(run.findById(14));
-
-//        Admin admin = new Admin();
-//        admin.setName("測試");
-//        admin.setAccount("測試");
-//        admin.setPassword("測試");
-//        admin.setPhone("測試");
-//        admin.setAddress("測試");
-//        admin.setEmail("測試");
-//        admin.setTitle("測試");
-//        System.out.println(run.insert(admin));
-
-//        admin.setStatus('1');
-//        admin.setId(14);
-//        System.out.println(run.update(admin));
-
-//        System.out.println(run.deleteById(18));
-    }
+    public static final String ALL = "select * from admin order by admin_title;";
 
     @Override
     public Admin findById(Integer id) {
 
-        try (Connection con = DriverManager.getConnection(url, uid, pw);
-             PreparedStatement ps = con.prepareStatement(FIND)) {
+        try (Connection con = DriverManager.getConnection(url, uid, pw); PreparedStatement ps = con.prepareStatement(FIND)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -58,7 +37,7 @@ public class AdminDAOImpl implements AdminDAO {
                 admin.setPhone(rs.getString("admin_phone"));
                 admin.setAddress(rs.getString("admin_address"));
                 admin.setEmail(rs.getString("admin_email"));
-                admin.setTitle(rs.getString("admin_title"));
+                admin.setTitle(rs.getString("admin_title").charAt(0));
                 admin.setStatus(rs.getString("admin_status").charAt(0));
 
                 return admin;
@@ -75,16 +54,13 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public Admin insert(Admin admin) {
 
-        try (Connection con = DriverManager.getConnection(url, uid, pw);
-             PreparedStatement ps = con.prepareStatement(INSERT)) {
+        try (Connection con = DriverManager.getConnection(url, uid, pw); PreparedStatement ps = con.prepareStatement(INSERT)) {
 
             ps.setString(1, admin.getName());
             ps.setString(2, admin.getAccount());
             ps.setString(3, admin.getPassword());
-            ps.setString(4, admin.getPhone());
-            ps.setString(5, admin.getAddress());
             ps.setString(6, admin.getEmail());
-            ps.setString(7, admin.getTitle());
+            ps.setString(7, String.valueOf(admin.getTitle()));
             ps.executeUpdate();
 
             return admin;
@@ -98,8 +74,7 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public Boolean deleteById(Integer id) {
 
-        try (Connection con = DriverManager.getConnection(url, uid, pw);
-             PreparedStatement ps = con.prepareStatement(DELETE)) {
+        try (Connection con = DriverManager.getConnection(url, uid, pw); PreparedStatement ps = con.prepareStatement(DELETE)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -114,8 +89,7 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public Admin update(Admin admin) {
 
-        try (Connection con = DriverManager.getConnection(url, uid, pw);
-             PreparedStatement ps = con.prepareStatement(UPDATE)) {
+        try (Connection con = DriverManager.getConnection(url, uid, pw); PreparedStatement ps = con.prepareStatement(UPDATE)) {
 
             ps.setString(1, admin.getName());
             ps.setString(2, admin.getAccount());
@@ -123,12 +97,41 @@ public class AdminDAOImpl implements AdminDAO {
             ps.setString(4, admin.getPhone());
             ps.setString(5, admin.getAddress());
             ps.setString(6, admin.getEmail());
-            ps.setString(7, admin.getTitle());
+            ps.setString(7, String.valueOf(admin.getTitle()));
             ps.setString(8, String.valueOf(admin.getStatus()));
             ps.setInt(9, admin.getId());
 
             ps.executeUpdate();
             return admin;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Admin> getAll() {
+
+        try (Connection con = DriverManager.getConnection(url, uid, pw);
+             PreparedStatement ps = con.prepareStatement(ALL)) {
+
+            ResultSet rs = ps.executeQuery();
+            List<Admin> list = new ArrayList<Admin>();
+
+            while (rs.next()) {
+                Admin admin = new Admin();
+                admin.setId(rs.getInt("admin_id"));
+                admin.setName(rs.getString("admin_name"));
+                admin.setAccount(rs.getString("admin_account"));
+                admin.setPassword(rs.getString("admin_password"));
+                admin.setPhone(rs.getString("admin_phone"));
+                admin.setAddress(rs.getString("admin_address"));
+                admin.setEmail(rs.getString("admin_email"));
+                admin.setTitle(rs.getString("admin_title").charAt(0));
+                admin.setStatus(rs.getString("admin_status").charAt(0));
+                list.add(admin);
+            }
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

@@ -8,12 +8,14 @@ public interface AdminService {
 
     Admin login(String account, String password);
 
-    Admin addNew(String name, String email, String title, String access);
+    Admin addNew(String name, String email, Character title);
 
     Admin modify(String name, String account, String password, String phone, String address, String email);
-    Admin modify(String name, String account, String password, String phone, String address, String email, String title, Character status);
+    Admin modify(String name, String account, String password, String phone, String address, String email, Character title, Character status);
 
     List<Admin> getAllAdmins();
+
+    Admin findById(Integer id);
 
 
 }
