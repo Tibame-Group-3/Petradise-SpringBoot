@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.admin.controller;
 
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
@@ -29,4 +30,7 @@ public class AdminController {
     Admin add(@RequestBody Admin admin) {
         return service.add(admin);
     }
+=======
+public class AdminController {
+>>>>>>> 27
 }
