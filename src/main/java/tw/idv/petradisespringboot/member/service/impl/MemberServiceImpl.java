@@ -39,6 +39,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Member update(Member newMember) {
+        return repository.save(newMember);
+    }
+
+    @Override
     public Member findMemberByAccount(String account) {
         return repository.findByAccount(account);
     }

@@ -13,6 +13,8 @@ public interface MemberService {
 
     Member findMemberById(Integer id);
 
+    Member update(Member newMember);
+
     Member findMemberByAccount(String account);
 
     Member findMemberByEmail(String email);

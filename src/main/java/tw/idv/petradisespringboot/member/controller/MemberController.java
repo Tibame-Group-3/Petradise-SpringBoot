@@ -23,7 +23,7 @@ class MemberController {
         return service.getAllMembers();
     }
 
-    @PostMapping("/members/signUp")
+    @PostMapping("/members/sign_up")
     Member signUp(@RequestBody Member member) {
         return service.signUp(member);
     }
