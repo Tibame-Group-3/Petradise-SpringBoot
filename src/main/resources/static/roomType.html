@@ -6,7 +6,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>房型資訊管理</title>
-<link rel="stylesheet" href="../assets17/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../assets17/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
 <link rel="stylesheet" href="../assets17/fonts/fontawesome-all.min.css">
@@ -161,7 +162,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">關閉</button>
-						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="button" class="btn btn-primary">提交</button>
 					</div>
 				</div>
 			</div>
@@ -278,7 +279,7 @@
 										</tr>
 									</thead>
 									<tbody id="room-data-list">
-										
+
 									</tbody>
 
 
@@ -347,41 +348,54 @@
 	}
 
 	$(document).ready(function () {
+		const hotelId = 5;
 	    $.ajax({
-	        url: '/CHA101G3/hotel/roomtype2', 
-	        type: 'POST',
-	        contentType: 'application/json',
-	        data: JSON.stringify({
-	            roomTypeId: 1
-	        }),
-	        success: function (res) {
-	            let parseJson = JSON.parse(res);
-	            console.log(parseJson);
-	            console.log(typeof (parseJson));
-	            let html = ` <tr>
-	                <td>${parseJson.roomTypeName}</td>
-	                <td>${parseJson.roomTypeAmount}</td>
-	                <td>${parseJson.roomTypePrice}</td>
-	                <td>${parseJson.roomPetType}</td>
-	                <td>${parseJson.roomTypeSize}</td>
-	                <td class="limited-text">${parseJson.roomTypeAbout}</td>
-	                <td>${parseJson.roomTypeSaleStatus}</td>
-	                <td><button type="button" class="btn btn-primary btn-modify" data-bs-toggle="modal" data-bs-target="#editModal">編輯</button></td>
-	 </tr>`;
-	            $("#room-data-list").html(html);
+	        url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`, 
+	        type: 'GET',
+	        
+	        success: function (response) {
+	            let html = '';
+	            for (let i = 0; i < response.length; i++) {
+	                let roomType = response[i];
+	                console.log(roomType);
+	                const sizeString = getSizeString(roomType.roomTypeSize);
 
-	            limitTextLength();  // 在这里调用限制文本长度的函数
+	                html += `<tr>
+	                    <td>${roomType.roomTypeName}</td>
+	                    <td>${roomType.roomTypeAmount}</td>
+	                    <td>${roomType.roomTypePrice}</td>
+	                    <td>${roomType.roomPetType}</td>
+	                    <td>${sizeString}</td>
+	                    <td class="limited-text">${roomType.roomTypeAbout}</td>
+	                    <td>${roomType.roomTypeSaleStatus === 0 ? "下架" : "上架"}</td>
+	                    <td><button type="button" class="btn btn-primary btn-modify" data-bs-toggle="modal" data-bs-target="#editModal">編輯</button></td>
+	                </tr>`;
+	            }
+	            $("#room-data-list").html(html);
+	            limitTextLength();  // 房型介紹字數限制
 	        },
 	        error: function (xhr, textStatus, errorThrown) {
 	            console.error(xhr);
-	            // 在這裡處理錯誤
 	            if (xhr.status === 401) {
 	                msg.show();
 	            }
 	        }
-	    });  
+	    });
 	});
-    </script>
+	
+	function getSizeString(type) {
+        switch (type) {
+            case "0":
+                return "小型";
+            case "1":
+            	return "中型";
+            case "2":
+            	return "大型";
+            default:
+            	return undefined;
+        }
+	}
+    </script> 
 
 	<!-- 驗證填寫欄位 -->
 	<script>
