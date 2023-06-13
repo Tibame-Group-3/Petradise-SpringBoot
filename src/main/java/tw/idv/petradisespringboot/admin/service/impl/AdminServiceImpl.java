@@ -1,11 +1,12 @@
 package tw.idv.petradisespringboot.admin.service.impl;
 
+import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.admin.repo.AdminDAO;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.util.List;
-
+@Service
 public class AdminServiceImpl implements AdminService {
     private final AdminDAO dao;
 

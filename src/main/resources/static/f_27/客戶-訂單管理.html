@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>訂單管理</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- <div class="searchEmp">
+                    <input type="search">
+                    <button class="btn btn-primary" type="button"
+                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button>
+
+                </div> -->
+
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Team</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">訂單管理</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Show&nbsp;<select
+                                                class="d-inline-block form-select form-select-sm">
+                                                <option selected="">全部</option>
+                                                <option>即將到來</option>
+                                                <option>已完成</option>
+                                                <option>已取消</option>
+                                            </select>&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search"></label>
+                                        <!-- <button class="btn btn-primary" type="button"
+                                            style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container py-4 py-xl-5">
+                                <div class="row gy-4 gy-md-0">
+                                    <div
+                                        class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                                        <div style="max-width: 350px;">
+                                            <h2 class="text-uppercase fw-bold">XX旅館</h2>
+                                            <p class="my-3">訂單編號: xxx<br>入住日期: 2023/7/1<br>退房日期: 2023/7/2</p><a
+                                                class="btn btn-primary btn-lg me-2" role="button" href="#">留下評論</a><a
+                                                class="btn btn-outline-primary btn-lg" role="button" href="#">查看詳情</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-xl-5 m-xl-5"><img href=""
+                                                class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;"
+                                                src="assets/img/xxx.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container py-4 py-xl-5">
+                                <div class="row gy-4 gy-md-0">
+                                    <div
+                                        class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                                        <div style="max-width: 350px;">
+                                            <h2 class="text-uppercase fw-bold">XX旅館</h2>
+                                            <p class="my-3">訂單編號: xxx<br>入住日期: 2023/7/1<br>退房日期: 2023/7/2</p><a
+                                                class="btn btn-primary btn-lg me-2" role="button" href="#">留下評論</a><a
+                                                class="btn btn-outline-primary btn-lg" role="button" href="#">查看詳情</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-xl-5 m-xl-5"><img href=""
+                                                class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;"
+                                                src="assets/img/xxx.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                        Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
+                                                    href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
+                                                        aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

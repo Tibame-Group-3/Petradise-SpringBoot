@@ -8,8 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -25,9 +25,9 @@ public class RoomReview {
     @Column(name = "room_order_id")
     private Integer roomOrderId;
     @Column(name = "room_review_score")
-    private Integer roomReviewScore;
+    private Integer score;
     @Column(name = "room_review_content")
-    private String roomReviewContent;
+    private String content;
 
     @Override
     public String toString() {
@@ -35,8 +35,8 @@ public class RoomReview {
                 "id=" + id +
                 ", hotelId=" + hotelId +
                 ", roomOrderId=" + roomOrderId +
-                ", roomReviewScore=" + roomReviewScore +
-                ", roomReviewContent='" + roomReviewContent + '\'' +
+                ", score=" + score +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

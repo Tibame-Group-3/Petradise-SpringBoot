@@ -6,7 +6,6 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
-
 @Service
 public class MemberServiceImpl implements MemberService {
 
