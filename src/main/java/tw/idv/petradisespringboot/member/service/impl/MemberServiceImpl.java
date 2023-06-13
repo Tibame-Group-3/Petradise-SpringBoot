@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member signUp(Member newMember) {
-        return null;
+        return repository.save(newMember);
     }
 
     @Override

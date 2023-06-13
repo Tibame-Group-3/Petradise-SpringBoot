@@ -1,13 +1,10 @@
 package tw.idv.petradisespringboot.member.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import tw.idv.petradisespringboot.member.repo.MemberRepository;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
+
+import java.util.List;
 
 @RestController
 class MemberController {
@@ -23,7 +20,7 @@ class MemberController {
         return service.getAllMembers();
     }
 
-    @PostMapping("/members/sign_up")
+    @PostMapping("/members/sign-up")
     Member signUp(@RequestBody Member member) {
         return service.signUp(member);
     }
