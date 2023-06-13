@@ -6,12 +6,15 @@ import java.util.List;
 
 public interface AdminService {
 
-    Admin findByID(Integer id);
+    Admin login(String account, String password);
 
-    Admin add(Admin admin);
+    Admin addNew(String name, String email, Character title);
 
-    Admin update(Admin newAdmin);
+    Admin modify(String name, String account, String password, String phone, String address, String email);
+    Admin modify(String name, String account, String password, String phone, String address, String email, Character title, Character status);
 
-    List<Admin> getAll();
+    List<Admin> getAllAdmins();
+
+    Admin findById(Integer id);
 
 }

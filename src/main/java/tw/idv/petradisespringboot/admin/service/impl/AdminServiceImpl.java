@@ -1,47 +1,53 @@
 package tw.idv.petradisespringboot.admin.service.impl;
 
-import org.springframework.stereotype.Service;
-import tw.idv.petradisespringboot.admin.repo.AdminRepository;
+import tw.idv.petradisespringboot.admin.repo.AdminDAO;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.util.List;
 
-@Service
 public class AdminServiceImpl implements AdminService {
+    private final AdminDAO dao;
 
-    private final AdminRepository repository;
-
-    AdminServiceImpl(AdminRepository repository) {
-        this.repository = repository;
+    public AdminServiceImpl(AdminDAO dao) {
+        this.dao = dao;
     }
 
     @Override
-    public Admin findByID(Integer id) {
-        return repository
-                .findById(id)
-                .orElseThrow(() -> new AdminNotFoundException(id));
+    public Admin login(String account, String password) {
+        return null;
     }
 
     @Override
-    public Admin add(Admin admin) {
-        return repository.save(admin);
+    public Admin addNew(String name, String email, Character title) {
+
+        Admin admin = new Admin();
+        admin.setAccount("admin" + admin.getId());
+        admin.setPassword("pw" + admin.getPassword());
+        admin.setName(name);
+        admin.setEmail(email);
+        admin.setTitle(title);
+        return dao.insert(admin);
     }
 
     @Override
-    public Admin update(Admin newAdmin) {
-        return repository.save(newAdmin);
+    public Admin modify(String name, String account, String password, String phone, String address, String email) {
+        return null;
     }
 
     @Override
-    public List<Admin> getAll() {
-        return repository.findAll();
+    public Admin modify(String name, String account, String password, String phone, String address, String email, Character title, Character status) {
+        return null;
     }
-}
 
-class AdminNotFoundException extends RuntimeException {
-
-    AdminNotFoundException(Integer id){
-        super("Admin not found, id: " + id);
+    @Override
+    public List<Admin> getAllAdmins() {
+        return dao.getAll();
     }
+
+    @Override
+    public Admin findById(Integer id) {
+        return dao.findById(id);
+    }
+
 }
