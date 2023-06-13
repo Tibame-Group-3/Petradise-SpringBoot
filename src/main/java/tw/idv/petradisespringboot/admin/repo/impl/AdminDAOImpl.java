@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.admin.repo.impl;
 
+import org.springframework.stereotype.Repository;
 import tw.idv.petradisespringboot.admin.repo.AdminDAO;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
@@ -7,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class AdminDAOImpl implements AdminDAO {
 
     String driver = "com.sql.cj.jdbc.Driver";

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>評論</title>
+    <style>
+        @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        fieldset,
+        label {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin: 10px;
+        }
+
+        /****** Style Star Rating Widget *****/
+
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating>input {
+            display: none;
+        }
+
+        .rating>label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating>label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating>input:checked~label,
+        /* show gold star when clicked */
+        .rating:not(:checked)>label:hover,
+        /* hover current star */
+        .rating:not(:checked)>label:hover~label {
+            color: #FFD700;
+        }
+
+        /* hover previous stars in list */
+
+        .rating>input:checked+label:hover,
+        /* hover current star when changing rating */
+        .rating>input:checked~label:hover,
+        .rating>label:hover~input:checked~label,
+        /* lighten current selection */
+        .rating>input:checked~label:hover~label {
+            color: #FFED85;
+        }
+
+        /* --------------------------------------------------------------------------------------------- */
+        .btn-indie-trans {
+            background-color: transparent;
+            /* border-color: tan; */
+            /* color: tan; */
+            /* border-radius: 0px; */
+        }
+
+        /* --------------------------------------------------------------------------------------------- */
+
+        #star-count {
+            color: darkgoldenrod;
+            display: inline-block;
+            vertical-align: bottom;
+            margin-left: 1px;
+            margin-bottom: -8px;
+        }
+
+
+        textarea#new-review {
+            resize: none;
+            /* Disable resizing */
+            min-height: 100px;
+            /* Set the minimum height */
+            max-height: 100px;
+            /* Set the maximum height */
+        }
+
+        .btn-indie-trans {
+            margin-left: 330px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pure CSS Star Rating Widget</h1>
+    <fieldset class="rating">
+        <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"
+            title="Awesome - 5 stars"></label>
+        <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4"
+            title="Pretty good - 4 stars"></label>
+        <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"
+            title="Meh - 3 stars"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2"
+            title="Kinda bad - 2 stars"></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1"
+            title="Sucks big time - 1 star"></label>
+    </fieldset>
+    <span id="star-count"></span>
+    <br>
+    <!-- --------------------------------------------------------------------------------------------- -->
+    <div class="container">
+        <div class="row" style="margin-top:40px;">
+            <div class="col-md-6">
+                <div class="well well-sm">
+
+                    <div class="row" id="post-review-box">
+                        <div class="col-md-12">
+
+                            <form accept-charset="UTF-8" action="" method="post">
+                                <input id="ratings-hidden" name="rating" type="hidden">
+                                <textarea class="form-control animated" cols="50" id="new-review" name="comment"
+                                    placeholder="Enter your review here..." rows="5"></textarea>
+
+                                <div class="text-right">
+                                    <br>
+                                    <button class="btn-indie-trans" type="submit">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------------------------------------------------------------  -->
+
+    <script>
+        // JavaScript code to update the star count dynamically on hover and persist after clicking
+        const starLabels = document.querySelectorAll('.rating > label');
+        const starCount = document.querySelector('#star-count');
+        const publishButton = document.querySelector('.btn-indie-trans');
+        const form = document.querySelector('form');
+
+        let selectedCount = 0; // Initialize the selected count to 0
+
+        starLabels.forEach((label) => {
+            label.addEventListener('mouseover', () => {
+                const count = label.getAttribute('title').split(' - ')[1].split(' ')[0];
+                starCount.textContent = `(${count})`;
+            });
+
+            label.addEventListener('click', () => {
+                const count = parseFloat(label.getAttribute('title').split(' - ')[1].split(' ')[0]);
+                selectedCount = count;
+                starCount.textContent = `(${selectedCount})`;
+            });
+
+            label.addEventListener('mouseout', () => {
+                starCount.textContent = `(${selectedCount})`; // Display the selected count when the mouse leaves
+            });
+        });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            const reviewText = document.querySelector('#new-review').value;
+            if (selectedCount === 0) {
+                alert("還沒評分喔 !");
+                return;
+            }
+
+            console.log('Review Text:', reviewText);
+            console.log('Rate:', selectedCount);
+
+            const ratingValue = selectedCount;
+            const hotelId = 1;
+            const roomOrderId = 1;
+            const formData = new FormData();
+            formData.append('hotelId', hotelId);
+            formData.append('roomOrderId', roomOrderId);
+            formData.append('score', ratingValue);
+            formData.append('content', reviewText);
+
+            fetch('http://localhost:8080/roomreview/addReview', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Form data submitted successfully!');
+                    } else {
+                        console.error('Form data submission failed!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

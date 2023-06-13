@@ -3,7 +3,6 @@ package tw.idv.petradisespringboot.admin.repo;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.util.List;
-
 public interface AdminDAO {
 
     // 查

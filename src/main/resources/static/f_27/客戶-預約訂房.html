@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/Simple-Slider-Simple-Slider.css">
+    <style>
+        .container {
+            display: flex;
+        }
+
+        .content {
+            flex: 1;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .aside {
+            flex: 0 0 200px;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .room-info {
+            margin-bottom: 20px;
+        }
+
+        .room-info h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .room-info p {
+            margin: 0;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 20%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .confirm-button {
+            width: 100%;
+            height: 50px;
+            max-width: 200px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="simple-slider">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper"></div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">基本資料</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">客戶名稱: &nbsp;<br>寵物名稱: <br>信箱: &nbsp;<br>電話: &nbsp;</p>
+                </div>
+                <div class="card-header">
+                    <h5 class="mb-0">付款資料</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">信用卡號:<br></p>
+                    <div class="form-group">
+                        <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
+                        <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
+                        <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
+                        <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" maxlength="3" placeholder="CVV">
+                        <input type="text" class="form-control" maxlength="4" placeholder="Expiration Date">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">特殊需求</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" cols="50" id="new-review" name="comment"
+                            placeholder="Enter here..." rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="aside">
+            <div class="image">
+                <img src="assets/img/xxx.jpg" alt="Hotel Image">
+            </div>
+            <div class="room-info">
+                <h5>Check-in/Check-out</h5>
+                <p>Check-in: June 10, 2023</p>
+                <p>Check-out: June 15, 2023</p>
+            </div>
+            <div class="room-info">
+                <h5>Room Type</h5>
+                <p>Deluxe Double Room</p>
+            </div>
+            <div class="room-info">
+                <h5>Room Info</h5>
+                <p>Max Occupancy: 2</p>
+                <p>Bed Type: Queen</p>
+                <p>View: City</p>
+            </div>
+            <div class="room-info">
+                <h5>Other Information</h5>
+                <p>Free Wi-Fi</p>
+                <p>Breakfast included</p>
+                <p>Pet-friendly</p>
+            </div>
+            <button class="confirm-button">Confirm & Pay</button>
+        </aside>
+    </div>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+    <script src="assets/js/Simple-Slider.js"></script>
+</body>
+
+</html>

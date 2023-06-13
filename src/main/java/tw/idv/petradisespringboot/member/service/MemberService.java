@@ -3,7 +3,6 @@ package tw.idv.petradisespringboot.member.service;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
-
 public interface MemberService {
     Member login(String account, String password);
 

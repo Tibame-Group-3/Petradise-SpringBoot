@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>員工列表</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <style>
+        .pagination a.page-link {
+            color: #a67c52;
+            /* Set the desired color here */
+        }
+
+        /* .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        } */
+    </style>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: #f1ecd1;color: rgb(133, 135, 150);">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3"><img width="59" height="33"
+                            src="assets/img/avatars/logo-only.png"></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">帳號管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">認證資料</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">基本資料</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">房間管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">總覽</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">已上架</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">未上架</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">訂單管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">新增商品</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">商品列表</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">新增促銷專案</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">促銷專案列表</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">訂單列表</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">即時聊天管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">客服列表</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- <div class="searchEmp">
+                    <input type="search">
+                    <button class="btn btn-primary" type="button"
+                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button>
+
+                </div> -->
+
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Team</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Employee Info</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Show&nbsp;<select
+                                                class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>&nbsp;</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search"></label>
+                                        <!-- <button class="btn btn-primary" type="button"
+                                            style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>員工編號</th>
+                                            <th>姓名</th>
+                                            <th>職稱</th>
+                                            <th>Email</th>
+                                            <th>狀態</th>
+                                            <th style="width: 120px;">編輯</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                        <tr>
+                                            <td>CHA001</td>
+                                            <td>老闆</td>
+                                            <td><select style="width: 80px;">
+                                                    <!-- <optgroup label="This is a group"> -->
+                                                    <option value="12" selected="">主管</option>
+                                                    <option value="13">員工</option>
+                                                    <option value="14">工讀生</option>
+                                                    <!-- </optgroup> -->
+                                                </select></td>
+                                            <td>Cell 1</td>
+                                            <td><select style="width: 65px;">
+                                                    <!-- <optgroup label="This is a group"> -->
+                                                    <option value="12" selected="">在職</option>
+                                                    <option value="13">離職</option>
+                                                    <!-- </optgroup> -->
+                                                </select></td>
+                                            <td>
+                                                <div>
+                                                    <button class="btn btn-primary" type="button"
+                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                    <button class="btn btn-primary" type="button"
+                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CHA002</td>
+                                            <td>主管1</td>
+                                            <td>主管</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>主管2</td>
+                                            <td>主管</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>員工1</td>
+                                            <td>員工</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>工讀生1</td>
+                                            <td>工讀生</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                        Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
+                                                    href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
+                                                        aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
