@@ -18,9 +18,6 @@ public class PetPic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "mem_id")
-    private Integer memId;
-
     @Column(name = "pet_id")
     private Integer petId;
 
