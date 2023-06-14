@@ -28,7 +28,7 @@ public class RoomReviewController {
     }
     @GetMapping("/roomreview/room-order-id/{roomOrderId}")
     RoomReview findByRoomOrderId(@PathVariable Integer roomOrderId){
-        return service.findRoomReviewById(roomOrderId);
+        return service.findRoomReviewByRoomOrederId(roomOrderId);
     }
     @GetMapping("/roomreview/hotel-id/{hotelId}/score/{score}")
     List<RoomReview> findByHotelIdAndScore(@PathVariable Integer hotelId, @PathVariable Integer score){
