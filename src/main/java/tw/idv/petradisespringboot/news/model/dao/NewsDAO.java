@@ -1,7 +1,7 @@
-package tw.idv.morgan.news.model.dao;
+package tw.idv.petradisespringboot.news.model.dao;
 
-import tw.idv.morgan.news.model.vo.News;
 import org.springframework.data.jpa.repository.JpaRepository;
+import tw.idv.petradisespringboot.news.model.vo.News;
 
 public interface NewsDAO extends JpaRepository<News, Integer> {
 }

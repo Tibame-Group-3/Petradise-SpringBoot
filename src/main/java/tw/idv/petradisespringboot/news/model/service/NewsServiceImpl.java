@@ -1,11 +1,12 @@
-package tw.idv.morgan.news.model.service;
+package tw.idv.petradisespringboot.news.model.service;
 
-import tw.idv.morgan.news.model.dao.NewsDAO;
-import tw.idv.morgan.news.model.vo.News;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import tw.idv.petradisespringboot.news.model.dao.NewsDAO;
+import tw.idv.petradisespringboot.news.model.vo.News;
 
 @Service
 public class NewsServiceImpl implements NewsService {

@@ -1,7 +1,7 @@
-package tw.idv.morgan.news.controller;
+package tw.idv.petradisespringboot.news.controller;
 
-import tw.idv.morgan.news.model.service.NewsServiceImpl;
-import tw.idv.morgan.news.model.vo.News;
+import tw.idv.petradisespringboot.news.model.service.NewsServiceImpl;
+import tw.idv.petradisespringboot.news.model.vo.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
