@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member signUp(Member newMember) {
-        return null;
+        return repository.save(newMember);
     }
 
     @Override
@@ -35,6 +35,11 @@ public class MemberServiceImpl implements MemberService {
         return repository
                 .findById(id)
                 .orElseThrow(() -> new MemberNotFoundException(id));
+    }
+
+    @Override
+    public Member update(Member newMember) {
+        return repository.save(newMember);
     }
 
     @Override
