@@ -12,7 +12,7 @@ public interface MemberService {
 
     List<Member> getAll();
 
-    Optional<Member> findMemberById(Integer id);
+    Optional<Member> getById(Integer id);
 
     Member update(Member newMember);
 }

@@ -1,18 +1,13 @@
 package tw.idv.petradisespringboot.member.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
-
 import tw.idv.petradisespringboot.member.vo.Member;
+
+import java.util.Optional;
 
 @Component
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-
-    Member findByAccount(String account);
-
-    Member findByName(String name);
-
-    Member findByEmail(String email);
+    Optional<Member> findByAccountAndPassword(String account, String password);
 
 }

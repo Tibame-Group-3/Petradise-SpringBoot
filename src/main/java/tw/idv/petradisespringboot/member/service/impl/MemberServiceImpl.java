@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Optional<Member> login(String account, String password) {
-        return null;
+        return repository.findByAccountAndPassword(account, password);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Optional<Member> findMemberById(Integer id) {
+    public Optional<Member> getById(Integer id) {
         return repository
                 .findById(id);
     }
