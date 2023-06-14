@@ -76,7 +76,7 @@
             class="fas fa-shopping-cart"
             style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;"></i>(
           0 )</button>
-        <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary" type="button"
+        <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary navigate-member-center" type="button"
             style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px"><svg
               xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
               class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
@@ -88,8 +88,9 @@
             data-bs-toggle="dropdown" aria-expanded="false" type="button"
             style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px"></button>
           <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a
-              class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item" href="#"
-              style="color: #ffffff;">會員中心</a></div>
+              class="dropdown-item" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item navigate-member-center"
+                                                                            href="#"
+                                                                            style="color: #ffffff;">會員中心</a></div>
         </div>
       </div>
     </div>
@@ -390,9 +391,11 @@
       <p class="mb-0">Copyright © 2023 PETRADISE</p>
     </div>
   </footer>
+  <script src="vendors/jquery/jquery-3.6.4.min.js"></script>
   <script src="assets/index/bootstrap/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="assets/index/js/script.min.js"></script>
+  <script src="./index/js/index.js"></script>
 </body>
 
 </html>
