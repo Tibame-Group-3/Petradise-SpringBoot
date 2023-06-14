@@ -30,7 +30,7 @@ class MemberController {
     ResponseEntity<?> one(@PathVariable Integer id) {
         var member = service.getById(id);
         if (member.isPresent()) {
-            return ResponseEntity.ok(member);
+            return ResponseEntity.ok(member.get());
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -43,7 +43,7 @@ class MemberController {
         var password = member.getPassword();
         var foundMember = service.login(account, password);
         if (foundMember.isPresent()) {
-            return ResponseEntity.ok(foundMember);
+            return ResponseEntity.ok(foundMember.get());
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
