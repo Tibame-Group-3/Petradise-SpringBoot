@@ -3,18 +3,16 @@ package tw.idv.petradisespringboot.member.service;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
+import java.util.Optional;
+
 public interface MemberService {
-    Member login(String account, String password);
+    Optional<Member> login(String account, String password);
 
     Member signUp(Member newMember);
 
-    List<Member> getAllMembers();
+    List<Member> getAll();
 
-    Member findMemberById(Integer id);
+    Optional<Member> findMemberById(Integer id);
 
     Member update(Member newMember);
-
-    Member findMemberByAccount(String account);
-
-    Member findMemberByEmail(String email);
 }

@@ -1,5 +1,7 @@
 package tw.idv.petradisespringboot.member.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
@@ -16,8 +18,8 @@ class MemberController {
     }
 
     @GetMapping("/members/all")
-    List<Member> all() {
-        return service.getAllMembers();
+    ResponseEntity<?> all() {
+        return new ResponseEntity<List<Member>>(service.getAll(), HttpStatus.OK);
     }
 
     @PostMapping("/members/sign-up")
@@ -35,5 +37,12 @@ class MemberController {
 
     @GetMapping("/members/email/{email}")
     Member findByEmail(@PathVariable String email) { return service.findMemberByEmail(email); }
+}
+
+
+class MemberNotFoundException extends RuntimeException {
+    MemberNotFoundException(Integer id) {
+        super("找不到會員ID: " + id);
+    }
 }
 
