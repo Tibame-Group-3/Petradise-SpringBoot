@@ -1,12 +1,13 @@
 package tw.idv.petradisespringboot.member.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
-import java.util.List;
-
 @RestController
+@RequestMapping("/members")
 class MemberController {
 
     private final MemberService service;
@@ -15,25 +16,47 @@ class MemberController {
         this.service = service;
     }
 
-    @GetMapping("/members/all")
-    List<Member> all() {
-        return service.getAllMembers();
+    @GetMapping("/all")
+    ResponseEntity<?> all() {
+        return ResponseEntity.ok(service.getAll());
     }
 
-    @PostMapping("/members/sign-up")
-    Member signUp(@RequestBody Member member) {
-        return service.signUp(member);
+    @PostMapping("/sign-up")
+    ResponseEntity<?> signUp(@RequestBody Member member) {
+        return ResponseEntity.ok(service.signUp(member));
     }
 
-    @GetMapping("/members/id/{id}")
-    Member one(@PathVariable Integer id) {
-        return service.findMemberById(id);
+    @GetMapping("/id/{id}")
+    ResponseEntity<?> one(@PathVariable Integer id) {
+        var member = service.getById(id);
+        if (member.isPresent()) {
+            return ResponseEntity.ok(member.get());
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new MemberNotFoundException(id));
     }
 
-    @GetMapping("/members/account/{account}")
-    Member findByAccount(@PathVariable String account) { return service.findMemberByAccount(account); }
+    @PostMapping("/login")
+    ResponseEntity<?> login(@RequestBody Member member) {
+        var account = member.getAccount();
+        var password = member.getPassword();
+        var foundMember = service.login(account, password);
+        if (foundMember.isPresent()) {
+            return ResponseEntity.ok(foundMember.get());
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new MemberNotFoundException(account));
+    }
+}
 
-    @GetMapping("/members/email/{email}")
-    Member findByEmail(@PathVariable String email) { return service.findMemberByEmail(email); }
+
+class MemberNotFoundException extends RuntimeException {
+    MemberNotFoundException(Integer id) {
+        super("找不到會員ID: " + id);
+    }
+
+    MemberNotFoundException(String account) { super("帳號為 " + account + " 之會員不存在"); }
 }
 

@@ -6,6 +6,8 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -16,8 +18,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member login(String account, String password) {
-        return null;
+    public Optional<Member> login(String account, String password) {
+        return repository.findByAccountAndPassword(account, password);
     }
 
     @Override
@@ -26,15 +28,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getAllMembers() {
+    public List<Member> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Member findMemberById(Integer id) {
+    public Optional<Member> getById(Integer id) {
         return repository
-                .findById(id)
-                .orElseThrow(() -> new MemberNotFoundException(id));
+                .findById(id);
     }
 
     @Override
@@ -42,20 +43,5 @@ public class MemberServiceImpl implements MemberService {
         return repository.save(newMember);
     }
 
-    @Override
-    public Member findMemberByAccount(String account) {
-        return repository.findByAccount(account);
-    }
-
-    @Override
-    public Member findMemberByEmail(String email) {
-        return repository.findByEmail(email);
-    }
-}
-
-class MemberNotFoundException extends RuntimeException {
-    MemberNotFoundException(Integer id) {
-        super("找不到會員ID: " + id);
-    }
 }
 

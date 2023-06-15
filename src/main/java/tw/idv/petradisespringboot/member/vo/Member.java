@@ -9,14 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -44,12 +40,5 @@ public class Member {
     private Character access;
     @Column(name = "mem_bonus", insertable = false)
     private Integer bonus;
-
-    @Override
-    public String toString() {
-        return "Member [memID=" + id + ", memName=" + name + ", memAccount=" + account + ", memPassword="
-                + password + ", memBirthday=" + birthday + ", memPhone=" + phone + ", memEmail=" + email
-                + ", memAddress=" + address + ", memAccess=" + access + ", memBonus=" + bonus + "]";
-    }
 
 }
