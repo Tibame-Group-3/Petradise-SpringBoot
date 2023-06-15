@@ -5,6 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.vo.Pet;
+import tw.idv.petradisespringboot.pet.vo.PetPic;
+
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/pets")
@@ -23,10 +26,10 @@ public class PetController {
 
     @PostMapping("/update")
     ResponseEntity<?> updatePet(@RequestBody Pet pet) {
-        return ResponseEntity.ok(pet);
+        return ResponseEntity.ok(service.updatePet(pet));
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/id={id}")
     ResponseEntity<?> one(@PathVariable Integer id) {
         var pet = service.getPetById(id);
         if (pet.isPresent()) {
@@ -37,10 +40,12 @@ public class PetController {
                 .body(new PetNotFoundException(id));
     }
 
-    @GetMapping("/member-id/{memberId}")
+    @GetMapping("/memberId={memberId}")
     ResponseEntity<?> getPetsByMemberId(@PathVariable Integer memberId) {
         return ResponseEntity.ok(service.getPetsByMemId(memberId));
     }
+
+
 }
 
 class PetNotFoundException extends RuntimeException {

@@ -26,7 +26,7 @@ class MemberController {
         return ResponseEntity.ok(service.signUp(member));
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/id={id}")
     ResponseEntity<?> one(@PathVariable Integer id) {
         var member = service.getById(id);
         if (member.isPresent()) {
