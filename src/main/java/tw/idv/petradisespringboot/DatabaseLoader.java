@@ -27,6 +27,9 @@ public class DatabaseLoader {
 
     @Bean
     CommandLineRunner initDatabasePetPic(PetPicRepository petPicRepository) {
+        if (petPicRepository.count() != 0) {
+            return args -> {};
+        }
         petPicRepository.deleteAll();
         return args -> {
             savePetPic(1, 1, petPicRepository);
@@ -46,7 +49,7 @@ public class DatabaseLoader {
         var pic = new PetPic();
         pic.setPetId(petId);
         pic.setPic(image);
-        logger.info("Preloading " + repo.save(pic));
+        logger.info("Preloading pet pic, pet id: " + repo.save(pic).getPetId());
     }
 
     private byte[] loadImageBytes(String imagePath) throws IOException {
