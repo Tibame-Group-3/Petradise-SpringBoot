@@ -35,6 +35,7 @@ public class PetPicController {
     @PostMapping("/upload")
     ResponseEntity<String> uploadPetPic(@RequestBody PetPicRequestVO vo) {
         try {
+            // 將PetPicRequestVO 轉為真正輸入資料庫的VO PetPic
             var petPic = new PetPic();
             petPic.setPetId(vo.getPetId());
             petPic.setPic(Base64.getDecoder().decode(vo.getPic()));
