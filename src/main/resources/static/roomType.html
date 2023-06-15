@@ -313,31 +313,8 @@
 		src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
 
-
-
-	<!-- 預覽圖 -->
 	<script>
-        $("#room_pic1").change(function () {
-            previewImage(this, "#preview1");
-        });
-
-        $("#room_pic2").change(function () {
-            previewImage(this, "#preview2");
-        });
-
-        function previewImage(input, previewElementSelector) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $(previewElementSelector).attr('src', e.target.result).show();
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-	<script>
+// 	限制字數
 	function limitTextLength() {
 	    $('.limited-text').each(function () {
 	        var text = $(this).text();
@@ -371,8 +348,26 @@
 	                    <td><button type="button" class="btn btn-primary btn-modify" data-bs-toggle="modal" data-bs-target="#editModal">編輯</button></td>
 	                </tr>`;
 	            }
+	          
 	            $("#room-data-list").html(html);
 	            limitTextLength();  // 房型介紹字數限制
+	            $('#myTable').DataTable({
+	                "language": {
+	                    "lengthMenu": "顯示 _MENU_ 條",
+	                    "zeroRecords": "未找到任何資料",
+	                    "info": "顯示頁數 _PAGE_ / _PAGES_",
+	                    "infoEmpty": "沒有任何資訊",
+	                    "infoFiltered": "(從 _MAX_ 條資料中過濾)",
+	                    "search": "搜尋:",
+	                    "paginate": {
+	                        "first":      "第一頁",
+	                        "last":       "最後一頁",
+	                        "next":       "下一頁",
+	                        "previous":   "上一頁"
+	                    },
+	                }
+	            });
+	           
 	        },
 	        error: function (xhr, textStatus, errorThrown) {
 	            console.error(xhr);

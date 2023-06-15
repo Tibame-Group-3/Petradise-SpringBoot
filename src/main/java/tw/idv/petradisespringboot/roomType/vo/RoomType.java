@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
+@Table(name ="room_type")
 public class RoomType implements Serializable {
 
 	@Id
@@ -53,7 +55,8 @@ public class RoomType implements Serializable {
 	@Column(name = "room_type_size")
 	private Character roomTypeSize;
 	
-
+	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+	    private List<RoomPic> roomPics;
 
 	@Override
 	public String toString() {
