@@ -31,16 +31,16 @@ public class RoomTypeController {
 	}
 
 
-	@PostMapping("/addNewRoomType")
-	public RoomType addNewRoomType(@RequestBody RoomType roomType ) {
-		
-	    
-//	    // 儲存圖片文件並獲取其路徑
-//	    String roomPic1Path = saveFileAndGetPath(roomPic1);
-//	    String roomPic2Path = saveFileAndGetPath(roomPic2);
-	    
-	    return service.addNewRoomType(roomType);
-	}
+//	@PostMapping("/addNewRoomType")
+//	public RoomType addNewRoomType(@RequestBody RoomType roomType ) {
+//		
+//	    
+////	    // 儲存圖片文件並獲取其路徑
+////	    String roomPic1Path = saveFileAndGetPath(roomPic1);
+////	    String roomPic2Path = saveFileAndGetPath(roomPic2);
+//	    
+//	    return service.addNewRoomType(roomType);
+//	}
 
 	// 將 MultipartFile 儲存為檔案並返回其路徑
 	public String saveFileAndGetPath(MultipartFile file) throws IOException {

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +57,7 @@ public class RoomType implements Serializable {
 	@Column(name = "room_type_size")
 	private Character roomTypeSize;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	    private List<RoomPic> roomPics;
 
