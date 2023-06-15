@@ -1,24 +1,18 @@
-(() => {
+$(document).ready(function () {
+    setupNavigation();
+})
+
+function setupNavigation() {
+    setupMemberCenterNavigation();
+    setupSigninNavigation();
+}
+
+function setupMemberCenterNavigation() {
     $('.navigate-member-center')
-        .on('click', onClickMemberCenter);
+        .attr('href', '/member/signin.html');
+}
+
+function setupSigninNavigation() {
     $('.navigate-signin')
-        .on('click', onClickSignin);
-})();
-
-function onClickMemberCenter(e) {
-    e.preventDefault();
-    navigateToSignup();
-}
-
-function onClickSignin(e) {
-    e.preventDefault();
-    navigateToSignin();
-}
-
-function navigateToSignup() {
-    location.href = "/member/signup.html";
-}
-
-function navigateToSignin() {
-    location.href = "/member/signin.html"
+        .attr('href', '/member/signin.html');
 }
