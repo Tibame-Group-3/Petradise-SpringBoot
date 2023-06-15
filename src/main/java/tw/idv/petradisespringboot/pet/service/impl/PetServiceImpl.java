@@ -54,4 +54,9 @@ public class PetServiceImpl implements PetService {
     public void deletePetPic(Integer picId) {
         petPicRepository.deleteById(picId);
     }
+
+    @Override
+    public List<PetPic> getPetPicsByPetId(Integer petId) {
+        return petPicRepository.findByPetId(petId);
+    }
 }

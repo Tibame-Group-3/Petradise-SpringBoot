@@ -19,4 +19,6 @@ public interface PetService {
     void addPetPic(PetPic petPic);
 
     void deletePetPic(Integer picId);
+
+    List<PetPic> getPetPicsByPetId(Integer petId);
 }
