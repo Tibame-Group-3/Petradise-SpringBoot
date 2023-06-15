@@ -41,6 +41,22 @@ public class PetController {
     ResponseEntity<?> getPetsByMemberId(@PathVariable Integer memberId) {
         return ResponseEntity.ok(service.getPetsByMemId(memberId));
     }
+
+    @DeleteMapping("/pet-pic/{picId}")
+    ResponseEntity<?> deletePetPic(@PathVariable Integer picId) {
+        try {
+            service.deletePetPic(picId);
+            return ResponseEntity.ok("Delete pet pic id: " + picId + " success.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to delete pet pic id: " + picId);
+        }
+    }
+
+    @PostMapping("/pet-pic/upload")
+    ResponseEntity<String> uploadPetPic(@RequestBody String base64) {
+        return ResponseEntity.ok("success");
+    }
 }
 
 class PetNotFoundException extends RuntimeException {

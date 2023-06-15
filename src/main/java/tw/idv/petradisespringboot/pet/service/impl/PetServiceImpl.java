@@ -5,6 +5,7 @@ import tw.idv.petradisespringboot.pet.repo.PetPicRepository;
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.vo.Pet;
+import tw.idv.petradisespringboot.pet.vo.PetPic;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +43,15 @@ public class PetServiceImpl implements PetService {
             return pet;
         }
         return petRepository.save(pet);
+    }
+
+    @Override
+    public void addPetPic(PetPic petPic) {
+        petPicRepository.save(petPic);
+    }
+
+    @Override
+    public void deletePetPic(Integer picId) {
+        petPicRepository.deleteById(picId);
     }
 }
