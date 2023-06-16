@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.HotelOwner.vo;
+package tw.idv.petradisespringboot.hotel_owner.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,13 +47,13 @@ public class HotelOwnerVO {
 	private String ownerEmail;
 	@Column(name = "owner_access" , insertable = false)
 	private String ownerAccess;
-	@Column(name = "review_score_people" , insertable = false)
+	@Column(name = "review_score_people" , insertable = false, updatable = false)
 	private Integer reviewScorePeople;
 	@Column(name = "review_score_total" , insertable = false)
 	private Integer reviewScoreTotal;
 	@Column(name = "hotel_lic_id")
 	private String hotelLicId;
 
-	private String imageBase64;
+//	private String imageBase64;
 
 }

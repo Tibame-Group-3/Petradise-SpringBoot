@@ -195,27 +195,31 @@ div.search2 {
 						<div class="card-body">
 							<div class="row">
 								<div class="search">
-									業主搜尋: <input type="text" name="Search" placeholder="Search...">
+									業主搜尋: <input class="owner_search" type="text" name="Search"
+										placeholder="Search...">
 
-									<button>
+									<button class="search_btn">
 										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
 											style="color: #4c51a4;"></i>
 									</button>
+									<div class="isNone1" style="display: none; color: red">請輸入業主編號或業主名稱!</div>
 
 								</div>
 
 								<div class="search2">
-									業主權限: <label> <input type="checkbox" name="option1"
-										value="option1"> 正常
-									</label> <label> <input type="checkbox" name="option1"
-										value="option1"> 停權
+									業主權限: <label> <input class="normal" type="checkbox"
+										name="option1" value="option1"> 正常
+									</label> <label> <input class="stopAccess" type="checkbox"
+										name="option1" value="option1"> 停權
 									</label>
 									<!-- 圖標 -->
-									<button>
+									<button class="Access_btn">
 										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
 											style="color: #4c51a4;"></i>
 									</button>
+									<div class="isNone2" style="display: none; color: red">請選擇搜尋項目!</div>
 								</div>
+
 							</div>
 							<div class="table-responsive table mt-2" id="dataTable"
 								role="grid" aria-describedby="dataTable_info"
@@ -346,32 +350,33 @@ div.search2 {
 </body>
 
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="jss-init.js"></script>
-<script src="jsheme-1-1.js"></script>
-<script src="jsheme-1.js"></script>
-<script src="jsheme.js"></script>
+<script src="./js/bs-init.js"></script>
+<script src="./js/theme-1-1.js"></script>
+<script src="./js/theme-1.js"></script>
+<script src="./js/theme.js"></script>
 <script src="../vendors/jquery/jquery-3.6.4.min.js"></script>
 <!-- sweatalert -->
-<script src="sweetalert2dn"></script>
+<script src="./sweetalert2/cdn"></script>
 
 <script>
 
-$(document).ready(function() {
-	
-// 	let resData;
-	
+
+
+$(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}))
+
+
     $.ajax({ 	
-      url: "/vendors/OwnerManage",
-      type: "POST",
+      url: "/owner/OwnerManage",
+      type: "GET",
       data: { action: "getAll" },
       dataType: "JSON",
       success: function(res) {
     	  console.log(res);
-//     	  resData=res;
+
     	  for(let i = 0 ; i < res.length ; i++){
     		  
     		
-    	  $("tbody").append(`<tr>
+    	  $("tbody").append(`<tr ${i}>
     			  <td>${res[i].hotelId}</td>
     			  <td>${res[i].ownerName}</td>
     			  <td>${res[i].hotelName}</td>
@@ -379,14 +384,15 @@ $(document).ready(function() {
     			  <td><button class="hotel btn btn-primary" type="button" style="background: #f8c544;">🏨</button></td>
     			  <td><button class="pic btn btn-primary" type="button" style="background: #f8c544;">🖼️</button></td>
 				  <td>
-				  	<select style="width:70px;">
+				  	<select class="ownerAccess" style="width:70px;">
 				  		<optgroup label="權限更改"> 
 				  	  ${res[i].ownerAccess === '0' ? `<option value="0" selected>正常</option>` : `<option value="0">正常</option>`}
 				      ${res[i].ownerAccess === '1' ? `<option value="1" selected>停權</option>` : `<option value="1">停權</option>`}
-				      ${res[i].ownerAccess === '2' ? `<option value="2" selected>未審核</option>` : `<option value="2">未審核</option>`}
+// 				      ${res[i].ownerAccess === '2' ? `<option value="2" selected>未審核</option>` : `<option value="2">未審核</option>`}
 						</optgroup>
 					</select>
-				  </td> 
+				  </td>
+				  <td><button class="update btn btn-primary" type="button" style="background: #f8c544;">編輯</td>
     	  </tr>`);
     	  $("tbody").on("click", ".pic", function() {
     			const index = $(this).closest("tr").index(); //找到最接近父元素的tr索引值,與資料庫一樣是從0開始
@@ -398,21 +404,61 @@ $(document).ready(function() {
     				  html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
     				});
     		});
-    	  
+    	  $("tbody").on("click", ".owner", function() {
+    		  	var click = parseInt($(this).closest("tr").find("td:first").text());
+//     		  	console.log(click);
+    		  var html = "";
+    		  	if(res[i].hotelId == click){
+//     		  		console.log(res[i].ownerName);
+					html += "<table>"
+					html += "<tr>" + "<td style='text-align: left;'>" + "會員帳號 : " +  res[i].ownerAccount + "</td>" + "<tr>"
+					html += "<tr>" + "<td style='text-align: left;'>" + "聯絡電話 : " +  res[i].ownerPhone + "</td>" + "<tr>"
+					html += "<tr>" + "<td style='text-align: left;'>" + "電子信箱 : " + res[i].ownerEmail + "</td>" + "<tr>"	
+					html += "<tr>" + "<td style='text-align: left;'>" + "身分證字號 : " + res[i].ownerId + "</td>" + "<tr>"	
+					html += "<tr>" + "<td style='text-align: left;'>" + "收款帳號 : " + res[i].ownerBank + "</td>" + "<tr>"	
+					html += "</table>"
+				 	swal.fire({
+				 		html: html
+				 	});
+    		  	} 
+    		  });
+    	
       	}
       }
     });
-});
+   
 
- 
-    
-	
-
-	
-	$("tbody").on("click",".owner", function() {
-		swal.fire("ok");
+    $("tbody").on("change", ".ownerAccess", function() {
+        var selectedValue = $(this).val();
+        var $row = $(this).closest("tr"); //抓到當前的行數
+        
+        var hotelId = ($row.find("td:first").text());
+        
+	$.ajax({
+	    url: "/owner/OwnerManage",
+	    type: "POST",
+	    data: {
+	      action: "update",
+	      ownerAccess: selectedValue,
+	      hotelId: hotelId
+	    },
+	    dataType: "JSON",
+	    success: function(res) {
+	      console.log("更新成功");
+	      console.log(res);
+	    
+	    },
+	    error: function(xhr, status, error) {
+	      console.log("更新失败");
+	      console.log(xhr.responseText);
+	     
+	    }
+	  });
 	});
 	
+});
+	
+
 	$("tbody").on("click", ".hotel",function() {
 
 		swal.fire("ok");
@@ -422,6 +468,85 @@ $(document).ready(function() {
 
 		swal.fire("ok");
 	});
+	//依業主ID搜尋
+	$(".search_btn").on("click",function(){
+		var number =  parseInt($(".owner_search").val());
+		var error = true;
+		 $("tbody tr").each(function() {
+			var tdNumber = parseInt($(this).find("td").text());
+			if(number === tdNumber){
+				$(this).show();
+				error = false;
+			}else if(number !== tdNumber){
+				$(this).hide();
+	
+			}
+		});
+		 if(error){
+			 var input = $(".owner_search").val();
+			 if(input == ""){
+				 $("tbody tr").show();
+			 }else{
+				swal.fire({
+					title:"業主不夠多",
+					html:`<img src = "./img/cry.gif">`
+				})
+		 }
+		 }
+	
+	
+});	
+	//如果搜尋欄位沒有任何資料,列出全部tr
+	$(".owner_search").on("blur",function(){
+	 var input = $(".owner_search").val();
+	 if(input == ""){
+		 $("tbody tr").show();
+	 }
+
+});
+	
+	//依權限搜尋
+	
+	$(".Access_btn").on("click",function(){
+		if($(".normal").is(":checked") && $(".stopAccess").is(":checked")){
+			$("tbody tr").each(function(){
+				if($(this).find(".ownerAccess").val() !== ""){
+					$(this).show();
+					$(".isNone2").hide(); //提示文字區塊隱藏
+				}
+			})
+		}
+		else if($(".normal").is(":checked")){ //如果選中正常的checkbox
+			$("tbody tr").each(function(){
+				if($(this).find(".ownerAccess").val() !== "0"){	
+					$(this).hide();
+				}else{
+					$(this).show();
+					$(".isNone2").hide(); //提示文字區塊隱藏
+				}
+			});
+		}else if($(".stopAccess").is(":checked")){  //如果選中停權的checkbox
+			$("tbody tr").each(function(){
+				if($(this).find(".ownerAccess").val() !== "1"){
+					$(this).hide();
+				}else{
+					$(this).show();
+					$(".isNone2").hide(); //提示文字區塊隱藏
+				}
+			});	
+		}else{
+			$(".isNone2").show();
+			}
+	});
+	
+	
+
+
+						
+				
+		
+
+	
 </script>
 
 </html>
