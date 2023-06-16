@@ -7,6 +7,7 @@ import tw.idv.petradisespringboot.roomType.vo.RoomType;
 public interface RoomTypeService {
 	List<RoomType> getByHotelId(Integer hotelId);
 
-	RoomType addNewRoomType(RoomType roomType);
+	
+	RoomType addNewRoomType(RoomType newRoomType);
 
 }

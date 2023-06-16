@@ -30,7 +30,7 @@ public class RoomType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "room_type_id")
+	@Column(name = "room_type_id", insertable = false)
 	private Integer roomTypeId;
 
 	@Column(name = "hotel_id")
@@ -42,7 +42,7 @@ public class RoomType implements Serializable {
 	@Column(name = "room_type_amount")
 	private Integer roomTypeAmount;
 
-	@Column(name = "room_type_sale_status", insertable = false)
+	@Column(name = "room_type_sale_status")
 	private Character roomTypeSaleStatus;
 
 	@Column(name = "room_type_about")

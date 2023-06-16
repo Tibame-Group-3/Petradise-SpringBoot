@@ -108,121 +108,6 @@
 			</div>
 		</nav>
 
-
-		<!-- addModal -->
-		<div class="modal fade" id="addModal" data-bs-backdrop="static"
-			data-bs-keyboard="false" tabindex="-1"
-			aria-labelledby="addModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="staticBackdropLabel">新增房型資訊</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<form action="/submit_room_type" method="post">
-							<label for="room_type_name">房型名稱:</label><br> <input
-								type="text" id="room_type_name" name="room_type_name"
-								maxlength="30" required><br> <label
-								for="room_type_amount">房間數量:</label><br> <input
-								type="number" id="room_type_amount" name="room_type_amount"
-								min="1" required><br> <label
-								for="room_type_sale_status">上下架狀態:</label><br> <select
-								id="room_type_sale_status" name="room_type_sale_status" required>
-								<option value="0">下架</option>
-								<option value="1">上架</option>
-							</select><br> <label for="room_type_about">房型介紹:</label><br>
-							<textarea id="room_type_about" name="room_type_about"
-								maxlength="1000" style="width: 400px; height: 200px;"></textarea>
-							<br> <label for="room_type_price">房型價格:</label><br> <input
-								type="number" id="room_type_price" name="room_type_price"
-								min="1" required><br> <label for="room_pet_type">寵物種類:</label><br>
-							<select id="pet_type" name="room_pet_type" required>
-								<option value="0">狗</option>
-								<option value="1">貓</option>
-								<option value="2">鳥</option>
-							</select><br> <label for="room_type_size">寵物尺寸:</label><br> <select
-								id="room_type_size" name="room_type_size" required>
-								<option value="0">小型</option>
-								<option value="1">中型</option>
-								<option value="2">大型</option>
-							</select><br> <label for="room_pic1">房型圖片1:</label><br> <input
-								type="file" id="room_pic1" name="room_pic1" accept="image/*"
-								required><br> <img id="preview1" src=""
-								alt="Image Preview" style="max-width: 200px; display: none;"><br>
-
-							<label for="room_pic2">房型圖片2:</label><br> <input type="file"
-								id="room_pic2" name="room_pic2" accept="image/*" required><br>
-							<img id="preview2" src="" alt="Image Preview"
-								style="max-width: 200px; display: none;"><br>
-
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">關閉</button>
-						<button type="button" class="btn btn-primary">提交</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- editModal -->
-		<div class="modal fade" id="editModal" data-bs-backdrop="static"
-			data-bs-keyboard="false" tabindex="-1"
-			aria-labelledby="editModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="staticBackdropLabel">編輯房型資訊</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<form action="/submit_room_type" method="post">
-							<label for="room_type_name">房型名稱:</label><br> <input
-								type="text" id="room_type_name" name="room_type_name"
-								maxlength="30" required><br> <label
-								for="room_type_amount">房間數量:</label><br> <input
-								type="number" id="room_type_amount" name="room_type_amount"
-								min="1" required><br> <label
-								for="room_type_sale_status">上下架狀態:</label><br> <select
-								id="room_type_sale_status" name="room_type_sale_status" required>
-								<option value="0">下架</option>
-								<option value="1">上架</option>
-							</select><br> <label for="room_type_about">房型介紹:</label><br>
-							<textarea id="room_type_about" name="room_type_about"
-								maxlength="1000"></textarea>
-							<br> <label for="room_type_price">房型價格:</label><br> <input
-								type="number" id="room_type_price" name="room_type_price"
-								min="1" required><br> <label for="room_pet_type">寵物種類:</label><br>
-							<input type="text" id="room_pet_type" name="room_pet_type"
-								maxlength="30" required><br> <label
-								for="room_type_size">房型大小:</label><br> <select
-								id="room_type_size" name="room_type_size" required>
-								<option value="0">小型</option>
-								<option value="1">中型</option>
-								<option value="2">大型</option>
-							</select><br> <label for="room_pic1">房型圖片1:</label><br> <input
-								type="file" id="room_pic1" name="room_pic1" accept="image/*"
-								required><br> <img id="preview1" src=""
-								alt="Image Preview" style="max-width: 200px; display: none;"><br>
-
-							<label for="room_pic2">房型圖片2:</label><br> <input type="file"
-								id="room_pic2" name="room_pic2" accept="image/*" required><br>
-							<img id="preview2" src="" alt="Image Preview"
-								style="max-width: 200px; display: none;"><br>
-
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">關閉</button>
-						<button type="button" class="btn btn-primary">提交</button>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="d-flex flex-column" id="content-wrapper">
 			<div id="content">
 				<nav
@@ -255,9 +140,9 @@
 					<h3 class="text-dark mb-4">房型資訊</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<!-- Button trigger modal -->
+							<!-- Button -->
 							<button type="button" class="btn btn-primary btn-modify"
-								data-bs-toggle="modal" data-bs-target="#addModal">
+								onclick="window.location.href='addRoomType.html'">
 								新增房型資訊</button>
 
 						</div>
@@ -313,8 +198,10 @@
 		src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
 
+
+
+	
 	<script>
-// 	限制字數
 	function limitTextLength() {
 	    $('.limited-text').each(function () {
 	        var text = $(this).text();
@@ -344,31 +231,30 @@
 	                    <td>${roomType.roomPetType}</td>
 	                    <td>${sizeString}</td>
 	                    <td class="limited-text">${roomType.roomTypeAbout}</td>
-	                    <td>${roomType.roomTypeSaleStatus === 0 ? "下架" : "上架"}</td>
+	                    <td>${roomType.roomTypeSaleStatus === "0" ? "下架" : "上架"}</td>
 	                    <td><button type="button" class="btn btn-primary btn-modify" data-bs-toggle="modal" data-bs-target="#editModal">編輯</button></td>
 	                </tr>`;
 	            }
-	          
 	            $("#room-data-list").html(html);
-	            limitTextLength();  // 房型介紹字數限制
-	            $('#myTable').DataTable({
-	                "language": {
-	                    "lengthMenu": "顯示 _MENU_ 條",
-	                    "zeroRecords": "未找到任何資料",
-	                    "info": "顯示頁數 _PAGE_ / _PAGES_",
-	                    "infoEmpty": "沒有任何資訊",
-	                    "infoFiltered": "(從 _MAX_ 條資料中過濾)",
-	                    "search": "搜尋:",
-	                    "paginate": {
-	                        "first":      "第一頁",
-	                        "last":       "最後一頁",
-	                        "next":       "下一頁",
-	                        "previous":   "上一頁"
-	                    },
-	                }
-	            });
-	           
-	        },
+	             limitTextLength();  // 房型介紹字數限制
+	             $('#myTable').DataTable({
+	                 "language": {
+	                     "lengthMenu": "顯示 _MENU_ 條",
+	                     "zeroRecords": "未找到任何資料",
+	                     "info": "顯示頁數 _PAGE_ / _PAGES_",
+	                     "infoEmpty": "沒有任何資訊",
+	                     "infoFiltered": "(從 _MAX_ 條資料中過濾)",
+	                     "search": "搜尋:",
+	                     "paginate": {
+	                         "first":      "第一頁",
+	                         "last":       "最後一頁",
+	                         "next":       "下一頁",
+	                         "previous":   "上一頁"
+	                     },
+	                 }
+	             });
+	            
+	         },
 	        error: function (xhr, textStatus, errorThrown) {
 	            console.error(xhr);
 	            if (xhr.status === 401) {
@@ -390,16 +276,9 @@
             	return undefined;
         }
 	}
-    </script> 
-
-	<!-- 驗證填寫欄位 -->
-	<script>
-        document.querySelector(".btn-primary").addEventListener("click", function (event) {
-            if (!document.querySelector("form").reportValidity()) {
-                event.preventDefault();
-            }
-        });
     </script>
+
+
 
 
 

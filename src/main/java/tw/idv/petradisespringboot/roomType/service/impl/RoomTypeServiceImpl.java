@@ -15,10 +15,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 	private final RoomTypeRepository typeRepository;
 	private final RoomPicRepository picRepository;
 
-//	public RoomTypeServiceImpl(RoomTypeRepository repository) {
-//
-//		this.repository = repository;
-//	}
 
 	public RoomTypeServiceImpl(RoomTypeRepository roomTypeRepository, RoomPicRepository roomPicRepository) {
 		this.typeRepository = roomTypeRepository;
@@ -33,24 +29,9 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 	}
 
 	
-
-//	 @Override
-//	 public RoomType addNewRoomType(RoomType roomType, List<RoomPic> roomPics) {
-//		    // 先保存RoomType
-//		    RoomType savedRoomType = typeRepository.save(roomType);
-//
-//		    // 遍歷保存RoomType關聯的RoomPic
-//		    for (RoomPic roomPic : roomPics) {
-//		        roomPic.setRoomTypeId(savedRoomType.getRoomTypeId()); // 假设RoomPic有一个setRoomTypeId方法
-//		        picRepository.save(roomPic);
-//		    }
-//
-//		    // 返回新建的RoomType
-//		    return savedRoomType;
-//		}
 	@Override
 	public RoomType addNewRoomType(RoomType newRoomType) {
-		return typeRepository.save(newRoomType);
+	    return typeRepository.save(newRoomType);
 	}
 
 }
