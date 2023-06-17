@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.member.service.impl;
 
 import org.springframework.stereotype.Service;
+import tw.idv.petradisespringboot.member.exceptions.AccountAlreadyExistsException;
 import tw.idv.petradisespringboot.member.repo.MemberRepository;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
@@ -24,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member signUp(Member newMember) {
+        if (repository.findByAccount(newMember.getAccount()).isPresent()) {
+            throw new AccountAlreadyExistsException("Account already exists: " + newMember.getAccount());
+        }
         return repository.save(newMember);
     }
 

@@ -34,7 +34,14 @@ class MemberController {
 
     @PostMapping("/sign-up")
     ResponseEntity<?> signUp(@RequestBody Member member) {
-        return ResponseEntity.ok(service.signUp(member));
+        try {
+            var newMember = service.signUp(member);
+            return ResponseEntity.ok(newMember);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping("/id={id}")

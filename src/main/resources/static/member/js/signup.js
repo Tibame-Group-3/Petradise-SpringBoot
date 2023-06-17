@@ -142,16 +142,20 @@ function submitRegistration() {
 
     fetch("http://localhost:8080/members/sign-up", requestOptions)
         .then(response => {
-            if (response.ok) {
-                return response.json();
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            throw new Error("status code: " + response.status);
+            return response.json();
         })
         .then(result => {
             saveMemberId(result.id);
             redirectToIndex();
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            if (error.message.includes('409')) {
+                showInvalidFeedback(accountElement, 'This account has been used.');
+            }
+        });
 }
 
 function fetchDistrictData() {
