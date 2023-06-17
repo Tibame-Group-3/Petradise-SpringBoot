@@ -1,43 +1,50 @@
+const formElement = document.getElementById('form');
+const nameElement = document.getElementById('name');
+const accountElement = document.getElementById('account');
+const passwordElement = document.getElementById('password');
+const birthdayElement = document.getElementById('birthday');
+const phoneElement = document.getElementById('phone');
+const emailElement = document.getElementById('email');
+const citySelectElement = document.getElementById('city');
+const districtSelectElement = document.getElementById('district');
+const addressElement = document.getElementById('address');
 
-const form = document.getElementById('form');
-const name = document.getElementById('name');
-const account = document.getElementById('account');
-const password = document.getElementById('password');
-const birthday = document.getElementById('birthday');
-const phone = document.getElementById('phone');
-const email = document.getElementById('email');
-const citySelect = document.getElementById('city');
-const districtSelect = document.getElementById('district');
-const address = document.getElementById('address');
-const submit = document.getElementById('submit');
-
-let districtsInfos;
+let districtData;
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchDistricts();
-    addBirthdayLimit();
-    disableSpace();
-    form.addEventListener('submit', onClickedSubmit);
-    citySelect.addEventListener('change', onCityChange);
-})
+    fetchDistrictData();
+    setBirthdayLimit();
+    preventSpaceInput();
+    formElement.addEventListener('submit', handleSubmit);
+    citySelectElement.addEventListener('change', handleCityChange);
+});
 
-function onCityChange() {
-    const cityIndex = citySelect.value;
-    const districtInfo = districtsInfos[cityIndex];
+// Event handlers
+function handleCityChange() {
+    const cityIndex = citySelectElement.value;
+    const districtInfo = districtData[cityIndex];
     populateDistrictSelect(districtInfo);
 }
 
-function addBirthdayLimit() {
-    // Set max to today
-    birthday.setAttribute('max', `${new Date().toISOString().split('T')[0]}`);
-
-    birthday.setAttribute('min', '1900-01-01');
+function handleSubmit(event) {
+    event.preventDefault();
+    const isFormValid = validateForm();
+    if (isFormValid) {
+        submitRegistration();
+    }
 }
 
-function disableSpace() {
-    let inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-        input.addEventListener('keypress', function(e) {
+// Utility functions
+function setBirthdayLimit() {
+    const today = new Date().toISOString().split('T')[0];
+    birthdayElement.setAttribute('max', today);
+    birthdayElement.setAttribute('min', '1900-01-01');
+}
+
+function preventSpaceInput() {
+    const inputElements = document.querySelectorAll('input');
+    inputElements.forEach(input => {
+        input.addEventListener('keypress', function (e) {
             if (e.key === ' ') {
                 e.preventDefault();
             }
@@ -45,115 +52,89 @@ function disableSpace() {
     });
 }
 
-function onClickedSubmit(event) {
-    event.preventDefault();
-    const validated = validateForm();
-    if (validated) {
-        signUp();
-    }
-    return false;
-}
-
 function validateForm() {
-    let isValid = true;
+    // Initialization
+    let isFormValid = true;
 
-    // Name validation
-    if(!validateInput(name, 'Please enter your name.')) {
-        isValid = false;
+    // Input validations
+    const validations = [
+        [nameElement, 'Please enter your name.'],
+        [accountElement, 'Please enter your account.'],
+        [passwordElement, 'Please enter your password.'],
+        [birthdayElement, 'Please enter your birthday.'],
+        [phoneElement, 'Please enter your phone number.', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
+        [emailElement, 'Please enter your email.', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
+        [addressElement, 'Please enter your address.']
+    ];
+
+    validations.forEach(([inputElement, errorMessage, regex]) => {
+        if (!validateInputElement(inputElement, errorMessage, regex)) {
+            isFormValid = false;
+        }
+    });
+
+    // Select validation
+    if (citySelectElement.selectedIndex === -1 || districtSelectElement.selectedIndex === -1) {
+        showInvalidFeedback(citySelectElement, 'Please select your city.');
+        showInvalidFeedback(districtSelectElement, 'Please select your district.');
+        isFormValid = false;
     }
 
-
-    // Account validation
-    if(!validateInput(account, 'Please enter your account.')) {
-        isValid = false;
-    }
-
-
-    // Password validation
-    if (!validateInput(password, 'Please enter your password.')) {
-        isValid = false;
-    }
-
-    // Birthday validation
-    if (!validateInput(birthday, 'Please enter your birthday.')) {
-        isValid = false;
-    }
-
-    // Phone number validation
-    if(!validateInput(phone, 'Please enter your phone number.')) {
-        isValid = false;
-    }
-
-    // Email validation
-    if (!validateInput(email, 'Please enter your email.')) {
-        isValid = false;
-    }
-
-    // Simple email format validation
-    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email.value)) {
-        addInvalidFeedback(email, 'Please enter a valid email.');
-        isValid = false;
-    }
-
-    // Address validation
-    if (!validateInput(address, 'Please enter your address.')) {
-        isValid = false;
-    }
-
-    return isValid;
+    return isFormValid;
 }
 
-function validateInput(input, message) {
-    if (input.value === '') {
-        addInvalidFeedback(input,  message);
+function validateInputElement(inputElement, errorMessage, regex = null) {
+    if (inputElement.value === '' || (regex && !regex.test(inputElement.value))) {
+        showInvalidFeedback(inputElement, errorMessage);
         return false;
     } else {
-        removeInvalidFeedback(input);
+        removeInvalidFeedback(inputElement);
         return true;
     }
 }
 
-function addInvalidFeedback(input, message) {
-    input.classList.add('is-invalid');
-    // Check if feedback already exists
-    if (input.parentNode.querySelector('.invalid-feedback')) {
-        // If feedback exists, just update the message
-        input.parentNode.querySelector('.invalid-feedback').textContent = message;
+function showInvalidFeedback(inputElement, errorMessage) {
+    inputElement.classList.add('is-invalid');
+    const existingFeedbackElement = inputElement.parentNode.querySelector('.invalid-feedback');
+
+    if (existingFeedbackElement) {
+        existingFeedbackElement.textContent = errorMessage;
     } else {
-        // If feedback doesn't exist, create it
-        const invalidFeedback = document.createElement('div');
-        invalidFeedback.classList.add('invalid-feedback');
-        invalidFeedback.textContent = message;
-        input.parentNode.appendChild(invalidFeedback);
+        const newFeedbackElement = document.createElement('div');
+        newFeedbackElement.classList.add('invalid-feedback');
+        newFeedbackElement.textContent = errorMessage;
+        inputElement.parentNode.appendChild(newFeedbackElement);
     }
 }
 
-function removeInvalidFeedback(input) {
-    input.classList.remove('is-invalid');
-    let feedbackElement = input.parentNode.querySelector('.invalid-feedback');
+function removeInvalidFeedback(inputElement) {
+    inputElement.classList.remove('is-invalid');
+    const feedbackElement = inputElement.parentNode.querySelector('.invalid-feedback');
     if (feedbackElement) {
         feedbackElement.remove();
     }
 }
 
-function signUp() {
+function submitRegistration() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
 
-    const body = JSON.stringify({
-        "name": name.value,
-        "account": account.value,
-        "password": password.value,
-        "birthday": birthday.value,
-        "phone": phone.value,
-        "email": email.value,
-        "address": address.value
-    });
+    const formData = {
+        "name": nameElement.value,
+        "account": accountElement.value,
+        "password": passwordElement.value,
+        "birthday": birthdayElement.value,
+        "phone": phoneElement.value,
+        "email": emailElement.value,
+        "address": citySelectElement.options[citySelectElement.selectedIndex].text
+            + districtSelectElement.value
+            + addressElement.value
+    };
 
     const requestOptions = {
         method: 'POST',
         headers: headers,
-        body: body,
+        body: JSON.stringify(formData),
         redirect: 'follow'
     };
 
@@ -165,37 +146,34 @@ function signUp() {
             throw new Error("status code: " + response.status);
         })
         .then(result => {
-            console.log("註冊成功, 資料: " + JSON.stringify(result));
+            saveMemberId(result.id);
+            redirectToIndex();
         })
         .catch(error => console.log('error', error));
 }
 
-function fetchDistricts() {
+function fetchDistrictData() {
     fetch('/members/districts')
         .then(response => response.json())
-        .then(populateAddressSelect);
+        .then(populateCitySelect);
 }
 
-function populateAddressSelect(json) {
-    // console.log(JSON.stringify(json));
-    districtsInfos = json;
-    const cities = json.map(info => info.name);
-    // console.log(cities);
-    cities.forEach((city, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = city;
-        citySelect.appendChild(option);
-    })
-    onCityChange();
+function populateCitySelect(data) {
+    districtData = data;
+    const cityOptions = data.map((cityInfo, index) => `<option value=${index}>${cityInfo.name}</option>`);
+    citySelectElement.innerHTML = cityOptions.join('');
+    handleCityChange();
 }
 
 function populateDistrictSelect(districtInfo) {
-    districtSelect.innerHTML = '';
-    districtInfo.districts.forEach(district => {
-        const option = document.createElement('option');
-        option.value = district.zip;
-        option.textContent = district.name;
-        districtSelect.appendChild(option);
-    })
+    const districtOptions = districtInfo.districts.map(district => `<option value=${district.zip}>${district.name}</option>`);
+    districtSelectElement.innerHTML = districtOptions.join('');
+}
+
+function saveMemberId(memberId) {
+    localStorage.setItem('memberId', memberId);
+}
+
+function redirectToIndex() {
+    window.location.href = '/';
 }
