@@ -11,7 +11,7 @@ function setupNavigation(isSignedIn) {
 }
 
 function isSignedIn() {
-    const memberId = sessionStorage.getItem('memberId');
+    const memberId = localStorage.getItem('memberId');
     return memberId !== undefined && memberId !== null;
 }
 
@@ -41,7 +41,7 @@ function setupSigninNavigation() {
 
 function logout() {
     // console.log('logging out');
-    sessionStorage.removeItem('memberId');
+    localStorage.removeItem('memberId');
     // console.log(sessionStorage.getItem('memberId'));
     location.reload();
 }

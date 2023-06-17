@@ -74,7 +74,7 @@ function signin(account, password) {
 }
 
 function saveMemberID(id) {
-    sessionStorage.setItem('memberId', id);
+    localStorage.setItem('memberId', id);
     redirectToMainPage();
 }
 
