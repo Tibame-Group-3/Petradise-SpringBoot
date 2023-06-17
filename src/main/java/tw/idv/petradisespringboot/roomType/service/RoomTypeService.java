@@ -10,4 +10,7 @@ public interface RoomTypeService {
 	
 	RoomType addNewRoomType(RoomType newRoomType);
 
+
+	RoomType getRoomType(Integer roomTypeId);
+
 }

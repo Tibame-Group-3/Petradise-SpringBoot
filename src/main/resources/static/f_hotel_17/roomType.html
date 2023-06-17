@@ -7,13 +7,14 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>房型資訊管理</title>
 <link rel="stylesheet"
-	href="../assets17/bootstrap/css/bootstrap.min.css">
+	href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-<link rel="stylesheet" href="../assets17/fonts/fontawesome-all.min.css">
-<link rel="stylesheet" href="../assets17/css/custom.css">
 <link rel="stylesheet"
-	href="../assets17/css/Ludens---3-Edit-Dark-mode.css">
+	href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
+<link rel="stylesheet" href="/f_hotel_17/assets17/css/custom.css">
+<link rel="stylesheet"
+	href="/f_hotel_17/assets17/css/Ludens---3-Edit-Dark-mode.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -41,7 +42,7 @@
 					href="#">
 					<div class="sidebar-brand-text mx-3">
 						<img width="59" height="33"
-							src="../assets17/img/avatars/logo-only.png">
+							src="/f_hotel_17/assets17/img/avatars/logo-only.png">
 					</div>
 				</a>
 				<hr class="sidebar-divider my-0">
@@ -124,7 +125,7 @@
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">Valerie
 											Luna</span><img class="border rounded-circle img-profile"
-										src="../assets17/img/avatars/avatar1.jpeg"></a>
+										src="/f_hotel_17/assets17/img/avatars/avatar1.jpeg"></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
 										style="min-width: 110px;">
@@ -186,8 +187,8 @@
 		<a class="border rounded d-inline scroll-to-top" href="#page-top"><i
 			class="fas fa-angle-up"></i></a>
 	</div>
-	<script src="../assets17/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../assets17/js/theme.js"></script>
+	<script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/f_hotel_17/assets17/js/theme.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<!-- jQuery -->
 	<script type="text/javascript" charset="utf8"
@@ -198,9 +199,9 @@
 		src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
 
-
-
 	
+
+
 	<script>
 	function limitTextLength() {
 	    $('.limited-text').each(function () {
@@ -232,12 +233,12 @@
 	                    <td>${sizeString}</td>
 	                    <td class="limited-text">${roomType.roomTypeAbout}</td>
 	                    <td>${roomType.roomTypeSaleStatus === "0" ? "下架" : "上架"}</td>
-	                    <td><button type="button" class="btn btn-primary btn-modify" data-bs-toggle="modal" data-bs-target="#editModal">編輯</button></td>
+	                    <td><button type="button" class="btn btn-primary btn-modify btn-edit" data-room-type-id="${roomType.roomTypeId}">編輯</button></td>
 	                </tr>`;
 	            }
 	            $("#room-data-list").html(html);
 	             limitTextLength();  // 房型介紹字數限制
-	             $('#myTable').DataTable({
+	             $('#myTable').DataTable({//初始化DataTable
 	                 "language": {
 	                     "lengthMenu": "顯示 _MENU_ 條",
 	                     "zeroRecords": "未找到任何資料",
@@ -277,8 +278,17 @@
         }
 	}
     </script>
+<script>
+//按下編輯會導向編輯網頁
+$(document).ready(function() {
+    $("#room-data-list").on("click", ".btn-edit", function() {
+        var roomTypeId = $(this).data("room-type-id");
+        window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
+    });
+});
 
-
+</script>
+	
 
 
 
