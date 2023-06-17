@@ -71,7 +71,6 @@ class MemberController {
         ObjectMapper mapper = new ObjectMapper();
         JavaType type = mapper.getTypeFactory().constructParametricType(List.class, AddressInfo.class);
         List<AddressInfo> infos = mapper.readValue(resource.getInputStream(), type);
-        System.out.println(infos);
         return ResponseEntity.ok(infos);
     }
 
