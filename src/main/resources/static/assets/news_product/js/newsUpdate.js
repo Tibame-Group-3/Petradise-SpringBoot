@@ -22,21 +22,34 @@ console.log(newsID)
 $("#submit").on('click', function (e) {
     e.preventDefault();
 
-    const data = {};
-    data.newsId = newsID;
-    data.adminId = $("#adminId").val();
-    data.newsTitle = $("#newsTitle").val();
-    data.newsDate = $("#newsDate").val();
-    data.newsContent = $("#newsContent").val();
+    let newsTitle = $("#newsTitle").val().trim();
+    let newsDate = $("#newsDate").val().trim();
+    let newsContent = $("#newsContent").val().trim();
 
-    axios
-        .put("/news/update/" + newsID, data)  // 設定url, object
-        .then((res) => {
-            console.log(res.data);  // 獲得回傳資料
-        })
-        .catch((err) => {
-            console.error(err);
+    if(newsTitle.length == 0 || newsDate.length == 0 || newsContent.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: '齁...',
+            text: '欄位不可以空著唷!',
         });
+    } else {
 
-    location.href = "NewsList.html";
+        const data = {};
+        data.newsId = newsID;
+        data.adminId = $("#adminId").val();
+        data.newsTitle = $("#newsTitle").val();
+        data.newsDate = $("#newsDate").val();
+        data.newsContent = $("#newsContent").val();
+
+        axios
+            .put("/news/update/" + newsID, data)  // 設定url, object
+            .then((res) => {
+                console.log(res.data);  // 獲得回傳資料
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+        location.href = "NewsList.html";
+    }
 });
