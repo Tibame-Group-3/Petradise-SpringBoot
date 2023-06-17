@@ -12,7 +12,6 @@ function setupNavigation(isSignedIn) {
 
 function isSignedIn() {
     const memberId = sessionStorage.getItem('memberId');
-    console.log('memberId: ' + memberId);
     return memberId !== undefined && memberId !== null;
 }
 
@@ -32,7 +31,7 @@ function setupMemberElements(isSignedIn) {
 
 function setupMemberCenterNavigation(isSignedIn) {
     $('.navigate-member-center')
-        .attr('href', '/member/signin.html');
+        .attr('href', '/member/member-center.html');
 }
 
 function setupSigninNavigation() {
