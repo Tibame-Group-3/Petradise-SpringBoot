@@ -13,11 +13,12 @@
 <body>
 
 <div class="container">
-    <form class="bg-light m-3 p-3 border rounded" id="form">
+    <form class="bg-light m-3 p-3 border rounded" id="form" novalidate>
         <h2 class="align-middle border-black">會員註冊</h2>
         <div class="mb-3 mt-3">
             <label for="name" class="form-label">姓名* </label>
             <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="name" required>
+            <div id="nameError" class="alert alert-danger mt-2" role="alert" style="display: none;"></div>
         </div>
         <div class="mb-3">
             <label for="account" class="form-label">帳號* </label>
@@ -27,10 +28,10 @@
             <label for="password" class="form-label">密碼* </label>
             <input type="password" class="form-control" id="password" placeholder="請輸入密碼" name="password" autocomplete="new-password" required>
         </div>
-        <div class="mb-3">
-            <label for="password-confirm" class="form-label">確認密碼* </label>
-            <input type="password" class="form-control" id="password-confirm" placeholder="請再輸入一次密碼" name="password-confirm" autocomplete="new-password" required>
-        </div>
+<!--        <div class="mb-3">-->
+<!--            <label for="password-confirm" class="form-label">確認密碼* </label>-->
+<!--            <input type="password" class="form-control" id="password-confirm" placeholder="請再輸入一次密碼" name="password-confirm" autocomplete="new-password" required>-->
+<!--        </div>-->
         <div class="mb-3">
             <label for="birthday" class="form-label">生日* </label>
             <input type="date" class="form-control" id="birthday" placeholder="請輸入生日" name="birthday" required>

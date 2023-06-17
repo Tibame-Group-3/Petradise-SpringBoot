@@ -16,7 +16,7 @@ let districtsInfos;
 document.addEventListener('DOMContentLoaded', () => {
     fetchDistricts();
     addBirthdayLimit();
-    addRegex();
+    disableSpace();
     form.addEventListener('submit', onClickedSubmit);
     citySelect.addEventListener('change', onCityChange);
 })
@@ -34,8 +34,15 @@ function addBirthdayLimit() {
     birthday.setAttribute('min', '1900-01-01');
 }
 
-function addRegex() {
-
+function disableSpace() {
+    let inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === ' ') {
+                e.preventDefault();
+            }
+        });
+    });
 }
 
 function onClickedSubmit(event) {
@@ -44,10 +51,89 @@ function onClickedSubmit(event) {
     if (validated) {
         signUp();
     }
+    return false;
 }
 
 function validateForm() {
-    return true;
+    let isValid = true;
+
+    // Name validation
+    if(!validateInput(name, 'Please enter your name.')) {
+        isValid = false;
+    }
+
+
+    // Account validation
+    if(!validateInput(account, 'Please enter your account.')) {
+        isValid = false;
+    }
+
+
+    // Password validation
+    if (!validateInput(password, 'Please enter your password.')) {
+        isValid = false;
+    }
+
+    // Birthday validation
+    if (!validateInput(birthday, 'Please enter your birthday.')) {
+        isValid = false;
+    }
+
+    // Phone number validation
+    if(!validateInput(phone, 'Please enter your phone number.')) {
+        isValid = false;
+    }
+
+    // Email validation
+    if (!validateInput(email, 'Please enter your email.')) {
+        isValid = false;
+    }
+
+    // Simple email format validation
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email.value)) {
+        addInvalidFeedback(email, 'Please enter a valid email.');
+        isValid = false;
+    }
+
+    // Address validation
+    if (!validateInput(address, 'Please enter your address.')) {
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function validateInput(input, message) {
+    if (input.value === '') {
+        addInvalidFeedback(input,  message);
+        return false;
+    } else {
+        removeInvalidFeedback(input);
+        return true;
+    }
+}
+
+function addInvalidFeedback(input, message) {
+    input.classList.add('is-invalid');
+    // Check if feedback already exists
+    if (input.parentNode.querySelector('.invalid-feedback')) {
+        // If feedback exists, just update the message
+        input.parentNode.querySelector('.invalid-feedback').textContent = message;
+    } else {
+        // If feedback doesn't exist, create it
+        const invalidFeedback = document.createElement('div');
+        invalidFeedback.classList.add('invalid-feedback');
+        invalidFeedback.textContent = message;
+        input.parentNode.appendChild(invalidFeedback);
+    }
+}
+
+function removeInvalidFeedback(input) {
+    input.classList.remove('is-invalid');
+    let feedbackElement = input.parentNode.querySelector('.invalid-feedback');
+    if (feedbackElement) {
+        feedbackElement.remove();
+    }
 }
 
 function signUp() {
