@@ -75,9 +75,9 @@ function signin(account, password) {
 
 function saveMemberID(id) {
     localStorage.setItem('memberId', id);
-    redirectToMainPage();
+    popBack();
 }
 
-function redirectToMainPage() {
-    window.location.href = '/';
+function popBack() {
+    history.go(-1);
 }
