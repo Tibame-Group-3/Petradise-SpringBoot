@@ -62,8 +62,10 @@ function validateForm() {
         [accountElement, 'Please enter your account.'],
         [passwordElement, 'Please enter your password.'],
         [birthdayElement, 'Please enter your birthday.'],
-        [phoneElement, 'Please enter your phone number.', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
-        [emailElement, 'Please enter your email.', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
+        [phoneElement, 'Please enter your phone number.'],
+        [phoneElement, 'Please enter valid Taiwan phone number', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
+        [emailElement, 'Please enter your email.'],
+        [emailElement, 'Please enter valid email.', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
         [addressElement, 'Please enter your address.']
     ];
 
