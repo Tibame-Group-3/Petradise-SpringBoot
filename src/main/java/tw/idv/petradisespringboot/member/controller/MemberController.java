@@ -1,5 +1,7 @@
 package tw.idv.petradisespringboot.member.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,11 +45,15 @@ class MemberController {
         var password = member.getPassword();
         var foundMember = service.login(account, password);
         if (foundMember.isPresent()) {
-            return ResponseEntity.ok(foundMember.get());
+            // Only return the id of the member
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.createObjectNode();
+            node.put("id", foundMember.get().getId());
+            return ResponseEntity.ok(node);
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new MemberNotFoundException(account));
+                .body(new MemberNotFoundException("帳號或密碼有誤"));
     }
 }
 
@@ -57,6 +63,8 @@ class MemberNotFoundException extends RuntimeException {
         super("找不到會員ID: " + id);
     }
 
-    MemberNotFoundException(String account) { super("帳號為 " + account + " 之會員不存在"); }
+    MemberNotFoundException(String message) {
+        super(message);
+    }
 }
 

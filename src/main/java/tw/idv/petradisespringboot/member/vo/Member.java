@@ -1,15 +1,11 @@
 package tw.idv.petradisespringboot.member.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import lombok.*;
 
 @Entity
 @Data
@@ -26,8 +22,10 @@ public class Member {
     private String name;
     @Column(name = "mem_account")
     private String account;
+
     @Column(name = "mem_password")
     private String password;
+
     @Column(name = "mem_birthday")
     private Date birthday;
     @Column(name = "mem_phone")
@@ -37,8 +35,8 @@ public class Member {
     @Column(name = "mem_address")
     private String address;
     @Column(name = "mem_access", insertable = false)
-    private Character access;
+    private Character access = '0';
     @Column(name = "mem_bonus", insertable = false)
-    private Integer bonus;
+    private Integer bonus = 0;
 
 }
