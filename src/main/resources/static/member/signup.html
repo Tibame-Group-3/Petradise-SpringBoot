@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
-
-<div class="container">
-    <form class="bg-light m-3 p-3 border rounded" id="form" novalidate>
-        <h2 class="align-middle border-black">會員註冊</h2>
+<div class="container py-5">
+    <form class="bg-light shadow p-5 rounded" id="form" novalidate>
+        <h2 class="mb-4 text-center border-bottom pb-3">會員註冊</h2>
         <div class="mb-3 mt-3">
             <label for="name" class="form-label">姓名* </label>
             <input type="text" class="form-control" id="name" placeholder="請輸入姓名" name="name" required>
@@ -28,10 +27,10 @@
             <label for="password" class="form-label">密碼* </label>
             <input type="password" class="form-control" id="password" placeholder="請輸入密碼" name="password" autocomplete="new-password" required>
         </div>
-<!--        <div class="mb-3">-->
-<!--            <label for="password-confirm" class="form-label">確認密碼* </label>-->
-<!--            <input type="password" class="form-control" id="password-confirm" placeholder="請再輸入一次密碼" name="password-confirm" autocomplete="new-password" required>-->
-<!--        </div>-->
+        <!--        <div class="mb-3">-->
+        <!--            <label for="password-confirm" class="form-label">確認密碼* </label>-->
+        <!--            <input type="password" class="form-control" id="password-confirm" placeholder="請再輸入一次密碼" name="password-confirm" autocomplete="new-password" required>-->
+        <!--        </div>-->
         <div class="mb-3">
             <label for="birthday" class="form-label">生日* </label>
             <input type="date" class="form-control" id="birthday" placeholder="請輸入生日" name="birthday" required>
@@ -62,7 +61,7 @@
             <label for="address" class="form-label">地址* </label>
             <input type="text" class="form-control" id="address" placeholder="請輸入地址" name="address" required>
         </div>
-        <button type="submit" value="Submit" class="btn btn-primary" id="submit">註冊</button>
+        <button type="submit" value="Submit" class="btn btn-primary w-100 mt-3" id="submit">註冊</button>
     </form>
 </div>
 
