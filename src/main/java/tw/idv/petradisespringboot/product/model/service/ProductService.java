@@ -1,6 +1,5 @@
 package tw.idv.petradisespringboot.product.model.service;
 
-import tw.idv.petradisespringboot.news.model.vo.News;
 import tw.idv.petradisespringboot.product.model.vo.Product;
 
 import java.util.List;
