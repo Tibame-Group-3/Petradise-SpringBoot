@@ -2,16 +2,21 @@ package tw.idv.petradisespringboot.lostpetarticle.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.idv.petradisespringboot.lostpetarticle.service.LostPetArticleService;
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 
 @RestController
+@RequestMapping("/LostPetArticle")
 public class LostPetArticleController {
 	
 	
@@ -21,25 +26,27 @@ public class LostPetArticleController {
 		this.lostPetArticleService = lostPetArticleService;
 	}
 	
-	@GetMapping("/LostPetArticle")
+	@GetMapping("/all")
 	List<LostPetArticle> getAllArticle(){
+		
 		var kk = lostPetArticleService.getAllArticles();
 		System.out.println(kk);
 		return lostPetArticleService.getAllArticles();
 	}
 		
-	@GetMapping("/LostPetArticle/id/{id}")
+	@GetMapping("/id={id}")
 	LostPetArticle getArticle(@PathVariable Integer id) {
-		return lostPetArticleService.findById(id);
+	 
+		 return lostPetArticleService.findById(id);
 	}
 	
-	@PostMapping("/LostPetArticle/create")
+	@PostMapping("/create")
 	LostPetArticle create(@RequestBody LostPetArticle lostPetArticle) {
 		System.out.println(lostPetArticle);
 		return lostPetArticleService.add(lostPetArticle);
 	}
 	
-	@PostMapping("/LostPetArticle/update")
+	@PostMapping("/update")
 	LostPetArticle update(@RequestBody LostPetArticle lostPetArticle) {
 		System.out.println(lostPetArticle);
 		return lostPetArticleService.update(lostPetArticle);

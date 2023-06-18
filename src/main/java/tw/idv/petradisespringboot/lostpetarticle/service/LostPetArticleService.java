@@ -3,6 +3,7 @@ package tw.idv.petradisespringboot.lostpetarticle.service;
 import java.util.List;
 
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
+import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 public interface LostPetArticleService {
 	
@@ -14,8 +15,9 @@ public interface LostPetArticleService {
 	
 	LostPetArticle update(LostPetArticle lostPetArticle);
 	
-	LostPetArticle delete(Integer id);
+	void delete(Integer id);
 	
+	void addLostPetPic(LostPetPic lostPetPic);
 	
 
 }

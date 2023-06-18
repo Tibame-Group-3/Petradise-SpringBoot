@@ -1,5 +1,7 @@
 package tw.idv.petradisespringboot.lostpetarticle.vo;
 
+import java.util.Base64;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,12 +25,11 @@ import lombok.ToString;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "lost_pet_pic")
 public class LostPetPic {
 	
-	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "lost_pet_pic_id")
@@ -39,8 +41,10 @@ public class LostPetPic {
 	@JoinColumn(name = "article_id")
 	private LostPetArticle articleId;
 	
-	@Column(name = "lost_pet_pic")
+	@Lob
+	@Column(name = "lost_pet_pic", columnDefinition = "LONGBLOB")
 	private byte[] lostPetPic;
+	
 	
 	
 }

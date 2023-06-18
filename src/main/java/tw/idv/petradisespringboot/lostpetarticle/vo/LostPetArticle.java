@@ -1,12 +1,12 @@
 package tw.idv.petradisespringboot.lostpetarticle.vo;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,11 +37,11 @@ public class LostPetArticle {
 	private Integer memId;
 	
 	@Column (name="article_update", insertable = false)
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	private Timestamp update;
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
+	private Date update;
 	
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	@Column (name="lost_date")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date lostDate;
 	
 	@Column	(name="lost_place")
@@ -71,8 +71,12 @@ public class LostPetArticle {
 	@Column
 	private String title;
 	
+//	@JsonManagedReference
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
+//	private List<LostPetPicSTR> lostPetPicSTR;
+	
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId") 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
 	private List<LostPetPic> lostPetPic;
 	
 	@JsonManagedReference

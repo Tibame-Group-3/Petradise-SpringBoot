@@ -71,6 +71,39 @@
 	line-height: 100%;
 }
 
+.comment {
+	color: #bbb;
+	background-color: #000;
+	line-height: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	margin: 0 auto;
+	padding: 0;
+	width: 100%;
+	background-color: #000;
+	line-height: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	margin: 0 auto;
+	padding: 0;
+	word-wrap: break-word;
+	margin: 0 auto;
+	padding: 0;
+	width: 100%;
+	background-color: #000;
+	line-height: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 100%;
+}
+
 .article-metaline {
 	margin: 0;
 	padding: 0;
@@ -124,8 +157,6 @@
 	transition: #fd780f 0.3s ease;
 	margin-left: 450px;
 }
-
-
 </style>
 </head>
 
@@ -250,8 +281,8 @@
 	</nav>
 	<div class="clip-border">
 		<div id="main-container">
-			<div id="main-content" class="bbs-screen bbs-content">
-				<!-- <div class="article-metaline"><span class="article-meta-tag">作者</span><span
+			<div id="main-content" class="bbs-screen bbs-content"></div>
+			<!-- <div class="article-metaline"><span class="article-meta-tag">作者</span><span
                         class="article-meta-value">會員ID</span></div>
                 <div class="article-metaline"><span class="article-meta-tag">標題</span><span
                         class="article-meta-value">標題</span></div>
@@ -293,7 +324,8 @@
                     +++++++ -->
 
 
-			</div>
+
+			<div class="comment"></div>
 		</div>
 		<br>
 		<button class="button" id="res">回文</button>
@@ -357,64 +389,76 @@
         });
         
         let conta = document.querySelector(".bbs-screen");
-        
-        console.log(conta);
-        axios.get("/LostPetArticle/id/3")
+        let comment = document.querySelector(".comment");
+        axios.get("/LostPetArticle/id={id}")
         .then ( function(response) {
         	console.log(response.data);
         	let da = "";
 		   	data = response.data; 
 		   	
-		   		console.log(data);
-		   		const base64Images = data.lostPetPic.map(pic => {
-			    	return `data:image/(jpeg|png|gif);base64,${pic.lostPetPic}`;
-			    });
-		   		(data["chipNum"] === null) ? data["chipNum"] = '無' : data["chipNum"];
-		   		(data["species"] === null) ? data["species"] = '無' : data["species"];
-		   		da =`
-		   			<div class="article-metaline"><span class="article-meta-tag">作者</span><span
-                    class="article-meta-value">${data.memId}</span></div>
-		            <div class="article-metaline"><span class="article-meta-tag">標題</span><span
-		                    class="article-meta-value">${data.title}</span></div>
-		            <div class="article-metaline"><span class="article-meta-tag">時間</span><span
-		                    class="article-meta-value">${data.update}</span></div>
-		            <div>
-		                <label for="lost_place">遺失地點：${data.lostPlace}</label>
-		            </div>
-		            <div>
-		                <label for="chip_num">晶片號碼：${data.chipNum}</label>
-		            </div>
-		            <div>
-		                <label for="species">品種：${data.species}</label>
-		            </div>
-		            <div>
-		                <label for="color">毛色：${data.color}</label>
-		            </div>
-		            <div>
-		                <label for="datetime">遺失時間：${data.lostDate}</label>
-		            </div>
-		            <div>
-		                <label for="feature">寵物特徵：${data.feature}</label>
-		            </div>
-		            <div>
-		                <label for="contact_phone">聯絡電話：${data.contactPhone}</label>
-		            </div>
-		            <div>
-		                <label for="pic">動物圖片：</label>
-		                <img class="pic" src="${base64Images}">
-		            </div>
-		            <div class="text">${data.text}</div>
-		            <div>
-		            <span>----------------------------------------------------------------------------------------------------</span>
-					</div>
-					<div><span class="an">${data.lostPetResponse[0]["memId"]}</span><span class="f3 push-content">：${data.lostPetResponse[0]["responseContent"]}</span><span class="push-ipdatetime">${data.lostPetResponse[0]["responseTime"]}</span></div>
-					<div><span class="an">${data.lostPetResponse[1]["memId"]}</span><span class="f3 push-content">：${data.lostPetResponse[1]["responseContent"]}</span><span class="push-ipdatetime">${data.lostPetResponse[1]["responseTime"]}</span></div>
-					<div><span class="an"></span><span class="f3 push-content"></span><span class="push-ipdatetime"></span></div>
-					<div><span class="an"></span><span class="f3 push-content"></span><span class="push-ipdatetime"></span></div>
-					<div><span class="an"></span><span class="f3 push-content"></span><span class="push-ipdatetime"></span></div>
+	   		console.log(data);
+	   		const base64Images = data.lostPetPic.map(pic => {
+		    	return `data:image/(jpeg|png|gif);base64,${pic.lostPetPic}`;
+		    });
+	   		(data["chipNum"] === null) ? data["chipNum"] = '無' : data["chipNum"];
+	   		(data["species"] === null) ? data["species"] = '無' : data["species"];
+	   		da =`
+	   			<div class="article-metaline"><span class="article-meta-tag">作者</span><span
+                   class="article-meta-value">${data.memId}</span></div>
+	            <div class="article-metaline"><span class="article-meta-tag">標題</span><span
+	                    class="article-meta-value">${data.title}</span></div>
+	            <div class="article-metaline"><span class="article-meta-tag">時間</span><span
+	                    class="article-meta-value">${data.update}</span></div>
+	            <div>
+	                <label for="lost_place">遺失地點：${data.lostPlace}</label>
+	            </div>
+	            <div>
+	                <label for="chip_num">晶片號碼：${data.chipNum}</label>
+	            </div>
+	            <div>
+	                <label for="species">品種：${data.species}</label>
+	            </div>
+	            <div>
+	                <label for="color">毛色：${data.color}</label>
+	            </div>
+	            <div>
+	                <label for="datetime">遺失時間：${data.lostDate}</label>
+	            </div>
+	            <div>
+	                <label for="feature">寵物特徵：${data.feature}</label>
+	            </div>
+	            <div>
+	                <label for="contact_phone">聯絡電話：${data.contactPhone}</label>
+	            </div>
+	            <div>
+	                <label for="pic">動物圖片：</label>
+	                <img class="pic" src="${base64Images}">
+	            </div>
+	            <div>
+	            	<div class="text">${data.text}</div>
+	            </div>
+	            <div>
+					<span>----------------------------------------------------------------------------------------------------</span>
+				</div>
+	            
 		   		`
-		   	conta.innerHTML = da;
-        })
+		   		conta.innerHTML = da;
+		   		if (data.lostPetResponse && data.lostPetResponse.length > 0) {
+				    let i = 0;
+				    let com = "";
+				    while (i < data.lostPetResponse.length) {
+				        com += `
+				            <div><span class="an">${data.lostPetResponse[i]["memId"]}</span><span class="f3 push-content">：${data.lostPetResponse[i]["responseContent"]}</span><span class="push-ipdatetime">${data.lostPetResponse[i]["responseTime"]}</span></div>
+				            <br>
+				        `;
+				        i++;
+				    }
+				        comment.innerHTML = com;
+				}
+			    })
+			    .catch ( (error) => console.log(error));
+	   
+       
     </script>
 </body>
 

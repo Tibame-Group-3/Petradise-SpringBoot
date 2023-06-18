@@ -161,62 +161,71 @@
 
 		</div>
 
-		<form class="post" action="POST" novalidate
-			onsubmit="event.preventDefault()">
+		<form action="/LostPetPic/create" method="post"
+			enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-md-8 ">
 					<div class="row">
 						<div class="mb-3">
 							<label for="post_tilte">文章標題</label> <input type="text"
-								class="form-control" id="post_title">
+								class="form-control" name="title" id="title">
 						</div>
 						<div class="mb-3">
 							<label for="lost_place">遺失地點</label> <input type="text"
-								class="form-control" id="lost_place">
+								class="form-control" name="lostPlace" id="lostPlace">
 						</div>
 
 						<div class="mb-3">
 							<label for="chip_num">晶片號碼 <span class="text-muted">(選填)</span></label>
-							<input type="text" class="form-control" id="chip_num">
+							<input type="text" class="form-control" name="chipNum"
+								id="chipNum">
 						</div>
 
 						<div class="mb-3">
-							<label for="species">品種 <span class="text-muted">(選填)</span></label>
-							<input type="text" class="form-control" id="species">
+							<label for="species">品種 </label> <select name="species"
+								id="select-animal" class="form-control">
+								<option>請選擇寵物種類</option>
+								<option>狗</option>
+								<option>貓</option>
+								<option>鳥</option>
+								<option>其他</option>
+							</select>
 						</div>
 
 						<div class="mb-3">
-							<label for="color">毛色 </label> <input type="text"
-								class="form-control" id="color">
+							<label for="color">毛色 </label> <input type="text" id="color"
+								class="form-control" name="color">
 						</div>
 						<div class="mb-3">
-							<label for="datetime">遺失時間：</label> <input type="datetime-local"
-								id="datetime" name="datetime">
+							<label for="date">遺失時間：</label> <input type="datetime-local"
+								class="form-control" id="datetime" name="lostDate">
 						</div>
 					</div>
-				</div>
-				<div class="row">
 					<div class="mb-3">
-						<label for="feature">寵物特徵</label> <input type="text"
-							class="form-control" id="feature">
+						<label for="feature">寵物特徵</label> <input type="text" id="feature"
+							class="form-control" name="feature">
 					</div>
-					<div class="col-md-6 mb-3">
+					<div class="mb-3">
 						<label for="contact_phone">聯絡電話</label><span class="text-muted">(選填)</span>
-						<input type="text" class="form-control" id="contact_phone">
+						<input type="text" class="form-control" id="contactPhone">
 					</div>
 				</div>
+
 				<div class="row">
 					<label for="text">文章其他備註：</label><br>
-					<textarea rows="10" cols="30" class="text"></textarea>
+					<textarea rows="10" cols="30" name="text" id="text"></textarea>
 				</div>
+
 				<div>
-					<label>寵物圖片：</label> <input type="file" id="p_file" multiple="multiple" accept="image/jpeg, image/png, image/gif, image/jpg"> <br>
-					<output></output>
+					<label>寵物圖片：</label> <br> <input type="file" class="input"
+						id="file" name="file" multiple="multiple" accept="image/*">
+					<br>
+					<output class="output"></output>
 				</div>
 
 				<hr class="mb-4">
 			</div>
-			<button class="button " id="commit">送出</button>
+			<button class="btn-submit" type="button">送出</button>
 		</form>
 	</div>
 
@@ -259,42 +268,135 @@
 		</div>
 	</footer>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
-		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
+		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js'></script>
 
 	<script>
-		let numberInput = document.getElementById('contact_phone');
-		numberInput.addEventListener('input', function(event) {
-			let inputValue = event.target.value;
-			if (!/^\d*$/.test(inputValue)) {
-				event.target.value = inputValue.replace(/\D/g, '');
-			}
+		const output = document.querySelector(".output");
+		const input = document.querySelector(".input");
+		let numberInput = document.getElementById('contactPhone');
+		let imagesArray = [];
+	
+		input.addEventListener("change", () => {
+		  files = input.files;
+		  for (let i = 0; i < files.length; i++) {
+		    imagesArray.push(files[i]);
+		  }
+		  displayImages();
 		});
-		let p_file_el = document.getElementById("p_file");
-		let preview_el = document.getElementById("preview");
-		let preview_img = function(file) {
-			let reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.addEventListener(
-							"load",
-							function() {
-								let img_str = '<img src="' + reader.result + '" class="preview_img">';
-								preview_el.innerHTML = img_str;
-							});
+	
+		function displayImages() {
+		  let images = "";
+		  imagesArray.forEach((image, index) => {
+		    images += `
+		      <div class="image">
+		        <img src="${URL.createObjectURL(image)}" alt="image">
+		        <span data-index="${index}" class="delete-image">&times;</span>
+		      </div>
+		    `;
+		  });
+		  output.innerHTML = images;
+		}
+	
+		output.addEventListener("click", (event) => {
+		  if (event.target.classList.contains("delete-image")) {
+		    const index = event.target.dataset.index;
+		    deleteImage(index);
+		  }
+		});
+	
+		function deleteImage(index) {
+		  imagesArray.splice(index, 1);
+		  displayImages();
+		}
+	
+		numberInput.addEventListener('input', function(event) {
+		  let inputValue = event.target.value;
+		  if (!/^\d*$/.test(inputValue)) {
+		    event.target.value = inputValue.replace(/\D/g, '');
+		    Swal.fire({
+		      icon: 'error',
+		      title: '請輸入數字',
+		    });
+		  }
+		});
+		function readFileAsDataURL(file) {
+			  return new Promise((resolve, reject) => {
+			    const reader = new FileReader();
+			    reader.onload = (event) => resolve(event.target.result);
+			    reader.onerror = (error) => reject(error);
+			    reader.readAsDataURL(file);
+			  });
 		};
 
-		p_file_el.addEventListener("change", function(e) {
-			if (this.files.length > 0) {
-				preview_img(this.files[0]);
-			} else {
-				preview_el.innerHTML = '<span class="text">預覽圖</span>';
+	
+		async function submitForm() {
+			
+			const jsonData = { lostPetId: 1, lostPetPics: [] };
+
+			for (let i = 0; i < imagesArray.length; i++) {
+			  const file = imagesArray[i];
+			  const base64Image = await readFileAsDataURL(file);
+			  jsonData.lostPetPics.push({ lostPetPic: base64Image });
 			}
+
+			$.ajax({
+			  url: "/LostPetPic/create",
+			  type: "POST",
+			  data: JSON.stringify(jsonData),
+			  contentType: "application/json",
+			  success: function(response) {
+			    console.log(response);
+			  },
+			  error: function(error) {
+			    console.error(error);
+			  }
+			});
+
+	
+		  const articleData = {
+		    memId: 6,
+		    lostDate: $("#datetime").val(),
+		    lostPlace: $("#lostPlace").val(),
+		    chipNum: $("#chipNum").val(),
+		    species: $("#select-animal").val(),
+		    color: $("#color").val(),
+		    feature: $("#feature").val(),
+		    text: $("#text").val(),
+		    contactPhone: $("#contactPhone").val(),
+		    title: $("#title").val(),
+		  };
+	
+		  $.ajax({
+		    url: "/LostPetArticle/create",
+		    type: "POST",
+		    data: JSON.stringify(articleData),
+		    contentType: "application/json",
+		    success: function(response) {
+		      console.log(response);
+		      console.log(JSON.stringify(response));
+		    },
+		    error: function(error) {
+		      console.error(error);
+		    }
+		  });
+		}
+	
+		$(".btn-submit").click(function(event) {
+		  event.preventDefault();
+		  submitForm();
 		});
+
+
 		
+
+
+				
+	
+			      
+				   
+			        
 	</script>
 
 </body>
