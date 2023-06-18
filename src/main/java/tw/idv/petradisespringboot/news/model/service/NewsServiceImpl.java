@@ -1,12 +1,12 @@
 package tw.idv.petradisespringboot.news.model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import tw.idv.petradisespringboot.news.model.dao.NewsDAO;
 import tw.idv.petradisespringboot.news.model.vo.News;
+
+import java.util.List;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -28,7 +28,6 @@ public class NewsServiceImpl implements NewsService {
         return newsDAO.findById(newsId).orElse(null);
     }
     public List<News> getAll(){
-        return newsDAO.findAll();
+        return newsDAO.findAll((Sort.by(Sort.Direction.DESC, "newsId")));
     }
-
 }

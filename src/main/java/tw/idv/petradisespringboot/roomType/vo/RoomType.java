@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,11 +25,12 @@ import lombok.Setter;
 @Getter
 @Setter
 
+@Table(name ="room_type")
 public class RoomType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "room_type_id")
+	@Column(name = "room_type_id", insertable = false)
 	private Integer roomTypeId;
 
 	@Column(name = "hotel_id")
@@ -38,7 +42,7 @@ public class RoomType implements Serializable {
 	@Column(name = "room_type_amount")
 	private Integer roomTypeAmount;
 
-	@Column(name = "room_type_sale_status", insertable = false)
+	@Column(name = "room_type_sale_status")
 	private Character roomTypeSaleStatus;
 
 	@Column(name = "room_type_about")
@@ -53,7 +57,9 @@ public class RoomType implements Serializable {
 	@Column(name = "room_type_size")
 	private Character roomTypeSize;
 	
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+	    private List<RoomPic> roomPics;
 
 	@Override
 	public String toString() {
