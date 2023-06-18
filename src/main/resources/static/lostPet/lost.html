@@ -530,9 +530,9 @@ select {
 		    .then(response => {
 		      const jsonData = response.data;
 		      const parentContainer = document.querySelector('.row');
+		      console.log(jsonData);
 
 		      jsonData.forEach(data => {
-		        console.log(jsonData);
 		        const base64Images = data.lostPetPic.map(pic => {
 		          return `data:image/(jpeg|png|gif);base64,${pic.lostPetPic}`;
 		        });

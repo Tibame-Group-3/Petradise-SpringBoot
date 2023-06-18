@@ -43,7 +43,7 @@ public class LostPetPic {
 	
 	@Lob
 	@Column(name = "lost_pet_pic", columnDefinition = "LONGBLOB")
-	private byte[] lostPetPic;
+	private String lostPetPic;
 	
 	
 	

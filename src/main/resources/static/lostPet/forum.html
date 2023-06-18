@@ -390,7 +390,7 @@
         
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
-        axios.get("/LostPetArticle/id={id}")
+        axios.get("/LostPetArticle/id=52")
         .then ( function(response) {
         	console.log(response.data);
         	let da = "";
@@ -432,10 +432,11 @@
 	            </div>
 	            <div>
 	                <label for="pic">動物圖片：</label>
+	                <br>
 	                <img class="pic" src="${base64Images}">
 	            </div>
 	            <div>
-	            	<div class="text">${data.text}</div>
+	            	<label for="text">文章補充內容：${data.text}</label>
 	            </div>
 	            <div>
 					<span>----------------------------------------------------------------------------------------------------</span>

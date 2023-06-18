@@ -17,7 +17,6 @@ public interface LostPetArticleService {
 	
 	void delete(Integer id);
 	
-	void addLostPetPic(LostPetPic lostPetPic);
 	
 
 }

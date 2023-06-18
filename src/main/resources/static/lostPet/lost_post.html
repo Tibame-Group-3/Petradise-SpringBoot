@@ -275,42 +275,40 @@
 	<script>
 		const output = document.querySelector(".output");
 		const input = document.querySelector(".input");
+		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
-		let imagesArray = [];
-	
+		
+		let base64Image = "";
+		let jsonData = [];
 		input.addEventListener("change", () => {
-		  files = input.files;
-		  for (let i = 0; i < files.length; i++) {
-		    imagesArray.push(files[i]);
-		  }
-		  displayImages();
-		});
-	
+			const files = input.files
+			for (let i = 0; i < files.length; i++) {
+				imagesArray.push(files[i])
+			};
+			displayImages()
+		})
 		function displayImages() {
-		  let images = "";
-		  imagesArray.forEach((image, index) => {
-		    images += `
-		      <div class="image">
-		        <img src="${URL.createObjectURL(image)}" alt="image">
-		        <span data-index="${index}" class="delete-image">&times;</span>
-		      </div>
-		    `;
-		  });
-		  output.innerHTML = images;
+			let images = ""
+			imagesArray.forEach((image, index) => {
+				images += `<div class="image">
+				<img src="${URL.createObjectURL(image)}" alt="image">
+				<span onclick="deleteImage(${index})">&times;</span>
+				</div>`
+			})
+			output.innerHTML = images
 		}
-	
+
 		output.addEventListener("click", (event) => {
 		  if (event.target.classList.contains("delete-image")) {
-		    const index = event.target.dataset.index;
-		    deleteImage(index);
+		    deleteImage();
 		  }
 		});
-	
+
 		function deleteImage(index) {
-		  imagesArray.splice(index, 1);
-		  displayImages();
+			imagesArray.splice(index, 1)
+			displayImages()
 		}
-	
+
 		numberInput.addEventListener('input', function(event) {
 		  let inputValue = event.target.value;
 		  if (!/^\d*$/.test(inputValue)) {
@@ -328,65 +326,52 @@
 			    reader.onerror = (error) => reject(error);
 			    reader.readAsDataURL(file);
 			  });
-		};
-
-	
-		async function submitForm() {
-			
-			const jsonData = { lostPetId: 1, lostPetPics: [] };
-
-			for (let i = 0; i < imagesArray.length; i++) {
-			  const file = imagesArray[i];
-			  const base64Image = await readFileAsDataURL(file);
-			  jsonData.lostPetPics.push({ lostPetPic: base64Image });
 			}
 
-			$.ajax({
-			  url: "/LostPetPic/create",
-			  type: "POST",
-			  data: JSON.stringify(jsonData),
-			  contentType: "application/json",
-			  success: function(response) {
+			async function submitForm() {
+				const file = input.files[0];
+				const base64Image = await readFileAsDataURL(file);
+				const base64Data = base64Image.split(',')[1];
+
+			  const jsonData = {
+			    lostPetId: 1,
+			    lostPetPic: base64Data
+			  };
+
+			  const articleData = {
+			    memId: 6,
+			    lostDate: $("#datetime").val(),
+			    lostPlace: $("#lostPlace").val(),
+			    chipNum: $("#chipNum").val(),
+			    species: $("#select-animal").val(),
+			    color: $("#color").val(),
+			    feature: $("#feature").val(),
+			    text: $("#text").val(),
+			    contactPhone: $("#contactPhone").val(),
+			    title: $("#title").val(),
+			    lostPetPic: [jsonData],
+			  };
+			  console.log(articleData);
+
+			  try {
+			    const response = await $.ajax({
+			      url: "/LostPetArticle/create",
+			      type: "POST",
+			      data: JSON.stringify(articleData),
+			      contentType: "application/json",
+			    });
 			    console.log(response);
-			  },
-			  error: function(error) {
+			    console.log(JSON.stringify(response));
+			  } catch (error) {
 			    console.error(error);
 			  }
+			}
+
+			$(".btn-submit").click(function(event) {
+			  event.preventDefault();
+			  submitForm();
 			});
 
-	
-		  const articleData = {
-		    memId: 6,
-		    lostDate: $("#datetime").val(),
-		    lostPlace: $("#lostPlace").val(),
-		    chipNum: $("#chipNum").val(),
-		    species: $("#select-animal").val(),
-		    color: $("#color").val(),
-		    feature: $("#feature").val(),
-		    text: $("#text").val(),
-		    contactPhone: $("#contactPhone").val(),
-		    title: $("#title").val(),
-		  };
-	
-		  $.ajax({
-		    url: "/LostPetArticle/create",
-		    type: "POST",
-		    data: JSON.stringify(articleData),
-		    contentType: "application/json",
-		    success: function(response) {
-		      console.log(response);
-		      console.log(JSON.stringify(response));
-		    },
-		    error: function(error) {
-		      console.error(error);
-		    }
-		  });
-		}
-	
-		$(".btn-submit").click(function(event) {
-		  event.preventDefault();
-		  submitForm();
-		});
 
 
 		

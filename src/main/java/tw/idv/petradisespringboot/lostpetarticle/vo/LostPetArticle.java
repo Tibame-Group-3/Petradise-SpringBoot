@@ -71,10 +71,6 @@ public class LostPetArticle {
 	@Column
 	private String title;
 	
-//	@JsonManagedReference
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
-//	private List<LostPetPicSTR> lostPetPicSTR;
-	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
 	private List<LostPetPic> lostPetPic;

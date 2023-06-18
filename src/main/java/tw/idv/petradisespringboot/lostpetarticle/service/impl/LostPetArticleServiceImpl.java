@@ -5,22 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
-import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetPicRepo;
 import tw.idv.petradisespringboot.lostpetarticle.service.LostPetArticleService;
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
-import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 @Service
 public class LostPetArticleServiceImpl implements LostPetArticleService{
 	
 	
-	private LostPetArticleRepository lostPetArticleRepository;
-	
-	private LostPetPicRepo lostPetPicRepo;
-	
-	public LostPetArticleServiceImpl(LostPetArticleRepository lostPetArticleRepository, LostPetPicRepo lostPetPicRepo) {
+	private LostPetArticleRepository lostPetArticleRepository;	
+
+	public LostPetArticleServiceImpl(LostPetArticleRepository lostPetArticleRepository) {
 		this.lostPetArticleRepository = lostPetArticleRepository;
-		this.lostPetPicRepo = lostPetPicRepo;
 	}
 
 	@Override
@@ -51,10 +46,6 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 		
 	}
 
-	@Override
-	public void addLostPetPic(LostPetPic lostPetPic) {
-		lostPetPicRepo.save(lostPetPic);
-	}
 	
 
 }
