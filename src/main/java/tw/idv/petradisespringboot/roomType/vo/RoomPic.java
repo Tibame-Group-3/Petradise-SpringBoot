@@ -36,7 +36,8 @@ public class RoomPic implements Serializable  {
 
 	
 	@Column(name = "room_pic")
-	private Byte[] roomPic;
+	private byte[] roomPic;
 
-	
+
+
 }
