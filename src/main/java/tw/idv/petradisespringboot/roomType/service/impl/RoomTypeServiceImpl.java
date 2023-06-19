@@ -48,22 +48,16 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     @Override
     public RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2) {
-        // 获取已存在的房型信息
-        RoomType existingRoomType = typeRepository.findById(roomTypeId)
+        // 拿到原有的房型資訊
+        RoomType existingRoomType = typeRepository.findById(roomTypeId)//找到指定的roomtypeid
                 .orElseThrow(() -> new RoomTypeNotFoundException(roomTypeId));
 
-        // Check if RoomPic exists and handle nulls
+        // 透過roomtypeid找到對應的圖片
         List<RoomPic> existingPics = picRepository.findByRoomType_RoomTypeId(roomTypeId);
 
-        for (RoomPic roomPic : existingPics) {
-            if (roomPic.getRoomPic() != null) {
-                // Do something with roomPic.getRoomPic()
-            } else {
-                // Handle the case where roomPic is null
-            }
-        }
 
-        // 更新房型基础信息
+        // 更新房型資訊
+        //把roomtype物件裡面的值設定給existingRoomType
         existingRoomType.setRoomTypeName(roomType.getRoomTypeName());
         existingRoomType.setRoomTypeSaleStatus(roomType.getRoomTypeSaleStatus());
         existingRoomType.setRoomTypePrice(roomType.getRoomTypePrice());
@@ -71,32 +65,33 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         existingRoomType.setRoomTypeSize(roomType.getRoomTypeSize());
         existingRoomType.setRoomTypeAbout(roomType.getRoomTypeAbout());
 
-        MultipartFile[] files = {file1, file2};
+        MultipartFile[] files = {file1, file2}; //把圖片們裝進陣列 處理待處理的圖片
 
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             if (!file.isEmpty()) {
                 RoomPic roomPic;
                 if (existingPics.size() > i) {
-                    // 如果数据库中已经有这张图片，则更新
-                    roomPic = existingPics.get(i);
+                    // existingPics.size() 表格內已存在的圖片數量
+                  System.out.println("existingPics.size() = " + existingPics.size());
+                    roomPic = existingPics.get(i); //把圖片表格裡的第i+1張照片拿出來
                 } else {
-                    // 否则新增一张图片
-                    roomPic = new RoomPic();
-                    roomPic.setRoomType(existingRoomType);
+
+                    roomPic = new RoomPic();// 新增圖片物件
+                    roomPic.setRoomType(existingRoomType);//關聯roomtype屬性跟圖片
                     existingPics.add(roomPic);
                 }
 
                 try {
                     byte[] picData = file.getBytes();
-                    roomPic.setRoomPic(picData);
+                    roomPic.setRoomPic(picData);//更新圖片表格的圖片
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        existingRoomType.setRoomPics(existingPics);
+        existingRoomType.setRoomPics(existingPics);//更新房型vo裡的圖片
         RoomType updatedRoomType = typeRepository.save(existingRoomType);
         return updatedRoomType;
     }
@@ -105,15 +100,8 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
 
     @Override
-    public RoomPic getRoomPic(Integer roomTypeId, Integer roomPicId) {
-        List<RoomPic> all = picRepository.findAll();
-        for (RoomPic roomPic:
-             all) {
-            if (roomPic.getRoomType().getRoomTypeId() == roomTypeId && roomPic.getRoomPicId() == roomPicId) {
-                return roomPic;
-            }
-        }
-        return null;
+    public RoomType getRoomTypeWithPics(Integer roomTypeId) {
+        return typeRepository.findByIdWithPics(roomTypeId);
     }
 
 

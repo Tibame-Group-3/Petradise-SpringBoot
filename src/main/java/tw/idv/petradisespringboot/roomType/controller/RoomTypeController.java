@@ -40,22 +40,11 @@ public class RoomTypeController {
 
     @GetMapping("/{roomTypeId}")
     @ResponseBody
-    public RoomType getRoomType(@PathVariable Integer roomTypeId) {
+    public RoomType getRoomTypeWithPics(@PathVariable Integer roomTypeId) {
         return service.getRoomType(roomTypeId);
     }
 
-    @GetMapping("/pic/{roomTypeId}/{roomPicId}")
-    public ResponseEntity<?> getRoomPic(@PathVariable Integer roomTypeId, @PathVariable Integer roomPicId) {
-        RoomPic roomPic = service.getRoomPic(roomTypeId, roomPicId);
 
-        if (roomPic == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("RoomPic not found with given roomTypeId and roomPicId");
-        }
-
-        ByteArrayResource dataSource = new ByteArrayResource(roomPic.getRoomPic());
-
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_GIF).body(dataSource);
-    }
     @PostMapping(path = "/{roomTypeId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public RoomType updateRoomType(@PathVariable Integer roomTypeId,
