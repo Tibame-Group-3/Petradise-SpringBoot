@@ -1,19 +1,11 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
-import java.util.Arrays;
 import java.util.List;
-
-import com.sun.istack.ByteArrayDataSource;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
-import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 @Controller

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -31,7 +30,5 @@ public class RoomPic implements Serializable  {
 	
 	@Column(name = "room_pic")
 	private byte[] roomPic;
-
-
 
 }

@@ -1,12 +1,8 @@
 package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.repo.RoomPicRepository;
 import tw.idv.petradisespringboot.roomType.repo.RoomTypeRepository;
@@ -32,7 +28,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     }
 
-
     @Override
     public RoomType addNewRoomType(RoomType newRoomType) {
         return typeRepository.save(newRoomType);
@@ -44,7 +39,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
                 .orElseThrow(() -> new ResourceNotFoundException("RoomType not found with id " + roomTypeId));
 
     }
-
 
     @Override
     public RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2) {
@@ -96,15 +90,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return updatedRoomType;
     }
 
-
-
-
-    @Override
-    public RoomType getRoomTypeWithPics(Integer roomTypeId) {
-        return typeRepository.findByIdWithPics(roomTypeId);
-    }
-
-
     class RoomTypeNotFoundException extends RuntimeException {
     RoomTypeNotFoundException(Integer id) {
         super("找不到業主ID: " + id);
@@ -112,7 +97,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
 }
-
 class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
         super(message);
