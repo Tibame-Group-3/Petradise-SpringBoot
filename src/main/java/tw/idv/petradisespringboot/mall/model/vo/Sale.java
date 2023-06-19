@@ -1,6 +1,4 @@
-package tw.idv.petradisespringboot.mall.po;
-
-import java.sql.Date;
+package tw.idv.petradisespringboot.mall.model.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,33 +9,32 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(name = "favorite")
-@IdClass(FavoriteCompositePK.class)
-public class Favorite {
-	
+@Table(name = "sale")
+@IdClass(SaleCompositePK.class)
+public class Sale {
+
 	@Id
 	@Column(name = "pd_id")
 	private Integer pdId;
 
 	@Id
-	@Column(name = "mem_id")
-	private Integer memId;
+	@Column(name = "sale_pro_id")
+	private Integer saleProId;
 	
-	@Column(name = "fav_date")
-	private Date favDate;
+	@Column(name = "sale_discount")
+	private Double saleDiscount;
 	
+	@Override
 	public String toString() {
-		return "Favorite {" +
+		return "Sale {" +
 				"pdId=" + pdId +
-				"memId=" + memId +
-				"favDate=" + favDate +
+				"saleProId=" + saleProId +
+				"saleDiscount=" + saleDiscount +
 				'}';
 	}
 	

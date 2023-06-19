@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import tw.idv.petradisespringboot.mall.po.SaleProject;
-import tw.idv.petradisespringboot.mall.repo.SaleProjectRepository;
+import tw.idv.petradisespringboot.mall.model.repo.SaleProjectRepository;
+import tw.idv.petradisespringboot.mall.model.vo.SaleProject;
 import tw.idv.petradisespringboot.mall.service.SaleProjectService;
 
 @Service

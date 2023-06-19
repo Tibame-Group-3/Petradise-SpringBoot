@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.mall.po;
+package tw.idv.petradisespringboot.mall.model.vo;
 
 import java.sql.Date;
 
