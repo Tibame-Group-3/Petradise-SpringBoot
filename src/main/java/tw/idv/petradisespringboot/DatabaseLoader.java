@@ -44,7 +44,7 @@ public class DatabaseLoader {
     }
 
     private void savePetPic(Integer petId, Integer index, PetPicRepository repo) throws Exception {
-        String imagePath = "pet_pic_" + petId + "_" + index + ".jpeg";
+        String imagePath = "pet_pics/pet_pic_" + petId + "_" + index + ".jpeg";
         byte[] image = loadImageBytes(imagePath);
         var pic = new PetPic();
         pic.setPetId(petId);
