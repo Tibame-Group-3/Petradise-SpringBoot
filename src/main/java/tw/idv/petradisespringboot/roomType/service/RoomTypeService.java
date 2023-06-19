@@ -2,6 +2,8 @@ package tw.idv.petradisespringboot.roomType.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 public interface RoomTypeService {
@@ -12,5 +14,11 @@ public interface RoomTypeService {
 
 
 	RoomType getRoomType(Integer roomTypeId);
+
+
+
+
+	RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
+
 
 }

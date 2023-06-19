@@ -1,20 +1,12 @@
 package tw.idv.petradisespringboot.roomType.vo;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
@@ -30,13 +22,13 @@ public class RoomPic implements Serializable  {
 	@Column(name = "room_pic_id")
 	private Integer roomPicId;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "room_type_id")
 	private RoomType roomType;
 
 	
 	@Column(name = "room_pic")
-	private Byte[] roomPic;
+	private byte[] roomPic;
 
-	
 }
