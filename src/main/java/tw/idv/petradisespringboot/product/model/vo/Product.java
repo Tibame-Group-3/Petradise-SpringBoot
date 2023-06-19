@@ -32,5 +32,7 @@ public class Product {
     Date pdDate;
     @Column(name = "pd_rank")
     Double pdRank;
+    @Column(name = "pd_img")
+    byte[] pdImg;
 
 }

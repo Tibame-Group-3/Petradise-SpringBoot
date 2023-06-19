@@ -1,3 +1,18 @@
+// ------------------預覽------------------
+$("#pdImg").on("change", function () {         // 監聽input讀取圖片
+    // 有選圖片的話
+    if (this.files.length > 0) {
+        let reader = new FileReader();                                          // 準備讀取檔案
+        reader.addEventListener('load', function () {
+            // alert("aaa");
+            $("#preview").html('<img src="' + reader.result + '" style="width: 100%">'); // 放圖片的src
+        });
+        reader.readAsDataURL(this.files[0]);                                    // 執行讀取檔案
+    } else {
+        $("#preview").html('預覽圖');
+    }
+});
+
 // ------------------拿session資料------------------
 $(document).ready(function () {
     const pdId = JSON.parse(sessionStorage.getItem("pdId"));
