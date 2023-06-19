@@ -40,7 +40,7 @@
                 .then((json) => onReceivedJSON(json));
 
             function onReceivedJSON(data) {
-                console.log(data);
+                console.log(JSON.stringify(data));
                 data.forEach(element => {
                     console.log(element)
                     const row = `

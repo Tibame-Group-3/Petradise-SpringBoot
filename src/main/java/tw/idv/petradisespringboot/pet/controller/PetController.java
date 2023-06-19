@@ -1,37 +1,51 @@
 package tw.idv.petradisespringboot.pet.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import tw.idv.petradisespringboot.pet.repo.PetRepository;
+import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.vo.Pet;
+import tw.idv.petradisespringboot.pet.vo.PetPic;
+
+import java.util.Base64;
 
 @RestController
+@RequestMapping("/pets")
 public class PetController {
 
-    private final PetRepository repository;
+    private final PetService service;
 
-    public PetController(PetRepository repository) {
-        this.repository = repository;
+    public PetController(PetService service) {
+        this.service = service;
     }
 
-    @GetMapping("/pets")
-    @ResponseBody
-    List<Pet> all() {
-        return repository.findAll();
+    @PostMapping("/add")
+    ResponseEntity<Pet> newPet(@RequestBody Pet pet) {
+        return ResponseEntity.ok(service.addPet(pet));
     }
 
-    @PostMapping("/pets")
-    Pet newPet(@RequestBody Pet pet) {
-        return repository.save(pet);
+    @PostMapping("/update")
+    ResponseEntity<?> updatePet(@RequestBody Pet pet) {
+        return ResponseEntity.ok(service.updatePet(pet));
     }
 
-    @GetMapping("/pets/{id}")
-    Pet one(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow(() -> new PetNotFoundException(id));
+    @GetMapping("/id={id}")
+    ResponseEntity<?> one(@PathVariable Integer id) {
+        var pet = service.getPetById(id);
+        if (pet.isPresent()) {
+            return ResponseEntity.ok(pet.get());
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new PetNotFoundException(id));
     }
+
+    @GetMapping("/memberId={memberId}")
+    ResponseEntity<?> getPetsByMemberId(@PathVariable Integer memberId) {
+        return ResponseEntity.ok(service.getPetsByMemId(memberId));
+    }
+
+
 }
 
 class PetNotFoundException extends RuntimeException {
