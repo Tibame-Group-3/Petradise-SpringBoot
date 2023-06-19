@@ -277,6 +277,7 @@
 		const input = document.querySelector(".input");
 		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
+		const encoder = new TextEncoder();
 		
 		let base64Image = "";
 		let jsonData = [];
@@ -327,18 +328,18 @@
 			    reader.readAsDataURL(file);
 			  });
 			}
-
+		
+		
+		
 			async function submitForm() {
 				const file = input.files[0];
 				const base64Image = await readFileAsDataURL(file);
-				const base64Data = base64Image.split(',')[1];
-
-			  const jsonData = {
-			    lostPetId: 1,
-			    lostPetPic: base64Data
-			  };
-
-			  const articleData = {
+				const base64Data = base64Image.split(',')[1]; // 除去前綴詞
+				const jsonData = {
+					lostPetId: 1,
+					lostPetPic: base64Data
+				};
+			const articleData = {
 			    memId: 6,
 			    lostDate: $("#datetime").val(),
 			    lostPlace: $("#lostPlace").val(),
@@ -361,7 +362,6 @@
 			      contentType: "application/json",
 			    });
 			    console.log(response);
-			    console.log(JSON.stringify(response));
 			  } catch (error) {
 			    console.error(error);
 			  }
