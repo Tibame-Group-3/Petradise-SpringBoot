@@ -49,6 +49,7 @@ public class RoomType implements Serializable {
 	private Character roomTypeSize;
 	
 //	@JsonIgnore
+	// https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 	@JsonManagedReference
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	    private List<RoomPic> roomPics;
