@@ -30,7 +30,7 @@ public class HotelOwnerService {
     public void delete(Integer hotelId) {
         hotelOwnerRepository.deleteById(hotelId);
     }
-    
+    	
     // 修改
     public void update(HotelOwnerVO hotelOwnerVO) {
         hotelOwnerRepository.save(hotelOwnerVO);
