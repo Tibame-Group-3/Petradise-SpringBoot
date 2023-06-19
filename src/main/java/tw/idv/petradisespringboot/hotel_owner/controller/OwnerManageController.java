@@ -38,6 +38,16 @@ public class OwnerManageController {
 		try {
 			// 查資料庫
 			List<HotelOwnerVO> list = hotelOwnerService.getAll();
+			
+			
+//			 for (HotelOwnerVO owner : list) {
+//		            byte[] imageBytes = owner.getHotelLicPic();
+//		            if (imageBytes != null) {
+//		                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+//		                owner.setBase64Image(base64Image);
+//		            }
+//		        }
+//			
 			// json 傳給前端
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(list);

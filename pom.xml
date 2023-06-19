@@ -58,19 +58,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<!--<<<<<<< HEAD-->
+<!--		 https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
-=======
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		</dependency>
+<!--=======-->
+<!--		 https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.13.0</version>
->>>>>>> origin/ramone
+<!-->>>>>>> origin/ramone-->
 		</dependency>
 
 	</dependencies>

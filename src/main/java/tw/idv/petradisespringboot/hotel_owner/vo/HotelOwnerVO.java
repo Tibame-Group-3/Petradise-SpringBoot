@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,7 +54,18 @@ public class HotelOwnerVO {
 	private Integer reviewScoreTotal;
 	@Column(name = "hotel_lic_id")
 	private String hotelLicId;
-
-//	private String imageBase64;
+	@Transient
+	private String imageBase64;
+	
+	public void setBase64Image(String base64Image) {
+		this.imageBase64 = imageBase64;
+		
+	}
+	
+	public String getBase64Image() {
+		return imageBase64;
+	}
+	
+	
 
 }
