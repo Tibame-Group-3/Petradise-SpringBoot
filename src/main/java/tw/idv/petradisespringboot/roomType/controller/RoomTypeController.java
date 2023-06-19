@@ -36,7 +36,6 @@ public class RoomTypeController {
         return service.getRoomType(roomTypeId);
     }
 
-
     @PostMapping(path = "/{roomTypeId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public RoomType updateRoomType(@PathVariable Integer roomTypeId,

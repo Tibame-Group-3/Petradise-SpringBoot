@@ -167,11 +167,8 @@
 									<tbody id="room-data-list">
 
 									</tbody>
-
-
 								</table>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -254,7 +251,6 @@
 	                     },
 	                 }
 	             });
-	            
 	         },
 	        error: function (xhr, textStatus, errorThrown) {
 	            console.error(xhr);
@@ -278,16 +274,15 @@
         }
 	}
     </script>
-<script>
+	<script>
 //按下編輯會導向編輯網頁
-$(document).ready(function() {
+	$(document).ready(function() {
     $("#room-data-list").on("click", ".btn-edit", function() {
         var roomTypeId = $(this).data("room-type-id");
         window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
-    });
-});
-
-</script>
+    	});
+	});
+	</script>
 
 </body>
 
