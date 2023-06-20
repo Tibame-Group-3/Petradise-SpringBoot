@@ -12,4 +12,7 @@ public interface AdminRepository extends JpaRepository <Admin, Integer> {
     List<Admin> findByNameContainingIgnoreCase(String keyword);
     List<Admin> findAdminsByTitle(char title);
     List<Admin> findAdminsByStatus(char status);
+
+
+
 }

@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tw.idv.petradisespringboot.accessfunction.vo.AccessFunction;
+import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -20,35 +20,14 @@ public class AdminAccess {
     @EmbeddedId
     private AdminAccessId id;
 
-    @Override
-    public String toString() {
-        return "AdminAccess{" +
-                "id=" + id +
-                '}';
-    }
+    @ManyToOne
+    @MapsId("adminId")
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    @ManyToOne
+    @MapsId("functionId")
+    @JoinColumn(name = "function_id")
+    private AccessFunction accessFunction;
 }
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Embeddable
-class AdminAccessId implements Serializable {
-    @Column(name = "admin_id")
-    private Integer adminId;
 
-    @Column(name = "function_id")
-    private Integer functionId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AdminAccessId that = (AdminAccessId) o;
-        return Objects.equals(adminId, that.adminId) && Objects.equals(functionId, that.functionId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(adminId, functionId);
-    }
-}
