@@ -1,10 +1,14 @@
 package tw.idv.petradisespringboot.roomType.vo;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tw.idv.petradisespringboot.room.vo.Room;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +20,7 @@ import java.util.List;
 @Setter
 
 @Table(name ="room_type")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "roomTypeId")
 public class RoomType implements Serializable {
 
 	@Id
@@ -51,7 +56,11 @@ public class RoomType implements Serializable {
 	// https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 	@JsonManagedReference
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
-	    private List<RoomPic> roomPics;
+	    private List<RoomPic> roomPics;//roomType 有多個 roomPic
+
+
+	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+	private List<Room> rooms;  // roomType 有多個 room
 
 	@Override
 	public String toString() {

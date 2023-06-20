@@ -73,7 +73,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
                     existingPics.add(roomPic);
                 }
                 try {
-                    byte[] picData = file.getBytes();
+                    byte[] picData = file.getBytes(); //透過getBytes() 取得圖片陣列
                     roomPic.setRoomPic(picData);//更新圖片表格的圖片
                 } catch (IOException e) {
                     e.printStackTrace();

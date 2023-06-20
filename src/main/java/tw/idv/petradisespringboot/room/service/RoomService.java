@@ -1,17 +1,10 @@
 package tw.idv.petradisespringboot.room.service;
 
+import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.room.vo.Room;
-
 import java.util.List;
 
+@Service
 public interface RoomService {
-
-    Room add(Room room);
-
-    Room update(Room room);
-
-    Room findByID(Integer id);
-
-    List<Room> findAll();
-
+    List<Room> getRoomsByHotelId(Integer hotelId);
 }
