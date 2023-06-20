@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+    fetchPets();
     displayPets();
     addNewPetButtonListener();
 });
+
+function fetchPets() {
+    fetch(`/members/memberId=${getMemberId()}`)
+        .then(response => response.json())
+        .then(console.log)
+}
 
 function displayPets() {
     // Replace this array with your actual data
@@ -37,4 +44,8 @@ function addNewPetButtonListener() {
     document.getElementById('add-pet-button').addEventListener('click', function () {
         window.location.href = '/member/add_pet.html';  // Replace with your actual link
     });
+}
+
+function getMemberId() {
+    return localStorage.getItem('memberId');
 }
