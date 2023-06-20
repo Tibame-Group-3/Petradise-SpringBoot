@@ -3,6 +3,9 @@ package tw.idv.petradisespringboot.pet.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tw.idv.petradisespringboot.pet.vo.enums.PetSize;
+import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
+import tw.idv.petradisespringboot.pet.vo.enums.PetType;
 
 import javax.persistence.*;
 
@@ -26,7 +29,7 @@ public class Pet {
     @Column(name = "pet_size")
     private PetSize petSize;
     @Column(name = "pet_status", insertable = false)
-    private Character petStatus;
+    private PetStatus petStatus = PetStatus.NORMAL;
 
 
 }

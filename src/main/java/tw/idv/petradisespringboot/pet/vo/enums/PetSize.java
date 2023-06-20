@@ -1,15 +1,15 @@
-package tw.idv.petradisespringboot.pet.vo;
+package tw.idv.petradisespringboot.pet.vo.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.stream.Stream;
 
-public enum PetType {
-    DOG("Dog"), CAT("Cat"), BIRD("Bird"), OTHER("Other");
+public enum PetSize {
+    SMALL("S"), MEDIUM("M"), LARGE("L");
 
     private final String value;
 
-    PetType(String value) {
+    PetSize(String value) {
         this.value = value;
     }
 
@@ -17,9 +17,9 @@ public enum PetType {
         return value;
     }
 
-    public static PetType fromValue(String value) {
-        return Stream.of(PetType.values())
-                .filter(petType -> petType.getValue().equals(value))
+    public static PetSize fromValue(String value) {
+        return Stream.of(PetSize.values())
+                .filter(petSize -> petSize.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(IllegalAccessError::new);
     }
@@ -27,6 +27,6 @@ public enum PetType {
     @JsonValue
     @Override
     public String toString() {
-        return this.getValue();
+        return this.value;
     }
 }

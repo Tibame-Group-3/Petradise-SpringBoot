@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.pet.vo;
+package tw.idv.petradisespringboot.pet.vo.enums;
 
 
 import javax.persistence.AttributeConverter;
