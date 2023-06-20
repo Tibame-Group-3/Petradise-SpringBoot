@@ -152,13 +152,14 @@
                                             style="width: 90px;color: #a67c52;">售價：</label>
             <input id="pdPrice" class="form-control" type="number"
                    style="width: 350px;display: inline-block;border-color: #f1ecd1;color: #a67c52;" min="0"></div>
-          <div style="margin: 20px;"><label class="form-label"
-                                            style="width: 90px;color: #a67c52;">商品圖片：</label><input class="form-control" type="file"
-                                                                                                        style="display: inline-block;width: 350px;color: #a67c52;">
+          <div style="margin: 20px;">
+            <label class="form-label"
+               style="width: 90px;color: #a67c52;">商品圖片：</label>
+            <input id="pdImg" class="form-control" type="file" accept="image/*" style="display: inline-block;width: 350px;color: #a67c52">
             <div>
-              <div
-                      style="width: 200px;height: 200px;border-radius: 10px;border: 2px dashed #f1ecd1;display: flex;justify-content: center;align-items: center;margin-top: 5px;margin-left: 90px;">
-                <span>預覽圖</span></div>
+              <div id="preview"
+                   style="width: 200px;height: 200px;border-radius: 10px;border: 2px dashed #f1ecd1;display: flex;justify-content: center;align-items: center;margin-top: 5px;margin-left: 90px;overflow: hidden;">
+                預覽圖</div>
             </div>
           </div>
           <div style="margin: 20px;"><label class="form-label"

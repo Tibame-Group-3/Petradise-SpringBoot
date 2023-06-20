@@ -1,17 +1,20 @@
+const data = {};
 // ------------------拿session資料------------------
 $(document).ready(function () {
     const pdId = JSON.parse(sessionStorage.getItem("pdId"));
-    // console.log("/news/get/" + newsID)
+    // console.log("/product/get/" + pdId)
 
     axios.get("/product/get/" + pdId)
         .then(function (res) {
-            // console.log(res.data);
-            // console.log(res.data.newsTitle);
+            console.log(res.data);
+            const base64Img = `data:image/*;base64,${res.data.pdImg}`;
             $("#pdName").val(res.data.pdName);
             $("#pdPetType").val(res.data.pdPetType);
             $("#pdType").val(res.data.pdType);
             $("#pdPrice").val(res.data.pdPrice);
             $("#pdInfo").val(res.data.pdInfo);
+            $("#preview").html(`<img src="${base64Img}" alt="image" style="width: 100%">`);
+            data.pdImg = base64Img;
         })
         .catch(err => console.log(err));
 
@@ -19,7 +22,7 @@ $(document).ready(function () {
 
 // ------------------修改資料------------------
 const pdId = JSON.parse(sessionStorage.getItem("pdId"));
-console.log(pdId)
+console.log(pdId);
 
 $("#submit").on('click', function (e) {
     e.preventDefault();
@@ -36,26 +39,26 @@ $("#submit").on('click', function (e) {
             text: '欄位不可以空著唷!',
         });
     } else {
-
         const currentDate = new Date();
         const year = currentDate.getFullYear();
         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
         const day = String(currentDate.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
 
-        const data = {};
-        data.pdId = pdId;
-        data.pdName = $("#pdName").val();
-        data.pdPetType = $("#pdPetType").val();
-        data.pdType = $("#pdType").val();
-        data.pdPrice = $("#pdPrice").val();
-        data.pdStatus = 0;
+        data.pdName = pdName;
+        data.pdPetType = pdPetType;
+        data.pdType = pdType;
+        data.pdPrice = pdPrice;
+        data.pdStatus = "0";
         data.pdInfo = $("#pdInfo").val();
         data.pdDate = formattedDate;
-        console.log(data);
 
         axios
-            .put("/product/update/" + pdId, data)  // 設定url, object
+            .put("/product/update/" + pdId, data, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })  // 設定url, object
             .then((res) => {
                 console.log(res.data);  // 獲得回傳資料
             })
@@ -64,5 +67,24 @@ $("#submit").on('click', function (e) {
             });
 
         location.href = "Product.html";
+    }
+});
+
+// ------------------預覽------------------
+$("#pdImg").on("change", function () {         // 監聽input讀取圖片
+    // 有選圖片的話
+    if (this.files.length > 0) {
+        let reader = new FileReader();                                          // 準備讀取檔案
+        reader.addEventListener('load', function (e) {
+            let base64Img = e.target.result.split(",")[1]; // 去除base64前墜
+            $("#preview").html('<img src="' + reader.result + '" style="width: 100%">'); // 放圖片的src
+            // console.log(base64Img);
+            data.pdImg = base64Img;
+            console.log(base64Img);
+            console.log(data);
+        });
+        reader.readAsDataURL(this.files[0]);                                    // 執行讀取檔案
+    } else {
+        $("#preview").html('預覽圖');
     }
 });
