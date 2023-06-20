@@ -2,12 +2,12 @@ package tw.idv.petradisespringboot.admin.service.impl;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import tw.idv.petradisespringboot.admin.controller.AdminDTO;
 import tw.idv.petradisespringboot.admin.repo.AccessFunctionRepository;
-import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
+import tw.idv.petradisespringboot.admin.controller.AdminDTO;
 import tw.idv.petradisespringboot.admin.repo.AdminRepository;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
+import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
 import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
 
 import javax.transaction.Transactional;
@@ -18,7 +18,8 @@ public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
     private final AdminAccessRepository adminAccessRepository;
     private final AccessFunctionRepository accessFunctionRepository;
-    AdminServiceImpl(AdminRepository repository, AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
+
+    AdminServiceImpl(AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
         this.adminRepository = adminRepository;
         this.adminAccessRepository = adminAccessRepository;
         this.accessFunctionRepository = accessFunctionRepository;
@@ -56,6 +57,7 @@ public class AdminServiceImpl implements AdminService {
         }
         return admin;
     }
+
     @Override
     public Admin modify(Integer id, Admin updatedAdmin) {
         return adminRepository.findById(id).map(existingAdmin -> {
