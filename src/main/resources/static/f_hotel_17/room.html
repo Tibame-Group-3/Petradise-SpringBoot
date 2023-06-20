@@ -144,7 +144,7 @@
                     <div class="card-header py-3">
                         <!-- Button -->
                         <button type="button" class="btn btn-primary btn-modify"
-                                onclick="window.location.href='addRoomType.html'">
+                                onclick="window.location.href='addRoom.html'">
                             新增房間資訊
                         </button>
 
@@ -213,16 +213,13 @@
             type: 'GET',
 
             success: function (response) {
-                console.log(response);
                 let html = '';
                 for (let i = 0; i < response.length; i++) {
                     let room = response[i];
-                    console.log(room);
-                    console.log(room.roomType);
 
                     html += `<tr>
                                 <td>${room.roomName}</td>
-                                <td>${room.roomType.roomTypeName}</td>
+                                <td>${room.roomTypeName}</td>
                                 <td>${room.petName || '尚無寵物使用'}</td>
                                 <td>${room.roomSaleStatus === "0" ? "下架" : "上架"}</td>
                                 <td>${getRoomStatus(room.roomStatus)}</td>

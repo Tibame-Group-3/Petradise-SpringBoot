@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tw.idv.petradisespringboot.room.service.RoomService;
 import tw.idv.petradisespringboot.room.vo.Room;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/rooms")
@@ -20,7 +21,7 @@ public class RoomController {
 
     @GetMapping("/hotelId/{hotelId}")
     @ResponseBody
-    public List<Room> getRoomsByHotelId(@PathVariable Integer hotelId) {
+    public List<Map<String, Object>> getRoomsByHotelId(@PathVariable Integer hotelId) {
         return roomService.getRoomsByHotelId(hotelId);
     }
 

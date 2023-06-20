@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>新增房型資訊</title>
+    <title>新增房間資訊</title>
     <link rel="stylesheet" href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -113,71 +113,46 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-1" style="color: #574f36;--bs-dark: #574f36;--bs-dark-rgb: 87,79,54;">新增房型資訊
+                    <h3 class="text-dark mb-1" style="color: #574f36;--bs-dark: #574f36;--bs-dark-rgb: 87,79,54;">新增房間資訊
                     </h3>
-                    <form id="roomTypeForm" style="padding: 16px;">
-                        <div style="margin: 20px;"><label class="form-label"
-                                style="width: 90px;color: #a67c52;">房型名稱：</label>
-                            <input class="form-control" type="text"name="room_type_name"
+                    <form id="roomForm" style="padding: 16px;">
+                        <div style="margin: 20px;"><label class="form-label" style="width: 90px;color: #a67c52;">房間名稱：</label>
+                            <input class="form-control" type="text"name="room_name"
                                 style="display: inline-block;width: 750px;border-color: #f1ecd1;" required>
                         </div>
-
+                        <div style="margin: 20px;"><label class="form-label" style="width: 90px;color: #a67c52;">房型名稱：</label>
+                            <select class="form-control" id="roomTypeSelect" name="room_type_name" style="display: inline-block;width: 750px;border-color: #f1ecd1;" required>
+                                <!-- 動態生成 -->
+                            </select>
+                        </div>
+                        <div style="margin: 20px;"><label class="form-label" style="width: 90px;color: #a67c52;">寵物名稱：</label>
+                            <input class="form-control" type="text"name="pet_name"
+                                   style="display: inline-block;width: 750px;border-color: #f1ecd1;" required>
+                        </div>
                         <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_sale_status">上下架狀態:</label>
+                            <label class="form-label" style="width: 90px;color: #a67c52;">上下架狀態:</label>
                             <select class="form-control"
                                 style="display: inline-block;width: 750px;border-color: #f1ecd1;"
-                                id="room_type_sale_status" name="room_type_sale_status" required>
+                                id="room_sale_status" name="room_sale_status" required>
                                 <option value="0">下架</option>
                                 <option value="1">上架</option>
                             </select>
                         </div>
                         <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_price">房型價格:</label>
-                            <input class="form-control" type="number"
-                                style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_type_price"
-                                name="room_type_price" min="1" required>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_pet_type">寵物種類:</label>
+                            <label class="form-label" style="width: 90px;color: #a67c52;">房間狀態:</label>
                             <select class="form-control"
-                                style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_pet_type"
-                                name="room_pet_type" required>
-                                <option value="貓">貓</option>
-                                <option value="狗">狗</option>
-                                <option value="鳥">鳥</option>
+                                    style="display: inline-block;width: 750px;border-color: #f1ecd1;"
+                                    id="room_status" name="room_status" required>
+                                <option value="0">空房</option>
+                                <option value="1">已入住</option>
+                                <option value="2">待整理</option>
                             </select>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_size">房型大小:</label>
-                            <select class="form-control"
-                                style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_type_size"
-                                name="room_type_size" required>
-                                <option value="0">小型</option>
-                                <option value="1">中型</option>
-                                <option value="2">大型</option>
-                            </select>
-                        </div>
-
-
-                        <div style="margin: 20px;"><label class="form-label"
-                                style="width: 90px;color: #a67c52;">房型介紹：</label>
-                                <textarea class="form-control" name="room_type_about"
-                                style="width: 750px;margin-left: 90px;margin-top: -30px;border-color: #f1ecd1;"
-                                required></textarea>
                         </div>
                         <div class="mb-3" style="text-align: left;margin: 20px;"><button class="btn btn-primary"
                                 type="submit"
                                 style="background: #a67c52;border-style: none;text-align: left;margin-left: 90px;color: #f1ecd1;">送出</button>
                         </div>
-                        <div style="margin: 20px;">
-                            <label for="room_type_amount"
-                                style="width: 90px;color: #a67c52; display: none;">房間數量:</label>
-                            <input type="hidden" id="room_type_amount" name="room_type_amount" value="0" required>
-                        </div>
+
 
 
                     </form>
@@ -192,36 +167,55 @@
     </div>
     <script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+
+
+
+    <script>
+        //動態生成房型select
+        $(document).ready(function() {
+            var hotelId = getHotelId();
+            $.ajax({
+                url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
+                type: 'GET',
+                success: function(data) {
+                    var select = $('#roomTypeSelect');
+                    select.empty();
+                    $.each(data, function(index, roomType) {
+                        select.append($('<option></option>').attr('value', roomType.roomTypeId).text(roomType.roomTypeName));
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        });
+
+    </script>
     <script>
     $(document).ready(function() {
+    const hotelId = getHotelId();
     $("#roomTypeForm").submit(function(e) {
         e.preventDefault(); // 阻止表单的默认提交行为
 
-        // 创建一个新的RoomType对象
-        var newRoomType = {
-        	hotelId: hotelId,
-        	roomTypeName: $("input[name='room_type_name']").val(),
-        	roomTypeSaleStatus: $("select[name='room_type_sale_status']").val(),
-        	roomTypePrice: $("input[name='room_type_price']").val(),
-            roomPetType: $("select[name='room_pet_type']").val(),
-            roomTypeSize: $("select[name='room_type_size']").val(),
-            roomTypeAbout: $("textarea[name='room_type_about']").val(),
-            roomTypeAmount: $("input[name='room_type_amount']").val()
+        // 创建一个新的Room对象
+        var newRoom = {
+            roomName: $("input[name='room_name']").val(),
+            roomTypeName: $("select[name='room_type_name']").val(),
+            petName: $("input[name='pet_name']").val(),
+            roomSaleStatus: $("select[name='room_sale_status']").val(),
+            roomStatus: $("select[name='room_status']").val()
         };
-        console.log(newRoomType.roomTypeSaleStatus);
-        console.log(newRoomType);
 
         // 發送Ajax請求
         $.ajax({
-            url: '/roomTypes/addRoomType',
+            url: '/rooms/addRoom',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(newRoomType),
+            data: JSON.stringify(newRoom),
             success: function(response) {
-               $("#roomTypeForm")[0].reset();//清空表單
+               $("#roomForm")[0].reset();//清空表單
 
-                window.location.href = "/f_hotel_17/roomType.html";//回到上一頁
+                window.location.href = "/f_hotel_17/room.html";//回到上一頁
             },
             error: function(jqXHR, textStatus, errorThrown) {
                console.error(textStatus, errorThrown);

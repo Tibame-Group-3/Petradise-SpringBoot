@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-
+//r=room實體物件
     @Query("SELECT r FROM Room r JOIN FETCH r.roomType WHERE r.roomType.hotelId = :hotelId")
     List<Room> findRoomsByHotelId(@Param("hotelId") Integer hotelId);
-
 }

@@ -245,8 +245,8 @@
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 // 從資料庫裡拿房型資料跟相關圖片
-    var urlParams = new URLSearchParams(window.location.search);//取得查詢字串
-    var roomTypeId = urlParams.get('roomTypeId');//找到名為roomTypeId的值
+    var urlParams = new URLSearchParams(window.location.search);
+    var roomTypeId = urlParams.get('roomTypeId');
 
     $.ajax({
         url: 'http://localhost:8080/roomTypes/' + roomTypeId ,

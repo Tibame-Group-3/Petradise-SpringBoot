@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.roomType.vo;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -58,7 +59,7 @@ public class RoomType implements Serializable {
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	    private List<RoomPic> roomPics;//roomType 有多個 roomPic
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	private List<Room> rooms;  // roomType 有多個 room
 

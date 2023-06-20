@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 import java.util.List;
-@Service
+
 public interface RoomTypeService {
 	List<RoomType> getByHotelId(Integer hotelId);
 
