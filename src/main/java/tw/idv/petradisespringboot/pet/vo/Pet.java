@@ -24,7 +24,7 @@ public class Pet {
     @Column(name = "pet_type")
     private PetType petType;
     @Column(name = "pet_size")
-    private Character petSize;
+    private PetSize petSize;
     @Column(name = "pet_status", insertable = false)
     private Character petStatus;
 
