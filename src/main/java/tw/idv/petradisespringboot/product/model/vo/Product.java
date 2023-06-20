@@ -33,6 +33,7 @@ public class Product {
     @Column(name = "pd_rank")
     Double pdRank;
     @Column(name = "pd_img")
+    @Lob
     byte[] pdImg;
 
 }
