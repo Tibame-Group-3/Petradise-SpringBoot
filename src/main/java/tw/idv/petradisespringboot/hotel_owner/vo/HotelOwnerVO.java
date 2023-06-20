@@ -30,7 +30,7 @@ public class HotelOwnerVO {
 	private String hotelAddress;
 	@Column(name = "hotel_status", insertable = false)
 	private String hotelStatus;
-	@Column(name = "hotel_lic_pic" , insertable = false)
+	@Column(name = "hotel_lic_pic")
 	private byte[] hotelLicPic;
 	@Column(name = "owner_account")
 	private String ownerAccount;
@@ -56,16 +56,10 @@ public class HotelOwnerVO {
 	private String hotelLicId;
 	@Transient
 	private String imageBase64;
-	
-	public void setBase64Image(String base64Image) {
-		this.imageBase64 = imageBase64;
-		
+	public void setBase64Image(String imageBase64) {
+		this.imageBase64 = imageBase64;	
 	}
-	
 	public String getBase64Image() {
 		return imageBase64;
 	}
-	
-	
-
 }
