@@ -1,9 +1,6 @@
 package tw.idv.petradisespringboot.adminaccess.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import tw.idv.petradisespringboot.accessfunction.vo.AccessFunction;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
@@ -30,4 +27,3 @@ public class AdminAccess {
     @JoinColumn(name = "function_id")
     private AccessFunction accessFunction;
 }
-
