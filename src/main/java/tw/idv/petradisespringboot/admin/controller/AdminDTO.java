@@ -3,7 +3,7 @@ package tw.idv.petradisespringboot.admin.controller;
 import lombok.Getter;
 import lombok.Setter;
 import tw.idv.petradisespringboot.admin.vo.Admin;
-import tw.idv.petradisespringboot.adminaccess.vo.AdminAccess;
+import tw.idv.petradisespringboot.admin.vo.AdminAccess;
 
 import java.util.Set;
 @Setter

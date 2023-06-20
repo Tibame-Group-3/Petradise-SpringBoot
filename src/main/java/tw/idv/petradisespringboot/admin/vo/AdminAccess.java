@@ -1,14 +1,13 @@
-package tw.idv.petradisespringboot.adminaccess.vo;
+package tw.idv.petradisespringboot.admin.vo;
 
-import lombok.*;
-import tw.idv.petradisespringboot.accessfunction.vo.AccessFunction;
-import tw.idv.petradisespringboot.admin.vo.Admin;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "admin_access")
@@ -16,11 +15,6 @@ public class AdminAccess {
 
     @EmbeddedId
     private AdminAccessId id;
-
-    @ManyToOne
-    @MapsId("adminId")
-    @JoinColumn(name = "admin_id")
-    private Admin admin;
 
     @ManyToOne
     @MapsId("functionId")
