@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface PetService {
 
+    List<Pet> getAll();
+
     List<Pet> getPetsByMemId(Integer memId);
 
     Optional<Pet> getPetById(Integer id);
