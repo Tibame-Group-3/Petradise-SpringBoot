@@ -22,10 +22,8 @@ public class Member {
     private String name;
     @Column(name = "mem_account")
     private String account;
-
     @Column(name = "mem_password")
     private String password;
-
     @Column(name = "mem_birthday")
     private Date birthday;
     @Column(name = "mem_phone")
@@ -35,7 +33,7 @@ public class Member {
     @Column(name = "mem_address")
     private String address;
     @Column(name = "mem_access", insertable = false)
-    private Character access = '0';
+    private MemberAccess access = MemberAccess.ACTIVE;
     @Column(name = "mem_bonus", insertable = false)
     private Integer bonus = 0;
 
