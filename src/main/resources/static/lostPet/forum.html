@@ -157,6 +157,19 @@
 	transition: #fd780f 0.3s ease;
 	margin-left: 450px;
 }
+
+.animal-pic {
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.animal-pic .pic {
+  width: 70%; 
+  margin-left: 65px;
+  margin-bottom: 10px; 
+}
+
+
 </style>
 </head>
 
@@ -387,77 +400,81 @@
                 }
             })
         });
-        
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
-        axios.get("/LostPetArticle/id=52")
-        .then ( function(response) {
-        	console.log(response.data);
-        	let da = "";
-		   	data = response.data; 
-		   	
-	   		console.log(data);
-	   		const base64Images = data.lostPetPic.map(pic => {
-		    	return `data:image/(jpeg|png|gif);base64,${pic.lostPetPic}`;
-		    });
-	   		(data["chipNum"] === null) ? data["chipNum"] = '無' : data["chipNum"];
-	   		(data["species"] === null) ? data["species"] = '無' : data["species"];
-	   		da =`
-	   			<div class="article-metaline"><span class="article-meta-tag">作者</span><span
-                   class="article-meta-value">${data.memId}</span></div>
-	            <div class="article-metaline"><span class="article-meta-tag">標題</span><span
-	                    class="article-meta-value">${data.title}</span></div>
-	            <div class="article-metaline"><span class="article-meta-tag">時間</span><span
-	                    class="article-meta-value">${data.update}</span></div>
-	            <div>
-	                <label for="lost_place">遺失地點：${data.lostPlace}</label>
-	            </div>
-	            <div>
-	                <label for="chip_num">晶片號碼：${data.chipNum}</label>
-	            </div>
-	            <div>
-	                <label for="species">品種：${data.species}</label>
-	            </div>
-	            <div>
-	                <label for="color">毛色：${data.color}</label>
-	            </div>
-	            <div>
-	                <label for="datetime">遺失時間：${data.lostDate}</label>
-	            </div>
-	            <div>
-	                <label for="feature">寵物特徵：${data.feature}</label>
-	            </div>
-	            <div>
-	                <label for="contact_phone">聯絡電話：${data.contactPhone}</label>
-	            </div>
-	            <div>
-	                <label for="pic">動物圖片：</label>
-	                <br>
-	                <img class="pic" src="${base64Images}">
-	            </div>
-	            <div>
-	            	<label for="text">文章補充內容：${data.text}</label>
-	            </div>
-	            <div>
-					<span>----------------------------------------------------------------------------------------------------</span>
-				</div>
-	            
-		   		`
-		   		conta.innerHTML = da;
-		   		if (data.lostPetResponse && data.lostPetResponse.length > 0) {
-				    let i = 0;
-				    let com = "";
-				    while (i < data.lostPetResponse.length) {
-				        com += `
-				            <div><span class="an">${data.lostPetResponse[i]["memId"]}</span><span class="f3 push-content">：${data.lostPetResponse[i]["responseContent"]}</span><span class="push-ipdatetime">${data.lostPetResponse[i]["responseTime"]}</span></div>
-				            <br>
-				        `;
-				        i++;
-				    }
-				        comment.innerHTML = com;
-				}
-			    })
-			    .catch ( (error) => console.log(error));
+
+        axios.get("/LostPetArticle/id=1")
+        .then(function(response) {
+          let data = response.data;
+
+          data["chipNum"] = data["chipNum"] || '無';
+          data["species"] = data["species"] || '無';
+
+
+          const articleHTML = `
+            <div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value">${data.memId}</span></div>
+            <div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value">${data.title}</span></div>
+            <div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">${data.update}</span></div>
+            <div>
+                <label for="lost_place">遺失地點：${data.lostPlace}</label>
+            </div>
+            <div>
+                <label for="chip_num">晶片號碼：${data.chipNum}</label>
+            </div>
+            <div>
+                <label for="species">品種：${data.species}</label>
+            </div>
+            <div>
+                <label for="color">毛色：${data.color}</label>
+            </div>
+            <div>
+                <label for="datetime">遺失時間：${data.lostDate}</label>
+            </div>
+            <div>
+                <label for="feature">寵物特徵：${data.feature}</label>
+            </div>
+            <div>
+                <label for="contact_phone">聯絡電話：${data.contactPhone}</label>
+            </div>
+            <div>
+                <label for="pic">動物圖片：</label>
+                <div class="animal-pic">
+                </div>
+            </div>
+            <div>
+                <label for="text">文章補充內容：${data.text}</label>
+            </div>
+            <div>
+                <span>----------------------------------------------------------------------------------------------------</span>
+            </div>
+          `;
+
+          conta.innerHTML = articleHTML;
+
+          let pic = document.querySelector(".animal-pic");
+          if (pic) {
+            const picHTML = data.lostPetPic.map(pic => `<img class="pic" src="data:image/*;base64,${pic.lostPetPic}">`);
+            pic.innerHTML = picHTML;
+          }
+
+          if (data.lostPetResponse && data.lostPetResponse.length > 0) {
+            const commentHTML = data.lostPetResponse.map(response => `
+              <div>
+                <span class="an">${response.memId}</span>
+                <span class="f3 push-content">：${response.responseContent}</span>
+                <span class="push-ipdatetime">${response.responseTime}</span>
+              </div>
+              <br>
+            `).join('');
+
+            comment.innerHTML = commentHTML;
+          }
+        })
+        .catch((error) => console.log(error));
+
+
+	    	
+		
 	   
        
     </script>

@@ -339,49 +339,39 @@
 					lostPetId: 1,
 					lostPetPic: base64Data
 				};
-			const articleData = {
-			    memId: 6,
-			    lostDate: $("#datetime").val(),
-			    lostPlace: $("#lostPlace").val(),
-			    chipNum: $("#chipNum").val(),
-			    species: $("#select-animal").val(),
-			    color: $("#color").val(),
-			    feature: $("#feature").val(),
-			    text: $("#text").val(),
-			    contactPhone: $("#contactPhone").val(),
-			    title: $("#title").val(),
-			    lostPetPic: [jsonData],
-			  };
-			  console.log(articleData);
-
-			  try {
-			    const response = await $.ajax({
-			      url: "/LostPetArticle/create",
-			      type: "POST",
-			      data: JSON.stringify(articleData),
-			      contentType: "application/json",
+				const articleData = {
+				    memId: 6,
+				    lostDate: $("#datetime").val(),
+				    lostPlace: $("#lostPlace").val(),
+				    chipNum: $("#chipNum").val(),
+				    species: $("#select-animal").val(),
+				    color: $("#color").val(),
+				    feature: $("#feature").val(),
+				    text: $("#text").val(),
+				    contactPhone: $("#contactPhone").val(),
+				    title: $("#title").val(),
+				    lostPetPic: [jsonData],
+				};
+				console.log(articleData);
+				$.ajax({
+				  url: "/LostPetArticle/create",
+				  type: "POST",
+				  data: JSON.stringify(articleData),
+				  contentType: "application/json",
+				})
+				.then(function(response) {
+			      console.log(response);
+			    })
+			    .catch(function(error) {
+			      console.error(error);
 			    });
-			    console.log(response);
-			  } catch (error) {
-			    console.error(error);
-			  }
-			}
-
-			$(".btn-submit").click(function(event) {
-			  event.preventDefault();
-			  submitForm();
-			});
-
-
+	
+				$(".btn-submit").click(function(event) {
+				  event.preventDefault();
+				  submitForm();
+				});
 
 		
-
-
-				
-	
-			      
-				   
-			        
 	</script>
 
 </body>
