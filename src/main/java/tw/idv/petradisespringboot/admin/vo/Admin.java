@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tw.idv.petradisespringboot.adminaccess.vo.AdminAccess;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -38,9 +40,12 @@ public class Admin {
     @Column(name = "admin_status", insertable = false)
     private Character status;
 
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<AdminAccess> accesses;
+
     @Override
     public String toString() {
-        return "Administrator{" +
+        return "Admin{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", account='" + account + '\'' +
@@ -48,8 +53,9 @@ public class Admin {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
+                ", title=" + title +
                 ", status=" + status +
+                ", adminAccesses=" + accesses +
                 '}';
     }
 }
