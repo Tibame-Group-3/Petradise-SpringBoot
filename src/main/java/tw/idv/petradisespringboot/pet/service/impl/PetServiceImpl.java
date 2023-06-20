@@ -22,6 +22,12 @@ public class PetServiceImpl implements PetService {
         this.petPicRepository = petPicRepository;
     }
 
+
+    @Override
+    public List<Pet> getAll() {
+        return petRepository.findAll();
+    }
+
     @Override
     public List<Pet> getPetsByMemId(Integer memId) {
         return petRepository.findByMemID(memId);

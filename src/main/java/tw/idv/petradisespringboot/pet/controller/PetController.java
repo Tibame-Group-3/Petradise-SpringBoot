@@ -5,9 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.vo.Pet;
-import tw.idv.petradisespringboot.pet.vo.PetPic;
-
-import java.util.Base64;
 
 @RestController
 @RequestMapping("/pets")
@@ -17,6 +14,11 @@ public class PetController {
 
     public PetController(PetService service) {
         this.service = service;
+    }
+
+    @GetMapping("/all")
+    ResponseEntity<?> all() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @PostMapping("/add")
