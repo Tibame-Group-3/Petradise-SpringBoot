@@ -8,10 +8,10 @@ import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
 import tw.idv.petradisespringboot.admin.repo.AdminRepository;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
+import tw.idv.petradisespringboot.admin.vo.AdminAccess;
 import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -19,7 +19,6 @@ public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
     private final AdminAccessRepository adminAccessRepository;
     private final AccessFunctionRepository accessFunctionRepository;
-    AdminServiceImpl(AdminRepository repository, AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
 
     AdminServiceImpl(AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
         this.adminRepository = adminRepository;
@@ -32,33 +31,30 @@ public class AdminServiceImpl implements AdminService {
     public Admin add(AdminDTO dto) {
         var admin = dto.getAdmin();
         // Save the Admin entity first so that it has an ID
-        admin = adminRepository.save(admin);
-        var accesses = dto.getAccesses();
-        if (accesses != null) {
-            for (var access : accesses) {
-                // Fetch the AccessFunction entity
-                var functionId = access.getAccessFunction().getId();
-                var function = accessFunctionRepository.findById(functionId).orElse(null);
+        var newAdmin = adminRepository.save(admin);
+        var functions = dto.getFunctions();
+        if (functions != null) {
+            for (var function : functions) {
 
                 if (function != null) {
+                    var access = new AdminAccess();
                     // Create the composite key
-                    var accessId = new AdminAccessId(admin.getId(), function.getId());
+                    var accessId = new AdminAccessId(newAdmin.getId(), function.getId());
                     access.setId(accessId);
-                    access.setAdmin(admin);
+                    access.setAdmin(newAdmin);
                     access.setAccessFunction(function);
                     // Save the AdminAccess entity
                     var newAccess = adminAccessRepository.save(access);
-                    var existingAccesses = admin.getAccesses();
+                    var existingAccesses = newAdmin.getAccesses();
                     if (existingAccesses == null) {
-                        existingAccesses = new HashSet<>();
                         existingAccesses = new ArrayList<>();
                     }
                     existingAccesses.add(newAccess);
-                    admin.setAccesses(existingAccesses);
+                    newAdmin.setAccesses(existingAccesses);
                 }
             }
         }
-        return admin;
+        return newAdmin;
     }
 
     @Override
