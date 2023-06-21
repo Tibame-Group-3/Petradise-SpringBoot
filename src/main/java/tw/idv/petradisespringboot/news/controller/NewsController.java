@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.news.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tw.idv.petradisespringboot.news.model.service.NewsServiceImpl;
+import tw.idv.petradisespringboot.news.model.service.NewsService;
 import tw.idv.petradisespringboot.news.model.vo.News;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
 @RestController
 public class NewsController {
 
-    private final NewsServiceImpl newsService;
+    private final NewsService newsService;
 
     @Autowired
-    public NewsController(NewsServiceImpl newsService) {
+    public NewsController(NewsService newsService) {
         this.newsService = newsService;
     }
 
