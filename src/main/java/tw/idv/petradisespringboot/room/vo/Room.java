@@ -1,49 +1,52 @@
 package tw.idv.petradisespringboot.room.vo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 import javax.persistence.*;
-
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+import java.io.Serializable;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "room")
-public class Room {
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "roomId")
+public class Room implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
-    private Integer roomID;
+    private Integer roomId;
 
-    @Column(name = "room_type_id")
-    private Integer roomTypeID;
+
+    @ManyToOne
+    @JoinColumn(name = "room_type_id", insertable = false, updatable = false)
+    private RoomType roomType;
+
+    @Column(name = "pet_name")
+    private String petName;
 
     @Column(name = "room_name")
     private String roomName;
 
-    @Column(name = "pet_id")
-    private Integer petID;
-
-    @Column(name = "room_sale_status", insertable = false)
+    @Column(name = "room_sale_status")
     private Character roomSaleStatus;
 
-    @Column(name = "room_status", insertable = false)
+    @Column(name = "room_status")
     private Character roomStatus;
 
-    @Override
+       @Override
     public String toString() {
-        return "Room{" +
-                "roomID=" + roomID +
-                ", roomTypeID=" + roomTypeID +
-                ", roomName='" + roomName + '\'' +
-                ", petID=" + petID +
-                ", roomSaleStatus=" + roomSaleStatus +
-                ", roomStatus=" + roomStatus +
-                '}';
+        return "Room [roomId=" + roomId + ", roomType=" + roomType + ", petName=" + petName
+                + ", roomName=" + roomName + ", roomSaleStatus=" + roomSaleStatus
+                + ", roomStatus=" + roomStatus + "]";
     }
 }

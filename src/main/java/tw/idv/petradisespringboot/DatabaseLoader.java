@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import tw.idv.petradisespringboot.pet.repo.PetPicRepository;
+import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
 
 import java.io.IOException;
@@ -26,30 +26,45 @@ public class DatabaseLoader {
     }
 
     @Bean
-    CommandLineRunner initDatabasePetPic(PetPicRepository petPicRepository) {
-        if (petPicRepository.count() != 0) {
-            return args -> {};
+    CommandLineRunner initDatabasePetPic(PetRepository petRepository) {
+        if (petRepository.countPetPics() != 0) {
+           return args -> { logger.info("寵物圖片已有資料，跳過初始化");};
         }
-        petPicRepository.deleteAll();
         return args -> {
-            savePetPic(1, 1, petPicRepository);
-            savePetPic(1, 2, petPicRepository);
-            savePetPic(1, 3, petPicRepository);
-            savePetPic(2, 1, petPicRepository);
-            savePetPic(2, 2, petPicRepository);
-            savePetPic(3, 1, petPicRepository);
-            savePetPic(4, 1, petPicRepository);
-            savePetPic(7, 1, petPicRepository);
+            savePetPic(1, 1, petRepository);
+            savePetPic(1, 2, petRepository);
+            savePetPic(1, 3, petRepository);
+            savePetPic(2, 1, petRepository);
+            savePetPic(2, 2, petRepository);
+            savePetPic(3, 1, petRepository);
+            savePetPic(4, 1, petRepository);
+            savePetPic(7, 1, petRepository);
         };
     }
+    
+   
 
-    private void savePetPic(Integer petId, Integer index, PetPicRepository repo) throws Exception {
+    private void savePetPic(Integer petId, Integer index, PetRepository repo) throws Exception {
         String imagePath = "pet_pics/pet_pic_" + petId + "_" + index + ".jpeg";
         byte[] image = loadImageBytes(imagePath);
+
+        // 尋找資料庫有無此Pet ID之寵物
+        var pet = repo.findById(petId).orElseThrow(() -> new Exception("Pet not found"));
+        pet.setPetID(petId);
+
+        // 把此寵物已擁有的圖片先拿出來
+        var pics = pet.getPetPics();
+
+        // 加入一個新圖片
         var pic = new PetPic();
-        pic.setPetId(petId);
+        pic.setPet(pet);
         pic.setPic(image);
-        logger.info("Preloading pet pic, pet id: " + repo.save(pic).getPetId());
+        pics.add(pic);
+
+        // 在把List塞回寵物
+        pet.setPetPics(pics);
+
+        logger.info("Preloading pet pic, pet id: " + repo.save(pet).getPetID());
     }
 
     private byte[] loadImageBytes(String imagePath) throws IOException {

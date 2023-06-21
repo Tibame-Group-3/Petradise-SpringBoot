@@ -14,7 +14,7 @@ public class RoomReviewController {
     public RoomReviewController(RoomReviewService service) {
         this.service = service;
     }
-    @PostMapping("/roomreview/addReview")
+    @PostMapping("/roomreview/add-review")
     RoomReview addReview(@RequestBody RoomReview review){
         return service.add(review);
     }
@@ -28,7 +28,7 @@ public class RoomReviewController {
     }
     @GetMapping("/roomreview/room-order-id/{roomOrderId}")
     RoomReview findByRoomOrderId(@PathVariable Integer roomOrderId){
-        return service.findRoomReviewByRoomOrederId(roomOrderId);
+        return service.findRoomReviewByRoomOrderId(roomOrderId);
     }
     @GetMapping("/roomreview/hotel-id/{hotelId}/score/{score}")
     List<RoomReview> findByHotelIdAndScore(@PathVariable Integer hotelId, @PathVariable Integer score){

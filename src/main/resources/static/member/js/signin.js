@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    preventSpaceInput();
     $('#btn_signin')
         .on('click', onClickSignin);
 });
@@ -7,6 +8,17 @@ $(document).ready(function () {
 function onClickSignin(e) {
     e.preventDefault();
     validateForm();
+}
+
+function preventSpaceInput() {
+    const inputElements = document.querySelectorAll('input');
+    inputElements.forEach(input => {
+        input.addEventListener('keypress', function (e) {
+            if (e.key === ' ') {
+                e.preventDefault();
+            }
+        });
+    });
 }
 
 function validateForm() {

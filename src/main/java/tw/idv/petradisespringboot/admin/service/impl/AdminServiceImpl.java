@@ -1,52 +1,84 @@
 package tw.idv.petradisespringboot.admin.service.impl;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import tw.idv.petradisespringboot.admin.repo.AdminDAO;
+import tw.idv.petradisespringboot.admin.repo.AdminRepository;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
-    private final AdminDAO dao;
-
-    @Override
-    public Admin login(String account, String password) {
-        return null;
+    private final AdminRepository repository;
+    AdminServiceImpl(AdminRepository repository){
+        this.repository = repository;
     }
 
     @Override
-    public Admin addNew(String name, String email, Character title) {
-
-        Admin admin = new Admin();
-        admin.setAccount("admin" + admin.getId());
-        admin.setPassword("pw" + admin.getPassword());
-        admin.setName(name);
-        admin.setEmail(email);
-        admin.setTitle(title);
-        return dao.insert(admin);
+    public Admin add(Admin admin) {
+        return repository.save(admin);
     }
-
     @Override
-    public Admin modify(String name, String account, String password, String phone, String address, String email) {
-        return null;
-    }
-
-    @Override
-    public Admin modify(String name, String account, String password, String phone, String address, String email, Character title, Character status) {
-        return null;
-    }
-
-    @Override
-    public List<Admin> getAllAdmins() {
-        return dao.getAll();
+    public Admin modify(Integer id, Admin updatedAdmin) {
+        return repository.findById(id).map(existingAdmin -> {
+            existingAdmin.setName(updatedAdmin.getName());
+            existingAdmin.setAccount(updatedAdmin.getAccount());
+            existingAdmin.setPassword(updatedAdmin.getPassword());
+            existingAdmin.setPhone(updatedAdmin.getPhone());
+            existingAdmin.setAddress(updatedAdmin.getAddress());
+            existingAdmin.setEmail(updatedAdmin.getEmail());
+            return repository.save(existingAdmin);
+        }).orElse(null);
     }
 
     @Override
     public Admin findById(Integer id) {
-        return dao.findById(id);
+        return repository.findById(id).orElseThrow(
+                () -> new AdminNotFoundException(id)
+        );
+    }
+    @Override
+    public List<Admin> searchAdminsByName(String keyword) {
+        return repository.findByNameContainingIgnoreCase(keyword);
     }
 
+    @Override
+    public List<Admin> findAdminsByTitle(char title) {
+        return repository.findAdminsByTitle(title);
+    }
+
+    @Override
+    public List<Admin> findAdminsByStatus(char status) {
+        return repository.findAdminsByStatus(status);
+    }
+
+    @Override
+    public List<Admin> getAdminsByIdOrderByTitle() {
+        Sort sortByTitle = Sort.by(Sort.Direction.ASC, "title");
+        return repository.findAll(sortByTitle);
+    }
+
+    @Override
+    public List<Admin> getAdminsByIdOrderByStatusDesc() {
+        Sort sortByStatus = Sort.by(Sort.Direction.DESC, "status");
+        return repository.findAll(sortByStatus);
+    }
+    @Override
+    public Admin changeAdminTitle(Integer id, char newTitle) {
+        return repository.findById(id).map(admin -> {
+            admin.setTitle(newTitle);
+            return repository.save(admin);
+        }).orElse(null);
+    }
+    @Override
+    public Admin changeAdminStatus(Integer id, char newStatus) {
+        return repository.findById(id).map(admin -> {
+            admin.setStatus(newStatus);
+            return repository.save(admin);
+        }).orElse(null);
+    }
+
+
+
 }
+

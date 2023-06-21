@@ -1,16 +1,13 @@
 package tw.idv.petradisespringboot.admin.vo;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -38,18 +35,8 @@ public class Admin {
     @Column(name = "admin_status", insertable = false)
     private Character status;
 
-    @Override
-    public String toString() {
-        return "Administrator{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "admin_id")
+    private Set<AdminAccess> accesses;
+
 }
