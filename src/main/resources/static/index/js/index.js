@@ -36,7 +36,7 @@ function setupMemberCenterNavigation(isSignedIn) {
 
 function setupSigninNavigation() {
     $('.navigate-signin')
-        .attr('href', '/member/signin.html');
+        .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
 }
 
 function logout() {

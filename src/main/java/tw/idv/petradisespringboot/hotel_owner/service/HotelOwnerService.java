@@ -1,52 +1,69 @@
 package tw.idv.petradisespringboot.hotel_owner.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
-//import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerDAO_interface;
-//import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerDao;
-import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
+
+//import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
-@Service
-public class HotelOwnerService {
-	
-	private final HotelOwnerRepository hotelOwnerRepository;
-	
-	@Autowired
-	public HotelOwnerService(HotelOwnerRepository hotelOwnerRepository) {
-		this.hotelOwnerRepository = hotelOwnerRepository;
-	}
-	
-	// 新增
-    public void insert(HotelOwnerVO hotelOwnerVO) {
-        hotelOwnerRepository.save(hotelOwnerVO);
-    }
-    
-    // 刪除
-    public void delete(Integer hotelId) {
-        hotelOwnerRepository.deleteById(hotelId);
-    }
-    	
-    // 修改
-    public void update(HotelOwnerVO hotelOwnerVO) {
-        hotelOwnerRepository.save(hotelOwnerVO);
-    }
-    
+public interface HotelOwnerService {
+    // 新增
+    void insert(HotelOwnerVO hotelOwnerVO);
 
-    
+    // 刪除
+    void delete(Integer hotelId);
+
+    // 修改
+    void update(HotelOwnerVO hotelOwnerVO);
+
     // 查詢單筆資料
-    public HotelOwnerVO findByPrimaryKey(Integer hotelId) {
-        return hotelOwnerRepository.findById(hotelId).orElse(null);
-    }
-    
+    HotelOwnerVO findByPrimaryKey(Integer hotelId);
+
     // 查詢所有資料
-    public List<HotelOwnerVO> getAll() {
-        return hotelOwnerRepository.findAll();
-    }
+    List<HotelOwnerVO> getAll();
+}
+
+
+//@Service
+//public class HotelOwnerService {
+//	
+//	private final HotelOwnerRepository hotelOwnerRepository;
+//	
+//	@Autowired
+//	public HotelOwnerService(HotelOwnerRepository hotelOwnerRepository) {
+//		this.hotelOwnerRepository = hotelOwnerRepository;
+//	}
+//	
+//	// 新增
+//    public void insert(HotelOwnerVO hotelOwnerVO) {
+//        hotelOwnerRepository.save(hotelOwnerVO);
+//    }
+//    
+//    // 刪除
+//    public void delete(Integer hotelId) {
+//        hotelOwnerRepository.deleteById(hotelId);
+//    }
+//    	
+//    // 修改
+//    public void update(HotelOwnerVO hotelOwnerVO) {
+//        hotelOwnerRepository.save(hotelOwnerVO);
+//    }
+//    
+//
+//    
+//    // 查詢單筆資料
+//    public HotelOwnerVO findByPrimaryKey(Integer hotelId) {
+//        return hotelOwnerRepository.findById(hotelId).orElse(null);
+//    }
+//    
+//    // 查詢所有資料
+//    public List<HotelOwnerVO> getAll() {
+//        return hotelOwnerRepository.findAll();
+//    }
     
     
 //============servlet寫法=================//
@@ -140,4 +157,4 @@ public class HotelOwnerService {
 //	}
 
 
-}
+

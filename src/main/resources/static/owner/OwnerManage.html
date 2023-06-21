@@ -17,6 +17,8 @@
 	href="css/card-3-column-animation-shadows-images.css">
 <link rel="stylesheet" href="css/Navbar-Centered-Links-icons.css">
 <link rel="stylesheet" href="css/styles.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
@@ -286,8 +288,15 @@ width : 15% ;
 <script src="./js/theme-1.js"></script>
 <script src="./js/theme.js"></script>
 <script src="../vendors/jquery/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
 <!-- sweatalert -->
 <script src="./sweetalert2/cdn"></script>
+
 
 <script>
 
@@ -310,8 +319,21 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		  dataType: "JSON",
 		  success: function(res) {
 		    console.log(res);
+
 		    data = res.length;
 		    var page = Math.ceil(data / 5);
+		    
+		    $("tbody").on("click", ".pic", function() {
+    			const index = $(this).closest("tr").index(); //找到最接近父元素的tr索引值,與資料庫一樣是從0開始
+    			const imageBase64 = res[index].imageBase64;
+    			Swal.fire({
+    				  title: '特定寵物業許可證',
+    				  width: '80%',
+    				  background: '#fff',
+    				  html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
+    				});
+    		});
+		    
 		  
 		    
 		    //先呼叫一次,這樣一進畫面就有第一頁資料
@@ -513,6 +535,21 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		      currentPage = parseInt($(this).text());
 		      displayPage(currentPage,res);
 		    });
+		    
+// 		    //圖片還沒好
+// 	        $("tbody").on("click", ".pic", function() {
+// 			      const index = $(this).closest("tr").index(); //找到點擊的tr索引值
+// 			      const imageBase64 = res[index].imageBase64;  // 查詢資料庫該索引值的圖片
+// 			      Swal.fire({
+// 			        title: '特定寵物業許可證',
+// 			        width: '80%',
+// 			        background: '#fff',
+// 			        html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
+// 			      });
+// 			    });
+		    
+		    
+		    
 		  }
 		});
 	
@@ -549,17 +586,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
         
         
         
-        //圖片還沒好
-//         $("tbody").on("click", ".pic", function() {
-// 		      const index = $(this).closest("tr").index();
-// 		      const imageBase64 = res[index].imageBase64;
-// 		      Swal.fire({
-// 		        title: '特定寵物業許可證',
-// 		        width: '80%',
-// 		        background: '#fff',
-// 		        html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
-// 		      });
-// 		    });
+      
 
 		    $("tbody").on("click", ".owner", function() {
 		      var click = parseInt($(this).closest("tr").find("td:first").text());
