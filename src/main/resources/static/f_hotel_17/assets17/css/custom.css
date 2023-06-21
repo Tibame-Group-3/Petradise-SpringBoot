@@ -131,3 +131,6 @@ div.overlay>article {
   background: -o-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
   background: linear-gradient(to bottom, #f1ecd1 0%, #f1ecd1 100%);
 }
+#toast-container .toast-success {
+  background-color: #f8c544 !important;
+}

@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.roomType.controller;
 
 import java.util.List;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,5 +58,10 @@ public class RoomTypeController {
         return service.updateRoomType(roomTypeId, roomType, file1, file2);
     }
 
+    @PostMapping("/updateRooms/{roomTypeId}")
+    public ResponseEntity<?> updateRoomType(@PathVariable Integer roomTypeId) {
+        service.updateRoomType(roomTypeId);
+        return ResponseEntity.ok().build();
+    }
 
 }

@@ -276,8 +276,8 @@
     //按下編輯會導向編輯網頁
     $(document).ready(function () {
         $("#room-data-list").on("click", ".btn-edit", function () {
-            var roomTypeId = $(this).data("room-type-id");
-            window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
+            var roomId = $(this).data("data-room-id");
+            window.location.href = "/f_hotel_17/editRoom.html?roomId=" + roomId;
         });
     });
 </script>
