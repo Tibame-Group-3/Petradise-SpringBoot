@@ -23,6 +23,7 @@ public class SaleProjectController {
 
 	@PostMapping("/add")
 	SaleProject addSaleProject(@RequestBody SaleProject saleProject) {
+		System.out.println(saleProject);
 		return saleProjectService.addSaleProject(saleProject);
 	}
 	
