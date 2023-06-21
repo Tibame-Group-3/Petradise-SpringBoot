@@ -2,7 +2,7 @@
 $(document).ready(function () {
     const sale_project_table_body = document.getElementById('sale_project_table_body');
     fetch("/saleProject/all")
-        .then(res => res.json())
+        .then(response => response.json())
         .then(onReceivedJSON)
         .catch(error => console.log('There woa a problem with the fetch operation', error));
 })
@@ -109,36 +109,33 @@ function onReceivedJSON(jsonData) {
 
 
 // 新增活動
-// type must be the samew 一定要數字型態 +號是轉數字型態，對應DTO表格，傳時間要有毫秒
-// const insertData = {
-//     'pdNo': +$("#pdNo").val(),
-//     'pdName': $("#pdName").val(),
-//     'pdPrice': +$("#pdPrice").val(),
-//     'pdStock': +$("#pdStock").val(),
-//     'pdDescription': $("#pdDescription").val(),
-//     'pdStatus': $("#c1").prop('checked'),
-//     'pdUpdate': moment($("#pdUpdate").val()).format('YYYY-MM-DD HH:mm:ss')
-// }
-// console.log(insertData);
+$(document).on('click', '#add_confirm', function () {
+    const insertData = {
+        'sale_project_name': $("#sale_project_name").val(),
+        'sale_product_id': +$("#sale_product_id").val(),
+        'sale_project_discount': +($("#sale_project_discount").val()) / 10,
+        'sale_project_start': moment($("#sale_project_start").val()).format('YYYY-MM-DD HH:mm:ss'),
+        'sale_project_end': moment($("#sale_project_end").val()).format('YYYY-MM-DD HH:mm:ss')
+    }
+    console.log(insertData);
 
-// // Send form data as POST request
-// fetch('/saleProject/add', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json' //一定要設定!
-//     },
-//     body: JSON.stringify(insertData) //轉JOSN字串
-// })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log(data);
-//     })
-//     .catch(error => {
-//         console.error('There was a problem with the fetch operation:', error);
-//     });
-// });
+    fetch('/saleProject/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // 必須要的設定
+        },
+        body: JSON.stringify(insertData) //轉JSON字串傳到後端
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            console.log(jsonData);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+});

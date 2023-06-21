@@ -34,6 +34,8 @@ public class SaleProjectController {
 
 	@GetMapping("/all")
 	List<SaleProject> getAllSaleProjects() {
+		var allSaleProject = saleProjectService.getAllSaleProject();
+		System.out.println(allSaleProject);
 		return saleProjectService.getAllSaleProject();
 	}
 	

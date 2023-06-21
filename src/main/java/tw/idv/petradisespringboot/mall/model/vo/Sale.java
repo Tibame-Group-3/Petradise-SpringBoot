@@ -33,13 +33,11 @@ public class Sale {
 	@Column(name = "sale_discount")
 	private Double saleDiscount;
 	
-	@ToString.Exclude
 	@JsonBackReference
     @ManyToOne
     @JoinColumn(name = "pd_id", referencedColumnName = "pd_id",insertable = false, updatable=false)
     private Product product;
 	
-	@ToString.Exclude
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="sale_pro_id", referencedColumnName = "sale_pro_id",insertable = false, updatable=false)

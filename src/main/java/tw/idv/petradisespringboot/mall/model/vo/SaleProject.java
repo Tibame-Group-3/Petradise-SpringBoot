@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -41,7 +42,7 @@ public class SaleProject {
 	@Column(name = "sale_pro_end")
 	private Date saleProEnd;
 	
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "saleProject", cascade = CascadeType.ALL)
 	private List<Sale> sale;
 	
