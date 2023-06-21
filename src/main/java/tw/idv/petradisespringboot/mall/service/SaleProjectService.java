@@ -6,12 +6,12 @@ import tw.idv.petradisespringboot.mall.model.vo.SaleProject;
 
 public interface SaleProjectService {
 
-	SaleProject add(SaleProject saleProject);
+	SaleProject addSaleProject(SaleProject saleProject);
 
-	SaleProject update(SaleProject saleProject);
+	SaleProject updateSaleProject(SaleProject saleProject);
 
-	SaleProject findById(Integer id);
+	SaleProject getSaleProjectById(Integer id);
 
-	List<SaleProject> findAll();
+	List<SaleProject> getAllSaleProject();
 
 }

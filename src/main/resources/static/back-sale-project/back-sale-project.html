@@ -232,71 +232,8 @@
                                             </tr>
                                         </thead>
 
-                                        <!-- 動態生成內容區域 -->
-                                        <tbody>
-
-
-
-                                            <tr>
-                                                <td style="color: #a67c52;">1</td>
-                                                <td style="color: #a67c52;">六月-用品類9折</td>
-                                                <td style="color: #a67c52;">0.9</td>
-                                                <td style="color: #a67c52;">2023-06-01</td>
-                                                <td style="color: #a67c52;">2023-06-30</td>
-
-
-                                                <!-- 編輯活動 -->
-                                                <td class="edit_sale_work">
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="edit_sale" data-bs-toggle="modal"
-                                                        data-bs-target="#editBackdrop">
-                                                        <img src="assets/img/edit_icon.png">
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="editBackdrop" data-bs-backdrop="static"
-                                                        data-bs-keyboard="false" tabindex="-1"
-                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
-                                                        <!-- Modal-dialog -->
-                                                        <div
-                                                            class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="staticBackdropLabel">
-                                                                        編輯活動</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-
-
-                                                                <!-- Body -->
-                                                                <div class="modal-body">
-                                                                    ...
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">取消</button>
-                                                                    <button type="button"
-                                                                        class="btn btn-primary">完成</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                                <!-- 取消訂單 -->
-                                                <td class="delete_sale_work">
-                                                    <button type="button" class="delete_sale">
-                                                        <img src="assets/img/delete_icon.png">
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-
-
+                                        <tbody id="sale_project_table_body">
+                                            <!-- 動態生成內容區域 -->
                                         </tbody>
                                     </table>
 
@@ -322,16 +259,11 @@
 
 
 
-
-
-
-
-
-
-
+    <!-- script -->
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
-
+    <script src="assets/jquery/jquery-3.7.0.min.js"></script>
+    <script src="assets/js/sale_project.js"></script>
 </body>
 
 </html>

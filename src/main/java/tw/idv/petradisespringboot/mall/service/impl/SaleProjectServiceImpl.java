@@ -18,29 +18,31 @@ public class SaleProjectServiceImpl implements SaleProjectService {
 	}
 
 	@Override
-	public SaleProject add(SaleProject saleProject) {
+	public SaleProject addSaleProject(SaleProject saleProject) {
 		return saleProjectRepository.save(saleProject);
 	}
 
 	@Override
-	public SaleProject update(SaleProject saleProject) {
+	public SaleProject updateSaleProject(SaleProject saleProject) {
 		return saleProjectRepository.save(saleProject);
 	}
 
 	@Override
-	public SaleProject findById(Integer id) {
-		return saleProjectRepository.findById(id).orElseThrow(() -> new SaleProjectNotFoundException(id));
+	public SaleProject getSaleProjectById(Integer saleProId) {
+		return saleProjectRepository.findById(saleProId).orElseThrow(() -> new SaleProjectNotFoundException(saleProId));
 	}
 
 	@Override
-	public List<SaleProject> findAll() {
+	public List<SaleProject> getAllSaleProject() {
 		return saleProjectRepository.findAll();
 	}
 
 }
 
 class SaleProjectNotFoundException extends RuntimeException {
-	SaleProjectNotFoundException(Integer id) {
-		super("SaleProject not found, id: " + id);
+	private static final long serialVersionUID = 6301165073809004299L;
+
+	SaleProjectNotFoundException(Integer saleProId) {
+		super("SaleProject not found, id: " + saleProId);
 	}
 }

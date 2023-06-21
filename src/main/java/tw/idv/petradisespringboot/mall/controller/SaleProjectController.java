@@ -7,6 +7,7 @@ import tw.idv.petradisespringboot.mall.model.vo.SaleProject;
 import tw.idv.petradisespringboot.mall.service.SaleProjectService;
 
 @RestController
+@RequestMapping("/saleProject")
 public class SaleProjectController {
 
 	private final SaleProjectService saleProjectService;
@@ -15,19 +16,24 @@ public class SaleProjectController {
 		this.saleProjectService = saleProjectService;
 	}
 
-	@GetMapping("/saleProjects/id/{id}")
-	SaleProject one(@PathVariable Integer id) {
-		return saleProjectService.findById(id);
+	@GetMapping("/{id}")
+	SaleProject getSaleProject(@PathVariable Integer SaleProjectId) {
+		return saleProjectService.getSaleProjectById(SaleProjectId);
 	}
 
-	@PostMapping("/saleProjects/add")
+	@PostMapping("/add")
 	SaleProject addSaleProject(@RequestBody SaleProject saleProject) {
-		return saleProjectService.add(saleProject);
+		return saleProjectService.addSaleProject(saleProject);
+	}
+	
+	@PostMapping("/update")
+	SaleProject updateSaleProject(@RequestBody SaleProject saleProject) {
+		return saleProjectService.updateSaleProject(saleProject);
 	}
 
-	@GetMapping("/saleProjects/all")
-	List<SaleProject> all() {
-		return saleProjectService.findAll();
+	@GetMapping("/all")
+	List<SaleProject> getAllSaleProjects() {
+		return saleProjectService.getAllSaleProject();
 	}
-
+	
 }
