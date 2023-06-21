@@ -12,6 +12,7 @@ import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -19,6 +20,8 @@ public class AdminServiceImpl implements AdminService {
     private final AdminAccessRepository adminAccessRepository;
     private final AccessFunctionRepository accessFunctionRepository;
     AdminServiceImpl(AdminRepository repository, AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
+
+    AdminServiceImpl(AdminRepository adminRepository, AdminAccessRepository adminAccessRepository, AccessFunctionRepository accessFunctionRepository){
         this.adminRepository = adminRepository;
         this.adminAccessRepository = adminAccessRepository;
         this.accessFunctionRepository = accessFunctionRepository;
@@ -48,6 +51,7 @@ public class AdminServiceImpl implements AdminService {
                     var existingAccesses = admin.getAccesses();
                     if (existingAccesses == null) {
                         existingAccesses = new HashSet<>();
+                        existingAccesses = new ArrayList<>();
                     }
                     existingAccesses.add(newAccess);
                     admin.setAccesses(existingAccesses);
@@ -56,6 +60,7 @@ public class AdminServiceImpl implements AdminService {
         }
         return admin;
     }
+
     @Override
     public Admin modify(Integer id, Admin updatedAdmin) {
         return adminRepository.findById(id).map(existingAdmin -> {
