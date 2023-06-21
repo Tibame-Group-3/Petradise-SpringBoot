@@ -3,11 +3,9 @@ package tw.idv.petradisespringboot.admin.controller;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
-import tw.idv.petradisespringboot.admin.vo.AdminAccess;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/admin")
@@ -19,10 +17,7 @@ public class AdminController {
     }
     @PostMapping("/add")
     public Admin addAdmin(@RequestBody AdminDTO adminDTO) {
-        Admin admin = adminDTO.getAdmin();
-        Set<AdminAccess> accesses = adminDTO.getAccesses();
-        admin.setAccesses(accesses);
-        return service.add(admin);
+        return service.add(adminDTO);
     }
     @PutMapping("/id/{id}/modify")
     Admin modifyAdmin(@PathVariable Integer id, @RequestBody Admin updatedAdmin) {

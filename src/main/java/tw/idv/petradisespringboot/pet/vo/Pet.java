@@ -21,17 +21,17 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private Integer petID;
+    private Integer id;
     @Column(name = "mem_id")
-    private Integer memID;
+    private Integer memberId;
     @Column(name = "pet_name")
-    private String petName;
+    private String name;
     @Column(name = "pet_type")
-    private PetType petType;
+    private PetType type;
     @Column(name = "pet_size")
-    private PetSize petSize;
+    private PetSize size;
     @Column(name = "pet_status", insertable = false)
-    private PetStatus petStatus = PetStatus.NORMAL;
+    private PetStatus status = PetStatus.NORMAL;
 
     // The mappedBy attribute refers to the property name of the association on the owner side.
     @JsonManagedReference

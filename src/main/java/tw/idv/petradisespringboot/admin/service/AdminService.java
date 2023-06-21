@@ -1,12 +1,13 @@
 package tw.idv.petradisespringboot.admin.service;
 
+import tw.idv.petradisespringboot.admin.controller.AdminDTO;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 
 import java.util.List;
 
 public interface AdminService {
 
-    Admin add(Admin admin);
+    Admin add(AdminDTO adminDTO);
     Admin modify(Integer id, Admin updatedAdmin);
     Admin findById(Integer id);
     List<Admin> searchAdminsByName(String keyword);

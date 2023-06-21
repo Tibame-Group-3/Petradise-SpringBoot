@@ -16,13 +16,29 @@
 <body>
 
     <div class="content">
-        <h1>會員資訊</h1>
-
+        <h1 class="mt-5">會員資訊</h1>
+        <form id="member-form" class="mt-4">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="account">Account</label>
+                <input type="text" class="form-control" id="account">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <!-- Continue this pattern for all fields -->
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
     <!-- Add nav bar -->
     <script src="./js/nav.js"></script>
+    <script src="./js/profile.js"></script>
 </body>
 
 </html>

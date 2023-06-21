@@ -49,7 +49,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         // 透過roomtypeid找到對應的圖片
         List<RoomPic> existingPics = picRepository.findByRoomType_RoomTypeId(roomTypeId);
 
-
         // 更新房型資訊
         //把roomtype物件裡面的值設定給existingRoomType
         existingRoomType.setRoomTypeName(roomType.getRoomTypeName());
@@ -60,24 +59,21 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         existingRoomType.setRoomTypeAbout(roomType.getRoomTypeAbout());
 
         MultipartFile[] files = {file1, file2}; //把圖片們裝進陣列 處理待處理的圖片
-
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             if (!file.isEmpty()) {
                 RoomPic roomPic;
                 if (existingPics.size() > i) {
                     // existingPics.size() 表格內已存在的圖片數量
-                  System.out.println("existingPics.size() = " + existingPics.size());
+//                  System.out.println("existingPics.size() = " + existingPics.size());
                     roomPic = existingPics.get(i); //把圖片表格裡的第i+1張照片拿出來
                 } else {
-
                     roomPic = new RoomPic();// 新增圖片物件
                     roomPic.setRoomType(existingRoomType);//關聯roomtype屬性跟圖片
                     existingPics.add(roomPic);
                 }
-
                 try {
-                    byte[] picData = file.getBytes();
+                    byte[] picData = file.getBytes(); //透過getBytes() 取得圖片陣列
                     roomPic.setRoomPic(picData);//更新圖片表格的圖片
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -93,12 +89,10 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     class RoomTypeNotFoundException extends RuntimeException {
     RoomTypeNotFoundException(Integer id) {
         super("找不到業主ID: " + id);
-
     }
-
 }
-class ResourceNotFoundException extends RuntimeException {
+    class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
         super(message);
     }
-}}
+    }}
