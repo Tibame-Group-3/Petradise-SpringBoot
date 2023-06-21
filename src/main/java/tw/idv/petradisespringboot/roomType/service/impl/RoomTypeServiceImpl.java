@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.repo.RoomPicRepository;
@@ -28,6 +29,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return typeRepository.findByHotelId(hotelId);
 
     }
+
     //新增房型
     @Override
     public RoomType addNewRoomType(RoomType newRoomType) {
@@ -101,12 +103,14 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
     class RoomTypeNotFoundException extends RuntimeException {
-    RoomTypeNotFoundException(Integer id) {
-        super("找不到業主ID: " + id);
+        RoomTypeNotFoundException(Integer id) {
+            super("找不到業主ID: " + id);
+        }
+    }
+
+    public static class ResourceNotFoundException extends RuntimeException {
+        public ResourceNotFoundException(String message) {
+            super(message);
+        }
     }
 }
-    public static class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
-        super(message);
-    }
-    }}

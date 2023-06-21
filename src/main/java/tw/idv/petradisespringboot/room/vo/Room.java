@@ -49,4 +49,5 @@ public class Room implements Serializable {
                 + ", roomName=" + roomName + ", roomSaleStatus=" + roomSaleStatus
                 + ", roomStatus=" + roomStatus + "]";
     }
+
 }

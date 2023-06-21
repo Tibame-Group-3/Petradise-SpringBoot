@@ -182,8 +182,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-
 <script>
+    // 拿到該筆房間資訊
     // 動態生成房型select
     var roomTypeMapping;
     $(document).ready(function () {
@@ -200,8 +200,27 @@
                     roomTypeMapping[roomType.roomTypeName] = roomType.roomTypeId;
                 });
 
-                // 更新房型的下拉選單
-                updateRoomTypeSelectOptions();
+                // 獲取房間資訊
+                var urlParams = new URLSearchParams(window.location.search);
+                var roomId = urlParams.get('roomId');
+                $.ajax({
+                    url: 'http://localhost:8080/rooms/' + roomId,
+                    type: 'GET',
+                    success: function (room) {
+                        // 填充表單
+                        $("input[name='room_name']").val(room.roomName);
+                        $("input[name='pet_name']").val(room.petName);
+                        $("select[name='room_sale_status']").val(room.roomSaleStatus);
+                        $("select[name='room_status']").val(room.roomStatus);
+                        $("select[name='room_type_id']").val(room.roomType.roomTypeId);  // 使用 roomType.roomTypeId
+
+                        // 更新房型的下拉選單
+                        updateRoomTypeSelectOptions(room.roomType.roomTypeName);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error(xhr);
+                    }
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
@@ -218,13 +237,17 @@
     });
 
     // 更新下拉選單的房型
-    function updateRoomTypeSelectOptions() {
+    function updateRoomTypeSelectOptions(currentRoomTypeName) {
         var select = $('#roomTypeSelect');
         select.empty();
 
         // 將房型名稱與id的映射關係加入下拉選單
         Object.keys(roomTypeMapping).forEach(function (roomTypeName) {
-            select.append($('<option></option>').val(roomTypeName).text(roomTypeName));
+            var option = $('<option></option>').val(roomTypeName).text(roomTypeName);
+            if (roomTypeName === currentRoomTypeName) {
+                option.attr('selected', 'selected');
+            }
+            select.append(option);
         });
     }
 
@@ -234,30 +257,42 @@
     }
 </script>
 <script>
-    //顯示房間資料
+    // 更新房間資訊
     $(document).ready(function () {
-        var urlParams = new URLSearchParams(window.location.search);//取得查詢字串
-        var roomId = urlParams.get('roomId');//找到名為roomId的值
+        $("#roomForm").submit(function (e) {
+            e.preventDefault();
+            var selectedRoomTypeName = $('#roomTypeSelect').val();
+            var selectedRoomTypeId = Number(roomTypeMapping[selectedRoomTypeName]); // 通過房型名稱拿到房型id
+            var room = {
+                roomName: $("input[name='room_name']").val(),
+                petName: $("input[name='pet_name']").val(),
+                roomSaleStatus: $("select[name='room_sale_status']").val(),
+                roomStatus: $("select[name='room_status']").val(),
+                roomTypeId: selectedRoomTypeId
+            };
+            console.log(room);
 
-        $.ajax({
-            url: 'http://localhost:8080/rooms/' + roomId,
-            type: 'GET',
-            success: function (room) {
-                // 填充表單
-                $("input[name='room_name']").val(room.roomName);
-                $("input[name='pet_name']").val(room.petName);
-                $("select[name='room_sale_status']").val(room.roomSaleStatus);
-                $("select[name='room_status']").val(room.roomStatus);
-                $("select[name='room_type_id']").val(room.roomType.roomTypeId);  // 使用 roomType.roomTypeId
+            var urlParams = new URLSearchParams(window.location.search);
+            var roomId = urlParams.get('roomId');
+            var roomTypeId = selectedRoomTypeId;
 
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.error(xhr);
-            }
+            $.ajax({
+                url: 'http://localhost:8080/rooms/'+ roomId + '/' + roomTypeId,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(room),
+                success: function (response) {
+                    alert('房間資訊已更新');
+                    window.location.href = '/f_hotel_17/room.html';
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
         });
     });
-
 </script>
+
 </body>
 
 </html>

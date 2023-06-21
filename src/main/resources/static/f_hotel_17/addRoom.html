@@ -219,14 +219,14 @@
             $("#roomForm").submit(function(e) {
                 e.preventDefault();
                 var selectedRoomTypeName = $('#roomTypeSelect').val();
-                var selectedRoomTypeId = Number(roomTypeMapping[selectedRoomTypeName]); // 通过房型名称获取房型ID
+                var selectedRoomTypeId = Number(roomTypeMapping[selectedRoomTypeName]); // 通過房型名稱拿到房型id
 
                 // newRoom
                 var newRoom = {
                     roomName: $("input[name='room_name']").val(),
                     roomSaleStatus: $("select[name='room_sale_status']").val(),
                     roomStatus: $("select[name='room_status']").val(),
-                    roomTypeId: selectedRoomTypeId // 将选定的房型ID添加到newRoom对象中
+                    roomTypeId: selectedRoomTypeId // 把選擇的房型ID加到newRoom中
                 };
 
                 // 送出新增房間的請求

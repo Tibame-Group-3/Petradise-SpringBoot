@@ -49,13 +49,31 @@ public class RoomServiceImpl implements RoomService {
         return roomRepository.save(newRoom);
     }
 
-    //修改房間
+    //拿到單筆房間
     @Override
     public Room getRoomById(Integer roomId) {
         return roomRepository.findById(roomId).orElse(null);
     }
 
-    public void saveRoom(Room room) {
-        roomRepository.save(room);
+    @Override
+    public Room updateRoom(Room updatedRoom) {
+        Room existingRoom = roomRepository.findById(updatedRoom.getRoomId()).orElse(null);
+        if (existingRoom != null) {
+            // 更新房間屬性
+            existingRoom.setRoomName(updatedRoom.getRoomName());
+            existingRoom.setPetName(updatedRoom.getPetName());
+            existingRoom.setRoomSaleStatus(updatedRoom.getRoomSaleStatus());
+            existingRoom.setRoomStatus(updatedRoom.getRoomStatus());
+            existingRoom.setRoomType(updatedRoom.getRoomType());
+            // 保存更新後的房間
+            return roomRepository.save(existingRoom);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public RoomType getRoomTypeById(Integer roomTypeId) {
+        return typeRepository.findById(roomTypeId).orElse(null);
     }
 }

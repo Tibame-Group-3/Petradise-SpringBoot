@@ -1,6 +1,8 @@
 package tw.idv.petradisespringboot.room.service;
 
 import tw.idv.petradisespringboot.room.vo.Room;
+import tw.idv.petradisespringboot.roomType.vo.RoomType;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,8 @@ public interface RoomService {
 
     public Room getRoomById(Integer roomId);
 
-    public void saveRoom(Room room);
+    //更改房間資料
+    Room updateRoom( Room updatedRoom);
 
+    RoomType getRoomTypeById(Integer roomTypeId);
 }

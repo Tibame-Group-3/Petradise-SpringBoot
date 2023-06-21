@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.room.service.RoomService;
 import tw.idv.petradisespringboot.room.vo.Room;
+import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 import java.util.List;
 import java.util.Map;
@@ -31,21 +32,34 @@ public class RoomController {
         return new ResponseEntity<>(room, HttpStatus.CREATED);
     }
 
-    @PostMapping("/updateRoom/{roomId}")
+    //拿到該筆房間資料(查單筆)
+    @GetMapping("/{roomId}")
     @ResponseBody
-    public String updateRoom(@PathVariable Integer roomId, @RequestBody Room updatedRoom) {
-        Room room = roomService.getRoomById(roomId);
-        if (room == null) {
-            return "Room not found";
-        }
-        room.setRoomName(updatedRoom.getRoomName());
-        room.setRoomType(updatedRoom.getRoomType());  // 使用 updatedRoom.getRoomType() 來設定房型對象
-        room.setPetName(updatedRoom.getPetName());
-        room.setRoomSaleStatus(updatedRoom.getRoomSaleStatus());
-        room.setRoomStatus(updatedRoom.getRoomStatus());
-
-        roomService.saveRoom(room);
-        return "Room updated successfully";
+    public Room getRoomById(@PathVariable Integer roomId) {
+        return roomService.getRoomById(roomId);
     }
+
+    //更新房間資料
+    @PostMapping("/{roomId}/{roomTypeId}")
+    public ResponseEntity<?> updateRoom(@PathVariable Integer roomId,
+                                        @PathVariable Integer roomTypeId,
+                                        @RequestBody Room updatedRoom) {
+        RoomType roomType = roomService.getRoomTypeById(roomTypeId);
+
+        if (roomType != null) {
+            updatedRoom.setRoomType(roomType);
+            updatedRoom.setRoomId(roomId);
+
+            Room updatedRoomResult = roomService.updateRoom(updatedRoom);
+
+            if (updatedRoomResult != null) {
+                return ResponseEntity.ok().build();
+            }
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+
 }
 
