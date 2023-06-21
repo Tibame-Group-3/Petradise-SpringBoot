@@ -84,7 +84,7 @@
                         style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;"></i>(
                     0 )</button>
                 <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary" type="button"
-                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;padding-top: 6px;"><svg
+                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px;"><svg
                             xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                             viewBox="0 0 16 16" class="bi bi-person-circle"
                             style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
@@ -94,7 +94,7 @@
                             </path>
                         </svg>會員</button><button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown" aria-expanded="false" type="button"
-                        style="background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;width: 29.5833px;"></button>
+                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
                     <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a
                             class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item"
                             href="#" style="color: #ffffff;">會員中心</a></div>
@@ -102,30 +102,31 @@
             </div>
         </div>
     </nav>
+
+
+
     <main class="container">
 
         <!-- Left Column / Headphones Image -->
-        <div class="left-column">
-            <img src="assets/img/Great%20Ball.png">
+        <div id="preview" class="left-column">
+<!--            <img src="assets/img/Great%20Ball.png">-->
         </div>
-
 
         <!-- Right Column -->
         <div class="right-column">
 
             <!-- Product Description -->
             <div class="product-description">
-                <span> Pokemon</span>
-                <h1>Great Ball</h1>
+                <span id="pdPetType"> </span> / <span id="pdType"> </span>
+                <h1 id="pdName"></h1>
 
                 <!-- Product Pricing -->
                 <div class="product-price">
-                    <span>$500</span>
+                    <span id="pdPrice"></span>
                     <br>
                 </div>
 
-                <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation.
-                    Sturdy headband and on-ear cushions suitable for live performance</p>
+                <p id="pdInfo"></p>
             </div>
 
             <!-- Product Configuration -->
@@ -141,17 +142,17 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
     </main>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    <script src="script.js" charset="utf-8"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="assets/js/script.min.js"></script>
+    <script src="assets/js/PdPage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

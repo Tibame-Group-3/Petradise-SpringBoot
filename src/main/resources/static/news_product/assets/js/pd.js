@@ -48,7 +48,6 @@ $(document).ready(function () {
 
 // ------------------修改資料------------------
 $(document).on('click', "button.btn_update", function () {
-    // const data = {};
     let pdId = $(this).closest("tr").find("td.pdId").text();
     console.log(pdId);
 
