@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function fetchPets() {
-    fetch(`/members/memberId=${getMemberId()}`)
+    fetch(`/pets/memberId=${getMemberId()}`)
         .then(response => response.json())
         .then(console.log)
 }
