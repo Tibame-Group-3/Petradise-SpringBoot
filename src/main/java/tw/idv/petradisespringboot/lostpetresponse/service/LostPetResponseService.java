@@ -10,5 +10,7 @@ public interface LostPetResponseService {
 	
 	LostPetResponse eidt(LostPetResponse lostPetResponse);
 	
+	LostPetResponse findById(Integer id);
+	
 	
 }

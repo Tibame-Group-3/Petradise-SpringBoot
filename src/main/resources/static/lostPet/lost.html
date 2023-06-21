@@ -262,11 +262,11 @@ select {
 					<div class="">
 						<div class="clear-both block-facets">
 							<select>
-								<option value="#">All Types</option>
-								<option value="#">Dogs</option>
-								<option value="#">Cats</option>
-								<option value="#">Birds</option>
-								<option value="#">Others</option>
+								<option value="AllType">全部種類</option>
+								<option value="Dogs" id ="dog">狗</option>
+								<option value="Cats" id ="cat">貓</option>
+								<option value="Birds" id = "bird">鳥</option>
+								<option value="Others" id = "other">其他</option>
 							</select>
 						</div>
 					</div>
@@ -521,6 +521,10 @@ select {
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript">
 	        const btn_create = document.querySelector('.btn-create');
+	        const option_dog = document.querySelector("#dog");
+	        const option_cat = document.querySelector("#cat");
+	        const option_bird = document.querySelector("#bird");
+	        const option_other = document.querySelector("#other");
 		    btn_create.addEventListener('click', () => {
 		        const targetPageUrl = './lost_post.html';
 		        window.location.href = targetPageUrl;

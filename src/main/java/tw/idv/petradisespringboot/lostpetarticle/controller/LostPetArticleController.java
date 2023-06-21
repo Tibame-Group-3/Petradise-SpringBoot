@@ -33,6 +33,20 @@ public class LostPetArticleController {
 		System.out.println(kk);
 		return lostPetArticleService.getAllArticles();
 	}
+	
+	@GetMapping("/species={species}")
+	List<LostPetArticle> getArticleBySpecies(@PathVariable String species){
+		if (species == "狗") {
+			return lostPetArticleService.findBySpecies(species);	
+		} else if ( species == "貓"){
+			return lostPetArticleService.findBySpecies(species);
+		} else if ( species == "鳥") {
+			return lostPetArticleService.findBySpecies(species);
+		} else if ( species == "其他"){
+			return lostPetArticleService.findBySpecies(species);
+		}
+		return null;
+	}
 		
 	@GetMapping("/id={id}")
 	LostPetArticle getArticle(@PathVariable Integer id) {

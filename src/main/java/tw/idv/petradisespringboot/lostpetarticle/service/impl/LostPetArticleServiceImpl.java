@@ -46,6 +46,17 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 		
 	}
 
+	@Override
+	public List<LostPetArticle> findBySpecies(String species) {
+		
+		return lostPetArticleRepository.findBySpecies(species);
+	}
+
+	@Override
+	public List<LostPetArticle> findByLostPlace(String lostPlace) {
+		return lostPetArticleRepository.findByLostPlace(lostPlace);
+	}
+
 	
 
 }

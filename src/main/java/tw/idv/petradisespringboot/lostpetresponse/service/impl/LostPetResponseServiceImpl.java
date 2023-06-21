@@ -32,6 +32,11 @@ public class LostPetResponseServiceImpl implements LostPetResponseService{
 		return lostPetResponseRepo.save(lostPetResponse);
 	}
 
+	@Override
+	public LostPetResponse findById(Integer id) {
+		return lostPetResponseRepo.findById(id).orElseThrow();
+	}
+
 
 	
 

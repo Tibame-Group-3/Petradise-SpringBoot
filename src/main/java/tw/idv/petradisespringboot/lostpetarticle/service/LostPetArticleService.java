@@ -17,6 +17,8 @@ public interface LostPetArticleService {
 	
 	void delete(Integer id);
 	
+	List<LostPetArticle> findBySpecies(String species);
 	
+	List<LostPetArticle> findByLostPlace(String lostPlace);
 
 }
