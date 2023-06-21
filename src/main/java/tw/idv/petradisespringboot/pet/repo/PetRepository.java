@@ -14,4 +14,6 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
 
     @Query(value = "SELECT COUNT(*) FROM pet_pic", nativeQuery = true)
     Integer countPetPics();
+
+    boolean existsByName(String name);
 }
