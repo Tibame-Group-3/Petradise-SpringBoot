@@ -2,16 +2,16 @@ package tw.idv.petradisespringboot.admin.service.impl;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import tw.idv.petradisespringboot.admin.repo.AccessFunctionRepository;
 import tw.idv.petradisespringboot.admin.controller.AdminDTO;
+import tw.idv.petradisespringboot.admin.repo.AccessFunctionRepository;
+import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
 import tw.idv.petradisespringboot.admin.repo.AdminRepository;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
-import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
 import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
                     var newAccess = adminAccessRepository.save(access);
                     var existingAccesses = admin.getAccesses();
                     if (existingAccesses == null) {
-                        existingAccesses = new HashSet<>();
+                        existingAccesses = new ArrayList<>();
                     }
                     existingAccesses.add(newAccess);
                     admin.setAccesses(existingAccesses);
