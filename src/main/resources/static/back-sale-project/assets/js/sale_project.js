@@ -110,35 +110,35 @@ function onReceivedJSON(jsonData) {
 
 // 新增活動
 // type must be the samew 一定要數字型態 +號是轉數字型態，對應DTO表格，傳時間要有毫秒
-const insertData = {
-    'pdNo': +$("#pdNo").val(),
-    'pdName': $("#pdName").val(),
-    'pdPrice': +$("#pdPrice").val(),
-    'pdStock': +$("#pdStock").val(),
-    'pdDescription': $("#pdDescription").val(),
-    'pdStatus': $("#c1").prop('checked'),
-    'pdUpdate': moment($("#pdUpdate").val()).format('YYYY-MM-DD HH:mm:ss')
-}
-console.log(insertData);
+// const insertData = {
+//     'pdNo': +$("#pdNo").val(),
+//     'pdName': $("#pdName").val(),
+//     'pdPrice': +$("#pdPrice").val(),
+//     'pdStock': +$("#pdStock").val(),
+//     'pdDescription': $("#pdDescription").val(),
+//     'pdStatus': $("#c1").prop('checked'),
+//     'pdUpdate': moment($("#pdUpdate").val()).format('YYYY-MM-DD HH:mm:ss')
+// }
+// console.log(insertData);
 
-// Send form data as POST request
-fetch('/saleProject/add', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json' //一定要設定!
-    },
-    body: JSON.stringify(insertData) //轉JOSN字串
-})
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
-});
+// // Send form data as POST request
+// fetch('/saleProject/add', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json' //一定要設定!
+//     },
+//     body: JSON.stringify(insertData) //轉JOSN字串
+// })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         console.log(data);
+//     })
+//     .catch(error => {
+//         console.error('There was a problem with the fetch operation:', error);
+//     });
+// });

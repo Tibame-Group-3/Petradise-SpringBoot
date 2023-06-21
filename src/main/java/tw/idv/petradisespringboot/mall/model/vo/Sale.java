@@ -36,13 +36,13 @@ public class Sale {
 	@ToString.Exclude
 	@JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "pd_id", referencedColumnName = "pd_id")
+    @JoinColumn(name = "pd_id", referencedColumnName = "pd_id",insertable = false, updatable=false)
     private Product product;
 	
 	@ToString.Exclude
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="sale_pro_id", referencedColumnName = "sale_pro_id")
+	@JoinColumn(name="sale_pro_id", referencedColumnName = "sale_pro_id",insertable = false, updatable=false)
 	private SaleProject saleProject;
 	
 	@Override
