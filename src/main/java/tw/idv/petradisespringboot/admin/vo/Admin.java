@@ -37,8 +37,7 @@ public class Admin {
     private Character status;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "admin_id")
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AdminAccess> accesses;
 
 }
