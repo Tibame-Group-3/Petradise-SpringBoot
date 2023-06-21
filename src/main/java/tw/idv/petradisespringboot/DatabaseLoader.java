@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
+import tw.idv.petradisespringboot.pet.vo.Pet;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
 
 import java.io.IOException;
@@ -42,7 +43,10 @@ public class DatabaseLoader {
         };
     }
     
-   
+   private void createPetRowlet() {
+        var pet = new Pet();
+        pet.setName("木木梟");
+   }
 
     private void savePetPic(Integer petId, Integer index, PetRepository repo) throws Exception {
         String imagePath = "pet_pics/pet_pic_" + petId + "_" + index + ".jpeg";
@@ -50,7 +54,7 @@ public class DatabaseLoader {
 
         // 尋找資料庫有無此Pet ID之寵物
         var pet = repo.findById(petId).orElseThrow(() -> new Exception("Pet not found"));
-        pet.setPetID(petId);
+        pet.setId(petId);
 
         // 把此寵物已擁有的圖片先拿出來
         var pics = pet.getPetPics();
@@ -64,7 +68,7 @@ public class DatabaseLoader {
         // 在把List塞回寵物
         pet.setPetPics(pics);
 
-        logger.info("Preloading pet pic, pet id: " + repo.save(pet).getPetID());
+        logger.info("Preloading pet pic, pet id: " + repo.save(pet).getId());
     }
 
     private byte[] loadImageBytes(String imagePath) throws IOException {
