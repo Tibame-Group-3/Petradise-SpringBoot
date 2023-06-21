@@ -1,10 +1,10 @@
 package tw.idv.petradisespringboot.roomType.service;
 
-import java.util.List;
-
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+
+import java.util.List;
 
 public interface RoomTypeService {
 	List<RoomType> getByHotelId(Integer hotelId);

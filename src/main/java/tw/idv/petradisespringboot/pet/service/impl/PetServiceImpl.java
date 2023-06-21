@@ -26,7 +26,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<Pet> getPetsByMemId(Integer memId) {
-        return petRepository.findByMemID(memId);
+        return petRepository.findByMemberId(memId);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet updatePet(Pet pet) {
-        if (!petRepository.existsById(pet.getPetID())) {
+        if (!petRepository.existsById(pet.getId())) {
             return pet;
         }
         return petRepository.save(pet);
