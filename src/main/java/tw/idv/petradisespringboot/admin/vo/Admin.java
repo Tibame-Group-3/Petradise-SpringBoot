@@ -1,10 +1,14 @@
 package tw.idv.petradisespringboot.admin.vo;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,8 +39,11 @@ public class Admin {
     @Column(name = "admin_status", insertable = false)
     private Character status;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "admin_id")
     private Set<AdminAccess> accesses;
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<AdminAccess> accesses;
 
 }
