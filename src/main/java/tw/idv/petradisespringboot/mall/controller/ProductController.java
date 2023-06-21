@@ -2,18 +2,17 @@ package tw.idv.petradisespringboot.mall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import tw.idv.petradisespringboot.mall.model.vo.Product;
-import tw.idv.petradisespringboot.mall.service.impl.ProductServiceImpl;
+import tw.idv.petradisespringboot.mall.service.ProductService;
 
 import java.util.List;
 
 @RestController
 public class ProductController {
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductServiceImpl productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 

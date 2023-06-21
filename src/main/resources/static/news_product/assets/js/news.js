@@ -18,6 +18,25 @@ $(document).ready(function () {
                             `
                     tableBody.innerHTML += row;
                 })
+
+            tableBody.html(html);
+            // limitTextLength();  // 房型介紹字數限制
+            $('#myTable').DataTable({//初始化DataTable
+                "language": {
+                    "lengthMenu": "顯示 _MENU_ 條",
+                    "zeroRecords": "未找到任何資料",
+                    "info": "顯示頁數 _PAGE_ / _PAGES_",
+                    "infoEmpty": "沒有任何資訊",
+                    "infoFiltered": "(從 _MAX_ 條資料中過濾)",
+                    "search": "搜尋:",
+                    "paginate": {
+                        "first":      "第一頁",
+                        "last":       "最後一頁",
+                        "next":       "下一頁",
+                        "previous":   "上一頁"
+                    },
+                }
+            });
         })
 
         .catch(err => console.log(err));

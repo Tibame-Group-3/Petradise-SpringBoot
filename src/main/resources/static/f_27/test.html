@@ -1,302 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>My Bookings</title>
+    <title>員工列表</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
-
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
     <style>
-        @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
-        fieldset,
-        label {
-            margin: 0;
-            padding: 0;
+        .pagination a.page-link {
+            color: #a67c52;
+            /* Set the desired color here */
         }
 
-        body {
-            margin: 20px;
+        /* .table-responsive {
+            overflow-x: auto;
         }
 
-
-        /****** Style Star Rating Widget *****/
-
-        .rating {
-            border: none;
-            float: left;
+        .table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .rating>input {
-            display: none;
-        }
+        .table th,
+        .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        } */
 
-        .rating>label:before {
-            margin: 5px;
-            font-size: 1.25em;
-            font-family: FontAwesome;
-            display: inline-block;
-            content: "\f005";
-        }
-
-        .rating>label {
-            color: #ddd;
-            float: right;
-        }
-
-        /***** CSS Magic to Highlight Stars on Hover *****/
-
-        .rating>input:checked~label,
-            /* show gold star when clicked */
-        .rating:not(:checked)>label:hover,
-            /* hover current star */
-        .rating:not(:checked)>label:hover~label {
-            color: #FFD700;
-        }
-
-        /* hover previous stars in list */
-
-        .rating>input:checked+label:hover,
-            /* hover current star when changing rating */
-        .rating>input:checked~label:hover,
-        .rating>label:hover~input:checked~label,
-            /* lighten current selection */
-        .rating>input:checked~label:hover~label {
-            color: #FFED85;
-        }
-
-        /* --------------------------------------------------------------------------------------------- */
-        .btn-indie-trans {
-            background-color: transparent;
-            /* border-color: tan; */
-            /* color: tan; */
-            /* border-radius: 0px; */
-        }
-
-        /* --------------------------------------------------------------------------------------------- */
-
-        #star-count {
-            color: darkgoldenrod;
-            display: inline-block;
-            vertical-align: bottom;
-            margin-left: 1px;
-            margin-bottom: -8px;
-        }
-
-
-        textarea#new-review {
-            resize: none;
-            height: 100px;
-            /* min-height: 100px;
-            max-height: 100px; */
-            width: auto;
-            box-sizing: border-box;
-        }
-
-        .btn-indie-trans {
-            margin-left: 330px;
-        }
-
-        body {
-            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        .btn btn-primaty {
+            height: 30px;
+            padding: 4px 12px;
+            color: #a67c52;
+            background: rgb(241, 236, 209);
+            box-shadow: 0px 0px var(--bs-btn-hover-color);
+            border-color: #fd780f
         }
     </style>
 </head>
 
-<body>
-<div id="wrapper">
-    <div class="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
-                                                     id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                    <ul class="navbar-nav flex-nowrap ms-auto">
-                        <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
-                                    class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                                    class="border rounded-circle img-profile"
-                                    src="assets/img/avatars/avatar1.jpeg"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-                                     style="min-width: 110px;"><a class="dropdown-item" href="#"><i
-                                        class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: #f1ecd1;color: rgb(133, 135, 150);">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-text mx-3"><img width="59" height="33"
+                            src="assets/img/avatars/logo-only.png"></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">帳號管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">認證資料</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">基本資料</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">房間管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">總覽</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">已上架</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">未上架</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">訂單管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">新增商品</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">商品列表</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">新增促銷專案</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">促銷專案列表</a><a
+                                class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">訂單列表</a>
+                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">即時聊天管理</a>
+                        <div class="dropdown-menu show" data-bs-popper="none"
+                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                            <a class="dropdown-item" href="#" style="padding: 2px 30px;font-size: 13px;">客服列表</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button>
                 </div>
-            </nav>
-
-            <div class="container-fluid">
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">My Bookings</p>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="container py-4 py-xl-5">
-                            <div class="row gy-4 gy-md-0">
-                                <div
-                                        class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                                    <!-- ...previous HTML code... -->
-
-                                    <div style="max-width: 350px;">
-                                        <h2 class="text-uppercase fw-bold">XX hotel</h2>
-                                        <p class="my-3">Order ID: xxx<br>CHECK-IN: 2023/7/1<br>CHECK-OUT: 2023/7/2
-                                        </p>
-                                        <a class="btn btn-primary btn-lg me-2 toggle-button" role="button">Leave
-                                            your review</a><a class="btn btn-outline-primary btn-lg" role="button"
-                                                              href="#">View
-                                        details</a>
-                                        <!-- --------------------------------------------------------------------------------------------- -->
-                                        <br><br>
-                                        <div class="review-box" style="display: none;">
-                                            <fieldset class="rating">
-                                                <input type="radio" id="star5" name="rating" value="5"
-                                                       checked="checked" /><label class="full" for="star5"
-                                                                                  title="Awesome - 5 stars"></label>
-                                                <input type="radio" id="star4" name="rating" value="4" /><label
-                                                    class="full" for="star4" title="Pretty good - 4 stars"></label>
-                                                <input type="radio" id="star3" name="rating" value="3" /><label
-                                                    class="full" for="star3" title="Meh - 3 stars"></label>
-                                                <input type="radio" id="star2" name="rating" value="2" /><label
-                                                    class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                                                <input type="radio" id="star1" name="rating" value="1" /><label
-                                                    class="full" for="star1"
-                                                    title="Sucks big time - 1 star"></label>
-                                            </fieldset>
-                                            <span id="star-count"></span>
-                                            <br>
-                                            <!-- --------------------------------------------------------------------------------------------- -->
-                                            <div class="col-md-6">
-                                                <form accept-charset="UTF-8">
-                                                        <textarea class="form-control" rows="4" cols="50"
-                                                                  id="new-review" name="comment"
-                                                                  placeholder="Enter your review here..." rows="5"></textarea>
-
-                                                    <div class="text-right">
-                                                        <br>
-                                                        <button class="btn-indie-trans"
-                                                                type="submit">Publish</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!-- <textarea rows="4" cols="50"
-                                                placeholder="Write your review here"></textarea> -->
-                                            <!-- <button class="btn btn-primary" type="button">Submit Review</button> -->
-                                        </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
-                                    <!-- ...remaining HTML code... -->
-
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Team</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Employee Info</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">Show&nbsp;<select
+                                                class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>&nbsp;</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="p-xl-5 m-xl-5"><img href=""
-                                                                    class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;"
-                                                                    src="assets/img/xxx.jpg"></div>
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+                                            class="form-label"><input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search"></label>
+                                        <!-- <button class="btn btn-primary" type="button"
+                                            style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>員工編號</th>
+                                            <th>姓名</th>
+                                            <th>職稱</th>
+                                            <th>Email</th>
+                                            <th>狀態</th>
+                                            <th style="width: 120px;">編輯</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                        <tr>
+                                            <td>CHA001</td>
+                                            <td>老闆</td>
+                                            <td><select style="width: 80px;">
+                                                    <!-- <optgroup label="This is a group"> -->
+                                                    <option value="12" selected="">主管</option>
+                                                    <option value="13">員工</option>
+                                                    <option value="14">工讀生</option>
+                                                    <!-- </optgroup> -->
+                                                </select></td>
+                                            <td>Cell 1</td>
+                                            <td><select style="width: 65px;">
+                                                    <!-- <optgroup label="This is a group"> -->
+                                                    <option value="12" selected="">在職</option>
+                                                    <option value="13">離職</option>
+                                                    <!-- </optgroup> -->
+                                                </select></td>
+                                            <td>
+                                                <div>
+                                                    <button class="btn btn-primary" type="button"
+                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                    <button class="btn btn-primary" type="button"
+                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CHA002</td>
+                                            <td>主管1</td>
+                                            <td>主管</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>主管2</td>
+                                            <td>主管</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>員工1</td>
+                                            <td>員工</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cell 1</td>
+                                            <td>工讀生1</td>
+                                            <td>工讀生</td>
+                                            <td>Cell 3</td>
+                                            <td>Cell 4</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+
+                                                <button class="btn btn-primary" type="button"
+                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+                                        Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
+                                                    href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
+                                                        aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
 
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
-            </div>
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-</div>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/jquery/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    // toggle function
-    $(document).ready(function () {
-        $(".toggle-button").click(function () {
-            $(this).toggleClass("active");
-            $(".review-box").slideToggle();
-        });
-    });
-    // JavaScript code to update the star count dynamically on hover and persist after clicking
-    const starLabels = document.querySelectorAll('.rating > label');
-    const starCount = document.querySelector('#star-count');
-    const publishButton = document.querySelector('.btn-indie-trans');
-    const textArea = document.querySelector('.form-control');
-    const form = document.querySelector('form');
-
-    let selectedCount = 5; // Set the default selected count to 5
-    starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
-
-    starLabels.forEach((label) => {
-        label.addEventListener('mouseover', () => {
-            const count = label.getAttribute('title').split(' - ')[1].split(' ')[0];
-            starCount.textContent = `(${count})`;
-        });
-
-        label.addEventListener('click', () => {
-            const count = parseFloat(label.getAttribute('title').split(' - ')[1].split(' ')[0]);
-            selectedCount = count;
-            starCount.textContent = `(${selectedCount})`;
-        });
-
-        label.addEventListener('mouseout', () => {
-            starCount.textContent = `(${selectedCount})`; // Display the selected count when the mouse leaves
-        });
-    });
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const reviewText = document.querySelector('#new-review').value;
-        console.log('Review Text:', reviewText);
-        console.log('Rate:', selectedCount);
-
-        const hotelId = 1;
-        const roomOrderId = 1;
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            "hotelId": hotelId,
-            "roomOrderId": roomOrderId,
-            "score": selectedCount,
-            "content": reviewText
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:8080/roomreview/addReview", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-
-        Swal.fire({
-            title: 'Thanks for your review!',
-            text: 'You have earned 10 points!',
-            icon: 'success',
-        });
-
-        publishButton.style.display = "none";
-        textArea.setAttribute("disabled", '');
-        starLabels.forEach((label) => {
-            label.style.pointerEvents = 'none';
-        });
-    })
-</script>
-
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

@@ -1,18 +1,3 @@
-// ------------------預覽------------------
-$("#newsImg").on("change", function () {         // 監聽input讀取圖片
-    // 有選圖片的話
-    if (this.files.length > 0) {
-        let reader = new FileReader();                                          // 準備讀取檔案
-        reader.addEventListener('load', function () {
-            // alert("aaa");
-            $("#preview").html('<img src="' + reader.result + '" style="width: 100%">'); // 放圖片的src
-        });
-        reader.readAsDataURL(this.files[0]);                                    // 執行讀取檔案
-    } else {
-        $("#preview").html('預覽圖');
-    }
-});
-
 // ------------------送出資料------------------
 $("#submit").on('click', function (e) {
     e.preventDefault();
@@ -30,11 +15,10 @@ $("#submit").on('click', function (e) {
     } else {
 
         const data = {};
-        data.adminId = $("#adminId").val();
         data.newsTitle = $("#newsTitle").val();
         data.newsDate = $("#newsDate").val();
         data.newsContent = $("#newsContent").val();
-        // console.log(data);
+        console.log(data);
 
         axios
             .post("/news/add", data)  // 設定url, object
@@ -45,7 +29,7 @@ $("#submit").on('click', function (e) {
                 console.error(err);
             });
 
-        location.href = "News.html";
+        // location.href = "News.html";
 
     }
 
