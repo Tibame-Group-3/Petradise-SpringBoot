@@ -30,9 +30,11 @@ public class DatabaseLoader {
     }
 
     @Bean
-    CommandLineRunner initDatabasePetPic(PetRepository petRepository){
+    CommandLineRunner initDatabasePetPic(PetRepository petRepository) {
         if (petRepository.countPetPics() != 0) {
-           return args -> { logger.info("寵物圖片已有資料，跳過初始化");};
+            return args -> {
+                logger.info("寵物圖片已有資料，跳過初始化");
+            };
         }
         return args -> {
             savePetPic(1, 1, petRepository);
@@ -46,14 +48,16 @@ public class DatabaseLoader {
         };
     }
 
+    // 初始化木木梟
     @Bean
     CommandLineRunner initRowlet(PetRepository petRepository, PetPicRepository petPicRepository) {
         return args -> {
             createPetRowlet(petRepository, petPicRepository);
         };
     }
-    
-   private void createPetRowlet(PetRepository petRepository, PetPicRepository petPicRepository) throws Exception {
+
+    // 建立木木梟
+    private void createPetRowlet(PetRepository petRepository, PetPicRepository petPicRepository) throws Exception {
         var petName = "木木梟";
         var rowletExist = petRepository.existsByName(petName);
         if (!rowletExist) {
@@ -72,7 +76,7 @@ public class DatabaseLoader {
         } else {
             logger.info("已有" + petName + "，略過初始化");
         }
-   }
+    }
 
     private void savePetPic(Integer petId, Integer index, PetRepository repo) throws Exception {
         String imagePath = "pet_pics/pet_pic_" + petId + "_" + index + ".png";
