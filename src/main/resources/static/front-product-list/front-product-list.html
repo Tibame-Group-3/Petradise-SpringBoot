@@ -98,7 +98,7 @@
                         style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;"></i>(
                     0 )</button>
                 <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary" type="button"
-                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;padding-top: 6px;"><svg
+                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px;"><svg
                             xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                             viewBox="0 0 16 16" class="bi bi-person-circle"
                             style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
@@ -108,7 +108,7 @@
                             </path>
                         </svg>會員</button><button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown" aria-expanded="false" type="button"
-                        style="background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;width: 29.5833px;"></button>
+                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
                     <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a
                             class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item"
                             href="#" style="color: #ffffff;">會員中心</a></div>
@@ -124,7 +124,7 @@
     <div class="app-container">
         <div class="app-content">
             <div class="app-content-header">
-                <h1 class="app-content-headerText">Products</h1>
+                <h1 class="app-content-headerText">寵物商城</h1>
                 <!-- <button class="mode-switch active" title="Switch Theme">
                     <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -151,9 +151,9 @@
                                 <option>600以上</option>
                                 <option>不限</option>
                             </select>
-                            <label>類別</label>
+                            <label>寵物類別</label>
                             <select>
-                                <option>犬</option>
+                                <option>狗</option>
                                 <option>貓</option>
                                 <option>寶可夢</option>
                                 <option>全部</option>
@@ -201,12 +201,11 @@
 
                     <div class="product-cell category">
                     </div>
-                    <div class="product-cell name">
-                        商品名稱
+                    <div class="product-cell name">商品名稱
                     </div>
                     <div class="product-cell category">類別
                     </div>
-                    <div class="product-cell price">Price
+                    <div class="product-cell price">售價
                         <button class="sort-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
                                 <path fill="currentColor"
@@ -217,19 +216,21 @@
                 </div>
 
 
+                <div id="tableBody">
 
                 <!-- 商品列表 -->
-                <div class="products-row">
-                    <div class="product-cell image">
-                        <img src="assets/img/001.jpg"
-                            alt="product">
-                        <!-- <span>Ocean</span> -->
-                    </div>
-                    <div class="product-cell name"><span class="cell-label"></span>Ocean</div>
-                    <div class="product-cell category"><span class="cell-label">類別:</span>Furniture</div>
-                    <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
+<!--                <div class="products-row">-->
+<!--                    <div class="product-cell image">-->
+<!--                        <img src="assets/img/001.jpg"-->
+<!--                            alt="product">-->
+<!--                        &lt;!&ndash; <span>Ocean</span> &ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="product-cell name"><span class="cell-label"></span>Ocean</div>-->
+<!--                    <div class="product-cell category"><span class="cell-label">類別:</span>Furniture</div>-->
+<!--                    <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>-->
+<!--                </div>-->
+
                 </div>
-                                
 
             </div>
         </div>
@@ -278,6 +279,7 @@
     <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/js/pro_list.js"></script>
 
 </body>
