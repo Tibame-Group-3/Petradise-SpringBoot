@@ -18,16 +18,19 @@ function displayPets(pets) {
         if (petPics !== undefined && petPics.length > 0) {
             image = ` data:image/jpeg;charset=utf-8;base64, ${petPics[0].pic}`;
         }
-        const petCard = `
+        const petCard =
+            `
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="${image}" class="card-img-top" alt="${pet.name}">
+                    <img src="${image}" class="card-img-top" style="height: 180px; object-fit: cover;" alt="${pet.name}">
                     <div class="card-body">
                         <h5 class="card-title">${pet.name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${pet.type}</h6>
+                        <p class="card-text">${pet.size}</p>
                     </div>
                 </div>
             </div>
-        `;
+           `;
         petsRow.insertAdjacentHTML('beforeend', petCard);
     });
 }
