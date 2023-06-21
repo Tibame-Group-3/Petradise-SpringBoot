@@ -20,18 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
+import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
 @RequestMapping("/owner")
 public class OwnerChackController {
-
-	private final HotelOwnerService hotelOwnerService;
-
+	
 	@Autowired
-	public OwnerChackController(HotelOwnerService hotelOwnerService) {
-		this.hotelOwnerService = hotelOwnerService;
-	}
+	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
+
+
 
 	@GetMapping("/OwnerChack")
 	public void getAllOwners(HttpServletRequest req, HttpServletResponse res) {
@@ -39,9 +38,9 @@ public class OwnerChackController {
 		try {	
 			String hotelStatus = req.getParameter("hotelStatus");
 			if("0".equals(hotelStatus)) {
-			List<HotelOwnerVO> list = hotelOwnerService.getAll();
+			List<HotelOwnerVO> list = hotelOwnerServiceImpl.getAll();
 			List<HotelOwnerVO> filteredOwners = list.stream().filter(owner -> "0".equals(owner.getHotelStatus()))
-			        .collect(Collectors.toList());
+			        .collect(Collectors.toList()); //將符合的資料放進新的容器(filteredOwners)
 			
 			
 			// json	
@@ -67,7 +66,7 @@ public class OwnerChackController {
 		String hotelid = req.getParameter("hotelId");
 		Integer hotelId = Integer.valueOf(hotelid);
 		//找到要做更新的hotelId
-		HotelOwnerVO vo = hotelOwnerService.findByPrimaryKey(hotelId);
+		HotelOwnerVO vo = hotelOwnerServiceImpl.findByPrimaryKey(hotelId);
 
 		//因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
 		if (vo != null) {
@@ -75,7 +74,7 @@ public class OwnerChackController {
 			vo.setHotelId(hotelId);
 
 			try {
-				hotelOwnerService.update(vo);
+				hotelOwnerServiceImpl.update(vo);
 				Gson gson = new Gson();
 				String jsonString = gson.toJson(vo);
 				res.setContentType("application/json;charset=utf-8");

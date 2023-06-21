@@ -195,7 +195,6 @@
     
     <script>
     $(document).ready(function() {
-    const hotelId = 5;
     $("#roomTypeForm").submit(function(e) {
         e.preventDefault(); // 阻止表单的默认提交行为
 
@@ -230,6 +229,10 @@
         });
     });
 });
+    function getHotelId() {
+        // return localStorage.getItem("hotelId");
+        return 5;
+    }
     </script>
     
 </body>

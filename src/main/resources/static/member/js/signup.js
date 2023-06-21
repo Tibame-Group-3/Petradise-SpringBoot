@@ -172,7 +172,7 @@ function populateCitySelect(data) {
 }
 
 function populateDistrictSelect(districtInfo) {
-    const districtOptions = districtInfo.districts.map(district => `<option value=${district.zip}>${district.name}</option>`);
+    const districtOptions = districtInfo.districts.map(district => `<option value=${district.name}>${district.name}</option>`);
     districtSelectElement.innerHTML = districtOptions.join('');
 }
 

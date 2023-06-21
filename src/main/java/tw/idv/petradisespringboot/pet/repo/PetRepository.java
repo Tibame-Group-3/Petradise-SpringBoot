@@ -10,8 +10,10 @@ import java.util.List;
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
 
-    List<Pet> findByMemID(Integer memId);
+    List<Pet> findByMemberId(Integer memId);
 
     @Query(value = "SELECT COUNT(*) FROM pet_pic", nativeQuery = true)
     Integer countPetPics();
+
+    boolean existsByName(String name);
 }
