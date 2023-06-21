@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.admin.vo;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Admin {
     @Column(name = "admin_status", insertable = false)
     private Character status;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "admin_id")
     private Set<AdminAccess> accesses;
