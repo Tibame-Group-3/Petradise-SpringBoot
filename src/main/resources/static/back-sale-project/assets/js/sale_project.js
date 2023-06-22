@@ -19,7 +19,7 @@ function onReceivedJSON(jsonData) {
                 <td style="color: #a67c52;">${element.saleProEnd}</td>
 
 
-                                        <!-- 編輯活動 -->
+                <!-- 編輯活動 -->
                 <td class="edit_sale_work">
                     <!-- Button trigger modal -->
                     <button type="button" class="edit_sale" data-bs-toggle="modal"
@@ -55,10 +55,15 @@ function onReceivedJSON(jsonData) {
                                                 id="sale_project_name">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="sale_product_id" class="form-label"
-                                                style="color: #a67c52;">活動商品編號：</label>
-                                            <input type="text" class="form-control"
-                                                id="sale_product_id">
+                                            <label for="sale_product_type" class="form-label"
+                                                style="color: #a67c52;">活動商品種類：</label>
+                                            <select name="sale_product_type" id="sale_product_type">
+                                                <option value="" selected>請選擇商品種類</option>
+                                                <option value="寶可夢">寶可夢</option>
+                                                <option value="狗">狗</option>
+                                                <option value="貓">貓</option>
+                                                <option value="全部">全部</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="sale_project_discount" class="form-label"
@@ -102,40 +107,42 @@ function onReceivedJSON(jsonData) {
                     </button>
                 </td>
             </tr>
-            `
+        `
         sale_project_table_body.innerHTML += row;
     });
 }
 
 
 // 新增活動
-$(document).on('click', '#add_confirm', function () {
-    const insertData = {
-        'sale_project_name': $("#sale_project_name").val(),
-        'sale_product_id': +$("#sale_product_id").val(),
-        'sale_project_discount': +($("#sale_project_discount").val()) / 10,
-        'sale_project_start': moment($("#sale_project_start").val()).format('YYYY-MM-DD HH:mm:ss'),
-        'sale_project_end': moment($("#sale_project_end").val()).format('YYYY-MM-DD HH:mm:ss')
-    }
-    console.log(insertData);
+$(document).ready(function () {
+    $(document).on('click', '#add_confirm', function () {
+        const insertData = {
+            'sale_project_name': $("#sale_project_name").val(),
+            'sale_product_type': $("#sale_product_type").val(),
+            'sale_project_discount': +($("#sale_project_discount").val()) / 10,
+            'sale_project_start': $("#sale_project_start").val(),
+            'sale_project_end': $("#sale_project_end").val()
+        }
+        console.log(insertData);
 
-    fetch('/saleProject/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // 必須要的設定
-        },
-        body: JSON.stringify(insertData) //轉JSON字串傳到後端
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+        fetch('/saleProject/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // 必須要的設定
+            },
+            body: JSON.stringify(insertData) //轉JSON字串傳到後端
         })
-        .then(jsonData => {
-            console.log(jsonData);
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(jsonData => {
+                console.log(jsonData);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
 });
