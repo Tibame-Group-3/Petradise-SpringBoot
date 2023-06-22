@@ -16,7 +16,7 @@ import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/")
 public class OwnerSignUpController {
 	
 	@Autowired

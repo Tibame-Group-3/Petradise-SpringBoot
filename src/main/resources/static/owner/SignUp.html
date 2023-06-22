@@ -466,10 +466,6 @@ $(function(){
                 },
                 owner_phone: {
                     validators: {
-                        stringLength: {
-                            min: 10,
-                            message: ' '
-                        },
                         notEmpty: {
                             message: '此欄位不得空白'
                         },
@@ -486,7 +482,7 @@ $(function(){
                         },
                         regexp: {
                             regexp: /^[A-Z]{1}[1-2]{1}\d{8}$/,
-                            message: ' '
+                            message: '身分證格式不正確'
                         }
                     }
 
@@ -497,7 +493,7 @@ $(function(){
                             message: '此欄位不得空白'
                         },
                         emailAddress: {
-                            message: ' '
+                            message: '請輸入有效的信箱'
                         }
                     }
 
@@ -528,7 +524,7 @@ $(function(){
                         notEmpty: {
                             message: '此欄位不得空白'
                         }
-                    },
+                    }
                 },
                 owner_account: {
                     validators: {
@@ -539,7 +535,7 @@ $(function(){
                         notEmpty: {
                             message: '此欄位不得空白'
                         }
-                    },
+                    }
                 },
                 hotel_address: {
                     validators: {
@@ -554,7 +550,7 @@ $(function(){
                             regexp: /^[\u4E00-\u9FFF0-9\u3105-\u3129\-]+$/,
                             message: '地址格式不正確，僅能包含中文、數字和（-）符號'
                         }
-                    },
+                    }
                 },
                 owner_password: {
                     validators: {
@@ -800,7 +796,6 @@ $(".btn_set").click(function(e) {
            
           }
         });
-
 
 
     $("#hotel_lic_pic").on("change", function () {
