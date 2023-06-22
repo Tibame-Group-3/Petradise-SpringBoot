@@ -29,8 +29,3 @@ public class LostPetResposeController {
 		return lostPetResponseService.findById(id);
 	}
 }
-
-class LostPetResponeDTO {
-	private LostPetResponse response;
-	private Integer articleId;
-}

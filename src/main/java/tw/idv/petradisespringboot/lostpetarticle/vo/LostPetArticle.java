@@ -73,11 +73,11 @@ public class LostPetArticle {
 	private String title;
 	
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
-	private List<LostPetPic> lostPetPic;
-	
-	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
 	private List<LostPetResponse> lostPetResponse;
+	
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
+	private List<LostPetPic> lostPetPic;
 
 }
