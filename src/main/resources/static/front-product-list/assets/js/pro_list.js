@@ -40,6 +40,7 @@ $(document).ready(function () {
                             <div class="product-cell image">
                                 <img src="${base64Img}" alt="image">
                             </div>
+                            <div class="product-cell pdId" style="display: none">${element.pdId}</div>
                             <div class="product-cell name"><span class="cell-label"></span>${element.pdName}</div>
                             <div class="product-cell category"><span class="cell-label">商品類別：</span>${element.pdType}</div>
                             <div class="product-cell price"><span class="cell-label">售價：</span>\$ ${element.pdPrice}</div>
@@ -50,5 +51,15 @@ $(document).ready(function () {
         })
       })
       .catch(err => console.log(err));
+
+})
+
+// ------------------查看商品------------------
+$(document).on('click', "#tableBody .products-row", function () {
+    let pdId = $(this).find(".pdId").text();
+    console.log(pdId);
+
+    sessionStorage.setItem("pdId", pdId);
+    location.href = "/shopping/pd_page/PdPage.html";
 
 })

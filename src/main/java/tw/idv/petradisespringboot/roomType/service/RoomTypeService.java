@@ -16,9 +16,9 @@ public interface RoomTypeService {
 	RoomType getRoomType(Integer roomTypeId);
 
 
+	void updateRoomType(Integer roomTypeId);
 
 
 	RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
-
 
 }

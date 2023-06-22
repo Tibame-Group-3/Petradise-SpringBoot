@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.repo.RoomPicRepository;
@@ -21,6 +22,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         this.picRepository = roomPicRepository;
     }
 
+    //取得該業主的所有房型
     @Override
     public List<RoomType> getByHotelId(Integer hotelId) {
 
@@ -28,11 +30,13 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     }
 
+    //新增房型
     @Override
     public RoomType addNewRoomType(RoomType newRoomType) {
         return typeRepository.save(newRoomType);
     }
 
+    //取得特定房型
     @Override
     public RoomType getRoomType(Integer roomTypeId) {
         return typeRepository.findById(roomTypeId)
@@ -40,6 +44,18 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     }
 
+    //新增房間時更新房型數量
+    @Override
+    public void updateRoomType(Integer roomTypeId) {
+        RoomType roomType = typeRepository.findById(roomTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException("RoomType not found with id " + roomTypeId));
+
+        roomType.setRoomTypeAmount(roomType.getRoomTypeAmount() + 1);  // 增加房間數量
+
+        typeRepository.save(roomType);
+    }
+
+    //更新房型
     @Override
     public RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2) {
         // 拿到原有的房型資訊
@@ -87,12 +103,14 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
     class RoomTypeNotFoundException extends RuntimeException {
-    RoomTypeNotFoundException(Integer id) {
-        super("找不到業主ID: " + id);
+        RoomTypeNotFoundException(Integer id) {
+            super("找不到業主ID: " + id);
+        }
+    }
+
+    public static class ResourceNotFoundException extends RuntimeException {
+        public ResourceNotFoundException(String message) {
+            super(message);
+        }
     }
 }
-    class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
-        super(message);
-    }
-    }}

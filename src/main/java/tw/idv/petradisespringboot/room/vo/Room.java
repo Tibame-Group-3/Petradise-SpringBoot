@@ -28,7 +28,7 @@ public class Room implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "room_type_id", insertable = false, updatable = false)
+    @JoinColumn(name = "room_type_id", insertable = true, updatable = true)
     private RoomType roomType;
 
     @Column(name = "pet_name")
@@ -49,4 +49,5 @@ public class Room implements Serializable {
                 + ", roomName=" + roomName + ", roomSaleStatus=" + roomSaleStatus
                 + ", roomStatus=" + roomStatus + "]";
     }
+
 }
