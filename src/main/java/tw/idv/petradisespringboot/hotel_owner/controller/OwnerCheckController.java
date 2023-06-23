@@ -25,7 +25,7 @@ import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
 @RequestMapping("/ownerChack")
-public class OwnerChackController {
+public class OwnerCheckController {
 
 	@Autowired
 	private HotelOwnerServiceImpl hotelOwnerServiceImpl;
