@@ -69,12 +69,6 @@ public class RoomTypeController {
         return ResponseEntity.ok().build();
     }
 
-    //更改房型狀態即更新關連到的房間所有狀態
-//    @PostMapping("/{roomTypeId}/setSaleStatus")
-//    public ResponseEntity<?> setRoomTypeSaleStatus(@PathVariable Integer roomTypeId,
-//                                                   @RequestParam Character saleStatus) {
-//        service.updateRoomTypeSaleStatus(roomTypeId, saleStatus);
-//        return ResponseEntity.ok().build();
-//    }
+
 
 }

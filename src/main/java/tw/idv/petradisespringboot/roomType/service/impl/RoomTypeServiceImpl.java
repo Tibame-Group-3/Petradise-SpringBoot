@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.room.vo.Room;
 import tw.idv.petradisespringboot.roomType.repo.RoomPicRepository;
 import tw.idv.petradisespringboot.roomType.repo.RoomTypeRepository;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
@@ -55,6 +56,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         typeRepository.save(roomType);
     }
 
+
     //更新房型
     @Override
     public RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2) {
@@ -66,9 +68,22 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         List<RoomPic> existingPics = picRepository.findByRoomType_RoomTypeId(roomTypeId);
 
         // 更新房型資訊
-        //把roomtype物件裡面的值設定給existingRoomType
+        // 把roomtype物件裡面的值設定給existingRoomType
+        Character roomTypeSaleStatus = roomType.getRoomTypeSaleStatus();
+        if (roomTypeSaleStatus != null) {
+            existingRoomType.setRoomTypeSaleStatus(roomTypeSaleStatus);
+            if (roomTypeSaleStatus == '0') {
+                for (Room room : existingRoomType.getRooms()) {
+                    room.setRoomSaleStatus('0');
+                }
+            } else if (roomTypeSaleStatus == '1') {
+                for (Room room : existingRoomType.getRooms()) {
+                    room.setRoomSaleStatus('1');
+                }
+            }
+        }
         existingRoomType.setRoomTypeName(roomType.getRoomTypeName());
-        existingRoomType.setRoomTypeSaleStatus(roomType.getRoomTypeSaleStatus());
+//        existingRoomType.setRoomTypeSaleStatus(roomType.getRoomTypeSaleStatus());
         existingRoomType.setRoomTypePrice(roomType.getRoomTypePrice());
         existingRoomType.setRoomPetType(roomType.getRoomPetType());
         existingRoomType.setRoomTypeSize(roomType.getRoomTypeSize());

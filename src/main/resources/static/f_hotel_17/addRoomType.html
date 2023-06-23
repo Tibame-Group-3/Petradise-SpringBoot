@@ -202,29 +202,14 @@
 <script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<<<<<<< HEAD
-        // 創建一個新的RoomType对象
-        var newRoomType = {
-        	hotelId: hotelId,
-        	roomTypeName: $("input[name='room_type_name']").val(),
-        	roomTypeSaleStatus: $("select[name='room_type_sale_status']").val(),
-        	roomTypePrice: $("input[name='room_type_price']").val(),
-            roomPetType: $("select[name='room_pet_type']").val(),
-            roomTypeSize: $("select[name='room_type_size']").val(),
-            roomTypeAbout: $("textarea[name='room_type_about']").val(),
-            roomTypeAmount: $("input[name='room_type_amount']").val()
-        };
-        console.log(newRoomType.roomTypeSaleStatus);
-        console.log(newRoomType);
-=======
->>>>>>> main
+
 
 <script>
     $(document).ready(function () {
         $("#roomTypeForm").submit(function (e) {
             e.preventDefault(); // 阻止表单的默认提交行为
 
-            // 创建一个新的RoomType对象
+            // 創建新的newType實體
             var newRoomType = {
                 hotelId: getHotelId(),
                 roomTypeName: $("input[name='room_type_name']").val(),
