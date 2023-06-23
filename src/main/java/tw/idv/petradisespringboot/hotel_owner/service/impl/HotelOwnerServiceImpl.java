@@ -75,5 +75,5 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
     @Override
     public List<HotelOwnerVO> getAll() {
         return hotelOwnerRepository.findAll();
-    }
+    }  
 }
