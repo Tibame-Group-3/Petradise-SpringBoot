@@ -205,9 +205,10 @@
 
 
 <script>
+    // 新增房型
     $(document).ready(function () {
         $("#roomTypeForm").submit(function (e) {
-            e.preventDefault(); // 阻止表单的默认提交行为
+            e.preventDefault();
 
             // 創建新的newType實體
             var newRoomType = {
