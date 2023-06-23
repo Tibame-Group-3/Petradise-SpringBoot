@@ -5,7 +5,7 @@ import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 
 public interface LostPetResponseService {
 	
-	LostPetResponseDTO add(LostPetResponseDTO lostPetResponseDTO);
+	LostPetResponse add(LostPetResponseDTO lostPetResponseDTO);
 	
 	LostPetResponse remove(LostPetResponse lostPetResponse);
 	

@@ -1,16 +1,13 @@
 package tw.idv.petradisespringboot.lostpetresponse.service.impl;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-
 import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
-import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 import tw.idv.petradisespringboot.lostpetresponse.controller.LostPetResponseDTO;
 import tw.idv.petradisespringboot.lostpetresponse.repo.LostPetResponseRepo;
 import tw.idv.petradisespringboot.lostpetresponse.service.LostPetResponseService;
 import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
+
+import javax.transaction.Transactional;
 
 @Service
 public class LostPetResponseServiceImpl implements LostPetResponseService{
@@ -27,17 +24,17 @@ public class LostPetResponseServiceImpl implements LostPetResponseService{
 	
 	@Transactional
 	@Override
-	public LostPetResponseDTO add(LostPetResponseDTO responseDTO) {
+	public LostPetResponse add(LostPetResponseDTO responseDTO) {
+		// 先從DTO拿到 LostPetResponse
 		var response = responseDTO.getResponse();
-		var newResponse = new LostPetResponse();
-		var responseID = responseDTO;
-        var articleID = new LostPetArticle().getArticleId();
-        responseID.setArticleId(articleID);
-        responseID.setResponse(response);
-        
-
-
-        return responseID;
+		// 取得DTO傳過來的 articleId
+		var articleId = responseDTO.getArticleId();
+		// 透過article repository 取得該id的article
+		var article = articleRepository.findById(articleId).orElseThrow(IllegalAccessError::new);
+		// 在把Repository找到的article放入要新增的LostPetResponse中
+		response.setArticleId(article);
+		// Call LostPetResponse repo 的 save方法, 存完順便回傳給前端表示成功
+		return lostPetResponseRepo.save(response);
 	}
 
 	@Override
