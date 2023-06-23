@@ -1,10 +1,11 @@
 package tw.idv.petradisespringboot.lostpetresponse.controller;
 
+import lombok.Data;
 import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 
-public class LostPetResponeDTO {
+@Data
+public class LostPetResponseDTO {
 
-	private LostPetResponse response;
-	private Integer articleId;
-	
+    private Integer articleId;
+    private LostPetResponse response;
 }

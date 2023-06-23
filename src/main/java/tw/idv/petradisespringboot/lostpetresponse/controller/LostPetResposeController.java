@@ -6,26 +6,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
 import tw.idv.petradisespringboot.lostpetresponse.service.LostPetResponseService;
 import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 
 @RestController
 public class LostPetResposeController {
 	
-	private LostPetResponseService lostPetResponseService;
 
-	public LostPetResposeController(LostPetResponseService lostPetResponseService) {
-		this.lostPetResponseService = lostPetResponseService;
+    private final LostPetResponseService responseService;
+   
+
+	public LostPetResposeController(LostPetResponseService responseService) {
+		super();
+		this.responseService = responseService;
 	}
-	
+
 	@PostMapping("/LostPetRespose/add")
-	LostPetResponse create(@RequestBody LostPetResponse lostPetResponse) {
-		System.out.println(lostPetResponse);
-		return lostPetResponseService.add(lostPetResponse);
+	LostPetResponseDTO create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
+		System.out.println(lostPetResponseDTO);
+		return responseService.add(lostPetResponseDTO);
 	}
 	
 	@GetMapping("/LostPetRespose/id={id}")
 	LostPetResponse getById(@PathVariable Integer id) {
-		return lostPetResponseService.findById(id);
+		return responseService.findById(id);
 	}
 }
