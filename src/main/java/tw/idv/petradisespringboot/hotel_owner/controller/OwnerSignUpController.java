@@ -12,14 +12,14 @@ import java.util.Arrays;
 import java.util.Base64;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/ownerSignUP")
 public class OwnerSignUpController {
 	
 	@Autowired
 	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
 	
 	
-	@PostMapping("/SignUp")
+	@PostMapping("/insert")
 	public void insertOwners(@RequestBody HotelOwnerVO hotelOwnerVO) {
 		try {
 		byte[]imgData = Base64.getDecoder().decode(hotelOwnerVO.getBase64Image());
