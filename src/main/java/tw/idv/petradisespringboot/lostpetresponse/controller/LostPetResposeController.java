@@ -23,7 +23,7 @@ public class LostPetResposeController {
 	}
 
 	@PostMapping("/LostPetRespose/add")
-	LostPetResponseDTO create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
+	LostPetResponse create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
 		System.out.println(lostPetResponseDTO);
 		return responseService.add(lostPetResponseDTO);
 	}

@@ -397,28 +397,37 @@
 		        title: 'Input something',
 		        input: 'textarea'
 		    }).then(function (result) {
-		        if (result.value != null) {
-		            let text = result.value;
-		            let jsonData = {
-		            		"memId": 11,
-		                    "articlId": 1,
-		                    "responseContent": text,
-		            }; 
-		            console.log(jsonData);
-		            $.ajax({
-		                url: "/LostPetRespose/add",
-		                method: "POST",
-		                contentType: "application/json",
-		                data: JSON.stringify(jsonData),
-		            	}).then(function(response) {
-		      		      console.log(response);
-		    		    })
-		    		    .catch(function(error) {
-		    		      console.error(error);
-		    		    });
-		        }
-		    });
+		    	 if (result.value != null && result.value.trim() !== ""){	            
+		    		 let text = result.value;
+		    		 let jsonData = {
+		    				 "articleId": 1,
+		    				 "response": {
+		    					 "memId": 11,
+		    					 "responseContent": text,
+		    				 }
+		    		 };
+		    		 console.log(jsonData);
+		    		 $.ajax({
+		    			 url: "/LostPetRespose/add",
+		    			 method: "POST",
+		    			 contentType: "application/json",
+		    			 data: JSON.stringify(jsonData),
+		    		 }).then(function(response) {
+		    			 console.log(response);
+		    			 window.location.reload();
+		    		 }).catch(function(error) {
+		    			 console.error(error);
+		    		 });
+		    	 } else {
+		    		 Swal.fire({
+		    			 title: 'Error',
+		    			 text: 'Please enter something',
+		    			 icon: 'error'
+		    		 });
+		    	 }
+		    })
 		});
+
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
 

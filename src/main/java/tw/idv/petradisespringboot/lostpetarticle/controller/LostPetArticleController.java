@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.lostpetarticle.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,6 @@ import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 @RequestMapping("/LostPetArticle")
 public class LostPetArticleController {
 	
-	
 	private LostPetArticleService lostPetArticleService;
 	
 	public LostPetArticleController(LostPetArticleService lostPetArticleService) {
@@ -28,8 +28,8 @@ public class LostPetArticleController {
 	
 	@GetMapping("/all")
 	List<LostPetArticle> getAllArticle(){
-		
 		var kk = lostPetArticleService.getAllArticles();
+	
 		System.out.println(kk);
 		return lostPetArticleService.getAllArticles();
 	}
@@ -50,9 +50,9 @@ public class LostPetArticleController {
 		
 	@GetMapping("/id={id}")
 	LostPetArticle getArticle(@PathVariable Integer id) {
-	 
-		 return lostPetArticleService.findById(id);
-	}
+		
+		return lostPetArticleService.findById(id)	;
+		}
 	
 	@PostMapping("/create")
 	LostPetArticle create(@RequestBody LostPetArticle lostPetArticle) {

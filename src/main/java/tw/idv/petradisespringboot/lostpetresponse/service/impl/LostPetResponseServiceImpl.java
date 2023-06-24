@@ -45,7 +45,7 @@ public class LostPetResponseServiceImpl implements LostPetResponseService{
 	}
 
 	@Override
-	public LostPetResponse eidt(LostPetResponse lostPetResponse) {
+	public LostPetResponse edit(LostPetResponse lostPetResponse) {
 		return lostPetResponseRepo.save(lostPetResponse);
 	}
 

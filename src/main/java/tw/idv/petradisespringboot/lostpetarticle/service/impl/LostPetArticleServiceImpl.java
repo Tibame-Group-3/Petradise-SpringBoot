@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.lostpetarticle.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,13 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 
 	@Override
 	public List<LostPetArticle> getAllArticles() {
-		return lostPetArticleRepository.findAll();
-	}
+	    List<LostPetArticle> articles = lostPetArticleRepository.findAll();
 
-	@Override
-	public LostPetArticle findById(Integer id) {
-		return lostPetArticleRepository.findById(id).orElseThrow();
+	    List<LostPetArticle> filteredArticles = articles.stream()
+	            .filter(article -> "0".equals(article.getArticleStatus()))
+	            .collect(Collectors.toList());
+
+	    return filteredArticles;
 	}
 
 	@Override
@@ -55,6 +57,11 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 	@Override
 	public List<LostPetArticle> findByLostPlace(String lostPlace) {
 		return lostPetArticleRepository.findByLostPlace(lostPlace);
+	}
+
+	@Override
+	public LostPetArticle findById(Integer id) {
+		return lostPetArticleRepository.findById(id).orElseThrow();
 	}
 
 	

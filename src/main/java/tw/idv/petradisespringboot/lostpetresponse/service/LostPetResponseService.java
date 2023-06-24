@@ -9,7 +9,7 @@ public interface LostPetResponseService {
 	
 	LostPetResponse remove(LostPetResponse lostPetResponse);
 	
-	LostPetResponse eidt(LostPetResponse lostPetResponse);
+	LostPetResponse edit(LostPetResponse lostPetResponse);
 	
 	LostPetResponse findById(Integer id);
 	

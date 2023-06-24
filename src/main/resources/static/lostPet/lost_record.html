@@ -154,54 +154,24 @@
 			</div>
 		</div>
 	</nav>
-	<br>
-	<br>
 	<div class="container_re">
 		<h2>遺失寵物貼文管理</h2>
 		<button class="btn-create">新增貼文</button>
-		<div class="conta"></div>
-		<!-- <div class="courses-container">
-            <br>
-            <div class="course">
-                <div class="course-preview">
-                    <h5></h5>
-                </div>
-                <div class="course-info">
-                    <h5></h5>
-                    <button class="btn-edit">修改</button>
-                    <button class="btn-more">更多內容</button>
-                    <button class="btn-delete"> Delete</button>
-                </div>
-            </div>
-        </div>
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-                    <h5></h5>
-                </div>
-                <div class="course-info">
-                    <h5></h5>
-                    <button class="btn-edit">修改</button>
-                    <button class="btn-more">更多內容</button>
-                    <button class="btn-delete"> Delete</button>
-                </div>
-            </div>
-        </div>
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-
-                    <h5></h5>
-                </div>
-                <div class="course-info">
-                    <h5></h5>
-                    <button class="btn-edit">修改</button>
-                    <button class="btn-more">更多內容</button>
-                    <button class="btn-delete"> Delete</button>
-                </div>
-            </div>
-        </div> -->
-
+		<div class="conta">
+			<div class="article-container">
+				<div class="article">
+					<div class="article-title">
+						<h5></h5>
+					</div>
+					<div class="info">
+						<h5></h5>
+						<button class="btn-edit">修改</button>
+						<button class="btn-more">更多內容</button>
+						<button class="btn-delete">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -260,37 +230,23 @@
 	    });
 	    
 	    let conta = document.querySelector(".conta");
+	    const titleElement = document.querySelector(".article-title h5");
+	    const infoElement = document.querySelector(".info h5");
 	
-	    axios.get("/LostPetArticle/id={id}")
+	    axios.get("/LostPetArticle/id=1")
 	    .then(function (response) {
-	        console.log(response.data);
-	        let da = "";
-	        let data = response.data; 
-	        console.log(typeof(data));
-	        
-
-	        
-            da = `
-                <div class="courses-container">
-                    <div class="course">
-                        <div class="course-preview">
-                            <h5>${data.title}</h5>
-                        </div>
-                        <div class="course-info">
-                            <h5>${data.text}</h5>
-                            <button class="btn-edit">修改</button>
-                            <button class="btn-more">更多內容</button>
-                            <button class="btn-delete">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-	        
-
-	        conta.innerHTML = da;
+	      console.log(response.data);
+	      let data = response.data;
+	      
+	      
+	      titleElement.textContent = data.title;
+	      infoElement.textContent = data.text;
+	      
 	    })
-		.catch( (error) => console.log(error));
-	    
+	    .catch(function (error) {
+	      console.log(error);
+	    });
+		    
 	   
     </script>
 </html>

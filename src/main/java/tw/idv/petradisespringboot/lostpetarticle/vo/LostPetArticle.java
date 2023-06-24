@@ -45,7 +45,7 @@ public class LostPetArticle implements Serializable{
 	private Date update;
 	
 	@Column (name="lost_date")
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyyy-MM-dd hh:mm", timezone = "GMT+8")
 	private Date lostDate;
 	
 	@Column	(name="lost_place")
