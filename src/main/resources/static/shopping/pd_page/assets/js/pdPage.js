@@ -61,7 +61,7 @@ $(document).ready(function () {
                 sessionStorage.setItem("shoppingItem", JSON.stringify(shoppingItem));
             };
 
-            // 更新購物車數
+            // 更新購物車商品數
             function updateCartIcon() {
                 // const totalItems = Object.keys(shoppingItem).length;
                 // $(".shopping-cart-total").text(`( ${totalItems} )`);
