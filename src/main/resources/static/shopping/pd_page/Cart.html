@@ -7,7 +7,7 @@
     <title>shopping_cart</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
 
@@ -77,13 +77,18 @@
                                 class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">聯絡我們</a>
                         </div>
                     </li>
-                </ul><button class="btn btn-primary" type="button"
-                    style="margin-top: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 85px;"><i
-                        class="fas fa-shopping-cart"
-                        style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;"></i>(
-                    0 )</button>
+                </ul>
+
+                <!-- Shopping Cart -->
+                <div class="btn btn-primary cart" style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
+                    <span class="fas fa-shopping-cart"
+                          style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
+                        </span>
+                    <span class="shopping-cart-total"></span>
+                </div>
+
                 <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary" type="button"
-                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;padding-top: 6px;"><svg
+                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px;"><svg
                             xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                             viewBox="0 0 16 16" class="bi bi-person-circle"
                             style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
@@ -93,7 +98,7 @@
                             </path>
                         </svg>會員</button><button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown" aria-expanded="false" type="button"
-                        style="background: #fd780f;border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;width: 29.5833px;"></button>
+                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
                     <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a
                             class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item"
                             href="#" style="color: #ffffff;">會員中心</a></div>
@@ -101,122 +106,126 @@
             </div>
         </div>
     </nav>
+
+    <!-- Cart -->
     <div class="cart-body">
         <div class="cart-container">
             <div class="header">
-                <h3 class="heading">Shopping Cart</h3>
-                <h5 class="action">Remove all</h5>
+                <h3 class="heading">購物車清單</h3>
+                <h5 class="action">全部移除</h5>
             </div>
 
+            <!-- Items -->
             <div class="cart-items">
                 <div class="check">
                     <input type="checkbox">
                 </div>
-                <div class="image-box">
-                    <img src="assets/img/Great%20Ball.png" style="height: 120px">
+                <div id="preview" class="image-box">
                 </div>
 
                 <div class="item-about">
-                    <h3 class="type">Pokemon</h3>
-                    <h1 class="title">Great Ball</h1>
-                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>
+                    <span id="pdPetType"> </span> / <span id="pdType"> </span>
+                    <h1 id="pdName" class="title">Great Ball</h1>
+<!--                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>-->
                 </div>
 
                 <div class="item-counter">
                     <div class="item-btn">-</div>
-                    <div class="item-count">2</div>
+                    <div id="" class="item-count">2</div>
                     <div class="item-btn">+</div>
 
                 </div>
 
                 <div class="prices">
-                    <div class="amount">$500</div>
-                    <div class="remove"><u>Remove</u></div>
-                </div>
-            </div>
-
-            <div class="cart-items">
-                <div class="check">
-                    <input type="checkbox">
-                </div>
-                <div class="image-box">
-                    <img src="assets/img/Great%20Ball.png" style="height: 120px">
-                </div>
-
-                <div class="item-about">
-                    <h3 class="type">Pokemon</h3>
-                    <h1 class="title">Great Ball</h1>
-                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>
-                </div>
-
-                <div class="item-counter">
-                    <div class="item-btn">-</div>
-                    <div class="item-count">2</div>
-                    <div class="item-btn">+</div>
-
-                </div>
-
-                <div class="prices">
-                    <div class="amount">$500</div>
-                    <div class="remove"><u>Remove</u></div>
-                </div>
-            </div>
-
-            <div class="cart-items">
-                <div class="check">
-                    <input type="checkbox">
-                </div>
-                <div class="image-box">
-                    <img src="assets/img/Great%20Ball.png" style="height: 120px">
-                </div>
-
-                <div class="item-about">
-                    <h3 class="type">Pokemon</h3>
-                    <h1 class="title">Great Ball</h1>
-                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>
-                </div>
-
-                <div class="item-counter">
-                    <div class="item-btn">-</div>
-                    <div class="item-count">2</div>
-                    <div class="item-btn">+</div>
-
-                </div>
-
-                <div class="prices">
-                    <div class="amount">$500</div>
-                    <div class="remove"><u>Remove</u></div>
-                </div>
-            </div>
-
-            <div class="cart-items">
-                <div class="check">
-                    <input type="checkbox">
-                </div>
-                <div class="image-box">
-                    <img src="assets/img/Great%20Ball.png" style="height: 120px">
-                </div>
-
-                <div class="item-about">
-                    <h3 class="type">Pokemon</h3>
-                    <h1 class="title">Great Ball</h1>
-                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>
-                </div>
-
-                <div class="item-counter">
-                    <div class="item-btn">-</div>
-                    <div class="item-count">2</div>
-                    <div class="item-btn">+</div>
-
-                </div>
-
-                <div class="prices">
-                    <div class="amount">$500</div>
-                    <div class="remove"><u>Remove</u></div>
+                    <div id="pdPrice" class="amount"></div>
+                    <div class="remove"><u>移除</u></div>
                 </div>
             </div>
 
 
+
+<!--            <div class="cart-items">-->
+<!--                <div class="check">-->
+<!--                    <input type="checkbox">-->
+<!--                </div>-->
+<!--                <div class="image-box">-->
+<!--                    <img src="assets/img/Great%20Ball.png" style="height: 120px">-->
+<!--                </div>-->
+
+<!--                <div class="item-about">-->
+<!--                    <h3 class="type">Pokemon</h3>-->
+<!--                    <h1 class="title">Great Ball</h1>-->
+<!--                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>-->
+<!--                </div>-->
+
+<!--                <div class="item-counter">-->
+<!--                    <div class="item-btn">-</div>-->
+<!--                    <div class="item-count">2</div>-->
+<!--                    <div class="item-btn">+</div>-->
+
+<!--                </div>-->
+
+<!--                <div class="prices">-->
+<!--                    <div class="amount">$500</div>-->
+<!--                    <div class="remove"><u>Remove</u></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="cart-items">-->
+<!--                <div class="check">-->
+<!--                    <input type="checkbox">-->
+<!--                </div>-->
+<!--                <div class="image-box">-->
+<!--                    <img src="assets/img/Great%20Ball.png" style="height: 120px">-->
+<!--                </div>-->
+
+<!--                <div class="item-about">-->
+<!--                    <h3 class="type">Pokemon</h3>-->
+<!--                    <h1 class="title">Great Ball</h1>-->
+<!--                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>-->
+<!--                </div>-->
+
+<!--                <div class="item-counter">-->
+<!--                    <div class="item-btn">-</div>-->
+<!--                    <div class="item-count">2</div>-->
+<!--                    <div class="item-btn">+</div>-->
+
+<!--                </div>-->
+
+<!--                <div class="prices">-->
+<!--                    <div class="amount">$500</div>-->
+<!--                    <div class="remove"><u>Remove</u></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="cart-items">-->
+<!--                <div class="check">-->
+<!--                    <input type="checkbox">-->
+<!--                </div>-->
+<!--                <div class="image-box">-->
+<!--                    <img src="assets/img/Great%20Ball.png" style="height: 120px">-->
+<!--                </div>-->
+
+<!--                <div class="item-about">-->
+<!--                    <h3 class="type">Pokemon</h3>-->
+<!--                    <h1 class="title">Great Ball</h1>-->
+<!--                    <p class="discribe">The preferred choice of a vast range of acclaimed DJs.</p>-->
+<!--                </div>-->
+
+<!--                <div class="item-counter">-->
+<!--                    <div class="item-btn">-</div>-->
+<!--                    <div class="item-count">2</div>-->
+<!--                    <div class="item-btn">+</div>-->
+
+<!--                </div>-->
+
+<!--                <div class="prices">-->
+<!--                    <div class="amount">$500</div>-->
+<!--                    <div class="remove"><u>Remove</u></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <!-- Total -->
             <hr>
             <div class="checkout">
                 <div class="total">
@@ -232,14 +241,16 @@
                 </div>
             </div>
 
-
         </div>
 
 
     </div>
+    <script src="vendors/jquery/jquery-3.6.4.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/js/script.min.js"></script>
+    <script src="assets/js/cart.js"></script>
 </body>
 
 </html>
