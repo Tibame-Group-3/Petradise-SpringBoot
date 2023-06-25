@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
@@ -68,7 +70,11 @@ public class RoomTypeController {
         service.updateRoomType(roomTypeId);
         return ResponseEntity.ok().build();
     }
-
+    @PostMapping("/search")
+    public ResponseEntity<List<AllHotelDTO>> searchHotels(@RequestBody searchHotelDTO searchDto) {
+        List<AllHotelDTO> searchResults = service.searchHotels(searchDto);
+        return ResponseEntity.ok(searchResults);
+    }
 
 
 }

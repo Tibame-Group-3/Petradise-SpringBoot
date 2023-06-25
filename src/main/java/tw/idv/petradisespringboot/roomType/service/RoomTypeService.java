@@ -2,6 +2,8 @@ package tw.idv.petradisespringboot.roomType.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 import java.util.List;
@@ -20,5 +22,5 @@ public interface RoomTypeService {
 
 
 	RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
-
+	public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto) ;
 }

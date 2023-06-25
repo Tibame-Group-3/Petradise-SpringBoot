@@ -1,27 +1,39 @@
 package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 import tw.idv.petradisespringboot.room.vo.Room;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.repo.RoomPicRepository;
 import tw.idv.petradisespringboot.roomType.repo.RoomTypeRepository;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+import tw.idv.petradisespringboot.roomreview.repo.RoomReviewRepository;
+import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
 @Service
 public class RoomTypeServiceImpl implements RoomTypeService {
-    private final RoomTypeRepository typeRepository;
-    private final RoomPicRepository picRepository;
+    @Autowired
+    private  RoomTypeRepository typeRepository;
+    @Autowired
+    private  RoomPicRepository picRepository;
+    @Autowired
+    private  RoomReviewRepository roomReviewRepository;
+    @Autowired
+    private  HotelOwnerRepository hotelOwnerRepository;
 
 
-    public RoomTypeServiceImpl(RoomTypeRepository roomTypeRepository, RoomPicRepository roomPicRepository) {
-        this.typeRepository = roomTypeRepository;
-        this.picRepository = roomPicRepository;
-    }
+
 
     //取得該業主的所有房型
     @Override
@@ -83,7 +95,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             }
         }
         existingRoomType.setRoomTypeName(roomType.getRoomTypeName());
-//        existingRoomType.setRoomTypeSaleStatus(roomType.getRoomTypeSaleStatus());
         existingRoomType.setRoomTypePrice(roomType.getRoomTypePrice());
         existingRoomType.setRoomPetType(roomType.getRoomPetType());
         existingRoomType.setRoomTypeSize(roomType.getRoomTypeSize());
@@ -128,4 +139,30 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             super(message);
         }
     }
+    //符合使用者條件的房型
+    public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto) {
+      hotelOwnerRepository.findBy
+
+        // 将获取到的数据转换为AllHotelDTO对象
+        List<AllHotelDTO> allHotelDTOs = new ArrayList<>();
+        for (RoomType roomType : roomTypes) {
+            AllHotelDTO dto = new AllHotelDTO();
+            HotelOwnerVO hotelOwner = hotelOwnerRepository.findById(roomType.getHotelId())
+                                        .orElseThrow(() -> new ResourceNotFoundException("HotelOwner not found with id " + roomType.getHotelId()));
+
+            dto.setHotelName(hotelOwner.getHotelName());
+            dto.setHotelAddress(hotelOwner.getHotelAddress());
+            dto.setRoomTypeName(roomType.getRoomTypeName());
+            dto.setRoomTypeAbout(roomType.getRoomTypeAbout());
+            dto.setRoomTypePrice(roomType.getRoomTypePrice());
+            dto.setReviewScoreTotal(hotelOwner.getReviewScoreTotal());
+            // 将RoomPic的List转换为byte[]的List
+            List<byte[]> roomPics = roomType.getRoomPics().stream().map(RoomPic::getRoomPic).collect(Collectors.toList());
+            dto.setRoomPics(roomPics);
+            allHotelDTOs.add(dto);
+        }
+
+        return allHotelDTOs;
+    }
+
 }

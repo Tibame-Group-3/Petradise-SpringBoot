@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>旅館詳情</title>
+    <link rel="stylesheet" href="/f_hotel_17/assets17/css/styles.min.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&amp;display=swap">
@@ -65,7 +66,7 @@
                         <a class="dropdown-item"
                            href="#" style="font-size: 14px;color: #fd780f;">預約訂房</a><a class="dropdown-item"
                                                                                            href="#"
-                                                                                           style="font-size: 14px;color: #fd780f;">加入我們</a
+                                                                                           style="font-size: 14px;color: #fd780f;">加入我們</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" style="width: 100px;margin: 0px 10px;margin-right: 0px;">
@@ -112,9 +113,7 @@
             </button>
             <div class="btn-group" style="margin: 10px 0px 0px;"><a class="btn btn-primary" type="button"
                                                                     style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
-                <svg
-
-                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                         viewBox="0 0 16 16"
                         class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
@@ -154,12 +153,21 @@
                 </svg>
                 <h5 id="single-hotel-add" name="ingle-hotel-add">旅館地址</h5>
             </div>
+            <div class="address-container" style=" display: flex; align-items: center;margin-left: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-square-dots" style="margin-right: 10px;" viewBox="0 0 16 16">
+                    <path d="M4 11h1.5a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5H4V5.5A1.5 1.5 0 0 1 5.5 4h4A1.5 1.5 0 0 1 11 5.5V6H9.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5H11v.5a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 4 12.5V12zm7-10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5.5a2.5 2.5 0 0 1-2.5-2.5V12a1 1 0 0 1-2 0v-1.5A2.5 2.5 0 0 1 2.5 8H4V7.5A1.5 1.5 0 0 1 5.5 6h4A1.5 1.5 0 0 1 11 7.5V8h1.5A2.5 2.5 0 0 1 15 10.5V2a1 1 0 0 1 1-1zm-7 5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-5z"/>
+                </svg>
+                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg>
+                <button id="single-hotel-chat" name="ingle-hotel-chat"style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">即時聊天</button>
+            </div>
         </div>
         <!-- 房型列表 -->
         <div class="col-md-9" style="position: relative;width: 1000px; height: 250px; margin: auto;">
             <!-- 單個房型卡片 -->
             <div class="card mb-4">
-                <div class="row no-gutters" style="position: relative; left: 20px;margin-bottom:10px;">
+                <div class="row no-gutters" style="position: relative; left: 20px;margin-top:10px;margin-bottom:10px;">
                     <div class="col-md-4">
                         <!-- 房型圖片輪播 -->
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
