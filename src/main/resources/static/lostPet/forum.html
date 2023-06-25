@@ -430,8 +430,9 @@
 
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
-
-        axios.get("/LostPetArticle/id=1")
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = parseInt(urlParams.get('id'), 10);
+        axios.get(`/LostPetArticle/id=${id}`)
         .then(function(response) {
           let data = response.data;
 
@@ -480,9 +481,12 @@
           conta.innerHTML = articleHTML;
 
           let pic = document.querySelector(".animal-pic");
-          if (pic) {
+          if (data.lostPetPic && data.lostPetPic.length > 0) {
             const picHTML = data.lostPetPic.map(pic => `<img class="pic" src="data:image/*;base64,${pic.lostPetPic}">`);
             pic.innerHTML = picHTML;
+          } else {
+            const defaultPicHTML = `<img class="pic" src="https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg">`;
+            pic.innerHTML = defaultPicHTML;
           }
 
           if (data.lostPetResponse && data.lostPetResponse.length > 0) {

@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.lostpetarticle.vo;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,7 +45,7 @@ public class LostPetArticle implements Serializable{
 	private Date update;
 	
 	@Column (name="lost_date")
-	@JsonFormat(pattern = "yyyyy-MM-dd hh:mm", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date lostDate;
 	
 	@Column	(name="lost_place")
@@ -83,4 +83,18 @@ public class LostPetArticle implements Serializable{
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
 	private List<LostPetResponse> lostPetResponse;
+	
+	
+//	 public List<LostPetPic> getLostPetPic() {
+//	        if (lostPetPic == null || lostPetPic.isEmpty()) {
+//
+////	        	LostPetPic defaultPic = new LostPetPic();
+////	            defaultPic.setLostPetPicId(1); 
+////	            defaultPic.setLostPetPic(new byte[0]);
+//
+////	            return Collections.singletonList(defaultPic);
+//	        } else {
+//	            return lostPetPic;
+//	        }
+//	    }
 }

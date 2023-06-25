@@ -61,7 +61,14 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 
 	@Override
 	public LostPetArticle findById(Integer id) {
-		return lostPetArticleRepository.findById(id).orElseThrow();
+
+		LostPetArticle article = lostPetArticleRepository.findById(id).orElse(null);
+
+	    if (article != null && "1".equals(article.getArticleStatus())) {
+	        return null; 
+	    }
+
+	    return article;
 	}
 
 	

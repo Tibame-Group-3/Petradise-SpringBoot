@@ -289,7 +289,7 @@
 		  let images = "";
 		  imagesArray.forEach((image, index) => {
 		    images += `<div class="image">
-		      <img src="data:image/jpeg;base64,${image.lostPetPic}" alt="image">
+		      <img src="data:image/*;base64,${image.lostPetPic}" alt="image">
 		      <span onclick="deleteImage(${index})">&times;</span>
 		    </div>`;
 		  });

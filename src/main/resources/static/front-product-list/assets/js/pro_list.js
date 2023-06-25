@@ -34,7 +34,8 @@ $(document).ready(function () {
         res.data.forEach(element => {
 
           const base64Img = `data:image/*;base64,${element.pdImg}`;
-
+			
+			console.log(base64Img);
           const row = `
                             <div class="products-row">
                             <div class="product-cell image">
