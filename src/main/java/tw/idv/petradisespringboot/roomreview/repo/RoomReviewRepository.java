@@ -14,4 +14,6 @@ public interface RoomReviewRepository extends JpaRepository<RoomReview, Integer>
     RoomReview findByRoomOrderId(Integer roomOrderId);
 
     List<RoomReview> findByHotelIdAndScore(Integer hotelId, Integer score);
+
+
 }

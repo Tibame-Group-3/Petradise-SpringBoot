@@ -1,10 +1,15 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
 import java.util.List;
+
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
@@ -18,24 +23,28 @@ public class RoomTypeController {
         this.service = service;
     }
 
+    //拿到該業主的所有房型資料
     @GetMapping("/hotelId/{hotelId}")
     @ResponseBody
     List<RoomType> getByHotelId(@PathVariable Integer hotelId) {
         return service.getByHotelId(hotelId);
     }
 
+    //新增房型
     @PostMapping("/addRoomType")
     @ResponseBody
     public void addRoomType(@RequestBody RoomType newRoomType) {
         service.addNewRoomType(newRoomType);
     }
 
+    //拿到該筆房型資料(查單筆)
     @GetMapping("/{roomTypeId}")
     @ResponseBody
     public RoomType getRoomTypeWithPics(@PathVariable Integer roomTypeId) {
         return service.getRoomType(roomTypeId);
     }
 
+    //修改房型資料
     @PostMapping(path = "/{roomTypeId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public RoomType updateRoomType(@PathVariable Integer roomTypeId,
@@ -57,5 +66,24 @@ public class RoomTypeController {
         return service.updateRoomType(roomTypeId, roomType, file1, file2);
     }
 
+    //更新房間數量
+    @PostMapping("/updateRooms/{roomTypeId}")
+    public ResponseEntity<?> updateRoomType(@PathVariable Integer roomTypeId) {
+        service.updateRoomType(roomTypeId);
+        return ResponseEntity.ok().build();
+    }
+    //使用者送篩想要的房型
+    @PostMapping("/search")
+    public ResponseEntity<List<AllHotelDTO>> searchHotels(@RequestBody searchHotelDTO searchDto) {
+        List<AllHotelDTO> searchResults = service.searchHotels(searchDto);
+        return ResponseEntity.ok(searchResults);
+    }
 
+    //使用者點選符合自己篩選條件的房型
+    @PostMapping ("/choose/{hotelId}")
+    @ResponseBody
+    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @RequestParam("petType") String petType, @RequestParam("roomTypeSize") Character roomTypeSize) {
+        System.out.println(petType+roomTypeSize);
+        return service.getSingleHotel(hotelId, petType, roomTypeSize);
+    }
 }

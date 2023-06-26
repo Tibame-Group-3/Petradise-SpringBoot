@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Table - Brand</title>
+<title>旅館業主資料審核</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -84,14 +84,14 @@ width : 15% ;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">網站管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">新增最新消息</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">最新消息列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">協尋文章列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">會員列表</a>
+							<a class="dropdown-item" href="NewsAlter.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增最新消息</a><a
+								class="dropdown-item" href="NewsList.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">最新消息列表</a><a
+								class="dropdown-item" href="blank.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">協尋文章列表</a><a
+								class="dropdown-item" href="blank.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">會員列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -100,15 +100,15 @@ width : 15% ;
 						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">業主管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">旅館業主審核</a><a
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
+							<a class="dropdown-item" href="http://localhost:8080/owner/OwnerChack.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主審核</a><a
+								class="dropdown-item" href="http://localhost:8080/owner/OwnerManage.html#"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主列表</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">旅館業主列表</a><a
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主審核</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">收容業主審核</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">收容業主列表</a>
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -117,28 +117,17 @@ width : 15% ;
 						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">商城管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">新增商品</a><a
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
+							<a class="dropdown-item" href	="ProductAlter.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
+								class="dropdown-item" href="Product.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
+								class="dropdown-item" href="SaleAlter.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增促銷專案</a><a
+								class="dropdown-item" href="SaleList.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">促銷專案列表</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">商品列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">新增促銷專案</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">促銷專案列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">訂單列表</a>
-							<div class="dropdown-divider"
-								style="border-color: rgb(255, 255, 255);"></div>
-						</div></li>
-					<li class="nav-item dropdown show"><a
-						class="dropdown-toggle nav-link" aria-expanded="true"
-						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">客服管理</a>
-						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">客服列表</a>
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -147,19 +136,19 @@ width : 15% ;
 						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
 							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">新增員工</a><a
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增員工</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">員工列表</a><a
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">員工權限</a>
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工權限</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
 				</ul>
 				<div class="text-center d-none d-md-inline">
-					<button class="btn rounded-circle border-0" id="sidebarToggle"
+					<button class="btn rounded-circle border-0" id="sidebarToggle-1"
 						type="button"></button>
 				</div>
 			</div>
@@ -193,27 +182,14 @@ width : 15% ;
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">旅館業主資料管理</h3>
+					<h3 class="text-dark mb-4">旅館業主資料審核</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">旅館業主資料管理</p>
+							<p class="text-primary m-0 fw-bold">旅館業主審核清單</p>
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="search">
-									業主搜尋: <input class="owner_search" type="text" name="Search"
-										placeholder="請輸入業主編號">
-
-									<button class="search_btn">
-										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
-											style="color: #4c51a4;"></i>
-									</button>
-									
-
-								</div>
-
-								
-
+								<span>待審核資料</span>
 							</div>
 							<div class="table-responsive table mt-2" id="dataTable"
 								role="grid" aria-describedby="dataTable_info"
@@ -286,7 +262,7 @@ $(function() {
 		location.reload();
 	}
 	  $.ajax({
-	    url: "/owner/OwnerChack",
+	    url: "/ownerChack/getAll",
 	    type: "GET",
 	    data: { hotelStatus: "0" }, //查詢未審核的資料
 	    dataType: "JSON",
@@ -303,11 +279,12 @@ $(function() {
 	            <td><button class="hotel btn btn-primary" type="button" style="background: #f8c544;">🏨</button></td>
 	            <td><button class="pic btn btn-primary" type="button" style="background: #f8c544;">🖼️</button></td>
 	            <td>
-	              <select class="hotelStatus" style="width:70px;">
+	              <select class="hotelStatus" style="width:90px;">
 	                <optgroup label="權限更改"> 
 	                  ${res[i].hotelStatus === '0' ? `<option value="0" selected>審核中</option>` : `<option value="0">審核中</option>`}
 	                  ${res[i].hotelStatus === '1' ? `<option value="1" selected>未通過</option>` : `<option value="1">未通過</option>`}
 	                  ${res[i].hotelStatus === '2' ? `<option value="2" selected>通過</option>` : `<option value="2">通過</option>`}
+
 	                </optgroup>
 	              </select>
 	            </td>
@@ -345,7 +322,19 @@ $(function() {
 			          html: html
 			        });
 			      }
-			    });   
+			    });
+	        
+	        
+	        $("tbody").on("click", ".pic", function() {
+    			const index = $(this).closest("tr").index(); //找到最接近父元素的tr索引值,與資料庫一樣是從0開始
+    			const imageBase64 = res[index].imageBase64;
+    			Swal.fire({
+    				  title: '特定寵物業許可證',
+    				  width: '80%',
+    				  background: '#fff',
+    				  html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
+    				});
+    		});
 	      }
 	      
 	    },
@@ -387,7 +376,7 @@ $(function() {
 	  var hotelName = $row.find("td:eq(1)").text(); //:eq(1)1為索引值,從0開始 ,取第二個td的值
 
 	  $.ajax({
-	    url: "/owner/OwnerChack",
+	    url: "/ownerChack/update",
 	    type: "POST",
 	    data: {
 	      action: "update",

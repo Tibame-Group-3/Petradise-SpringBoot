@@ -1,17 +1,13 @@
 package tw.idv.petradisespringboot.roomorder.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -46,23 +42,4 @@ public class RoomOrder {
     private Integer bonus;
     @Column(name = "room_od_special_req")
     private String specialReq;
-
-    @Override
-    public String toString() {
-        return "RoomOrder{" +
-                "id=" + id +
-                ", memId=" + memId +
-                ", roomTypeId=" + roomTypeId +
-                ", roomId=" + roomId +
-                ", petId=" + petId +
-                ", orderDate=" + orderDate +
-                ", checkInDate=" + checkInDate +
-                ", checkOutDate=" + checkOutDate +
-                ", status=" + status +
-                ", origPrice=" + origPrice +
-                ", finalPrice=" + finalPrice +
-                ", bonus=" + bonus +
-                ", specialReq='" + specialReq + '\'' +
-                '}';
-    }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Hotel Booking</title>
+    <title>客戶-預約訂房</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/Simple-Slider-Simple-Slider.css">
@@ -66,6 +66,10 @@
             height: 50px;
             max-width: 200px;
             margin-top: auto;
+            background-color: beige;
+            border-radius: 5px;
+            border-color: tan;
+            border-width: 5px;
         }
     </style>
 </head>
@@ -86,7 +90,10 @@
                     <h5 class="mb-0">基本資料</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">客戶名稱: &nbsp;<br>寵物名稱: <br>信箱: &nbsp;<br>電話: &nbsp;</p>
+                    <div class="card-text">客戶名稱: <span id="customer-name">name</span></div>
+                    <div>寵物名稱: <span id="pet-name">e</span></div>
+                    <div>連絡電話: <span id="phone">e</span></div>
+                    <div>Email: <span id="email">e</span></div>
                 </div>
                 <div class="card-header">
                     <h5 class="mb-0">付款資料</h5>
@@ -121,13 +128,13 @@
                 <img src="assets/img/xxx.jpg" alt="Hotel Image">
             </div>
             <div class="room-info">
-                <h5>Check-in/Check-out</h5>
-                <p>Check-in: June 10, 2023</p>
-                <p>Check-out: June 15, 2023</p>
+                <h5>入住 / 退房日期</h5>
+                <p>入住: <span id="check-in-date"></span></p>
+                <p>退房: <span id="check-out-date"></span></p>
             </div>
             <div class="room-info">
-                <h5>Room Type</h5>
-                <p>Deluxe Double Room</p>
+                <h5>房型</h5>
+                <p>xx房<span id="room-type"></span></p>
             </div>
             <div class="room-info">
                 <h5>Room Info</h5>
@@ -141,7 +148,7 @@
                 <p>Breakfast included</p>
                 <p>Pet-friendly</p>
             </div>
-            <button class="confirm-button">Confirm & Pay</button>
+            <button class="confirm-button">確認訂房&付款</button>
         </aside>
     </div>
 
