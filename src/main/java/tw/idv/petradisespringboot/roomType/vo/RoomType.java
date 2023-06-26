@@ -63,16 +63,6 @@ public class RoomType implements Serializable {
 	@OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
 	private List<Room> rooms;  // roomType 有多個 room
 
-	//依據房型的上下架狀態，設置關聯的全部房間的上下架狀態
-//	public void setRoomTypeSaleStatus(Character roomTypeSaleStatus) {
-//		this.roomTypeSaleStatus = roomTypeSaleStatus;
-//		if (roomTypeSaleStatus == '0') {
-//			// 下架房型時，將關聯的全部房間都設置為下架狀態
-//			for (Room room : rooms) {
-//				room.setRoomSaleStatus('0');
-//			}
-//		}
-//	}
 	@Override
 	public String toString() {
 		return "RoomType [roomTypeId=" + roomTypeId + ", hotelId=" + hotelId + ", roomTypeName=" + roomTypeName

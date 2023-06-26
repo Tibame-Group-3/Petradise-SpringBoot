@@ -7,11 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 @Repository
-public interface RoomTypeRepository extends JpaRepository<RoomType, Integer>{
-	public List<RoomType> findByHotelId(Integer id);
-	@Query("SELECT rt FROM RoomType rt LEFT JOIN FETCH rt.roomPics WHERE rt.roomTypeId = :roomTypeId")
-	RoomType findByIdWithPics(@Param("roomTypeId") Integer roomTypeId);
+public interface RoomTypeRepository extends JpaRepository<RoomType, Integer> {
+    public List<RoomType> findByHotelId(Integer id);
+
+    List<RoomType> findAllByHotelId(Integer hotelId);
+    @Query("SELECT DISTINCT rt FROM RoomType rt JOIN HotelOwnerVO ho ON rt.hotelId = ho.hotelId JOIN RoomPic rp ON rt.roomTypeId = rp.roomTypeId WHERE ho.hotelAddress LIKE %:location% AND rt.roomPetType = :petType AND rt.roomTypeSize = :petSize")
+    List<RoomType> findBySearchCriteria(@Param("location") String location, @Param("petType") String petType, @Param("petSize") Character petSize);
 }
+
+
