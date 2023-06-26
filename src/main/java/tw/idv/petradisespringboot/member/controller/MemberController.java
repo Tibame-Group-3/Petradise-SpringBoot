@@ -3,6 +3,7 @@ package tw.idv.petradisespringboot.member.controller;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.Data;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
@@ -81,8 +82,23 @@ class MemberController {
         return ResponseEntity.ok(infos);
     }
 
+    @PostMapping("/change-password")
+    ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO dto) {
+        return service.changePassword(dto.getId(), dto.getOldPassword(), dto.getNewPassword()) ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
     private Resource loadDistricts(){
         return resourceLoader.getResource("classpath:json/address_info.json");
+    }
+
+
+    @Data
+    private class ChangePasswordDTO {
+        Integer id;
+        String oldPassword;
+        String newPassword;
     }
 }
 
