@@ -1,12 +1,6 @@
 package tw.idv.petradisespringboot.lostpetresponse.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
+import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.lostpetresponse.service.LostPetResponseService;
 import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 
@@ -23,8 +17,7 @@ public class LostPetResposeController {
 	}
 
 	@PostMapping("/LostPetRespose/add")
-	LostPetResponseDTO create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
-		System.out.println(lostPetResponseDTO);
+	LostPetResponse create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
 		return responseService.add(lostPetResponseDTO);
 	}
 	
