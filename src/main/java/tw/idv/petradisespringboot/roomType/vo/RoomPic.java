@@ -24,11 +24,14 @@ public class RoomPic implements Serializable  {
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "room_type_id")
+	@JoinColumn(name = "room_type_id", insertable = false, updatable = false)
 	private RoomType roomType;
 
 	
 	@Column(name = "room_pic")
 	private byte[] roomPic;
+
+	@Column(name = "room_type_id")
+	private Integer roomTypeId;
 
 }

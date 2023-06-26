@@ -10,9 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 public class searchHotelDTO {
     private String location;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
     private String petType;
-    private String petSize;
-    private String hotelName;
+    private Character petSize;
 }

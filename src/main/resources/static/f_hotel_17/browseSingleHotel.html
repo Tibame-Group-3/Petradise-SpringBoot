@@ -114,8 +114,8 @@
             <div class="btn-group" style="margin: 10px 0px 0px;"><a class="btn btn-primary" type="button"
                                                                     style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                        viewBox="0 0 16 16"
-                        class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
+                     viewBox="0 0 16 16"
+                     class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
                     <path fill-rule="evenodd"
                           d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
@@ -131,8 +131,6 @@
                         style="color: #ffffff;">會員中心</a>
                     <a class="dropdown-item logout"
                        style="color: #ffffff;">登出</a></div>
-
-
             </div>
         </div>
     </div>
@@ -154,13 +152,14 @@
                 <h5 id="single-hotel-add" name="ingle-hotel-add">旅館地址</h5>
             </div>
             <div class="address-container" style=" display: flex; align-items: center;margin-left: 20px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-square-dots" style="margin-right: 10px;" viewBox="0 0 16 16">
-                    <path d="M4 11h1.5a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5H4V5.5A1.5 1.5 0 0 1 5.5 4h4A1.5 1.5 0 0 1 11 5.5V6H9.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5H11v.5a1.5 1.5 0 0 1-1.5 1.5h-4A1.5 1.5 0 0 1 4 12.5V12zm7-10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5.5a2.5 2.5 0 0 1-2.5-2.5V12a1 1 0 0 1-2 0v-1.5A2.5 2.5 0 0 1 2.5 8H4V7.5A1.5 1.5 0 0 1 5.5 6h4A1.5 1.5 0 0 1 11 7.5V8h1.5A2.5 2.5 0 0 1 15 10.5V2a1 1 0 0 1 1-1zm-7 5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-5z"/>
-                </svg>
-                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-chat-square-dots" style="margin-right: 10px;" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                     <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                 </svg>
-                <button id="single-hotel-chat" name="ingle-hotel-chat"style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">即時聊天</button>
+                <button id="single-hotel-chat" name="single-hotel-chat"
+                        style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">即時聊天
+                </button>
             </div>
         </div>
         <!-- 房型列表 -->
@@ -179,8 +178,6 @@
                                 <div class="carousel-item">
                                     <img src="/f_hotel_17/assets17/img/旅館照1-1.jpg" class="d-block w-100" alt="...">
                                 </div>
-                                <!-- 更多圖片 -->
-
                             </div>
                             <!-- 左右控制按鈕 -->
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -202,7 +199,7 @@
                                 <div>
                                     <h5 class="card-title" id="type-name"
                                         style="display: inline-block; margin-right: 10px;">房型名字</h5>
-                                    <p class="card-text" id="price" style="display: inline-block;">500</p>
+                                    <p class="card-text" id="price" style="display: inline-block;">房型價格</p>
                                 </div>
 
                                 <p class="card-text" id="intro" style="margin-right: 10px;">
@@ -316,6 +313,39 @@
         <script src="/f_hotel_17/assets17/js/bs-init.js"></script>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    // 文件載入時期要做的事
+    $(document).ready(function () {
+        $.ajax({
+            url: "/roomTypes/choose/5",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            data: {
+                petType: "貓",
+                roomTypeSize: '0'
+            },
+            success: function (res) {
+                $("#single-hotel-name").text(res.hotelName);
+                $("#single-hotel-add").text(res.hotelAddress);
+                $("#type-name").text(res.roomTypeName);
+                $("#price").text(res.roomTypePrice);
+                $("#intro").text(res.roomTypeAbout);
+                console.log(res);
+                alert("查詢成功");
+                // 在這裡處理成功回應，可以根據需要進行後續操作
+                // res 是伺服器返回的回應結果
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                alert("查詢失敗");
+                // 在這裡處理錯誤回應，可以根據需要進行後續操作
+                // xhr 是代表錯誤的 XMLHttpRequest 物件
+            }
+        });
+    });
+
+</script>
 </body>
 
 </html>

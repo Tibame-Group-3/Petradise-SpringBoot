@@ -2,7 +2,9 @@ package tw.idv.petradisespringboot.roomType.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,5 +16,5 @@ public class AllHotelDTO {
     private String roomTypeAbout;
     private Integer roomTypePrice;
     private Integer reviewScoreTotal;
-    private List<byte[]> roomPics;
+    private List<String> roomPics = new ArrayList<>();
 }

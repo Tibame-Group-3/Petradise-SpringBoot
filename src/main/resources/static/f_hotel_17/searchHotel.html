@@ -22,11 +22,8 @@
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/card-3-column-animation-shadows-images.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/Navbar-Centered-Links-icons.css">
-    <link rel="stylesheet" href="/f_hotel_17/assets17/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/f_hotel_17/assets17/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/Articles-Badges-images.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -151,11 +148,11 @@
             </label>
             <select id="location" class="border-1" style="padding-right: 0px;margin-right: 1px;">
                 <option value="" disabled selected>請選擇</option>
-                <option value="taipei">台北市</option>
-                <option value="new_taipei">新北市</option>
-                <option value="taoyuan">桃園市</option>
-                <option value="taichung">台中市</option>
-                <option value="kaohsiung">高雄市</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台中市">台中市</option>
+                <option value="高雄市">高雄市</option>
             </select>
             <label class="form-label fs-5 "
                    style="padding-top: 5px;margin-bottom: 15px;margin-left: -7px;padding-bottom: 3px;margin-right: 14px;">
@@ -179,9 +176,9 @@
             </label>
             <select id="pet-type" class="border-1" style="padding-right: 0px;margin-right: 1px;">
                 <option value="" disabled selected>請選擇</option>
-                <option value="dog">狗</option>
-                <option value="cat">貓</option>
-                <option value="cat">鳥</option>
+                <option value="狗">狗</option>
+                <option value="貓">貓</option>
+                <option value="鳥">鳥</option>
             </select>
             <label class="form-label fs-5 ">
                 <strong>
@@ -190,15 +187,15 @@
             </label>
             <select id="pet-size" class="border-1" style="padding-right: 0px;margin-right: 1px;">
                 <option value="" disabled selected>請選擇</option>
-                <option value="small">小型</option>
-                <option value="medium">中型</option>
-                <option value="large">大型</option>
+                <option value="0">小型</option>
+                <option value="1">中型</option>
+                <option value="2">大型</option>
             </select>
             <label class="form-label fs-5 "><strong>
                 <span class="span-search" style="color: rgb(87, 79, 54);">旅館名稱</span></strong>
                 <input id="hotel-name" type="text" style="width: 100px;height: 24px;"/>
             </label>
-            <button class="btn btn-modify btn-primary btn-search " type="button">搜尋</button>
+            <button id=search class="btn btn-modify btn-primary btn-search " type="button">搜尋</button>
         </div>
     </form>
 </div>
@@ -342,57 +339,11 @@
 <div class="container mt-5">
     <div class="row">
         <!-- 房型列表 -->
-        <div class="container mt-5 mb-5" >
+        <div class="container mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
                     <div class="row p-2 bg-white border rounded" id="filter_hotel">
                         <!-- 單個房型卡片 -->
-                        <div class="row p-2 bg-white border rounded mt-2" style="margin-left: 2px; border:2px">
-                            <div class="col-md-3 mt-1"><!-- 房型圖片輪播 -->
-                                <div id="show_hotel" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="/f_hotel_17/assets17/img/旅館照1-2.jpg" class="d-block w-100"
-                                                 alt="Slide Image">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mt-1">
-                                <div>
-                                    <h5 >旅館名字</h5>
-                                    <h6>房型名字</h6>
-                                </div>
-
-                                <div class="d-flex flex-row">
-                                    <div class="ratings mr-2"><i class="fa fa-star"></i></div>
-                                    <span>旅館總評分</span>
-                                </div>
-                                <p class="text-justify text-truncate para mb-0">=========房型介紹=========<br><br></p>
-                            </div>
-                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    NT
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                         fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                                        <path
-                                                d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-                                    </svg>
-                                    <h4 class="mr-1">房型價格</h4>
-                                </div>
-
-                                <div class="d-flex flex-column mt-4">
-                                    <button
-                                            style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;"
-                                            type="button">查看詳情
-                                    </button>
-                                    <button
-                                            style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;"
-                                            type="button">加入收藏
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -441,79 +392,82 @@
 </footer>
 <script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
 <script src="/f_hotel_17/assets17/js/bs-init.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
-    let filterHotel=` <div class="row p-2 bg-white border rounded mt-2" style="margin-left: 2px; border:2px">
-                            <div class="col-md-3 mt-1"><!-- 房型圖片輪播 -->
-                                <div id="show_hotel" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="/f_hotel_17/assets17/img/旅館照1-2.jpg" class="d-block w-100"
-                                                 alt="Slide Image">
-                                        </div>
-                                    </div>
+    $(document).ready(function () {
+        $("#search").click(function () {
+            var searchDto = {
+                location: $("#location").val(),
+                petType: $("#pet-type").val(),
+                petSize: $("#pet-size").val(),
+            };
+            console.log(searchDto);
+
+            $.ajax({
+                url: '/roomTypes/search',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(searchDto),
+                success: function (data) {
+                    // 清空现有的元素
+                    $("#filter_hotel").empty();
+
+                    // 遍历返回的数据
+                    $.each(data, function (index, hotel) {
+                        console.log('roomPicUrl:', hotel.roomPicUrl);
+                        // 创建新的HTML元素
+                        var newElement = `
+                <div class="row p-2 bg-white border rounded mt-2" style="margin-left: 2px; border:2px">
+                    <div class="col-md-3 mt-1">
+                        <div id="show_hotel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="${hotel.roomPics[0]}" class="d-block w-100" alt="Slide Image">
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-1">
-                                <div>
-                                    <h5 >旅館名字</h5>
-                                    <h6>房型名字</h6>
-                                </div>
-
-                                <div class="d-flex flex-row">
-                                    <div class="ratings mr-2"><i class="fa fa-star"></i></div>
-                                    <span>旅館總評分</span>
-                                </div>
-                                <p class="text-justify text-truncate para mb-0">=========房型介紹=========<br><br></p>
-                            </div>
-                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    NT
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                         fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                                        <path
-                                                d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-                                    </svg>
-                                    <h4 class="mr-1">房型價格</h4>
-                                </div>
-
-                                <div class="d-flex flex-column mt-4">
-                                    <button
-                                            style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;"
-                                            type="button">查看詳情
-                                    </button>
-                                    <button
-                                            style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;"
-                                            type="button">加入收藏
-                                    </button>
-                                </div>
-                            </div>
-                        </div>`;
-    $(".btn-search").click(function () {
-        var searchDto = {
-            location: $("#location").val(),
-            checkInDate: $("#in-day").val(),
-            checkOutDate: $("#out-day").val(),
-            petType: $("#pet-type").val(),
-            petSize: $("#pet-size").val(),
-            hotelName: $("#hotel-name").val()
-        };
-
-        $.ajax({
-            url: '/roomTypes/search',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(searchDto),
-            success: function (data) {
-                // 在这里处理服务器返回的数据
-                console.log(data);
-            },
-            error: function (error) {
-                // 在这里处理错误
-                console.log(error);
-            }
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <div>
+                            <h5>${hotel.hotelName}</h5>
+                            <h6>${hotel.roomTypeName}</h6>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i></div>
+                            <span>${hotel.reviewScoreTotal}</span>
+                        </div>
+                        <p class="text-justify text-truncate para mb-0">${hotel.roomTypeAbout}<br><br></p>
+                    </div>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            NT
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944 .704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287 .323 1.852 .859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l .348 .086z"/>
+                            </svg>
+                            <h4 class="mr-1">${hotel.roomTypePrice}</h4>
+                        </div>
+                        <div class="d-flex flex-column mt-4">
+                            <button style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;" type="button">查看詳情</button>
+                            <button style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;" type="button">加入收藏</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+                        // 把新的的HTML元素加到#filter_hotel元素中
+                        $("#filter_hotel").append(newElement);
+                    });
+                },
+                error: function (error) {
+                    // 在这里处理错误
+                    console.log(error);
+                }
+            });
         });
     });
+
 
 </script>
 </body>

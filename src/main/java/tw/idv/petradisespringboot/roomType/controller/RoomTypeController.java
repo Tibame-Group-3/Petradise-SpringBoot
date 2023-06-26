@@ -1,12 +1,14 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
 import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
 import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
@@ -70,11 +72,18 @@ public class RoomTypeController {
         service.updateRoomType(roomTypeId);
         return ResponseEntity.ok().build();
     }
+    //使用者送篩想要的房型
     @PostMapping("/search")
     public ResponseEntity<List<AllHotelDTO>> searchHotels(@RequestBody searchHotelDTO searchDto) {
         List<AllHotelDTO> searchResults = service.searchHotels(searchDto);
         return ResponseEntity.ok(searchResults);
     }
 
-
+    //使用者點選符合自己篩選條件的房型
+    @PostMapping ("/choose/{hotelId}")
+    @ResponseBody
+    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @RequestParam("petType") String petType, @RequestParam("roomTypeSize") Character roomTypeSize) {
+        System.out.println(petType+roomTypeSize);
+        return service.getSingleHotel(hotelId, petType, roomTypeSize);
+    }
 }
