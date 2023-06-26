@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import tw.idv.petradisespringboot.lostpetresponse.controller.LostPetResponseDTO;
 import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 
-@Repository
+@Component
 public interface LostPetResponseRepo extends JpaRepository<LostPetResponse, Integer>{
 
 
