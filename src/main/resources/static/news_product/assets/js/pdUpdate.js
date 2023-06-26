@@ -7,14 +7,15 @@ $(document).ready(function () {
     axios.get("/product/get/" + pdId)
         .then(function (res) {
             console.log(res.data);
-            const base64Img = `data:image/*;base64,${res.data.pdImg}`;
+            let base64Img = `data:image/*;base64,${res.data.pdImg}`;
             $("#pdName").val(res.data.pdName);
             $("#pdPetType").val(res.data.pdPetType);
             $("#pdType").val(res.data.pdType);
             $("#pdPrice").val(res.data.pdPrice);
             $("#pdInfo").val(res.data.pdInfo);
             $("#preview").html(`<img src="${base64Img}" alt="image" style="width: 100%">`);
-            data.pdImg = base64Img;
+
+            data.pdImg = `${res.data.pdImg}`;   // 去除base64前墜
         })
         .catch(err => console.log(err));
 
@@ -66,6 +67,7 @@ $("#submit").on('click', function (e) {
                 console.error(err);
             });
 
+        console.log(data);
         location.href = "Product.html";
     }
 });
