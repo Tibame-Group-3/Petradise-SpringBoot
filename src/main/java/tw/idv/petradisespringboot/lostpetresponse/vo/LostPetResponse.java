@@ -1,10 +1,11 @@
 package tw.idv.petradisespringboot.lostpetresponse.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 @Table(name = "lost_pet_response")
 public class LostPetResponse {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "response_id")
@@ -38,7 +40,7 @@ public class LostPetResponse {
 	
 	@ToString.Exclude
 	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "article_id")
 	private LostPetArticle articleId;
 	
@@ -50,3 +52,4 @@ public class LostPetResponse {
 	private Timestamp responseTime;
 
 }
+

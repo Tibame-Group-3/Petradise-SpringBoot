@@ -91,5 +91,12 @@ function saveMemberID(id) {
 }
 
 function popBack() {
-    history.go(-1);
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirect = urlParams.get('color');
+    if (redirect !== null) {
+        window.location.href = redirect;
+    } else {
+        history.go(-1);
+    }
+
 }
