@@ -41,9 +41,20 @@
                     <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);"></div>
                     <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">常見問題</a>
                     <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">服務認證</a>
-                    <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">聯絡我們</a></div></li></ul>
-            <button class="btn btn-primary" type="button" style="margin-top: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 85px;">
-                <i class="fas fa-shopping-cart" style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;"></i>( 0 )</button>
+                    <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">聯絡我們</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Shopping Cart -->
+            <div class="btn btn-primary cart" style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
+                    <span class="fas fa-shopping-cart"
+                          style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
+                        </span>
+                <span class="shopping-cart-total"></span>
+            </div>
+
+
             <div class="btn-group" style="margin: 10px 0px 0px;"><button class="btn btn-primary" type="button" style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
@@ -60,35 +71,40 @@
                 <div class="checkout-items">
                     <h3 class="title">訂購明細</h3>
                     <hr class="diver">
-                    <div class="payment-items">
-                        <div class="image-box">
-                            <img src="assets/img/Great%20Ball.png" style="height: 80px">
-                        </div>
 
-                        <div class="item-about">
-                            <h3 class="item-type">Pokemon</h3>
-                            <h1 class="item-title">Great Ball</h1>
-                        </div>
 
-                        <div class="item-price">$500</div>
+                    <div id="payBody">
+<!--                        <div class="payment-items">-->
+<!--                            <div class="image-box">-->
+<!--                                <img src="assets/img/Great%20Ball.png" style="height: 80px">-->
+<!--                            </div>-->
+
+<!--                            <div class="item-about">-->
+<!--                                <h3 class="item-type">Pokemon</h3>-->
+<!--                                <h1 class="item-title">AAAAA</h1>-->
+<!--                            </div>-->
+
+<!--                            <div class="item-price">$500</div>-->
+<!--                        </div>-->
+
+<!--                        <div class="payment-items">-->
+<!--                            <div class="image-box">-->
+<!--                                <img src="assets/img/Great%20Ball.png" style="height: 80px">-->
+<!--                            </div>-->
+
+<!--                            <div class="item-about">-->
+<!--                                <h3 class="item-type">Pokemon</h3>-->
+<!--                                <h1 class="item-title">BBBBB</h1>-->
+<!--                            </div>-->
+
+<!--                            <div class="item-price">$500</div>-->
+<!--                        </div>-->
                     </div>
 
-                    <div class="payment-items">
-                        <div class="image-box">
-                            <img src="assets/img/Great%20Ball.png" style="height: 80px">
-                        </div>
-
-                        <div class="item-about">
-                            <h3 class="item-type">Pokemon</h3>
-                            <h1 class="item-title">Great Ball</h1>
-                        </div>
-
-                        <div class="item-price">$500</div>
-                    </div>
 
                     <hr class="diver">
                     <span class="tol">付款總金額
-                        <span class="tol-price">$320</span>
+                        <span class="tol-price">$ 0</span>
                     </span>
                 </div>
 
@@ -206,35 +222,11 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#sel1').change(function () {
-                    let selectedOption = $(this).val();
-                    $('.credit-card, .wire-transfers').addClass('-off');
-
-                    if (selectedOption === 'credit-card') {
-                        $('.credit-card').removeClass('-off');
-                    } else if (selectedOption === 'wire-transfers') {
-                        $('.wire-transfers').removeClass('-off');
-                    }
-                });
-            });
-
-            $(document).ready(function () {
-                $('#sel2').change(function () {
-                    let selectedOption = $(this).val();
-                    $('.home-delivery, .pickup').addClass('-off');
-
-                    if (selectedOption === 'home-delivery') {
-                        $('.home-delivery').removeClass('-off');
-                    } else if (selectedOption === 'pickup') {
-                        $('.pickup').removeClass('-off');
-                    }
-                });
-            });
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="assets/js/script.min.js"></script>
+        <script src="assets/js/payment.js"></script>
     </body>
 </html>

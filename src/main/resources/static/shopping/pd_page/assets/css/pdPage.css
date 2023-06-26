@@ -44,8 +44,8 @@ html {
     text-decoration: none
 }
 
-.product-description h1 {
-    font-weight: 300;
+.product-description h3 {
+    font-weight: 600;
     font-size: 52px;
     color: #fd780f;
     letter-spacing: -2px
@@ -177,7 +177,20 @@ html {
 }
 
 .cart-btn:hover {
-    background-color: #e69609
+    background-color: #e69609;
+    color: #f1ecd1
+}
+
+.badge-notify {
+    background: red;
+    position: relative;
+    top: -20px;
+    right: 10px;
+}
+
+.my-cart-icon-affix {
+    position: fixed;
+    z-index: 999;
 }
 
 @media (max-width:940px) {
