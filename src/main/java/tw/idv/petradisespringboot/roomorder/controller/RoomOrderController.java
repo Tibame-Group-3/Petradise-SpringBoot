@@ -31,4 +31,19 @@ public class RoomOrderController {
     public List<RoomOrder> getRoomOrdersByStatus(@PathVariable Character status) {
         return service.getRoomOrdersByStatus(status);
     }
+
+    @GetMapping("/all")
+    public List<RoomOrder> getAllOrder(){
+        return service.getAll();
+    }
+
+    @GetMapping("/id/{id}")
+    public RoomOrder getRoomOrderById(@PathVariable Integer id){
+        return service.getRoomOrderById(id);
+    }
+
+    @PutMapping("id/{id}/modify")
+    public RoomOrder modify(@PathVariable Integer id, @RequestBody RoomOrder modifiedRoomOrder){
+        return service.modify(id, modifiedRoomOrder);
+    }
 }
