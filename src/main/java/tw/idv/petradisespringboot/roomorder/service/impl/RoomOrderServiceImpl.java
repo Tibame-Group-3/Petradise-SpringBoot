@@ -34,4 +34,33 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     public List<RoomOrder> getRoomOrdersByStatus(Character status) {
         return repository.findByStatus(status);
     }
+
+    @Override
+    public List<RoomOrder> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public RoomOrder getRoomOrderById(Integer id) {
+        return repository.findById(id).orElseThrow(null);
+    }
+
+    @Override
+    public RoomOrder modify(Integer id, RoomOrder modifiedRoomOrder) {
+        // Update the fields of the existing room order with the new values
+        return repository.findById(id).map(existingRoomOrder ->{
+            existingRoomOrder.setRoomTypeId(modifiedRoomOrder.getRoomTypeId());
+            existingRoomOrder.setRoomId(modifiedRoomOrder.getRoomId());
+            existingRoomOrder.setPetId(modifiedRoomOrder.getPetId());
+            existingRoomOrder.setOrderDate(modifiedRoomOrder.getOrderDate());
+            existingRoomOrder.setCheckInDate(modifiedRoomOrder.getCheckInDate());
+            existingRoomOrder.setCheckOutDate(modifiedRoomOrder.getCheckOutDate());
+            existingRoomOrder.setStatus(modifiedRoomOrder.getStatus());
+            existingRoomOrder.setOrigPrice(modifiedRoomOrder.getOrigPrice());
+            existingRoomOrder.setFinalPrice(modifiedRoomOrder.getFinalPrice());
+            existingRoomOrder.setBonus(modifiedRoomOrder.getBonus());
+            existingRoomOrder.setSpecialReq(modifiedRoomOrder.getSpecialReq());
+            return repository.save(existingRoomOrder);
+        }).orElse(null);
+    }
 }

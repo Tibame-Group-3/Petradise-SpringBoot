@@ -1,19 +1,31 @@
+
 const navigationItems = [
     {
         name: '會員資訊',
-        url: '/member/profile.html'
+        root: '/member/profile.html',
+        links: [
+            '/member/profile.html',
+            '/member/edit_profile.html',
+            '/member/change_password.html'
+        ]
     },
     {
         name: '我的寵物',
-        url: '/member/pets.html'
+        root: '/member/pets.html',
+        links: [
+            '/member/pets.html'
+        ]
     },
     {
         name: '我的訂單',
-        url: '/member/orders.html'
+        root: '/member/orders.html',
+        links: [
+            '/member/orders.html'
+        ]
     }
-];
+]
 
-let selectedIndex = navigationItems.findIndex(item => window.location.pathname.includes(item.url));;
+let selectedIndex = navigationItems.findIndex(item => item.links.includes(window.location.pathname));
 
 (() => {
     'use strict'
@@ -51,6 +63,6 @@ let selectedIndex = navigationItems.findIndex(item => window.location.pathname.i
 
     function createNavigationItem(item, index) {
         const isActive = index === selectedIndex ? 'active' : '';
-        return `<a href="${item.url}" class="${isActive}">${item.name}</a>`;
+        return `<a href="${item.root}" class="${isActive}">${item.name}</a>`;
     }
 })();

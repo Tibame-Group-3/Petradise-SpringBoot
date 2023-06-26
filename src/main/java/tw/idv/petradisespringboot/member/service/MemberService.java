@@ -15,4 +15,6 @@ public interface MemberService {
     Optional<Member> getById(Integer id);
 
     Member update(Member newMember);
+
+    boolean changePassword(Integer id, String oldPassword, String newPassword);
 }

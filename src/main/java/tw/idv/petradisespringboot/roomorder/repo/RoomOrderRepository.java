@@ -12,5 +12,4 @@ public interface RoomOrderRepository extends JpaRepository<RoomOrder, Integer> {
     List<RoomOrder> findByMemId(Integer memId);
     List<RoomOrder> findByPetId(Integer petId);
     List<RoomOrder> findByStatus(Character status);
-
 }
