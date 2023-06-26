@@ -5,8 +5,6 @@ package tw.idv.petradisespringboot.hotel_owner.service;
 import java.util.List;
 
 //import org.springframework.stereotype.Service;
-
-
 //import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 

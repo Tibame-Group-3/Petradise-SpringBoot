@@ -224,7 +224,7 @@ select {
 				</button>
 				<div class="btn-group" style="margin: 10px 0px 0px;">
 					<button class="btn btn-primary" type="button"
-						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; padding-top: 6px;">
+						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; padding-top: 6px;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
 							fill="currentColor" viewBox="0 0 16 16"
 							class="bi bi-person-circle"
@@ -239,7 +239,7 @@ select {
 					<button
 						class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 						data-bs-toggle="dropdown" aria-expanded="false" type="button"
-						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; width: 29.5833px;"></button>
+						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; width: 29.5833px;"></button>
 					<div class="dropdown-menu"
 						style="min-width: 118px; background: #fd780f; margin: 1px 0px 0px;">
 						<a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a
@@ -262,11 +262,11 @@ select {
 					<div class="">
 						<div class="clear-both block-facets">
 							<select>
-								<option value="#">All Types</option>
-								<option value="#">Dogs</option>
-								<option value="#">Cats</option>
-								<option value="#">Birds</option>
-								<option value="#">Others</option>
+								<option value="AllType">全部種類</option>
+								<option value="Dogs" id ="dog">狗</option>
+								<option value="Cats" id ="cat">貓</option>
+								<option value="Birds" id = "bird">鳥</option>
+								<option value="Others" id = "other">其他</option>
 							</select>
 						</div>
 					</div>
@@ -521,6 +521,10 @@ select {
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript">
 	        const btn_create = document.querySelector('.btn-create');
+	        const option_dog = document.querySelector("#dog");
+	        const option_cat = document.querySelector("#cat");
+	        const option_bird = document.querySelector("#bird");
+	        const option_other = document.querySelector("#other");
 		    btn_create.addEventListener('click', () => {
 		        const targetPageUrl = './lost_post.html';
 		        window.location.href = targetPageUrl;
@@ -534,18 +538,20 @@ select {
 
 		      jsonData.forEach(data => {
 		        const base64Images = data.lostPetPic.map(pic => {
-		          return `data:image/(jpeg|png|gif);base64,${pic.lostPetPic}`;
+		          return `data:image/*;base64,${pic.lostPetPic}`;
 		        });
+
+		        const imageSrc = base64Images.length > 0 ? base64Images[0] : 'https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg';
 
 		        const card = document.createElement('div');
 		        card.classList.add('col-12', 'col-md-6', 'col-lg-3');
 		        card.innerHTML = `
 		          <div class="card">
-		            <a href="/LostPetArticle/id=${data.articleId}">
-		              <img class="card-img-top" src="${base64Images[0]}" alt="image">
+		        	<a href="/lostPet/forum.html?id=${data.articleId}">
+		              <img class="card-img-top" src="${imageSrc}" alt="image">
 		            </a>
 		            <div class="card-body">
-		              <div class="card-title"><a href="/LostPetArticle/id=${data.articleId}">${data.title}</a></div>
+		              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
 		              <div class="card-text">${data.text}</div>
 		            </div>
 		          </div>

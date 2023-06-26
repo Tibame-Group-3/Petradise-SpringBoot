@@ -23,14 +23,14 @@ import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/ownerManage")
 public class OwnerManageController {
 	
 	@Autowired
 	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
 
 	
-	@GetMapping("/OwnerManage")
+	@GetMapping("/getAll")
 	public void getAllOwners(HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
@@ -39,7 +39,7 @@ public class OwnerManageController {
 			
 			for (HotelOwnerVO vo : list) {
 				// 只需獲取圖片的數組
-				byte[] imageBytes = vo.getHotelLicPic(); // 假设 getImage() 方法用于获取图片字段的字节数组
+				byte[] imageBytes = vo.getHotelLicPic(); 
 				// 只要圖片不為空 就轉為Base64
 				if (imageBytes != null) {
 					String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
@@ -65,7 +65,7 @@ public class OwnerManageController {
 		}
 	}
 
-	@PostMapping("/OwnerManage")
+	@PostMapping("/update")
 	public void updateOwner(HttpServletRequest req, HttpServletResponse res) {
 		// 獲取前端回應
 		String ownerAccess = req.getParameter("ownerAccess");

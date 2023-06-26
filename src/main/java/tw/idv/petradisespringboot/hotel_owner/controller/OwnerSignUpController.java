@@ -1,12 +1,5 @@
 package tw.idv.petradisespringboot.hotel_owner.controller;
 
-import java.util.Arrays;
-import java.util.Base64;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,15 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
+import java.util.Arrays;
+import java.util.Base64;
+
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/ownerSignUP")
 public class OwnerSignUpController {
 	
 	@Autowired
 	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
 	
 	
-	@PostMapping("/SignUp")
+	@PostMapping("/insert")
 	public void insertOwners(@RequestBody HotelOwnerVO hotelOwnerVO) {
 		try {
 		byte[]imgData = Base64.getDecoder().decode(hotelOwnerVO.getBase64Image());

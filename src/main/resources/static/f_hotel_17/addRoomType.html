@@ -7,234 +7,247 @@
     <title>新增房型資訊</title>
     <link rel="stylesheet" href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
 </head>
 
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
-            style="background: #f1ecd1;">
-            <div class="container-fluid d-flex flex-column p-0"><a
-                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-text mx-3"><img width="59" height="33"
-                            src="/f_hotel_17/assets17/img/avatars/logo-only.png"></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
-                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">網站管理</a>
-                        <div class="dropdown-menu show" data-bs-popper="none"
-                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
-                            <a class="dropdown-item" href="NewsAlter.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增最新消息</a><a
-                                class="dropdown-item" href="NewsList.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">最新消息列表</a><a
-                                class="dropdown-item" href="blank.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">協尋文章列表</a><a
-                                class="dropdown-item" href="blank.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">會員列表</a>
-                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
-                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">業主管理</a>
-                        <div class="dropdown-menu show" data-bs-popper="none"
-                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
-                            <a class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主審核</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主列表</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主審核</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主列表</a>
-                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
-                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">商城管理</a>
-                        <div class="dropdown-menu show" data-bs-popper="none"
-                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
-                            <a class="dropdown-item" href="ProductAlter.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增商品</a><a
-                                class="dropdown-item" href="ProductList.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">商品列表</a><a
-                                class="dropdown-item" href="SaleAlter.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增促銷專案</a><a
-                                class="dropdown-item" href="SaleList.html"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">促銷專案列表</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">訂單列表</a>
-                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
-                            data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-                            style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">員工管理</a>
-                        <div class="dropdown-menu show" data-bs-popper="none"
-                            style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
-                            <a class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增員工</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">員工列表</a><a
-                                class="dropdown-item" href="#"
-                                style="padding: 2px 30px;font-size: 13px;color: #574f36;">員工權限</a>
-                            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle-1" type="button"></button></div>
-            </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
-                            id="sidebarToggleTop-1" type="button"><i class="fas fa-bars"></i></button>
-                        <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
-                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                                            class="border rounded-circle img-profile"
-                                            src="/f_hotel_17/assets17/img/avatars/avatar1.jpeg"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
-                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+         style="background: #f1ecd1;">
+        <div class="container-fluid d-flex flex-column p-0"><a
+                class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-text mx-3"><img width="59" height="33"
+                                                      src="/f_hotel_17/assets17/img/avatars/logo-only.png"></div>
+        </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                                      data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                                      style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">網站管理</a>
+                    <div class="dropdown-menu show" data-bs-popper="none"
+                         style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+                        <a class="dropdown-item" href="NewsAlter.html"
+                           style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增最新消息</a><a
+                            class="dropdown-item" href="NewsList.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">最新消息列表</a><a
+                            class="dropdown-item" href="blank.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">協尋文章列表</a><a
+                            class="dropdown-item" href="blank.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">會員列表</a>
+                        <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
                     </div>
-                </nav>
+                </li>
+                <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                                      data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                                      style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">業主管理</a>
+                    <div class="dropdown-menu show" data-bs-popper="none"
+                         style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+                        <a class="dropdown-item" href="#"
+                           style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主審核</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主列表</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主審核</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主列表</a>
+                        <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                                      data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                                      style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">商城管理</a>
+                    <div class="dropdown-menu show" data-bs-popper="none"
+                         style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+                        <a class="dropdown-item" href="ProductAlter.html"
+                           style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增商品</a><a
+                            class="dropdown-item" href="ProductList.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">商品列表</a><a
+                            class="dropdown-item" href="SaleAlter.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增促銷專案</a><a
+                            class="dropdown-item" href="SaleList.html"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">促銷專案列表</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">訂單列表</a>
+                        <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                                      data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                                      style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">員工管理</a>
+                    <div class="dropdown-menu show" data-bs-popper="none"
+                         style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+                        <a class="dropdown-item" href="#"
+                           style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增員工</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">員工列表</a><a
+                            class="dropdown-item" href="#"
+                            style="padding: 2px 30px;font-size: 13px;color: #574f36;">員工權限</a>
+                        <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center d-none d-md-inline">
+                <button class="btn rounded-circle border-0"
+                        id="sidebarToggle-1" type="button"></button>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-1" style="color: #574f36;--bs-dark: #574f36;--bs-dark-rgb: 87,79,54;">新增房型資訊
-                    </h3>
-                    <form id="roomTypeForm" style="padding: 16px;">
-                        <div style="margin: 20px;"><label class="form-label"
-                                style="width: 90px;color: #a67c52;">房型名稱：</label>
-                            <input class="form-control" type="text"name="room_type_name"
-                                style="display: inline-block;width: 750px;border-color: #f1ecd1;" required>
-                        </div>
+                    <button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop-1" type="button"><i class="fas fa-bars"></i></button>
+                    <ul class="navbar-nav flex-nowrap ms-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                                                       aria-expanded="false" data-bs-toggle="dropdown"
+                                                                       href="#"><span
+                                    class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                                    class="border rounded-circle img-profile"
+                                    src="/f_hotel_17/assets17/img/avatars/avatar1.jpeg"></a>
+                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                                     style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                                        class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-1" style="color: #574f36;--bs-dark: #574f36;--bs-dark-rgb: 87,79,54;">新增房型資訊
+                </h3>
+                <form id="roomTypeForm" style="padding: 16px;">
+                    <div style="margin: 20px;"><label class="form-label"
+                                                      style="width: 90px;color: #a67c52;">房型名稱：</label>
+                        <input class="form-control" type="text" name="room_type_name"
+                               style="display: inline-block;width: 750px;border-color: #f1ecd1;" required>
+                    </div>
 
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_sale_status">上下架狀態:</label>
-                            <select class="form-control"
+                    <div style="margin: 20px;">
+                        <label class="form-label" style="width: 90px;color: #a67c52;"
+                               for="room_type_sale_status">上下架狀態:</label>
+                        <select class="form-control"
                                 style="display: inline-block;width: 750px;border-color: #f1ecd1;"
                                 id="room_type_sale_status" name="room_type_sale_status" required>
-                                <option value="0">下架</option>
-                                <option value="1">上架</option>
-                            </select>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_price">房型價格:</label>
-                            <input class="form-control" type="number"
-                                style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_type_price"
-                                name="room_type_price" min="1" required>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_pet_type">寵物種類:</label>
-                            <select class="form-control"
+                            <option value="0">下架</option>
+                            <option value="1">上架</option>
+                        </select>
+                    </div>
+                    <div style="margin: 20px;">
+                        <label class="form-label" style="width: 90px;color: #a67c52;"
+                               for="room_type_price">房型價格:</label>
+                        <input class="form-control" type="number"
+                               style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_type_price"
+                               name="room_type_price" min="1" required>
+                    </div>
+                    <div style="margin: 20px;">
+                        <label class="form-label" style="width: 90px;color: #a67c52;"
+                               for="room_pet_type">寵物種類:</label>
+                        <select class="form-control"
                                 style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_pet_type"
                                 name="room_pet_type" required>
-                                <option value="貓">貓</option>
-                                <option value="狗">狗</option>
-                                <option value="鳥">鳥</option>
-                            </select>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label class="form-label" style="width: 90px;color: #a67c52;"
-                                for="room_type_size">房型大小:</label>
-                            <select class="form-control"
+                            <option value="貓">貓</option>
+                            <option value="狗">狗</option>
+                            <option value="鳥">鳥</option>
+                        </select>
+                    </div>
+                    <div style="margin: 20px;">
+                        <label class="form-label" style="width: 90px;color: #a67c52;"
+                               for="room_type_size">房型大小:</label>
+                        <select class="form-control"
                                 style="display: inline-block;width: 750px;border-color: #f1ecd1;" id="room_type_size"
                                 name="room_type_size" required>
-                                <option value="0">小型</option>
-                                <option value="1">中型</option>
-                                <option value="2">大型</option>
-                            </select>
-                        </div>
+                            <option value="0">小型</option>
+                            <option value="1">中型</option>
+                            <option value="2">大型</option>
+                        </select>
+                    </div>
 
 
-                        <div style="margin: 20px;"><label class="form-label"
-                                style="width: 90px;color: #a67c52;">房型介紹：</label>
-                                <textarea class="form-control" name="room_type_about"
-                                style="width: 750px;margin-left: 90px;margin-top: -30px;border-color: #f1ecd1;"
-                                required></textarea>
-                        </div>
-                        <div class="mb-3" style="text-align: left;margin: 20px;"><button class="btn btn-primary"
+                    <div style="margin: 20px;"><label class="form-label"
+                                                      style="width: 90px;color: #a67c52;">房型介紹：</label>
+                        <textarea class="form-control" name="room_type_about"
+                                  style="width: 750px;margin-left: 90px;margin-top: -30px;border-color: #f1ecd1;"
+                                  required></textarea>
+                    </div>
+                    <div class="mb-3" style="text-align: left;margin: 20px;">
+                        <button class="btn btn-primary"
                                 type="submit"
-                                style="background: #a67c52;border-style: none;text-align: left;margin-left: 90px;color: #f1ecd1;">送出</button>
-                        </div>
-                        <div style="margin: 20px;">
-                            <label for="room_type_amount"
-                                style="width: 90px;color: #a67c52; display: none;">房間數量:</label>
-                            <input type="hidden" id="room_type_amount" name="room_type_amount" value="0" required>
-                        </div>
+                                style="background: #a67c52;border-style: none;text-align: left;margin-left: 90px;color: #f1ecd1;">
+                            送出
+                        </button>
+                    </div>
+
+                    <div style="margin: 20px;">
+                        <label for="room_type_amount"
+                               style="width: 90px;color: #a67c52; display: none;">房間數量:</label>
+                        <input type="hidden" id="room_type_amount" name="room_type_amount" value="0" required>
+                    </div>
 
 
-                    </form>
-                </div>
+                </form>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+            </div>
+        </footer>
     </div>
-    <script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <script>
-    $(document).ready(function() {
-    $("#roomTypeForm").submit(function(e) {
-        e.preventDefault(); // 阻止表单的默认提交行为
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        // 创建一个新的RoomType对象
-        var newRoomType = {
-        	hotelId: hotelId,
-        	roomTypeName: $("input[name='room_type_name']").val(),
-        	roomTypeSaleStatus: $("select[name='room_type_sale_status']").val(),
-        	roomTypePrice: $("input[name='room_type_price']").val(),
-            roomPetType: $("select[name='room_pet_type']").val(),
-            roomTypeSize: $("select[name='room_type_size']").val(),
-            roomTypeAbout: $("textarea[name='room_type_about']").val(),
-            roomTypeAmount: $("input[name='room_type_amount']").val()
-        };
-        console.log(newRoomType.roomTypeSaleStatus);
-        console.log(newRoomType);
 
-        // 發送Ajax請求
-        $.ajax({
-            url: '/roomTypes/addRoomType',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(newRoomType),
-            success: function(response) {
-               $("#roomTypeForm")[0].reset();//清空表單
 
-                window.location.href = "/f_hotel_17/roomType.html";//回到上一頁
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-               console.error(textStatus, errorThrown);
-            }
+<script>
+    // 新增房型
+    $(document).ready(function () {
+        $("#roomTypeForm").submit(function (e) {
+            e.preventDefault();
+
+            // 創建新的newType實體
+            var newRoomType = {
+                hotelId: getHotelId(),
+                roomTypeName: $("input[name='room_type_name']").val(),
+                roomTypeSaleStatus: $("select[name='room_type_sale_status']").val(),
+                roomTypePrice: $("input[name='room_type_price']").val(),
+                roomPetType: $("select[name='room_pet_type']").val(),
+                roomTypeSize: $("select[name='room_type_size']").val(),
+                roomTypeAbout: $("textarea[name='room_type_about']").val(),
+                roomTypeAmount: $("input[name='room_type_amount']").val()
+            };
+            console.log(newRoomType.roomTypeSaleStatus);
+            console.log(newRoomType);
+
+            // 發送Ajax請求
+            $.ajax({
+                url: '/roomTypes/addRoomType',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(newRoomType),
+                success: function (response) {
+                    $("#roomTypeForm")[0].reset();//清空表單
+
+                    window.location.href = "/f_hotel_17/roomType.html";//回到上一頁
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
         });
     });
-});
+
     function getHotelId() {
         // return localStorage.getItem("hotelId");
         return 5;
     }
-    </script>
-    
+</script>
+
 </body>
 
 </html>

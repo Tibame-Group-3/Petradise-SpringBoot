@@ -196,17 +196,8 @@
         src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
 
-<<script>
-    function limitTextLength() {
-        $('.limited-text').each(function () {
-            var text = $(this).text();
-            if (text.length > 10) {
-                $(this).text(text.substring(0, 10) + '...');
-            }
-        });
-    }
-
-    $(document).ready(function () {
+<script>
+        $(document).ready(function () {
         const hotelId = getHotelId();
         $.ajax({
             url: `http://localhost:8080/rooms/hotelId/${hotelId}`,
@@ -223,7 +214,7 @@
                                 <td>${room.petName || '尚無寵物使用'}</td>
                                 <td>${room.roomSaleStatus === "0" ? "下架" : "上架"}</td>
                                 <td>${getRoomStatus(room.roomStatus)}</td>
-                                <td><button type="button" class="btn btn-primary btn-modify btn-edit" data-room-id="${room.roomId}">編輯</button></td>
+                                <td><a class="btn btn-primary btn-modify btn-edit" href="/f_hotel_17/editRoom.html?roomId=${room.roomId}">編輯</a></td>
                             </tr>`;
                 }
                 $("#room-data-list").html(html);
@@ -276,8 +267,8 @@
     //按下編輯會導向編輯網頁
     $(document).ready(function () {
         $("#room-data-list").on("click", ".btn-edit", function () {
-            var roomTypeId = $(this).data("room-type-id");
-            window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
+            var roomId = $(this).data("data-room-id");
+            window.location.href = "/f_hotel_17/editRoom.html?roomId=" + roomId;
         });
     });
 </script>

@@ -5,23 +5,21 @@ $(document).ready(function () {
         .then( function (res) {
             console.log(res.data);
             res.data.forEach(element => {
-                    const row = `
-                            <tr>
-                                <td class="newsId" style="color: #a67c52">${element.newsId}</td>
-                                <td class="newsTitle" style="color: #a67c52">${element.newsTitle}</td>
-                                <td class="newsContent" style="color: #a67c52; display: none">${element.newsContent}</td>
-                                <td class="newsDate" style="color: #a67c52">${element.newsDate}</td>
-                                <td>
-                                    <button id="btn_update" class="btn btn-primary" type="button" style="background: #f1ecd1;border-style: none;color: #a67c52">修改</button>
-                                </td>
-                            </tr>
-                            `
-                    tableBody.innerHTML += row;
-                })
+                const row = `
+                    <tr>
+                        <td class="newsId" style="color: #a67c52">${element.newsId}</td>
+                        <td class="newsTitle" style="color: #a67c52">${element.newsTitle}</td>
+<!--                        <td class="newsContent" style="color: #a67c52; display: none">${element.newsContent}</td>-->
+                        <td class="newsDate" style="color: #a67c52">${element.newsDate}</td>
+                        <td>
+                            <button id="btn_update" class="btn btn-primary" type="button" style="background: #f1ecd1;border-style: none;color: #a67c52">修改</button>
+                        </td>
+                    </tr>
+                    `
+                tableBody.innerHTML += row;
+            })
 
-            tableBody.html(html);
-            // limitTextLength();  // 房型介紹字數限制
-            $('#myTable').DataTable({//初始化DataTable
+            $("#myTable").DataTable({   //初始化DataTable
                 "language": {
                     "lengthMenu": "顯示 _MENU_ 條",
                     "zeroRecords": "未找到任何資料",
@@ -32,19 +30,19 @@ $(document).ready(function () {
                     "paginate": {
                         "first":      "第一頁",
                         "last":       "最後一頁",
-                        "next":       "下一頁",
-                        "previous":   "上一頁"
-                    },
+                        "next":       "»",
+                        "previous":   "«"
+                    }
                 }
             });
-        })
 
+        })
         .catch(err => console.log(err));
 
 })
 
 // ------------------修改資料------------------
-$(document).on('click', "button#btn_update", function (e) {
+$(document).on('click', "button#btn_update", function () {
     // const data = {};
     let newsId = $(this).closest("tr").find("td.newsId").text();
     // console.log(newsId);
