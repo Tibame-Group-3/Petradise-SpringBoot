@@ -267,7 +267,7 @@
 				</button>
 				<div class="btn-group" style="margin: 10px 0px 0px;">
 					<button class="btn btn-primary" type="button"
-						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; padding-top: 6px;">
+						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; padding-top: 6px;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
 							fill="currentColor" viewBox="0 0 16 16"
 							class="bi bi-person-circle"
@@ -282,7 +282,7 @@
 					<button
 						class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 						data-bs-toggle="dropdown" aria-expanded="false" type="button"
-						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; width: 29.5833px;"></button>
+						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; width: 29.5833px;"></button>
 					<div class="dropdown-menu"
 						style="min-width: 118px; background: #fd780f; margin: 1px 0px 0px;">
 						<a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a
@@ -392,33 +392,33 @@
 		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-        document.getElementById("res").addEventListener("click", function () {
-            Swal.fire({
-                title: 'Input something',
-                input: 'textarea'
-            }).then(function (result) {
-            	$.ajax({
-           		  url:"/LostPetRespose/add",
-           		  method:"POST",
-    			  contentType: "application/json",
-           		  data:JSON.stringify({
-           			  "memId": 11,
-           			  "articleId": [{
-           				  "articleId": 1
-           			  }],
-           			  "responseContent": result.value,
-           		  })
-            	})
-            	.then(function(response) {
-      		      console.log(response);
-        		  window.location.reload();
-      		    })
-      		    .catch(function(error) {
-      		      console.error(error);
-      		    });
-            
-        });
-        });
+		document.getElementById("res").addEventListener("click", function () {
+		    Swal.fire({
+		        title: 'Input something',
+		        input: 'textarea'
+		    }).then(function (result) {
+		        if (result.value != null) {
+		            let text = result.value;
+		            let jsonData = {
+		            		"memId": 11,
+		                    "articlId": 1,
+		                    "responseContent": text,
+		            }; 
+		            console.log(jsonData);
+		            $.ajax({
+		                url: "/LostPetRespose/add",
+		                method: "POST",
+		                contentType: "application/json",
+		                data: JSON.stringify(jsonData),
+		            	}).then(function(response) {
+		      		      console.log(response);
+		    		    })
+		    		    .catch(function(error) {
+		    		      console.error(error);
+		    		    });
+		        }
+		    });
+		});
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
 

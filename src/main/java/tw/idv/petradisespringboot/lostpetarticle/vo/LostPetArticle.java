@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.lostpetarticle.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,9 @@ import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "lost_pet_article")
-public class LostPetArticle {
+public class LostPetArticle implements Serializable{
+
+	private static final long serialVersionUID = 2L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,12 +75,12 @@ public class LostPetArticle {
 	@Column
 	private String title;
 	
-	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
-	private List<LostPetResponse> lostPetResponse;
 	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
 	private List<LostPetPic> lostPetPic;
 
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
+	private List<LostPetResponse> lostPetResponse;
 }

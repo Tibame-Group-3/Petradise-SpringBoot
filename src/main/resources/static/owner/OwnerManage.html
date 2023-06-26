@@ -300,7 +300,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 	  }
 	
 	$.ajax({
-		  url: "/owner/OwnerManage",
+		  url: "/ownerManage/getAll",
 		  type: "GET",
 		  data: { action: "getAll" },
 		  dataType: "JSON",
@@ -310,6 +310,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		    data = res.length;
 		    var page = Math.ceil(data / 5);
 		    
+		    //查看圖片
 		    $("tbody").on("click", ".pic", function() {
     			const index = $(this).closest("tr").index(); //找到最接近父元素的tr索引值,與資料庫一樣是從0開始
     			const imageBase64 = res[index].imageBase64;
@@ -639,7 +640,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
     	  var hotelName = $row.find("td:eq(1)").text(); //:eq(1)1為索引值,從0開始 ,取第二個td的值
 
     	  $.ajax({
-    	    url: "/owner/OwnerManage",
+    	    url: "/ownerManage/update",
     	    type: "POST",
     	    data: {
     	      action: "update",
