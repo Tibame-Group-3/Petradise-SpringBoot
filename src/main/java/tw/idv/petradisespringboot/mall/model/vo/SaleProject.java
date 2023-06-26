@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Table(name = "sale_project")
 public class SaleProject {
 
@@ -36,25 +35,14 @@ public class SaleProject {
 	private String saleProName;
 
 	@Column(name = "sale_pro_start")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Timestamp saleProStart;
 
 	@Column(name = "sale_pro_end")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Timestamp saleProEnd;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "saleProId", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "saleProject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Sale> sale;
-	
-	@Override
-	public String toString() {
-		return "SaleProject {" + 
-				"saleProId=" + saleProId + 
-				"saleProName=" + saleProName + 
-				"saleProStart=" + saleProStart + 
-				"saleProEnd=" + saleProEnd + 
-				'}';
-	}
 
 }
