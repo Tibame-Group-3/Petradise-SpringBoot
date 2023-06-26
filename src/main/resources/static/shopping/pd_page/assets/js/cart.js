@@ -1,9 +1,17 @@
 $(document).ready(function () {
+
     // ------------------拿session資料----------------------------------------------------
+    // 初始化 shoppingItem ----------------------------------------------------
     let shoppingItem = sessionStorage.getItem("shoppingItem");
-    shoppingItem = JSON.parse(shoppingItem);
+    if (shoppingItem) {
+        shoppingItem = JSON.parse(shoppingItem);
+    } else {
+        shoppingItem = {};
+    }
     // console.log(shoppingItem);
 
+    // 初始化 checkoutItem ----------------------------------------------------
+    const checkoutItem = {};
 
     // ------------------渲染購物車項目----------------------------------------------------
     let totalItems = 0;
@@ -112,45 +120,6 @@ $(document).ready(function () {
     }
 
 
-    // ------------------存要付款項目到session----------------------------------------------------
-    const checkoutItem = {};
-
-    // ------------------點擊 checkbox----------------------------------------------------
-    $(document).on('click', '.check input[type="checkbox"]', function () {
-        const productId = $(this).closest('.cart-items').find('#id').text();
-        const isChecked = $(this).prop('checked');
-
-        if (isChecked) {
-            // 勾選時將項目存入 checkoutItem------------------------------------------------------
-            checkoutItem[productId] = shoppingItem[productId];
-        } else {
-            // 取消勾選時從 checkoutItem 移除項目--------------------------------------------------
-            delete checkoutItem[productId];
-        }
-        updateCheckoutItem();
-    });
-
-    // ------------------更新 checkoutItem 物件--------------------------------------------------
-    function updateCheckoutItem() {
-        sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
-
-        const itemsElement = $(".items");
-        const totalAmountElement = $(".total-amount");
-
-        let itemsCount = 0;
-        let totalAmount = 0;
-
-        for (const productId in checkoutItem) {
-            const item = checkoutItem[productId];
-            itemsCount += item.quantity;
-            totalAmount += item.price * item.quantity;
-        }
-
-        itemsElement.text(`${itemsCount} 品項`);
-        totalAmountElement.text(`$ ${totalAmount}`);
-    }
-
-
     // ------------------移除項目----------------------------------------------------
     // 移除全部----------------------------------------------------
     $(document).on("click", ".deleteAll", function () {
@@ -172,6 +141,7 @@ $(document).ready(function () {
                 sessionStorage.removeItem("checkoutItem");
 
                 // 更新購物車品項----------------------------------------------------
+                updateCheckoutItem();
                 $(".shopping-cart-total").text(`(0)`);
             }
         });
@@ -190,15 +160,28 @@ $(document).ready(function () {
             cancelButtonText: "否，請保留",
         }).then((result) => {
             if (result.isConfirmed) {
-                $(this).closest(".cart-items").fadeOut(1000, function () {
-                    $(this).remove();
-                })
-                // 從session的 shoppingItem 清掉他----------------------------------
+
+                // 從session的 shoppingItem checkoutItem清掉----------------------------------
                 const shoppingItem = JSON.parse(sessionStorage.getItem("shoppingItem"));
                 delete shoppingItem[productId];
                 sessionStorage.setItem("shoppingItem", JSON.stringify(shoppingItem));
 
+                // 取消勾選被移除的 checkbox
+                const checkbox = $(".cart-items").closest(`#${productId}`).find("input[type='checkbox']");
+                if (checkbox.prop("checked")) {
+                    // alert(checkbox);
+                    checkbox.prop("checked", false);
+                    const checkoutItem = JSON.parse(sessionStorage.getItem("checkoutItem"));
+                    delete checkoutItem[productId];
+                    sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
+                }
+
+                $(this).closest(".cart-items").fadeOut(1000, function () {
+                    $(this).remove();
+                })
+
                 // 更新購物車品項----------------------------------------------------
+                updateCheckoutItem();
                 totalItems = updateTotalItems(shoppingItem);
                 $(".shopping-cart-total").text(`(${totalItems})`);
             }
@@ -206,10 +189,79 @@ $(document).ready(function () {
     });
 
 
-    // 繼續選購----------------------------------------------------
+    // ------------------存待付款項目到session----------------------------------------------------
+    // 點擊 checkbox----------------------------------------------------
+    $(document).on('click', '.check input[type="checkbox"]', function () {
+        const productId = $(this).closest('.cart-items').find('#id').text();
+        const isChecked = $(this).prop('checked');
+
+        if (isChecked) {
+            // 勾選時將項目存入 checkoutItem------------------------------------------------------
+            checkoutItem[productId] = shoppingItem[productId];
+        } else {
+            // 取消勾選時從 checkoutItem 移除項目--------------------------------------------------
+            delete checkoutItem[productId];
+        }
+        updateCheckoutItem();
+    });
+
+    // 更新 checkoutItem 物件--------------------------------------------------
+    function updateCheckoutItem() {
+        sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
+
+        const itemsElement = $(".items");
+        const totalAmountElement = $(".total-amount");
+
+        let itemsCount = 0;
+        let totalAmount = 0;
+
+        for (const productId in checkoutItem) {
+            const item = checkoutItem[productId];
+            itemsCount += item.quantity;
+            totalAmount += item.price * item.quantity;
+        }
+
+        itemsElement.text(`${itemsCount} 品項`);
+        totalAmountElement.text(`$ ${totalAmount}`);
+    }
+
+
+    // ------------------繼續選購----------------------------------------------------
     $(".button-back").on("click", function () {
         location.href = "/front-product-list/front-product-list.html";
     })
 
+    // ------------------前往結帳----------------------------------------------------
+    $(".button-pay").on("click", function () {
+        // 從 checkbox 中取得被勾選的項目的產品 ID----------------------------------------------------
+        const checkedItems = $(".cart-items input[type='checkbox']:checked");
+        checkedItems.closest(".cart-items").fadeOut(1000, function () {
+            $(this).remove();
+        })
+        const productIds = checkedItems.closest('.cart-items').map(function () {
+            return $(this).attr('id');
+        }).get();
+
+        // 從 sessionStorage 的 shoppingItem 和 checkoutItem 移除被勾選的項目
+        const shoppingItem = JSON.parse(sessionStorage.getItem("shoppingItem"));
+        const checkoutItem = JSON.parse(sessionStorage.getItem("checkoutItem"));
+
+        productIds.forEach(function (productId) {
+            delete shoppingItem[productId];
+            delete checkoutItem[productId];
+        });
+
+        sessionStorage.setItem("shoppingItem", JSON.stringify(shoppingItem));
+        sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
+
+
+        // 更新購物車品項
+        updateCheckoutItem();
+        totalItems = updateTotalItems(shoppingItem);
+        $(".shopping-cart-total").text(`(${totalItems})`);
+
+        // 前往結帳頁面
+        location.href = "/shopping/payment/payment.html";
+    })
 
 });
