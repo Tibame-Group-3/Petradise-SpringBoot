@@ -7,6 +7,7 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -45,6 +46,22 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member update(Member newMember) {
         return repository.save(newMember);
+    }
+
+    @Override
+    public boolean changePassword(Integer id, String oldPassword, String newPassword) {
+
+        var optionalMember = repository.findById(id);
+        if (optionalMember.isEmpty()) {
+            return false;
+        }
+       var member = optionalMember.get();
+        if (Objects.equals(member.getPassword(), oldPassword)) {
+            member.setPassword(newPassword);
+            repository.save(member);
+            return true;
+        }
+        return false;
     }
 
 }
