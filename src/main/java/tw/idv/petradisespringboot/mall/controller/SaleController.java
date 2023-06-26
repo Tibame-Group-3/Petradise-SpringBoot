@@ -52,11 +52,10 @@ public class SaleController {
 
 	@PostMapping("/add")
 	ResponseEntity<AddSaleDTO> addSale(@RequestBody AddSaleDTO addSaleDTO) {
-		// convert DTO to Entity
+
 		Sale saleRequest = modelMapper.map(addSaleDTO, Sale.class);
 		Sale sale = saleService.addSale(saleRequest);
 
-		// convert Entity to DTO
 		AddSaleDTO saleResponse = modelMapper.map(sale, AddSaleDTO.class);
 
 		return new ResponseEntity<AddSaleDTO>(saleResponse, HttpStatus.CREATED);
