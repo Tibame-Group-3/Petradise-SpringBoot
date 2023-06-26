@@ -21,5 +21,7 @@ public interface LostPetArticleService {
 	List<LostPetArticle> findBySpecies(String species);
 	
 	List<LostPetArticle> findByLostPlace(String lostPlace);
+	
+	LostPetArticle update4Status(LostPetArticle lostPetArticle);
 
 }

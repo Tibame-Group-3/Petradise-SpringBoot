@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
 import tw.idv.petradisespringboot.lostpetarticle.service.LostPetArticleService;
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
+import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 @Service
 public class LostPetArticleServiceImpl implements LostPetArticleService{
@@ -38,14 +39,17 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 
 	@Override
 	public LostPetArticle update(LostPetArticle lostPetArticle) {
-
+	
 		return lostPetArticleRepository.save(lostPetArticle);
 	}
 
 	@Override
 	public void delete(Integer id) {
 		lostPetArticleRepository.deleteById(id);
-		
+	}
+	
+	public LostPetArticle update4Status(LostPetArticle lostPetArticle) {
+		return lostPetArticleRepository.save(lostPetArticle);
 	}
 
 	@Override

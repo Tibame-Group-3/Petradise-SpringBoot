@@ -269,6 +269,8 @@
 	<script>
 		const output = document.querySelector(".output");
 		const input = document.querySelector(".input");
+		const urlParams = new URLSearchParams(window.location.search);
+		const id = parseInt(urlParams.get('id'), 10);
 		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
 		let base64Image = "";
@@ -289,34 +291,34 @@
 		function deletePreImage(index) {
 			  const updatedImagesArray = [...imagesArray];
 			  updatedImagesArray.splice(index, 1);
+			  imagesArray = updatedImagesArray; // 更新 imagesArray
 			  displayPreImages(updatedImagesArray);
 		}
-		const urlParams = new URLSearchParams(window.location.search);
-		const id = parseInt(urlParams.get('id'), 10);
+		
 		$.ajax({
 		  url: `/LostPetArticle/id=${id}`,
 		  method: 'GET',
 		  dataType: 'json',
 		  success: res => {
-		    console.log(res);
-		    $("#title").val(res.title);
-		    const dateString = res.lostDate; 
-		    const dateParts = dateString.split("T");
-		    const date = dateParts[0];
-		    const time = dateParts[1].slice(0, 5);
-		    const formattedDate = `${date} ${time}`;
-		    $("#datetime").val(formattedDate); 
-		    $("#lostPlace").val(res.lostPlace);
-		    $("#chipNum").val(res.chipNum);
-		    $("#select-animal").val(res.species);
-		    $("#color").val(res.color);
-		    $("#feature").val(res.feature);
-		    $("#text").val(res.text);
-		    $("#contactPhone").val(res.contactPhone);
-		    displayPreImages(res.lostPetPic);
+			  console.log(res);
+			  $("#title").val(res.title);
+			  const originalDate = res.lostDate;
+			  const parsedDate = new Date(originalDate);
+			  const formattedDate = parsedDate.toISOString().slice(0, 16);
+			  $("#datetime").val(formattedDate); 
+			  $("#lostPlace").val(res.lostPlace);
+			  $("#chipNum").val(res.chipNum);
+			  $("#select-animal").val(res.species);
+			  $("#color").val(res.color);
+			  $("#feature").val(res.feature);
+			  $("#text").val(res.text);
+			  $("#contactPhone").val(res.contactPhone);
+			  displayPreImages(res.lostPetPic);
 		  },
 		  error: err => {
 		    console.log(err);
+			window.location.assign("/lostPet/forum_deleted.html");
+
 		  },
 		});
 		
@@ -330,11 +332,13 @@
 		    const file = files[i];
 		    const base64Image = await readFileAsDataURL(file);
 		    const base64Data = base64Image.split(",")[1]; // 去除前缀
-		    const newImage = { lostPetId: i + 1, lostPetPic: base64Data };
+		    const newImage = 
+		    		{ article: id,
+		    		lostPetPic: base64Data };
 		    imagesArray.push(newImage);
 		  }
-		  displayPreImages(imagesArray); 
 		});
+		
 		/* function displayImages() {
 		  let images = "";
 		  imagesArray.forEach((image, index) => {
@@ -344,13 +348,13 @@
 		    </div>`;
 		  });
 		  output.innerHTML = images;
-		} */
-		/* output.addEventListener("click", (event) => {
+		} 
+		output.addEventListener("click", (event) => {
 		  if (event.target.classList.contains("delete-image")) {
 		    deleteImage();
 		  }
-		}); */
-		/* function deleteImage(index) {
+		});
+		function deleteImage(index) {
 			imagesArray.splice(index, 1);
 			displayImages();
 		} */
@@ -380,17 +384,18 @@
 		async function submitForm() {
 			
 			const articleData = {
-				  memId: 6,
-				  lostDate: $("#datetime").val(),
-				  lostPlace: $("#lostPlace").val(),
-				  chipNum: $("#chipNum").val(),
-				  species: $("#select-animal").val(),
-				  color: $("#color").val(),
-				  feature: $("#feature").val(),
-				  text: $("#text").val(),
-				  contactPhone: $("#contactPhone").val(),
-				  title: $("#title").val(),
-				  lostPetPic: imagesArray,
+					articleId: id ,
+					memId: 6,
+					lostDate: $("#datetime").val(),
+					lostPlace: $("#lostPlace").val(),
+					chipNum: $("#chipNum").val(),
+					species: $("#select-animal").val(),
+					color: $("#color").val(),
+					feature: $("#feature").val(),
+					text: $("#text").val(),
+					contactPhone: $("#contactPhone").val(),
+					title: $("#title").val(),
+					lostPetPic: imagesArray,
 			};
 			console.log(articleData);
 			$.ajax({
@@ -401,6 +406,7 @@
 			})
 			.then(function(response) {
 		      console.log(response);
+		      window.location.assign("/lostPet/forum.html?id=" + id); ;
 		    })
 		    .catch(function(error) {
 		      console.error(error);

@@ -28,9 +28,9 @@ public class LostPetArticleController {
 	
 	@GetMapping("/all")
 	List<LostPetArticle> getAllArticle(){
-		var kk = lostPetArticleService.getAllArticles();
-	
-		System.out.println(kk);
+//		var kk = lostPetArticleService.getAllArticles();
+//	
+//		System.out.println(kk);
 		return lostPetArticleService.getAllArticles();
 	}
 	
@@ -64,7 +64,7 @@ public class LostPetArticleController {
 
 	    article.setArticleStatus("1");
 
-	    lostPetArticleService.update(article);
+	    lostPetArticleService.update4Status(article);
 
 	    return ResponseEntity.ok(article);
 	}
