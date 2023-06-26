@@ -58,28 +58,31 @@ function validateForm() {
 
     // Input validations
     const validations = [
-        [nameElement, 'Please enter your name.'],
-        [accountElement, 'Please enter your account.'],
-        [passwordElement, 'Please enter your password.'],
-        [birthdayElement, 'Please enter your birthday.'],
-        [phoneElement, 'Please enter your phone number.'],
-        [phoneElement, 'Please enter valid Taiwan phone number', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
-        [emailElement, 'Please enter your email.'],
-        [emailElement, 'Please enter valid email.', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
-        [addressElement, 'Please enter your address.']
+        [nameElement, '請輸入姓名'],
+        [accountElement, '請輸入帳號'],
+        [passwordElement, '請輸入密碼'],
+        [birthdayElement, '請輸入生日'],
+        [phoneElement, '請輸入電話號碼'],
+        [phoneElement, '請輸入符合格式的台灣電話號碼', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
+        [emailElement, '請輸入電子郵件'],
+        [emailElement, '請輸入符合格式的電子郵件', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
+        [addressElement, '請輸入地址']
     ];
 
-    validations.forEach(([inputElement, errorMessage, regex]) => {
+    for(const [inputElement, errorMessage, regex] of validations) {
         if (!validateInputElement(inputElement, errorMessage, regex)) {
             isFormValid = false;
+            inputElement.focus();
+            return isFormValid;
         }
-    });
+    }
 
     // Select validation
     if (citySelectElement.selectedIndex === -1 || districtSelectElement.selectedIndex === -1) {
         showInvalidFeedback(citySelectElement, 'Please select your city.');
         showInvalidFeedback(districtSelectElement, 'Please select your district.');
         isFormValid = false;
+        return isFormValid;
     }
 
     return isFormValid;

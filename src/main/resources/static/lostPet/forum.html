@@ -392,43 +392,61 @@
 		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+        const id = parseInt(urlParams.get('id'), 10);
 		document.getElementById("res").addEventListener("click", function () {
-		    Swal.fire({
+			Swal.fire({
 		        title: 'Input something',
 		        input: 'textarea'
 		    }).then(function (result) {
-		        if (result.value != null) {
-		            let text = result.value;
-		            let jsonData = {
-		            		"memId": 11,
-		                    "articlId": 1,
-		                    "responseContent": text,
-		            }; 
-		            console.log(jsonData);
-		            $.ajax({
-		                url: "/LostPetRespose/add",
-		                method: "POST",
-		                contentType: "application/json",
-		                data: JSON.stringify(jsonData),
-		            	}).then(function(response) {
-		      		      console.log(response);
-		    		    })
-		    		    .catch(function(error) {
-		    		      console.error(error);
-		    		    });
-		        }
-		    });
+		    	 if (result.value != null && result.value.trim() !== ""){	            
+		    		 let text = result.value;
+		    		 let jsonData = {
+		    				 "articleId": id,
+		    				 "response": {
+		    					 "memId": 11,
+		    					 "responseContent": text,
+		    				 }
+		    		 };
+		    		 console.log(jsonData);
+		    		 $.ajax({
+		    			 url: "/LostPetRespose/add",
+		    			 method: "POST",
+		    			 contentType: "application/json",
+		    			 data: JSON.stringify(jsonData),
+		    		 }).then(function(response) {
+		    			 console.log(response);
+		    			 window.location.reload();
+		    		 }).catch(function(error) {
+		    			 console.error(error);
+		    		 });
+		    	 } else {
+		    		 Swal.fire({
+		    			 title: 'Error',
+		    			 text: 'Please enter something',
+		    			 icon: 'error'
+		    		 });
+		    	 }
+		    })
 		});
+
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
-
-        axios.get("/LostPetArticle/id=1")
+        
+        axios.get(`/LostPetArticle/id=${id}`)
         .then(function(response) {
           let data = response.data;
-
+        
+		  if (data["articleStatus"] == undefined) {
+			  window.location.assign("/lostPet/forum_deleted.html");
+		  }
+          const originalDate = data.lostDate;
+		  const parsedDate = new Date(originalDate);
+		  const formattedDate = parsedDate.toISOString().replace("T", " ").slice(0, 16);
+		
           data["chipNum"] = data["chipNum"] || '無';
           data["species"] = data["species"] || '無';
-
+			
 
           const articleHTML = `
             <div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value">${data.memId}</span></div>
@@ -447,7 +465,7 @@
                 <label for="color">毛色：${data.color}</label>
             </div>
             <div>
-                <label for="datetime">遺失時間：${data.lostDate}</label>
+                <label for="datetime">遺失時間：${formattedDate}</label>
             </div>
             <div>
                 <label for="feature">寵物特徵：${data.feature}</label>
@@ -471,9 +489,12 @@
           conta.innerHTML = articleHTML;
 
           let pic = document.querySelector(".animal-pic");
-          if (pic) {
+          if (data.lostPetPic && data.lostPetPic.length > 0) {
             const picHTML = data.lostPetPic.map(pic => `<img class="pic" src="data:image/*;base64,${pic.lostPetPic}">`);
             pic.innerHTML = picHTML;
+          } else {
+            const defaultPicHTML = `<img class="pic" src="https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg">`;
+            pic.innerHTML = defaultPicHTML;
           }
 
           if (data.lostPetResponse && data.lostPetResponse.length > 0) {

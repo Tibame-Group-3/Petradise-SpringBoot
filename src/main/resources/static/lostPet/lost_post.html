@@ -156,11 +156,8 @@
 	</nav>
 	<div class="container">
 		<div class="py-5 text-center">
-
 			<h2>遺失寵物發文</h2>
-
 		</div>
-
 		<form action="/LostPetPic/create" method="post"
 			enctype="multipart/form-data">
 			<div class="row">
@@ -174,13 +171,11 @@
 							<label for="lost_place">遺失地點</label> <input type="text"
 								class="form-control" name="lostPlace" id="lostPlace">
 						</div>
-
 						<div class="mb-3">
 							<label for="chip_num">晶片號碼 <span class="text-muted">(選填)</span></label>
 							<input type="text" class="form-control" name="chipNum"
 								id="chipNum">
 						</div>
-
 						<div class="mb-3">
 							<label for="species">品種 </label> <select name="species"
 								id="select-animal" class="form-control">
@@ -191,7 +186,6 @@
 								<option>其他</option>
 							</select>
 						</div>
-
 						<div class="mb-3">
 							<label for="color">毛色 </label> <input type="text" id="color"
 								class="form-control" name="color">
@@ -277,26 +271,28 @@
 		const input = document.querySelector(".input");
 		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
-		const encoder = new TextEncoder();
-		
 		let base64Image = "";
 		let jsonData = [];
-		input.addEventListener("change", () => {
-			const files = input.files
-			for (let i = 0; i < files.length; i++) {
-				imagesArray.push(files[i])
-			};
-			displayImages()
-		})
+		input.addEventListener("change", async () => {
+		  const files = input.files;
+		  for (let i = 0; i < files.length; i++) {
+		    const file = files[i];
+		    const base64Image = await readFileAsDataURL(file);
+		    const base64Data = base64Image.split(',')[1]; // 除去前缀詞
+		    imagesArray.push({ lostPetId: i + 1, lostPetPic: base64Data });
+		  }
+		  displayImages();
+		});
+
 		function displayImages() {
-			let images = ""
-			imagesArray.forEach((image, index) => {
-				images += `<div class="image">
-				<img src="${URL.createObjectURL(image)}" alt="image">
-				<span onclick="deleteImage(${index})">&times;</span>
-				</div>`
-			})
-			output.innerHTML = images
+		  let images = "";
+		  imagesArray.forEach((image, index) => {
+		    images += `<div class="image">
+		      <img src="data:image/*;base64,${image.lostPetPic}" alt="image">
+		      <span onclick="deleteImage(${index})">&times;</span>
+		    </div>`;
+		  });
+		  output.innerHTML = images;
 		}
 
 		output.addEventListener("click", (event) => {
@@ -306,8 +302,8 @@
 		});
 
 		function deleteImage(index) {
-			imagesArray.splice(index, 1)
-			displayImages()
+			imagesArray.splice(index, 1);
+			displayImages();
 		}
 
 		numberInput.addEventListener('input', function(event) {
@@ -332,25 +328,19 @@
 		
 		
 		async function submitForm() {
-			const file = input.files[0];
-			const base64Image = await readFileAsDataURL(file);
-			const base64Data = base64Image.split(',')[1]; // 除去前綴詞
-			const jsonData = {
-				lostPetId: 1,
-				lostPetPic: base64Data
-			};
+			
 			const articleData = {
-			    memId: 6,
-			    lostDate: $("#datetime").val(),
-			    lostPlace: $("#lostPlace").val(),
-			    chipNum: $("#chipNum").val(),
-			    species: $("#select-animal").val(),
-			    color: $("#color").val(),
-			    feature: $("#feature").val(),
-			    text: $("#text").val(),
-			    contactPhone: $("#contactPhone").val(),
-			    title: $("#title").val(),
-			    lostPetPic: [jsonData],
+				  memId: 6,
+				  lostDate: $("#datetime").val(),
+				  lostPlace: $("#lostPlace").val(),
+				  chipNum: $("#chipNum").val(),
+				  species: $("#select-animal").val(),
+				  color: $("#color").val(),
+				  feature: $("#feature").val(),
+				  text: $("#text").val(),
+				  contactPhone: $("#contactPhone").val(),
+				  title: $("#title").val(),
+				  lostPetPic: imagesArray,
 			};
 			console.log(articleData);
 			$.ajax({
@@ -361,6 +351,7 @@
 			})
 			.then(function(response) {
 		      console.log(response);
+		      window.location.assign("/lostPet/forum.html?id=" + response.articleId); ;
 		    })
 		    .catch(function(error) {
 		      console.error(error);

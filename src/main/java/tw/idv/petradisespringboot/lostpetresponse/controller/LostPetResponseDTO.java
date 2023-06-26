@@ -8,4 +8,8 @@ public class LostPetResponseDTO {
 
     private Integer articleId;
     private LostPetResponse response;
+    
+    public LostPetResponseDTO () {
+    	response = new LostPetResponse();
+    }
 }

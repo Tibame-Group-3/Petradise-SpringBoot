@@ -11,33 +11,59 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
     <style>
-        .pagination a.page-link {
-            color: #a67c52;
-            /* Set the desired color here */
+        @import url("https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css");
+
+        #example tbody td:first-child {
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
         }
 
-        /* .table-responsive {
-            overflow-x: auto;
+        #example tbody td:first-child:hover {
+            color: orange;
         }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            padding: 8px;
-            border: 1px solid #ddd;
+        /* .swal2-icon {
+            color: orange !important;
         } */
 
-        .btn btn-primaty {
-            height: 30px;
-            padding: 4px 12px;
-            color: #a67c52;
-            background: rgb(241, 236, 209);
-            box-shadow: 0px 0px var(--bs-btn-hover-color);
-            border-color: #fd780f
+        .admin-info-dialog {
+            text-align: center;
+        }
+
+        .admin-info-dialog i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .admin-info-table {
+            margin: 10px auto;
+            text-align: left;
+        }
+
+        .admin-info-table td {
+            padding: 5px 10px;
+        }
+
+        .admin-info-table td:first-child {
+            font-weight: bold;
+        }
+
+        .edit-form {
+            margin: 10px auto;
+            text-align: left;
+        }
+
+        .edit-form input[type="text"],
+        .edit-form select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .edit-form button {
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -123,160 +149,31 @@
                     </div>
                 </nav>
 
-                <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Team</h3>
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Employee Info</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                        <label class="form-label">Show&nbsp;<select
-                                                class="d-inline-block form-select form-select-sm">
-                                                <option value="10" selected="">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                            </select>&nbsp;</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
-                                            class="form-label"><input type="search" class="form-control form-control-sm"
-                                                aria-controls="dataTable" placeholder="Search"></label>
-                                        <!-- <button class="btn btn-primary" type="button"
-                                            style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">搜尋</button> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>員工編號</th>
-                                            <th>姓名</th>
-                                            <th>職稱</th>
-                                            <th>Email</th>
-                                            <th>狀態</th>
-                                            <th style="width: 120px;">編輯</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr></tr>
-                                        <tr>
-                                            <td>CHA001</td>
-                                            <td>老闆</td>
-                                            <td><select style="width: 80px;">
-                                                    <!-- <optgroup label="This is a group"> -->
-                                                    <option value="12" selected="">主管</option>
-                                                    <option value="13">員工</option>
-                                                    <option value="14">工讀生</option>
-                                                    <!-- </optgroup> -->
-                                                </select></td>
-                                            <td>Cell 1</td>
-                                            <td><select style="width: 65px;">
-                                                    <!-- <optgroup label="This is a group"> -->
-                                                    <option value="12" selected="">在職</option>
-                                                    <option value="13">離職</option>
-                                                    <!-- </optgroup> -->
-                                                </select></td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-primary" type="button"
-                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
+                <button id="addEmployeeButton">Add New Employee</button>
 
-                                                    <button class="btn btn-primary" type="button"
-                                                        style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>CHA002</td>
-                                            <td>主管1</td>
-                                            <td>主管</td>
-                                            <td>Cell 3</td>
-                                            <td>Cell 4</td>
-                                            <td>
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
-
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cell 1</td>
-                                            <td>主管2</td>
-                                            <td>主管</td>
-                                            <td>Cell 3</td>
-                                            <td>Cell 4</td>
-                                            <td>
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
-
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cell 1</td>
-                                            <td>員工1</td>
-                                            <td>員工</td>
-                                            <td>Cell 3</td>
-                                            <td>Cell 4</td>
-                                            <td>
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
-
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cell 1</td>
-                                            <td>工讀生1</td>
-                                            <td>工讀生</td>
-                                            <td>Cell 3</td>
-                                            <td>Cell 4</td>
-                                            <td>
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">查看</button>
-
-                                                <button class="btn btn-primary" type="button"
-                                                    style="height: 30px;padding: 4px 12px;color: #a67c52;background: rgb(241,236,209);box-shadow: 0px 0px var(--bs-btn-hover-color);border-color: #fd780f;">編輯</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 27</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav
-                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
-                                                    href="#"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
-                                                        aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
-
-
-
 
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
@@ -287,6 +184,278 @@
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Event listener for "Add New Employee" button
+            $('#addEmployeeButton').click(function () {
+                // Display the employee info table in Swal.fire
+                Swal.fire({
+                    title: 'Add New Employee',
+                    html: getEmployeeInfoTable(),
+                    icon: 'info',
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    customClass: {
+                        container: 'admin-info-dialog'
+                    },
+                    didOpen: function () {
+                        // Event listener for employee info form submission
+                        $('#employeeInfoForm').submit(function (event) {
+                            event.preventDefault(); // Prevent form submission
+
+                            // // Serialize form data
+                            // var formData = $(this).serialize();
+                            // Serialize form data
+                            var formData = {
+                                admin: {
+                                    name: $('#name').val(),
+                                    account: $('#account').val(),
+                                    password: $('#password').val(),
+                                    phone: $('#phone').val(),
+                                    address: $('#address').val(),
+                                    email: $('#email').val(),
+                                    title: $('#title').val(),
+                                    status: $('#status').val()
+                                },
+                                functions: []
+                            };
+
+                            // Retrieve selected functions
+                            $('[name="function-checkbox"]:checked').each(function () {
+                                var functionId = $(this).val();
+                                formData.functions.push({ id: parseInt(functionId) });
+                            });
+
+                            // AJAX request to add new employee
+                            $.ajax({
+                                type: 'POST',
+                                url: 'http://localhost:8080/admin/add', // Replace with the actual URL
+                                data: JSON.stringify(formData),
+                                contentType: 'application/json',
+                                success: function (response) {
+                                    console.log('Employee added:', response);
+
+                                    // Display success message
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: 'Employee added successfully.',
+                                        icon: 'success',
+                                        showCloseButton: true,
+                                        showConfirmButton: false,
+                                        customClass: {
+                                            container: 'admin-info-dialog'
+                                        }
+                                    });
+
+                                    // Clear form fields
+                                    $('#employeeInfoForm')[0].reset();
+                                },
+                                error: function (error) {
+                                    console.log('Failed to add employee:', error);
+
+                                    // Display error message
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'Failed to add employee.',
+                                        icon: 'error',
+                                        showCloseButton: true,
+                                        showConfirmButton: false,
+                                        customClass: {
+                                            container: 'admin-info-dialog'
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+
+            // Admin list table
+            var table = $('#example').DataTable({
+                "ajax": {
+                    "url": "http://localhost:8080/admin/all",
+                    "dataSrc": "" // The data is not wrapped in an object property
+                },
+                "columns": [
+                    {
+                        "data": "name",
+                        "render": function (data, type, row) {
+                            return '<span class="admin-info-text">' + data + '</span>';
+                        }
+                    },
+                    { "data": "email" },
+                    {
+                        "data": "title",
+                        "render": function (data, type, row) {
+                            if (data === "0") {
+                                return "manager";
+                            } else if (data === "1") {
+                                return "full-time";
+                            } else if (data === "2") {
+                                return "intern";
+                            } else {
+                                return "";
+                            }
+                        }
+                    },
+                    {
+                        "data": "status",
+                        "render": function (data, type, row) {
+                            return (data === "0") ? "active" : "inactive";
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return '<button type="button" class="edit-button">Edit</button>';
+                        }
+                    }
+                ]
+            });
+
+            // Event listener for admin info text click
+            $('#example tbody').on('click', 'span.admin-info-text', function () {
+                var data = table.row($(this).closest('tr')).data();
+                console.log(data); // Log the admin data to the console
+
+                // Prepare the admin info table
+                var adminInfoTable = '<table class="admin-info-table">';
+                adminInfoTable += '<tr><td>Id:</td><td>' + data.id + '</td></tr>';
+                adminInfoTable += '<tr><td>Name:</td><td>' + data.name + '</td></tr>';
+                adminInfoTable += '<tr><td>Email:</td><td>' + data.email + '</td></tr>';
+                adminInfoTable += '<tr><td>Phone:</td><td>' + (data.phone ? data.phone : 'N/A') + '</td></tr>';
+                adminInfoTable += '<tr><td>Address:</td><td>' + (data.address ? data.address : 'N/A') + '</td></tr>';
+                adminInfoTable += '<tr><td>Title:</td><td>' + getTitleText(data.title) + '</td></tr>';
+                adminInfoTable += '<tr><td>Status:</td><td>' + getStatusText(data.status) + '</td></tr>';
+                adminInfoTable += '</table>';
+
+                Swal.fire({
+                    title: 'Admin Information',
+                    html: '<div><i class="fas fa-info-circle"></i></div><div>' + adminInfoTable + '</div>',
+                    // icon: 'info',
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    customClass: {
+                        container: 'admin-info-dialog'
+                    }
+                });
+            });
+
+
+            // Event listener for edit button click
+            $('#example tbody').on('click', 'button.edit-button', function () {
+                var data = table.row($(this).closest('tr')).data();
+                console.log(data); // Log the admin data to the console
+
+                // Prepare the edit form
+                var editForm = '<form class="edit-form">';
+                editForm += '<label for="edit-name">Name:</label>';
+                editForm += '<input type="text" id="edit-name" name="edit-name" value="' + data.name + '">';
+                editForm += '<label for="edit-account">Account:</label>';
+                editForm += '<input type="text" id="edit-account" name="edit-account" value="' + data.account + '" readonly>';
+                editForm += '<label for="edit-password">Password:</label>';
+                editForm += '<input type="password" id="edit-password" name="edit-password">';
+                editForm += '<label for="edit-confirm-password">Confirm Password:</label>';
+                editForm += '<input type="password" id="edit-confirm-password" name="edit-confirm-password">';
+                editForm += '<label for="edit-email">Email:</label>';
+                editForm += '<input type="text" id="edit-email" name="edit-email" value="' + data.email + '">';
+                editForm += '<label for="edit-phone">Phone:</label>';
+                editForm += '<input type="text" id="edit-phone" name="edit-phone" value="' + (data.phone ? data.phone : '') + '">';
+                editForm += '<label for="edit-address">Address:</label>';
+                editForm += '<input type="text" id="edit-address" name="edit-address" value="' + (data.address ? data.address : '') + '">';
+                editForm += '<label for="edit-title">Title:</label>';
+                editForm += '<select id="edit-title" name="edit-title">';
+                editForm += '<option value="0" ' + (data.title === '0' ? 'selected' : '') + '>Manager</option>';
+                editForm += '<option value="1" ' + (data.title === '1' ? 'selected' : '') + '>Full-time</option>';
+                editForm += '<option value="2" ' + (data.title === '2' ? 'selected' : '') + '>Intern</option>';
+                editForm += '</select>';
+                editForm += '<label for="edit-status">Status:</label>';
+                editForm += '<select id="edit-status" name="edit-status">';
+                editForm += '<option value="0" ' + (data.status === '0' ? 'selected' : '') + '>Active</option>';
+                editForm += '<option value="1" ' + (data.status === '1' ? 'selected' : '') + '>Inactive</option>';
+                editForm += '</select>';
+                editForm += '<label for="edit-access">Access:</label>';
+                editForm += '<input type="checkbox" id="hotel" value="access_hotel" name="admin_access"><label class="light" for="hotel">' + getAccessText(data.access) + '</label>';
+                editForm += '<input type="checkbox" id="shelter" value="access_shelter" name="admin_access"><label class="light" for="shelter">' + getAccessText(data.access) + '</label>';
+                editForm += '<input type="checkbox" id="shop" value="access_shop" name="admin_access"><label class="light" for="shop">' + getAccessText(data.access) + '</label>';
+                editForm += '<input type="checkbox" id="employee" value="access_employee" name="admin_access"><label class="light" for="employee">' + getAccessText(data.access) + '</label>';
+                editForm += '</label>';
+                editForm += '<button type="button" class="edit-confirm-button">Confirm</button>';
+                editForm += '</form>';
+
+                Swal.fire({
+                    title: 'Edit Admin Information',
+                    html: editForm,
+                    icon: 'info',
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    customClass: {
+                        container: 'admin-info-dialog'
+                    }
+                });
+
+                // Event listener for edit confirm button click
+                $('.edit-confirm-button').click(function () {
+                    var editedData = {
+                        id: data.id,
+                        name: $('#edit-name').val(),
+                        email: $('#edit-email').val(),
+                        phone: $('#edit-phone').val(),
+                        address: $('#edit-address').val(),
+                        title: $('#edit-title').val(),
+                        status: $('#edit-status').val()
+                    };
+
+                    console.log(editedData); // Log the edited data to the console
+
+                    // Implement your logic to handle the edit operation
+                });
+            });
+
+            // Helper function to get the title text
+            function getTitleText(title) {
+                if (title === "0") {
+                    return "Manager";
+                } else if (title === "1") {
+                    return "Full-time";
+                } else if (title === "2") {
+                    return "Intern";
+                } else {
+                    return "";
+                }
+            }
+
+            // Helper function to get the status text
+            function getStatusText(status) {
+                return (status === "0") ? "Active" : "Inactive";
+            }
+
+            // Helper function to get the access text
+            function getAccessText(access) {
+                var accessList = {
+                    "1": "Access 1",
+                    "2": "Access 2",
+                    "3": "Access 3"
+                };
+                var accessText = "";
+                if (access) {
+                    var accessArray = access.split(",");
+                    accessArray.forEach(function (item) {
+                        accessText += accessList[item] + "<br>";
+                    });
+                }
+                return accessText;
+            }
+        });
+
+    </script>
 </body>
 
 </html>
