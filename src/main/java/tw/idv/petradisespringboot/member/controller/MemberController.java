@@ -33,6 +33,11 @@ class MemberController {
         return ResponseEntity.ok(service.getAll());
     }
 
+    @PostMapping("/update")
+    ResponseEntity<?> update(@RequestBody Member member) {
+        return ResponseEntity.ok(service.update(member));
+    }
+
     @PostMapping("/sign-up")
     ResponseEntity<?> signUp(@RequestBody Member member) {
         try {
