@@ -36,7 +36,7 @@ public class AdoptedApplicationServiceImpl implements AdoptedApplicationService 
 
 
 	@Override
-	public AdoptedApplication save(AdoptedApplication adoptedApplication) {
+	public AdoptedApplication addAdoptedApplication(AdoptedApplication adoptedApplication) {
 		
 		return repository.save(adoptedApplication);
 	}
@@ -47,6 +47,13 @@ public class AdoptedApplicationServiceImpl implements AdoptedApplicationService 
 			super("找不到會員ID: " + id);
 		}
 		
+	}
+
+
+	@Override
+	public AdoptedApplication save(AdoptedApplication adoptedApplication) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	}

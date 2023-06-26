@@ -1,16 +1,22 @@
 package tw.idv.petradisespringboot.animal.vo;
 
+
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tw.idv.petradisespringboot.animlpic.vo.AnimalPic;
 
 @Entity
 @Getter
@@ -48,6 +54,9 @@ public class Animal {
 	
 	@Column(name ="animal_info_note", insertable = false )
 	private String animalinfo;
+	
+//	@OneToOne(mappedBy = "animalid", cascade = CascadeType.ALL)
+//    private List<AnimalPic> animalPics;
 	
 	public String toString() {
 		return "Animal [animalID="+animalid +",corpID="+corpid +",menID="+ memid +",Type="+animaltype +"animalName=" +animalname +"animalStatus=" +aniamlstatus

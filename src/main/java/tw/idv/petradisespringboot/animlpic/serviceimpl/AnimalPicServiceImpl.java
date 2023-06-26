@@ -2,11 +2,14 @@ package tw.idv.petradisespringboot.animlpic.serviceimpl;
 
 import java.util.List;
 
+import javax.persistence.OrderColumn;
+
 import org.springframework.stereotype.Service;
 
 import tw.idv.petradisespringboot.animlpic.repo.AnimalPicRepository;
 import tw.idv.petradisespringboot.animlpic.service.AnimalPicService;
 import tw.idv.petradisespringboot.animlpic.vo.AnimalPic;
+
 
 @Service
 public class AnimalPicServiceImpl implements AnimalPicService {
@@ -34,6 +37,16 @@ public class AnimalPicServiceImpl implements AnimalPicService {
 		return repository.save(animalpic);
 	}
 	
+	
+	@Override
+    public AnimalPic addAnimalPic(AnimalPic animalpic) {
+		return repository.save(animalpic);
+    }
+	
+	@Override
+	public AnimalPic update(AnimalPic animalpic) {
+		return repository.save(animalpic);
+	}
 }
 
 class AnimalpicNotFoundException extends RuntimeException {

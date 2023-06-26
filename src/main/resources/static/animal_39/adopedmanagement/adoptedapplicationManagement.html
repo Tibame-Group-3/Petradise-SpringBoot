@@ -3,8 +3,6 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Table - Brand</title>
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -64,7 +62,7 @@
 							<a class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">新增動物</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;"></a>
+								style="padding: 2px 30px; font-size: 13px;">動物照片</a>
 						</div></li>
 					<li class="nav-item dropdown show"><a
 						class="dropdown-toggle nav-link" aria-expanded="true"
@@ -73,7 +71,7 @@
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
 							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">收藏</a><a
+								style="padding: 2px 30px; font-size: 13px;"></a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">預約</a><a
 								class="dropdown-item" href="#"
@@ -131,97 +129,53 @@
 				</nav>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">預約資訊</h3>
+					<h3 class="text-dark mb-4">認養資訊</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
 							<!-- Button -->
-							<button type="button" class="btn btn-primary btn-modify"
-								onclick="window.location.href='addRoomType.html'">新增預約</button>
+							<button type="button" class="btn btn-primary"
+								id="applicationAddButton" data-bs-toggle="modal"
+								data-bs-target="#exampleModal" data-bs-whatever="@mdo">認養新增</button>
 
-						</div>
-						<div class="controll-content activity-order-controll-content">
-							<table id="all" class="display" style="width: 100%">
-								<thead>
-									<tr>
-										<th>預約編號</th>
-										<th>會員編號</th>
-										<th>動物編號</th>
-										<th>預約時間</th>
-										<th>預約狀態</th>
-										<th>查詢</th>
-										<th>修改</th>
-									</tr>
 
-								</thead>
-								<!-- <tbody id="tbody">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <th>0</th>
-                                        <td class="align-middle"><button type="button" class="btn btn-dark"
-                                                data-bs-toggle="modal" data-bs-target="#staticUpdate">
-                                                查詢
-                                            </button>
-                                        </td>
-                                        <td class="align-middle"><button type="button" class="btn btn-dark"
-                                                data-bs-toggle="modal" data-bs-target="#staticUpdate">
-                                                修改
-                                            </button>
-                                        </td>>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>896</td>
-                                        <td>896</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>896</td>
-                                        <td>896</td>
-                                    </tr>
+							<div class="controll-content activity-order-controll-content">
+								<table id="all" class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<!-- <th>認養編號</th> -->
+											<th>會員</th>
+											<th>動物</th>
+											<th>身分證</th>
+											<th>姓名</th>
+											<th>地址</th>
+											<th>電話</th>
+											<th>職業</th>
+											<th>信箱</th>
+											<th>狀態</th>
+											<th>查詢</th>
+											<th>修改</th>
+										</tr>
+									</thead>
+									<tbody id="tbody">
 
-                                </tbody>
-                            </table> -->
+
+									</tbody>
+								</table>
 
 
 								<!---------------------------------主體結束-------------------------------->
-								</div>
-								</div>
-								</div>
-								</div>
-								</div>
-								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
 
 
-								<!-- <div class="row">
+		<!-- <div class="row">
                     <div class="col-md-6 align-self-center">
                         <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
                             Showing 1 to 10 of 27</p>
@@ -243,7 +197,7 @@
                 </div> -->
 
 
-								<!-- <footer class="bg-white sticky-footer">
+		<!-- <footer class="bg-white sticky-footer">
         <div class="container my-auto">
             <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
         </div>
@@ -252,56 +206,68 @@
     </div> -->
 
 
-								<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-								<script src="assets/js/theme.js"></script>
-								<script
-									src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-								<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-								<script
-									src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-								<script
-									src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-								<!-- 引入bootstrap CDN -->
-								<script
-									src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-									integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-									crossorigin="anonymous"></script>
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="assets/js/theme.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+		<!-- 引入bootstrap CDN -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+			crossorigin="anonymous"></script>
 
-								<!-- 新引入的JS檔案或套件請由此往下放 -->
-								<script src="./assets/js/Promotionedit.js"></script>
-								<script>
+		<!-- 新引入的JS檔案或套件請由此往下放 -->
+		<script src="./assets/js/Promotionedit.js"></script>
+		<script>
         const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
         const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
     </script>
 
-								<script>
+		<script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
 
-								<!-- JS -->
-								<script
-									src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-									integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-									crossorigin="anonymous"></script>
-								<script
-									src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
-									integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-									crossorigin="anonymous"></script>
-								<script>
+		<!-- JS -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+			integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+			integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
+			crossorigin="anonymous"></script>
+		<script>
             (() => {
                 const tbody = document.querySelector('#tbody');
 
 
-                // ===============================VVV方法區VVV====================================
+                $(document).ready(function() {
+                    // 监听按钮点击事件
+                    $('#applicationAddButton').click(function() {
+                        // 执行页面重定向
+                        window.location.href = 'http://localhost:8080/animal_39/animalform/addapplicationManagement.html';
+                    });
+                });
+                
+                
+                
+                
+                
+                
+                
+                // ============================1.查資料回來getAllPromotion() 拿到字串和筆數========================
+               let dataaccount = 0;
+                let AdoptedApplication = [];
 
-                // ============================1.查資料回來getAllPromiseList() 拿到字串和筆數========================
-                let dataaccount = 0;
-                let PromiseList = [];
-
-                function getAllPromiseList() {
-                    console.log('進入getAllPromiseList()')
-                    fetch("http://localhost:8080/promise_lists/all")
+                function getAllAdoptedApplication() {
+                    console.log('進入getAllAdoptedApplication()')
+                    fetch("http://localhost:8080/adopted_applications/all")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {
@@ -312,26 +278,38 @@
                             // 解析 JSON 格式的數據
                             response.json().then(function (data) {
                                 // 在此處可以處理從 API 獲取的數據
-                                PromiseList = data;
-                                console.log('獲取預約資訊：', PromiseList);
+                                AdoptedApplication = data;
+                                console.log('獲取領養人資訊：', AdoptedApplication);
 
 
-                                for (let i = 0; i < PromiseList.length; i++) {
+                                for (let i = 0; i < AdoptedApplication.length; i++) {
                                     dataaccount = i;
-                                    let row = PromiseList[i];
-                                    const promiseid = row.promiseid;
-                                    const memid = row.memid;
-                                    const animalid = row.aanimalid;
-                                    const promisetime = row.promisetime;
-                                    const promisestatus = row.promisestatus;
+                                    let row = AdoptedApplication[i];
+                                    //const adoptedId = row.adoptedId;
+                                    const memberId = row.membId;
+                                    const animalId = row.animalId;
+                                    const adopterIdNumber = row.adopterIdNumber;
+                                    const adopterName = row.adopterName;
+                                    const adopterAddress = row.adopterAddress;
+                                    const adopterPhone = row.adopterPhone;
+                                    const adopterJob = row.adopterJob;
+                                    const adopterEmail = row.adopterEmail;
+                                    const adopterStatus = row.adopterStatus;
+                                    //const adopterNote = row.adopterNote;
                                     dataTable.row.add([
-                                    	row.promiseid,
-                                        row.memid,
-                                        row.animalid,
-                                        row.promisetime,
-                                        row.promisestatus,
+                                        //row.adoptedId,
+                                        row.membId,
+                                        row.animalId,
+                                        row.adopterIdNumber,
+                                        row.adopterName,
+                                        row.adopterAddress,
+                                        row.adopterPhone,
+                                        row.adopterJob,
+                                        row.adopterEmail,
+                                        row.adopterStatus,
+                                        //row.adopterNote,
                                         `<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}">修改
+                    data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton">修改
             </button>`,
                                         `<button type="button" class="btn btn-primary">查詢</button>`
 
@@ -344,6 +322,22 @@
                             console.log('錯誤：', err);
                         });
                 }
+                
+                $(document).on("click", "#editbutton", function() {
+                    
+                    var rowIndex = $(this).closest("tr").index();
+
+                    // 使用索引获取对应的动物对象和动物ID
+                    var row = AdoptedApplication[rowIndex];
+                    var adoptedId = row.adoptedId;
+
+                    window.location.href  = "/animal_39/animalform/updateapplication.html?id=" + adoptedId;
+
+   
+                });
+                
+                
+                
 
 
                 // ============================2.  初始化datatable函式========================
@@ -357,17 +351,13 @@
                     destroy: true,
                 });
 
-                // ============================３. 修改資料進去 editmemberdata()========================
+    
 
 
 
 
-                // ===============================^^^方法區^^^====================================
-
-                // ===============================VVV使用方法區VVV================================
-
-                //=================================1. 總之先查一次=================================
-                getAllPromiseList();
+               
+                getAllAdoptedApplication();
 
             })();
     </script>

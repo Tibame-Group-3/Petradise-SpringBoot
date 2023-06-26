@@ -1,11 +1,15 @@
 package tw.idv.petradisespringboot.animlpic.vo;
 
+import java.util.Base64;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +23,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "Animal_pic")
 public class AnimalPic {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pic_id")
@@ -27,8 +32,9 @@ public class AnimalPic {
 	@Column(name ="animal_id" )
 	private Integer animalid;
 	
-	@Column(name = "animal_pic")
+	@Column(name = "animal_pic",columnDefinition = "LONGBLOB")
 	private byte[] animalpic;
+	
 	
 	
 	@Override

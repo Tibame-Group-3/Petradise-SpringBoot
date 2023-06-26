@@ -69,6 +69,12 @@ public class AdoptedApplication {
 				+ adopterEmail + ", adopterStatus=" + adopterStatus + ", adopterNote=" + adopterNote + "]";
 	}
 
+
+
+	
+
+
+	
 	
 	
 	

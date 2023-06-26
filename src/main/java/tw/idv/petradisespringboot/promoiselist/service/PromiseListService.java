@@ -14,6 +14,9 @@ public interface PromiseListService {
 
 	List<PromiseList> findAllPromiselist();
 
+
+	PromiseList addPromiselist(PromiseList promiseList);
+
 	
 
 }

@@ -10,6 +10,8 @@ import tw.idv.petradisespringboot.animal.vo.Animal;
 @Component
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 
+
+
 	
 
 	

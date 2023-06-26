@@ -47,7 +47,7 @@
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
 							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">收容資訊</a> <a
+								style="padding: 2px 30px; font-size: 13px;">地區</a> <a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;"></a> <a
 								class="dropdown-item" href="#"
@@ -73,7 +73,7 @@
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
 							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;"></a><a
+								style="padding: 2px 30px; font-size: 13px;">收藏</a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">預約</a><a
 								class="dropdown-item" href="#"
@@ -131,152 +131,32 @@
 				</nav>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">動物資訊</h3>
+					<h3 class="text-dark mb-4">預約資訊</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
 							<!-- Button -->
 							<button type="button" class="btn btn-primary"
-								id="animalAddButton" data-bs-toggle="modal"
-								data-bs-target="#exampleModal" data-bs-whatever="@mdo">動物新增</button>
-							<div class="modal fade" id="exampleModal" tabindex="-1"
-								aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h1 class="modal-title fs-5" id="exampleModalLabel">動物資料新增
-											</h1>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form id="add-animal" method="post">
-												<div class="input-group-sm mb-3">
-													<label for="animalid" class="col-form-label">動物編號:</label>
-													<input type="text" class="form-control" id="animalid">
-												</div>
-												<div class="input-group-sm mb-3">
-													<label for="cropId" class="col-form-label">業主編號:</label> <input
-														type="text" class="form-control" id="cropId" name="corpid">
-												</div>
-												<!--<div class="input-group-sm mb-3">
-													<label for="memid" class="col-form-label">身分證:</label> <input
-														type="text" class="form-control" id="memid" name="memid">
-												</div>-->
-												<div class="input-group-sm mb-3">
-													<label for="type class="col-form-label">種類:</label> <input
-														type="text" class="form-control" id="type" name="animaltype">
-												</div>
-												<div class="input-group-sm mb-3">
-													<label for="name" class="col-form-label">名字:</label> <input
-														type="text" class="form-control" id="name" name="animalname">
-												</div>
-												<div class="input-group-sm mb-3">
-													<label for="status" class="col-form-label">狀態:</label> <input
-														type="text" class="form-control" id="status" name="aniamlstatus">
-												</div>
-												<div class="input-group-sm mb-3">
-													<label for="sex" class="col-form-label">性別:</label> <input
-														type="text" class="form-control" id="sex" name="animalsex">
-												</div>
-												<div class="input-group-sm mb-3">
-													<label for="occupation" class="col-form-label">年齡:</label>
-													<input type="text" class="form-control" id="age" name="animalage">
-												</div>
-												<!--<div class="input-group-sm mb-3">
-													<label for="status" class="col-form-label">狀態:</label> <input
-														type="text" class="form-control" id="status">
-												</div>-->
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">取消</button>
-													<button type="submit" class="btn btn-primary">新增</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
+								id="promiseaddButton" data-bs-toggle="modal"
+								data-bs-target="#exampleModal" data-bs-whatever="@mdo">預約新增</button>
 
-
-
-
-
-
-
-						</div>
 						<div class="controll-content activity-order-controll-content">
 							<table id="all" class="display" style="width: 100%">
 								<thead>
 									<tr>
-										<!--<th>動物編號</th>-->
-										<th>動物</th>
-										<th>業主</th>
-										<th>種類</th>
-										<th>名字</th>
-										<th>狀態</th>
-										<th>性別</th>
-										<th>年齡</th>
-										<!-- <th>備註</th> -->
+										<th>預約編號</th>
+										<th>會員編號</th>
+										<th>動物編號</th>
+										<th>預約時間</th>
+										<th>預約狀態</th>
 										<th>查詢</th>
 										<th>修改</th>
 									</tr>
-									</tr>
 
 								</thead>
-								<!-- <tbody id="tbody">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <th>0</th>
-                                        <td class="align-middle"><button type="button" class="btn btn-dark"
-                                                data-bs-toggle="modal" data-bs-target="#staticUpdate">
-                                                查詢
-                                            </button>
-                                        </td>
-                                        <td class="align-middle"><button type="button" class="btn btn-dark"
-                                                data-bs-toggle="modal" data-bs-target="#staticUpdate">
-                                                修改
-                                            </button>
-                                        </td>>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>896</td>
-                                        <td>896</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>0</td>
-                                        <td>896</td>
-                                        <td>896</td>
-                                    </tr>
-
+								<tbody id="tbody">
+                                   
                                 </tbody>
-                            </table> -->
+                            </table> 
 
 
 								<!---------------------------------主體結束-------------------------------->
@@ -363,15 +243,29 @@
                 const tbody = document.querySelector('#tbody');
 
 
-                // ===============================VVV方法區VVV====================================
+                
+                
+                $(document).ready(function() {
+                    // 监听按钮点击事件
+                    $('#promiseaddButton').click(function() {
+                        // 执行页面重定向
+                        window.location.href = 'http://localhost:8080/animal_39/animal_addform/addpromise.html';
+                    });
+                });
+                
+                
+                
+                
+                
+                
 
-                // ============================1.查資料回來getAllPromotion() 拿到字串和筆數========================
+                // ============================1.查資料回來getAllPromiseList() 拿到字串和筆數========================
                 let dataaccount = 0;
-                let Animal = [];
+                let PromiseList = [];
 
-                function getAllAnimal() {
-                    console.log('進入getAllAnimal()')
-                    fetch("http://localhost:8080/animals/all")
+                function getAllPromiseList() {
+                    console.log('進入getAllPromiseList()')
+                    fetch("http://localhost:8080/promise_lists/all")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {
@@ -382,30 +276,24 @@
                             // 解析 JSON 格式的數據
                             response.json().then(function (data) {
                                 // 在此處可以處理從 API 獲取的數據
-                                Animal = data;
-                                console.log('獲取動物人資訊：', Animal);
+                                PromiseList = data;
+                                console.log('獲取預約資訊：', PromiseList);
 
 
-                                for (let i = 0; i < Animal.length; i++) {
+                                for (let i = 0; i < PromiseList.length; i++) {
                                     dataaccount = i;
-                                    let row = Animal[i];
-                                    const animalid = row. animalid;
-                                    const corpid = row.corpid;
-                                    //const memid = row.memid;
-                                    const animaltype = row.animaltype;
-                                    const animalname = row.animalname;
-                                    const animalsex = row.animalsex;
-                                    const animalage = row.animalage;
-                                    const aniamlstatus = row.aniamlstatus;
+                                    let row = PromiseList[i];
+                                    const promiseid = row.promiseid;
+                                    const memid = row.memid;
+                                    const animalid = row.aanimalid;
+                                    const promisetime = row.promisetime;
+                                    const promisestatus = row.promisestatus;
                                     dataTable.row.add([
+                                    	row.promiseid,
+                                        row.memid,
                                         row.animalid,
-                                        row.corpid,
-                                        //row.memid,
-                                        row.animaltype,
-                                        row.animalname,
-                                        row.animalsex,
-                                        row.animalage,
-                                        row.aniamlstatus,
+                                        row.promisetime,
+                                        row.promisestatus,
                                         `<button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}">修改
             </button>`,
@@ -420,40 +308,7 @@
                             console.log('錯誤：', err);
                         });
                 }
-                
-                <!--燈箱-->
-                
-                $("#add-animal").submit(function (event) {
-                    event.preventDefault();
 
-                    const newAnimal = {
-                    		corpid: $("input[name='corpid']").val(),
-                    		memid: $("input[name='memid']").val(),
-                    		animaltype: $("input[name='animaltype']").val(),
-                    		animalname: $("input[name='animalname']").val(),
-                    		animalsex: $("input[name='animalsex']").val(),
-                    		animalage: $("input[name='animalage']").val(),
-                    		aniamlstatus: $("input[name='aniamlstatus']").val(),
-                    		
-                    };
-
-                   
-                    
-                    
-                    $.ajax({
-                        url: "http://localhost:8080/animals/save",
-                        type: "POST",
-                        data: JSON.stringify(newAnimal),
-                        contentType: "application/json",
-                        success: function (response) {
-                            window.location.href = "/animal_39/adopedmanagement/adopted_addAnimal.html"; // 使用JavaScript進行頁面跳轉
-                            console.log("Data saved successfully!");
-                        },
-                        error: function (xhr, status, error) {
-                            console.log("AJAX Error: " + error);
-                        }
-                    });
-                });
 
                 // ============================2.  初始化datatable函式========================
 
@@ -476,7 +331,7 @@
                 // ===============================VVV使用方法區VVV================================
 
                 //=================================1. 總之先查一次=================================
-                getAllAnimal();
+                getAllPromiseList();
 
             })();
     </script>

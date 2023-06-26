@@ -18,6 +18,20 @@ public interface AnimalPicService {
 	AnimalPic save (AnimalPic animalpic);
 
 
+	AnimalPic addAnimalPic(AnimalPic animalPic);
+
+
+	AnimalPic update(AnimalPic animalpic);
+
+
+	
+
+	
+
+
+	
+
+
 	
 
 

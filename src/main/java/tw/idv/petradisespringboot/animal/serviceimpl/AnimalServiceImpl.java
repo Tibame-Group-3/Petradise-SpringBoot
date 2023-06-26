@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.animal.repo.AnimalRepository;
 import tw.idv.petradisespringboot.animal.service.AnimalService;
 import tw.idv.petradisespringboot.animal.vo.Animal;
+import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {
@@ -34,6 +35,17 @@ public class AnimalServiceImpl implements AnimalService {
 	public Animal save(Animal animal) {
 		return repository.save(animal);
 	}
+	
+
+	@Override
+	public Animal addAnimal(Animal animal) {
+
+		return repository.save(animal);
+	}
+
+
+	
+
 
 }
 

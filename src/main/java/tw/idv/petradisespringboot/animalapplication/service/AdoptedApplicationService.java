@@ -15,6 +15,8 @@ public interface AdoptedApplicationService {
 
 	AdoptedApplication save(AdoptedApplication adoptedApplication);
 
+	AdoptedApplication addAdoptedApplication(AdoptedApplication adoptedApplication);
+
 
 
 
