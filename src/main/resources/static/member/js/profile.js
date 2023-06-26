@@ -6,13 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-// Attach a submit event listener to the form to handle form submission
-document.getElementById('member-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent form from submitting normally
-
-    // Handle form submission, for example by making an AJAX request to your server
-});
-
 function fetchMember(){
     const memberId = localStorage.getItem('memberId');
     if (memberId === null) {
