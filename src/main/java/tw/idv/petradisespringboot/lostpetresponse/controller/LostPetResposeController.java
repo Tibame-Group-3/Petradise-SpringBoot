@@ -18,12 +18,11 @@ public class LostPetResposeController {
 
 	@PostMapping("/LostPetRespose/add")
 	LostPetResponse create(@RequestBody LostPetResponseDTO lostPetResponseDTO) {
-<<<<<<< HEAD
+
 
 		System.out.println(lostPetResponseDTO);
 
-=======
->>>>>>> origin/main
+
 		return responseService.add(lostPetResponseDTO);
 	}
 	
