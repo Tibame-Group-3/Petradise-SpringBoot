@@ -95,7 +95,7 @@ class MemberController {
 
 
     @Data
-    private class ChangePasswordDTO {
+    private static class ChangePasswordDTO {
         Integer id;
         String oldPassword;
         String newPassword;
