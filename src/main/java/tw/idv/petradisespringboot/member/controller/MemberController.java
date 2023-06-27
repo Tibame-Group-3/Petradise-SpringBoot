@@ -14,6 +14,7 @@ import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/members")
@@ -89,9 +90,13 @@ class MemberController {
 
     @PostMapping("/change-password")
     ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO dto) {
-        return service.changePassword(dto.getId(), dto.getOldPassword(), dto.getNewPassword()) ?
-                ResponseEntity.ok().build() :
-                ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        final var result = service.changePassword(dto.getId(), dto.getOldPassword(), dto.getNewPassword());
+        if (Objects.equals(result, "更改密碼成功")) {
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(result);
     }
 
     private Resource loadDistricts(){

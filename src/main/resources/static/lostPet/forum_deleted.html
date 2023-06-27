@@ -80,6 +80,22 @@
 #main-container {
 	border: 3px solid black;
 }
+
+.button-redi {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	background-color: #fd780f;
+	color: #fff;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	transition: #fd780f 0.3s ease;
+	margin-right: 400px;
+}
 </style>
 </head>
 
@@ -208,6 +224,10 @@
 				<h5>(本文已被刪除)</h5>
 			</div>
 		</div>
+		<br>
+		<div>
+			<button class="button-redi" id="redi">回瀏覽頁面</button>
+		</div>
 	</div>
 	<footer class="text-center">
 		<div class="container text-muted py-4 py-lg-5">
@@ -248,16 +268,13 @@
 		</div>
 	</footer>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
-		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
-		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script>
-		
+    	const btn_redi = document.querySelector('.button-redi');
+    	btn_redi.addEventListener('click', () => {
+	        const targetPageUrl = './lost.html';
+	        window.location.href = targetPageUrl;
+	    });
 	</script>
 </body>
 

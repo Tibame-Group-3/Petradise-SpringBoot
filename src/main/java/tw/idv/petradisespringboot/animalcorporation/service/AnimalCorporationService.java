@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.animalcorporation.service;
 
 import java.util.List;
 
+
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
 
 
@@ -14,4 +15,5 @@ public interface AnimalCorporationService {
 	List<AnimalCorporation> findAll();
 	
 	AnimalCorporation findByID(Integer id);
+
 }

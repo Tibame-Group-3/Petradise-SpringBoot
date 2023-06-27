@@ -16,5 +16,5 @@ public interface MemberService {
 
     Member update(Member newMember);
 
-    boolean changePassword(Integer id, String oldPassword, String newPassword);
+    String changePassword(Integer id, String oldPassword, String newPassword);
 }

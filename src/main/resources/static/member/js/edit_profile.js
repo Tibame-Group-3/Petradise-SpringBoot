@@ -1,5 +1,11 @@
 let member;
 
+const nameInput = document.getElementById('name');
+const birthdayInput = document.getElementById('birthday');
+const phoneInput = document.getElementById('phone');
+const emailInput = document.getElementById('email');
+const addressInput = document.getElementById('address');
+
 document.addEventListener('DOMContentLoaded', function () {
     preventSpaceInput();
     fetchMember();
@@ -32,11 +38,11 @@ function fetchMember() {
 
 function displayMember(member) {
     // Populate form with member info
-    document.getElementById('name').value = member.name;
-    document.getElementById('birthday').value = member.birthday;
-    document.getElementById('phone').value = member.phone;
-    document.getElementById('email').value = member.email;
-    document.getElementById('address').value = member.address;
+    nameInput.value = member.name;
+    birthdayInput.value = member.birthday;
+    phoneInput.value = member.phone;
+    emailInput.value = member.email;
+    addressInput.value = member.address;
     // Continue for all fields
 }
 
@@ -46,11 +52,17 @@ function redirectToMainPage() {
 
 function handleSubmit(event) {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const birthday = document.getElementById('birthday').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const address = document.getElementById('address').value;
+    if (validateForm()) {
+        showConfirmDialog();
+    }
+}
+
+function showConfirmDialog() {
+    const name = nameInput.value;
+    const birthday = birthdayInput.value;
+    const phone = phoneInput.value;
+    const email = emailInput.value;
+    const address = addressInput.value;
 
     const newMember = member;
     newMember.name = name;
@@ -92,7 +104,6 @@ function handleSubmit(event) {
             updateMember(newMember);
         }
     });
-
 }
 
 function updateMember(newMember) {
@@ -118,6 +129,65 @@ function updateMember(newMember) {
             });
         });
 }
+
+function validateForm() {
+    // Initialization
+    let isFormValid = true;
+
+    // Input validations
+    const validations = [
+        [nameInput, '請輸入姓名'],
+        [birthdayInput, '請輸入生日'],
+        [phoneInput, '請輸入電話號碼'],
+        [phoneInput, '請輸入符合格式的台灣電話號碼', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
+        [emailInput, '請輸入電子郵件'],
+        [emailInput, '請輸入符合格式的電子郵件', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
+        [addressInput, '請輸入地址']
+    ];
+
+    for(const [inputElement, errorMessage, regex] of validations) {
+        if (!validateInputElement(inputElement, errorMessage, regex)) {
+            isFormValid = false;
+            inputElement.focus();
+            return isFormValid;
+        }
+    }
+
+    return isFormValid;
+}
+
+function validateInputElement(inputElement, errorMessage, regex = null) {
+    if (inputElement.value === '' || (regex && !regex.test(inputElement.value))) {
+        showInvalidFeedback(inputElement, errorMessage);
+        return false;
+    } else {
+        removeInvalidFeedback(inputElement);
+        return true;
+    }
+}
+
+function showInvalidFeedback(inputElement, errorMessage) {
+    inputElement.classList.add('is-invalid');
+    const existingFeedbackElement = inputElement.parentNode.querySelector('.invalid-feedback');
+
+    if (existingFeedbackElement) {
+        existingFeedbackElement.textContent = errorMessage;
+    } else {
+        const newFeedbackElement = document.createElement('div');
+        newFeedbackElement.classList.add('invalid-feedback');
+        newFeedbackElement.textContent = errorMessage;
+        inputElement.parentNode.appendChild(newFeedbackElement);
+    }
+}
+
+function removeInvalidFeedback(inputElement) {
+    inputElement.classList.remove('is-invalid');
+    const feedbackElement = inputElement.parentNode.querySelector('.invalid-feedback');
+    if (feedbackElement) {
+        feedbackElement.remove();
+    }
+}
+
 
 function redirectToProfilePage() {
     window.location.href = "/member/profile.html";
