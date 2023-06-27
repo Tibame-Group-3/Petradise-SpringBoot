@@ -1,23 +1,60 @@
 const data = {};
+// ------------------選單------------------
+const selector = {
+    "寶可夢": ["寶可夢球", "樹果", "回復道具", "戰鬥道具", "其他"],
+    "狗": ["飼料", "罐罐", "零食", "玩具", "保健", "其他"],
+    "貓": ["飼料", "罐罐", "零食", "玩具", "保健", "其他"]
+}
+// $("#pdPetType").on("change", function (e){
+//
+//     $("#pdType").empty();
+//     const pdTypeArr = selector[e.target.value];
+//     pdTypeArr.forEach( function (type) {
+//         const option = $(`<option>`).val(type).text(type);
+//         $("#pdType").append(option);
+//     });
+// })
+
+// 生成選單選項
+function createOptions() {
+    const pdPetType = $("#pdPetType").val();
+    const pdTypeArr = selector[pdPetType] || [];
+
+    $("#pdType").empty();
+
+    pdTypeArr.forEach(function (type) {
+        const option = $("<option>").val(type).text(type);
+        $("#pdType").append(option);
+    });
+}
+
+$("#pdPetType").on("change", function (){
+    createOptions();
+});
+
 // ------------------拿session資料------------------
 $(document).ready(function () {
     const pdId = JSON.parse(sessionStorage.getItem("pdId"));
     // console.log("/product/get/" + pdId)
 
-    axios.get("/product/get/" + pdId)
-        .then(function (res) {
-            console.log(res.data);
-            let base64Img = `data:image/*;base64,${res.data.pdImg}`;
-            $("#pdName").val(res.data.pdName);
-            $("#pdPetType").val(res.data.pdPetType);
-            $("#pdType").val(res.data.pdType);
-            $("#pdPrice").val(res.data.pdPrice);
-            $("#pdInfo").val(res.data.pdInfo);
-            $("#preview").html(`<img src="${base64Img}" alt="image" style="width: 100%">`);
+    axios.get("/product/get/" + pdId, {
+        async: false
+    })
+    .then(function (res) {
+        console.log(res.data);
+        let base64Img = `data:image/*;base64,${res.data.pdImg}`;
+        $("#pdName").val(res.data.pdName);
+        $("#pdPetType").val(res.data.pdPetType);
+        createOptions();
+        $("#pdType").val(res.data.pdType);
+        $("#pdStatus").val(res.data.pdStatus);
+        $("#pdPrice").val(res.data.pdPrice);
+        $("#pdInfo").val(res.data.pdInfo);
+        $("#preview").html(`<img src="${base64Img}" alt="image" style="width: 100%">`);
 
-            data.pdImg = `${res.data.pdImg}`;   // 去除base64前墜
-        })
-        .catch(err => console.log(err));
+        data.pdImg = `${res.data.pdImg}`;   // 去除base64前墜
+    })
+    .catch(err => console.log(err));
 
 })
 
@@ -31,7 +68,9 @@ $("#submit").on('click', function (e) {
     let pdName = $("#pdName").val().trim();
     let pdPetType = $("#pdPetType").val();
     let pdType = $("#pdType").val();
+    let pdStatus = $("#pdStatus").val();
     let pdPrice = $("#pdPrice").val();
+    let pdInfo = $("#pdInfo").val();
 
     if(pdName.length === 0 || pdPetType === "" || pdType === "" || pdPrice.length === 0) {
         Swal.fire({
@@ -50,8 +89,8 @@ $("#submit").on('click', function (e) {
         data.pdPetType = pdPetType;
         data.pdType = pdType;
         data.pdPrice = pdPrice;
-        data.pdStatus = "0";
-        data.pdInfo = $("#pdInfo").val();
+        data.pdStatus = pdStatus;
+        data.pdInfo = pdInfo;
         data.pdDate = formattedDate;
 
         axios
