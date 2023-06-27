@@ -27,8 +27,8 @@ function createPetCard(pet) {
                 <div class="card-body d-flex justify-content-between align-items-end">
                     <div>
                         <h5 class="card-title">${pet.name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">${pet.type}</h6>
-                        <p class="card-text">${pet.size}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">${getPetTypeText(pet.type)}</h6>
+                        <p class="card-text">${getPetSizeText(pet.size)}</p>
                     </div>
                     <button class="btn btn-danger delete-btn" data-pet-id="${pet.id}">刪除寵物</button>
                 </div>
@@ -132,6 +132,34 @@ function showDeleteSuccessAlert(petId) {
             fetchPets();
         }
     });
+}
+
+function getPetTypeText(type) {
+    switch (type) {
+        case 'Dog':
+            return '狗';
+        case 'Cat':
+            return '貓';
+        case 'Bird':
+            return '鳥';
+        case 'Other':
+            return '其他';
+        default:
+            return '未知';
+    }
+}
+
+function getPetSizeText(size) {
+    switch (size) {
+        case 'S':
+            return '小型';
+        case 'M':
+            return '中型';
+        case 'L':
+            return '大型';
+        default:
+            return '未知';
+    }
 }
 
 function getMemberId() {
