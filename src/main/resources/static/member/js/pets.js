@@ -16,7 +16,7 @@ function createPetCard(pet) {
     let image = 'https://placehold.co/268x180';
     const petPics = pet.petPics;
     if (petPics !== undefined && petPics.length > 0) {
-        image = ` data:image/jpeg;charset=utf-8;base64, ${petPics[0].pic}`;
+        image = ` data:image/jpeg;base64,${petPics[0].pic}`;
     }
     return `
         <div class="col-md-4">
@@ -24,15 +24,20 @@ function createPetCard(pet) {
                 <div class="img-container">
                     <img src="${image}" class="card-img-top" alt="${pet.name}">
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">${pet.name}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">${pet.type}</h6>
-                    <p class="card-text">${pet.size}</p>
+                <div class="card-body d-flex justify-content-between align-items-end">
+                    <div>
+                        <h5 class="card-title">${pet.name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${pet.type}</h6>
+                        <p class="card-text">${pet.size}</p>
+                    </div>
+                    <button class="btn btn-danger delete-btn" data-pet-id="${pet.id}">刪除寵物</button>
                 </div>
             </div>
         </div>
     `;
 }
+
+
 
 function createNewPetCard() {
     return `
@@ -53,12 +58,69 @@ function createNewPetCard() {
 function displayPets(pets) {
     const petsRow = document.getElementById('pets-row');
 
+    // Clear existing pet cards
+    petsRow.innerHTML = '';
+
     // Add "New Pet" card
     petsRow.insertAdjacentHTML('afterbegin', createNewPetCard());
 
     // Display actual pet cards
     pets.forEach(pet => {
         petsRow.insertAdjacentHTML('beforeend', createPetCard(pet));
+    });
+
+    // Add event listeners to delete buttons
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', showDeleteAlert);
+    });
+}
+
+function showDeleteAlert(event) {
+    const petId = event.target.dataset.petId;
+    Swal.fire({
+        title: '確定要刪除寵物嗎？',
+        text: '刪除後無法復原',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        cancelButtonText: '取消',
+    }).then(result => {
+        if (result.isConfirmed) {
+            deletePet(petId);
+        }
+    });
+}
+
+function deletePet(petId) {
+
+    fetch(`/pets/delete/id=${petId}`, {
+        method: 'GET',
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('請確認網路環境正常');
+            }
+            showDeleteSuccessAlert();
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: '刪除寵物失敗',
+                text: error.message,
+            });
+        });
+}
+
+function showDeleteSuccessAlert() {
+    Swal.fire({
+        icon: 'success',
+        title: '刪除寵物成功',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+            // Refresh the pet list after successful deletion
+            fetchPets();
+        }
     });
 }
 
