@@ -19,7 +19,7 @@ function createPetCard(pet) {
         image = ` data:image/jpeg;base64,${petPics[0].pic}`;
     }
     return `
-        <div class="col-md-4">
+        <div class="col-md-4" id="pet-card-${pet.id}">
             <div class="card mb-4">
                 <div class="img-container">
                     <img src="${image}" class="card-img-top" alt="${pet.name}">
@@ -92,15 +92,16 @@ function showDeleteAlert(event) {
 }
 
 function deletePet(petId) {
-
     fetch(`/pets/delete/id=${petId}`, {
-        method: 'GET',
+        method: 'DELETE',
     })
         .then(response => {
             if (!response.ok) {
                 throw new Error('請確認網路環境正常');
             }
-            showDeleteSuccessAlert();
+            // Remove the pet card from the UI
+            removePetCard(petId);
+            showDeleteSuccessAlert(petId);
         })
         .catch(error => {
             Swal.fire({
@@ -111,7 +112,16 @@ function deletePet(petId) {
         });
 }
 
-function showDeleteSuccessAlert() {
+
+function removePetCard(petId) {
+    let petCard = document.getElementById(`pet-card-${petId}`);
+    petCard.classList.add("fade-out"); // Adding the animation class
+    setTimeout(() => {
+        petCard.remove();
+    }, 500); // Set timeout equal to the animation duration
+}
+
+function showDeleteSuccessAlert(petId) {
     Swal.fire({
         icon: 'success',
         title: '刪除寵物成功',
