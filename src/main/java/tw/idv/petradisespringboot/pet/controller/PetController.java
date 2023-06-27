@@ -48,6 +48,17 @@ public class PetController {
         return ResponseEntity.ok(service.getPetsByMemId(memberId));
     }
 
+    @GetMapping("/delete/id={id}")
+    ResponseEntity<?> deletePetById(@PathVariable Integer id) {
+        try {
+            service.deletePet(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new PetNotFoundException(id));
+        }
+    }
 
 }
 

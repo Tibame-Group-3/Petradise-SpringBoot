@@ -7,6 +7,7 @@ import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
+import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
 
 import javax.transaction.Transactional;
 import java.util.Base64;
@@ -28,17 +29,29 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<Pet> getAll() {
-        return petRepository.findAll();
+        return petRepository.findAll()
+                .stream()
+                .filter(pet -> pet.getStatus().equals(PetStatus.NORMAL))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Pet> getPetsByMemId(Integer memId) {
-        return petRepository.findByMemberId(memId);
+        return petRepository
+                .findByMemberId(memId)
+                .stream()
+                .filter(pet -> pet.getStatus()
+                        .equals(PetStatus.NORMAL))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Pet> getPetById(Integer id) {
-        return petRepository.findById(id);
+        var pet = petRepository.findById(id);
+        if (pet.isPresent() && pet.get().getStatus().equals(PetStatus.NORMAL)) {
+            return pet;
+        }
+        return Optional.empty();
     }
 
     @Transactional
@@ -63,6 +76,15 @@ public class PetServiceImpl implements PetService {
             return pet;
         }
         return petRepository.save(pet);
+    }
+
+    @Override
+    public void deletePet(Integer id) {
+        var pet = petRepository.findById(id);
+        if (pet.isPresent()) {
+            pet.get().setStatus(PetStatus.DELETED);
+            petRepository.save(pet.get());
+        }
     }
 
 }

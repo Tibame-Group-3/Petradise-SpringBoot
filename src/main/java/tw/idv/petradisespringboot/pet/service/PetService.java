@@ -17,4 +17,6 @@ public interface PetService {
     Pet addPet(NewPetDTO dto);
 
     Pet updatePet(Pet pet);
+
+    void deletePet(Integer id);
 }
