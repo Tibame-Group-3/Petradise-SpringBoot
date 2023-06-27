@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.pet.service.PetService;
+import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 @RestController
@@ -22,8 +23,8 @@ public class PetController {
     }
 
     @PostMapping("/add")
-    ResponseEntity<Pet> newPet(@RequestBody Pet pet) {
-        return ResponseEntity.ok(service.addPet(pet));
+    ResponseEntity<Pet> newPet(@RequestBody NewPetDTO dto) {
+        return ResponseEntity.ok(service.addPet(dto));
     }
 
     @PostMapping("/update")
