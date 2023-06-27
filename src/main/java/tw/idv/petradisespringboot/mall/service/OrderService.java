@@ -1,5 +1,9 @@
 package tw.idv.petradisespringboot.mall.service;
 
-public class OrderService {
+import tw.idv.petradisespringboot.mall.model.vo.CreateOrderDTO;
+import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
 
+public interface OrderService {
+
+    OrderMaster createOrder(CreateOrderDTO dto);
 }
