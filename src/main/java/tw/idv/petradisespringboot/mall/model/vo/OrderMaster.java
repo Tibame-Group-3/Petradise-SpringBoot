@@ -67,26 +67,5 @@ public class OrderMaster {
 	
 	@Column(name = "od_date")
 	private Date odDate;
-	
-	
-	@Override
-	public String toString() {
-		return "OrderMaster {" + 
-					"odId=" + odId + 
-					"memId=" + memId + 
-					"priceOri=" + priceOri + 
-					"priceDis=" + priceDis + 
-					"priceBonus=" + priceBonus +
-					"priceShip=" + priceShip +
-					"priceOd=" + priceOd +
-					"odStatus=" + odStatus +
-					"odPay=" + odPay +
-					"odShip=" + odShip +
-					"odNote=" + odNote +
-					"reciName=" + reciName +
-					"reciPhone=" + reciPhone + 
-					"reciAdd=" + reciAdd + 
-					"odDate=" + odDate +
-					'}';
-	}
+
 }
