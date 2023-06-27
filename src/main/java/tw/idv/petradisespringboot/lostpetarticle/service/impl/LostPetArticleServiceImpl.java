@@ -21,14 +21,17 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 	}
 
 	@Override
-	public List<LostPetArticle> getAllArticles() {
+	public List<LostPetArticle> getArticlesWithStatus() {
 	    List<LostPetArticle> articles = lostPetArticleRepository.findAll();
-
 	    List<LostPetArticle> filteredArticles = articles.stream()
 	            .filter(article -> "0".equals(article.getArticleStatus()))
 	            .collect(Collectors.toList());
-
 	    return filteredArticles;
+	}
+	
+	@Override
+	public List<LostPetArticle> getAllArticleByAdmin() {
+		return lostPetArticleRepository.findAll();
 	}
 
 	@Override
@@ -48,15 +51,11 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 		lostPetArticleRepository.deleteById(id);
 	}
 	
+	@Override
 	public LostPetArticle update4Status(LostPetArticle lostPetArticle) {
 		return lostPetArticleRepository.save(lostPetArticle);
 	}
 
-	@Override
-	public List<LostPetArticle> findBySpecies(String species) {
-		
-		return lostPetArticleRepository.findBySpecies(species);
-	}
 
 	@Override
 	public List<LostPetArticle> findByLostPlace(String lostPlace) {
@@ -75,6 +74,14 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 	    return article;
 	}
 
-	
+	@Override
+	public List<LostPetArticle> findBySpecies(String species) {
+	    return lostPetArticleRepository.findBySpecies(species);
+	}
+
+	@Override
+	public List<LostPetArticle> findByMemId(Integer memId) {
+		return lostPetArticleRepository.findByMemId(memId);
+	}
 
 }

@@ -84,16 +84,4 @@ public class LostPetArticle implements Serializable{
 	private List<LostPetResponse> lostPetResponse;
 	
 	
-//	 public List<LostPetPic> getLostPetPic() {
-//	        if (lostPetPic == null || lostPetPic.isEmpty()) {
-//
-////	        	LostPetPic defaultPic = new LostPetPic();
-////	            defaultPic.setLostPetPicId(1); 
-////	            defaultPic.setLostPetPic(new byte[0]);
-//
-////	            return Collections.singletonList(defaultPic);
-//	        } else {
-//	            return lostPetPic;
-//	        }
-//	    }
 }
