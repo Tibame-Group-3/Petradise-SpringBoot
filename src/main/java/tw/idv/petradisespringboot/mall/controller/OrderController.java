@@ -18,6 +18,27 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+//    前端會傳來的JSON格式
+//    {
+//        "orderMaster": {
+//        "memId": 1,
+//                "priceOri": 1800,
+//                "priceShip": 100,
+//                "priceOd": 1900,
+//                "reciName": "王小明",
+//                "reciPhone": "0912312312"
+//    },
+//        "products": [
+//        {
+//            "productId": 2,
+//                "productAmount": 3
+//        },
+//        {
+//            "productId": 3,
+//                "productAmount": 2
+//        }
+//  ]
+//    }
     @PostMapping("/add")
     public ResponseEntity<?> addOrder(@RequestBody CreateOrderDTO dto) {
         return ResponseEntity.ok(orderService.createOrder(dto));
