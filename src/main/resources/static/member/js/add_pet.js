@@ -64,16 +64,36 @@ function setupFormSubmit() {
                     body: JSON.stringify(data),
                 });
             })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response data here
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
+            .then(response => {
+                if (response.ok) {
+                    showSuccessAlert();
+                } else {
+                    showErrorAlert(response.statusText);
+                }
             });
     });
 
+}
+
+function showSuccessAlert() {
+    Swal.fire({
+        icon: 'success',
+        title: '新增寵物成功',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+            window.location.href = '/member/pets.html';
+        }
+    });
+}
+
+function showErrorAlert(errorMessage) {
+    Swal.fire({
+        icon: 'error',
+        title: '新增寵物失敗',
+        text: errorMessage,
+        confirmButtonText: '確認',
+    })
 }
 
 function getMemberId() {

@@ -23,8 +23,15 @@ public class PetController {
     }
 
     @PostMapping("/add")
-    ResponseEntity<Pet> newPet(@RequestBody NewPetDTO dto) {
-        return ResponseEntity.ok(service.addPet(dto));
+    ResponseEntity<?> newPet(@RequestBody NewPetDTO dto) {
+        try {
+            service.addPet(dto);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/update")
