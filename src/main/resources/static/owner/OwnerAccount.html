@@ -115,6 +115,46 @@ div.text {
 	cursor: not-allowed;
 	background-color: #eaecf4;
 }
+.hotelLicPic_btn {
+	border: none;
+	border-radius: 5px;
+	width:50px;
+	height:40px;
+	background: goldenrod;
+	color: #FFF;
+	background-color:#f1ecd1
+}
+
+.update_btn, .save_btn{
+	border: none;
+	border-radius: 5px;
+	width:60px;
+	height:40px;
+	background: goldenrod;
+	color: #574f36;
+	background-color:#f1ecd1;
+	margin:10px;
+
+}
+
+.save_btn{
+display: none;
+}
+
+button:hover {
+	background: #f8c544;
+	color: #333;;
+	cursor: pointer;
+}
+button:active {
+  background-color: #e69609;
+}
+
+.change_password{
+	font-size:20px;
+	cursor:url('./img/graycat.png');
+	
+}
 
 
 </style>
@@ -277,7 +317,7 @@ div.text {
 								<div class="col-md-4 inputGroupContainer">
 									<div class="input-group">
 
-										<p class="change_password">變更密碼?</p>
+										<p class="change_password">變更密碼?<img src="./img/graycat.gif" style="width:50px;height: 50px;"></img></p>
 									</div>
 								</div>
 							</div>
@@ -285,7 +325,7 @@ div.text {
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-1 control-label">電話</label>
+								<label class="col-md-1 control-label">手機/市話</label>
 								<div class="col-md-4 inputGroupContainer">
 									<div class="input-group">
 										<input name="owner_phone" id="owner_phone"
@@ -307,7 +347,7 @@ div.text {
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-1 control-label">旅館名稱</label>
+								<label class="col-md-1 control-label">寵物旅館名稱</label>
 								<div class="col-md-4 inputGroupContainer">
 									<div class="input-group">
 										<input name="hotel_name" id="hotel_name" class="form-control"
@@ -327,28 +367,10 @@ div.text {
 								</div>
 							</div>
 
-							<!-- Text input-->
-							<!-- <div class="form-group">
-                                <label class="col-md-1 control-label">帳號</label>
-                                <div class="col-md-4 inputGroupContainer">
-                                    <div class="input-group">
-                                        <input name="owner_account" id="owner_account" class="form-control" type="text" maxlength="8">
-                                    </div>
-                                </div>
-                            </div> -->
-
-							<!-- Text input-->
-							<!--                             <div class="form-group"> -->
-							<!--                                 <label class="col-md-1 control-label">許可證號</label> -->
-							<!--                                 <div class="col-md-4 inputGroupContainer"> -->
-							<!--                                     <div class="input-group"> -->
-							<!--                                         <input name="hotel_lic_id" id="hotel_lic_id" class="form-control" type="text" maxlength="50" readonly> -->
-							<!--                                     </div> -->
-							<!--                                 </div> -->
-							<!--                             </div> -->
+							
 							<div class="hotel_lic_pic">
 								<label class="col-md-1 control-label">許可證</label>
-								<button class="hotel_lic_pic">📑</button>
+								<button class="hotelLicPic_btn">📑</button>
 							</div>
 							<div>
 								<span>證號:</span> <span id="hotel_lic"></span>
@@ -389,7 +411,7 @@ div.text {
     $(function () {
     
    
-    //查詢使用者資料
+    //====================================查詢使用者資料============================================//
     	$.ajax({
     		  url: "/ownerAccount/1",
     		  type: 'GET',
@@ -406,7 +428,6 @@ div.text {
     		    $("#hotel_name").val(res.hotelName);
     		    $("#hotel_address").val(res.hotelAddress);
     		    $("#hotel_address").val(res.hotelAddress);
-//     		    $('#hotel_lic_id').val(res.hotelLicId);
     		    var hotelLicId = res.hotelLicId;
     		    console.log(hotelLicId);
     		    $('#hotel_lic').text($('#hotel_lic').text()+hotelLicId);
@@ -426,7 +447,7 @@ div.text {
     		   
     		  }
     		});
-    	
+    	//====================================查詢使用者資料============================================//    	
 
     
     
@@ -434,7 +455,9 @@ div.text {
         $('.form-control').prop('disabled', true);
         
         
+      //====================================修改個資============================================//
         
+        //修改用function , 因為有兩個部分都會用到
         function updateOwnerAccount(data) {
             $.ajax({
                 url: "/ownerAccount/1",
@@ -450,26 +473,104 @@ div.text {
             });
         }
         
-        
-        
-        
-
         // 編輯
         $(".update_btn").on("click",function(){
-            $('.form-control').prop('disabled',false);
+            $(".form-control").prop("disabled",false);
+            $(".save_btn").css("display","inline-block");
         });
-
+	
+        //儲存
         $(".save_btn").on("click",function(){
+        	Swal.fire({
+        		title:"是否儲存資料?",
+        		html:`<img src= "./img/update.gif" style="with 300px; height:300px;">`,
+        		showCancelButton: true,
+        	    confirmButtonText: "確定",
+        	    cancelButtonText: "取消",		
+        	})
+        	.then(result => {
+        		if (result.isConfirmed) {	
             $('.form-control').prop('disabled',true);
-            var newOwnerName = $("#owner_name").val();
+        		
+            //名字驗證
+            var newOwnerName = $("#owner_name").val();           
+      	  	var nameRegex = /^[\u4E00-\u9FFFㄅ-ㄩㄚ-ㄦA-Za-z\s]{2,50}$/; 	  
+      	  	if (!nameRegex.test(newOwnerName)) {
+      	    	Swal.fire({
+      	      		allowOutsideClick: false,
+      	      		icon: 'error',
+      	      		title: '業主名稱格式有誤',
+      	    	});
+      	    	$('.form-control').prop('disabled',false);
+      	    	return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
+      	  	}
+            
+            
+            //信箱驗證
            	var newOwnerEmail = $("#owner_email").val();
+           	var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        	if (!emailRegex.test(newOwnerEmail)) {
+        	  Swal.fire({
+        	    allowOutsideClick: false,
+        	    icon: 'error',
+        	    title: '信箱格式有誤',
+        	  });
+        	  $('.form-control').prop('disabled',false);
+        	  return;
+        	}
+            //電話驗證      
            	var newOwnerPhone = $("#owner_phone").val();
+           	var phoneRegex = /^(0[1-9][0-9]{8}|(02|03[2-9]|04[1-9]|05[2-9]|06[2-9]|07[2-9]|08[2-9]|09[1-8]|037|049|082|089|0826|0829|0836|0839|0896|0899)\d{6,8})$/;
+        	if (!phoneRegex.test(newOwnerPhone)) {
+        	    Swal.fire({
+        	      allowOutsideClick: false,
+        	      icon: 'error',
+        	      title: '手機/市話格式有誤',
+        	    });
+        	    $('.form-control').prop('disabled',false);
+        	    return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
+        	  }
+        	//收款帳戶驗證
            	var newOwnerBank = $("#owner_bank").val();
+           	var bankRegex = /^\d{8,}$/;
+        	if (!bankRegex.test(newOwnerBank)) {
+        	    Swal.fire({
+        	      allowOutsideClick: false,
+        	      icon: 'error',
+        	      title: '收款帳戶格式有誤',
+        	    });
+        	    $('.form-control').prop('disabled',false);
+        	    return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
+        	  }
+        	
+            //驗證旅館名稱    	
             var newHotelName = $("#hotel_name").val();
+            var hotelNameRegex = /^.{1,}$/;
+            if (!hotelNameRegex.test(newHotelName)) {
+              // 驗證不通過，執行相應的處理邏輯
+              Swal.fire({
+                allowOutsideClick: false,
+                icon: 'error',
+                title: '寵物旅館名稱格式有誤',
+              });
+              $('.form-control').prop('disabled',false);
+              return;
+            }
+            
+            
             var newHotelAddress = $("#hotel_address").val();
-           	
-            
-            
+            var addressRegex = /^[\u4E00-\u9FFF0-9\u3105-\u3129\-]+$/;
+        	if (!addressRegex.test(newHotelAddress)) {
+        	    Swal.fire({
+        	      allowOutsideClick: false,
+        	      icon: 'error',
+        	      title: '旅館地址格式有誤',
+        	    });
+        	    $('.form-control').prop('disabled',false);
+        	    return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
+        		}
+        	  
             var data = {
                     ownerName: newOwnerName,
                     ownerEmail: newOwnerEmail,
@@ -480,24 +581,22 @@ div.text {
                     hotelLicId: $("#hotel_lic").text(),
                     ownerPassword: $("#owner_password").val(),
                     
-                };
-            
-            updateOwnerAccount(data);
-//                 $.ajax({
-//                     url: "/ownerAccount/1",
-//                     type: 'POST',
-//                     contentType: "application/json",
-//                     data: JSON.stringify(data),
-//                     success: function(res) {
-//                         console.log("更新成功");
-                        
-//                     },
-//                     error: function(err) {
-//                         console.log("更新失敗");
-                        
-//                     }
-//                 });
-            });
+                    
+                	};         
+            		updateOwnerAccount(data);
+        	 	}else{
+        	 		return;
+        	 	}
+        		Swal.fire({
+        			html:`<img src= "./img/dancingCat.gif" style="with 300px; height:300px;">`,
+        			title:"資料已更新",
+        			confirmButtonText: "確定"
+        			
+        		})
+        		$(".save_btn").css("display","none");
+        		
+            }); 
+        });
             
             
        
@@ -553,16 +652,16 @@ div.text {
                             message: '請填入連絡電話'
                         },
                         regexp: {
-                            regexp: /^\d+$/,
-                            message: ' '
+                            regexp: /^\d{8,10}$/,
+                            message: '長度不符'
                         },
                     }
                 },
                 owner_bank: {
-                    validators: {
+                	validators: {
                         stringLength: {
                             min: 8,
-                            message: ' '
+                            message: '收款帳戶長度不符'
                         },
                         notEmpty: {
                             message: '此欄位不得空白'
@@ -577,7 +676,7 @@ div.text {
                     validators: {
                         stringLength: {
                             min: 1,
-                            message: ' '
+                            message: '此欄位不得空白'
                         },
                         notEmpty: {
                             message: '此欄位不得空白'
@@ -648,16 +747,18 @@ div.text {
                 		if(newPassword === rePassword){
                     		console.log("一樣");
                         	Swal.fire({
+                        		iconHtml:`<img src= "./img/happy.gif" style="with 200px; height:200px;">`,
                             	title:"密碼變更成功",
                             	text:"請牢記您的新密碼"
                         	})
-                        	 var newOwnerName = $("#owner_name").val();
-           	var newOwnerEmail = $("#owner_email").val();
-           	var newOwnerPhone = $("#owner_phone").val();
-           	var newOwnerBank = $("#owner_bank").val();
-            var newHotelName = $("#hotel_name").val();
-            var newHotelAddress = $("#hotel_address").val();
-                        	var data ={
+                        	 	var newOwnerName = $("#owner_name").val();
+           						var newOwnerEmail = $("#owner_email").val();
+           						var newOwnerPhone = $("#owner_phone").val();
+           						var newOwnerBank = $("#owner_bank").val();
+            					var newHotelName = $("#hotel_name").val();
+            					var newHotelAddress = $("#hotel_address").val();
+            					
+                        		var data ={
                         			ownerName: newOwnerName,
                                     ownerEmail: newOwnerEmail,
                                     ownerPhone: newOwnerPhone,
@@ -671,7 +772,7 @@ div.text {
                         	
                     	}else{
                     		Swal.fire({
-                    			icon:'error',
+                    			iconHtml:`<img src= "./img/cry.gif" style="with 150px; height:150px;">`,
                             	title:"密碼變更失敗",
                             	text:"兩次輸入的密碼不一致"
                         	})
