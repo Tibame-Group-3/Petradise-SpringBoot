@@ -1,7 +1,6 @@
 let member;
 
 const nameInput = document.getElementById('name');
-const accountInput = document.getElementById('account');
 const birthdayInput = document.getElementById('birthday');
 const phoneInput = document.getElementById('phone');
 const emailInput = document.getElementById('email');
