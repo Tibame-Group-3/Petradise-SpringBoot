@@ -1,6 +1,5 @@
 package tw.idv.petradisespringboot.pet.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +35,6 @@ public class Pet {
 
     // The mappedBy attribute refers to the property name of the association on the owner side.
     @JsonManagedReference
-    @JsonIgnore
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PetPic> petPics;
 }
