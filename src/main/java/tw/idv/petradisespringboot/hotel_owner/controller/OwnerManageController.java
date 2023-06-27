@@ -19,34 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
+import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/ownerManage")
 public class OwnerManageController {
-
-	private final HotelOwnerService hotelOwnerService;
-
+	
 	@Autowired
-	public OwnerManageController(HotelOwnerService hotelOwnerService) {
-		this.hotelOwnerService = hotelOwnerService;
-	}
+	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
 
-	@GetMapping("/OwnerManage")
+	
+	@GetMapping("/getAll")
 	public void getAllOwners(HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
 			// 查資料庫
-			List<HotelOwnerVO> list = hotelOwnerService.getAll();
+			List<HotelOwnerVO> list = hotelOwnerServiceImpl.getAll();
+			
+			for (HotelOwnerVO vo : list) {
+				// 只需獲取圖片的數組
+				byte[] imageBytes = vo.getHotelLicPic(); 
+				// 只要圖片不為空 就轉為Base64
+				if (imageBytes != null) {
+					String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+
+					// VO那邊建一個getter和setter的Base64,好讓下方可放進資料
+					vo.setBase64Image(imageBase64);
+				}
+			}
 			
 			
-//			 for (HotelOwnerVO owner : list) {
-//		            byte[] imageBytes = owner.getHotelLicPic();
-//		            if (imageBytes != null) {
-//		                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-//		                owner.setBase64Image(base64Image);
-//		            }
-//		        }
 //			
 			// json 傳給前端
 			Gson gson = new Gson();
@@ -62,14 +65,14 @@ public class OwnerManageController {
 		}
 	}
 
-	@PostMapping("/OwnerManage")
+	@PostMapping("/update")
 	public void updateOwner(HttpServletRequest req, HttpServletResponse res) {
 		// 獲取前端回應
 		String ownerAccess = req.getParameter("ownerAccess");
 		String hotelid = req.getParameter("hotelId");
 		Integer hotelId = Integer.valueOf(hotelid);
 		//找到要做更新的hotelId
-		HotelOwnerVO vo = hotelOwnerService.findByPrimaryKey(hotelId);
+		HotelOwnerVO vo = hotelOwnerServiceImpl.findByPrimaryKey(hotelId);
 
 		//因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
 		if (vo != null) {
@@ -77,7 +80,7 @@ public class OwnerManageController {
 			vo.setHotelId(hotelId);
 
 			try {
-				hotelOwnerService.update(vo);
+				hotelOwnerServiceImpl.update(vo);
 				Gson gson = new Gson();
 				String jsonString = gson.toJson(vo);
 				res.setContentType("application/json;charset=utf-8");

@@ -31,12 +31,12 @@ function setupMemberElements(isSignedIn) {
 
 function setupMemberCenterNavigation(isSignedIn) {
     $('.navigate-member-center')
-        .attr('href', '/member/center.html');
+        .attr('href', '/member/profile.html');
 }
 
 function setupSigninNavigation() {
     $('.navigate-signin')
-        .attr('href', '/member/signin.html');
+        .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
 }
 
 function logout() {

@@ -1,43 +1,40 @@
 package tw.idv.petradisespringboot.pet.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import tw.idv.petradisespringboot.pet.vo.enums.PetSize;
+import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
+import tw.idv.petradisespringboot.pet.vo.enums.PetType;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 
 public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private Integer petID;
+    private Integer id;
     @Column(name = "mem_id")
-    private Integer memID;
+    private Integer memberId;
     @Column(name = "pet_name")
-    private String petName;
+    private String name;
     @Column(name = "pet_type")
-    private String petType;
+    private PetType type;
     @Column(name = "pet_size")
-    private Character petSize;
+    private PetSize size;
     @Column(name = "pet_status", insertable = false)
-    private Character petStatus;
+    private PetStatus status = PetStatus.NORMAL;
 
-    @Override
-    public String toString() {
-        return "Pet [petID=" + petID + ", memID=" + memID + ", petName=" + petName + ", petType=" + petType
-                + ", petSize=" + petSize + ", petStatus=" + petStatus + "]";
-    }
-
+    // The mappedBy attribute refers to the property name of the association on the owner side.
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PetPic> petPics;
 }

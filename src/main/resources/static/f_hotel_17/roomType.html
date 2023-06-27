@@ -167,11 +167,8 @@
 									<tbody id="room-data-list">
 
 									</tbody>
-
-
 								</table>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -213,7 +210,7 @@
 	}
 
 	$(document).ready(function () {
-		const hotelId = 5;
+		const hotelId = getHotelId();
 	    $.ajax({
 	        url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`, 
 	        type: 'GET',
@@ -222,7 +219,6 @@
 	            let html = '';
 	            for (let i = 0; i < response.length; i++) {
 	                let roomType = response[i];
-	                console.log(roomType);
 	                const sizeString = getSizeString(roomType.roomTypeSize);
 
 	                html += `<tr>
@@ -244,7 +240,7 @@
 	                     "zeroRecords": "未找到任何資料",
 	                     "info": "顯示頁數 _PAGE_ / _PAGES_",
 	                     "infoEmpty": "沒有任何資訊",
-	                     "infoFiltered": "(從 _MAX_ 條資料中過濾)",
+	                     "infoFiltered": "(從 _MAX_ 條資料中篩選)",
 	                     "search": "搜尋:",
 	                     "paginate": {
 	                         "first":      "第一頁",
@@ -254,7 +250,6 @@
 	                     },
 	                 }
 	             });
-	            
 	         },
 	        error: function (xhr, textStatus, errorThrown) {
 	            console.error(xhr);
@@ -277,17 +272,20 @@
             	return undefined;
         }
 	}
+	function getHotelId() {
+		// return localStorage.getItem("hotelId");
+		return 5;
+	}
     </script>
-<script>
+	<script>
 //按下編輯會導向編輯網頁
-$(document).ready(function() {
+	$(document).ready(function() {
     $("#room-data-list").on("click", ".btn-edit", function() {
         var roomTypeId = $(this).data("room-type-id");
         window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
-    });
-});
-
-</script>
+    	});
+	});
+	</script>
 
 </body>
 

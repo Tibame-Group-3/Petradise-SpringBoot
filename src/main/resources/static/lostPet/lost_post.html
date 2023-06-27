@@ -129,7 +129,7 @@
 				</button>
 				<div class="btn-group" style="margin: 10px 0px 0px;">
 					<button class="btn btn-primary" type="button"
-						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; padding-top: 6px;">
+						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; padding-top: 6px;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
 							fill="currentColor" viewBox="0 0 16 16"
 							class="bi bi-person-circle"
@@ -144,7 +144,7 @@
 					<button
 						class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 						data-bs-toggle="dropdown" aria-expanded="false" type="button"
-						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; width: 29.5833px;"></button>
+						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; width: 29.5833px"></button>
 					<div class="dropdown-menu"
 						style="min-width: 118px; background: #fd780f; margin: 1px 0px 0px;">
 						<a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a
@@ -156,11 +156,8 @@
 	</nav>
 	<div class="container">
 		<div class="py-5 text-center">
-
 			<h2>遺失寵物發文</h2>
-
 		</div>
-
 		<form action="/LostPetPic/create" method="post"
 			enctype="multipart/form-data">
 			<div class="row">
@@ -174,13 +171,11 @@
 							<label for="lost_place">遺失地點</label> <input type="text"
 								class="form-control" name="lostPlace" id="lostPlace">
 						</div>
-
 						<div class="mb-3">
 							<label for="chip_num">晶片號碼 <span class="text-muted">(選填)</span></label>
 							<input type="text" class="form-control" name="chipNum"
 								id="chipNum">
 						</div>
-
 						<div class="mb-3">
 							<label for="species">品種 </label> <select name="species"
 								id="select-animal" class="form-control">
@@ -191,7 +186,6 @@
 								<option>其他</option>
 							</select>
 						</div>
-
 						<div class="mb-3">
 							<label for="color">毛色 </label> <input type="text" id="color"
 								class="form-control" name="color">
@@ -277,25 +271,28 @@
 		const input = document.querySelector(".input");
 		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
-		
 		let base64Image = "";
 		let jsonData = [];
-		input.addEventListener("change", () => {
-			const files = input.files
-			for (let i = 0; i < files.length; i++) {
-				imagesArray.push(files[i])
-			};
-			displayImages()
-		})
+		input.addEventListener("change", async () => {
+		  const files = input.files;
+		  for (let i = 0; i < files.length; i++) {
+		    const file = files[i];
+		    const base64Image = await readFileAsDataURL(file);
+		    const base64Data = base64Image.split(',')[1]; // 除去前缀詞
+		    imagesArray.push({ lostPetId: i + 1, lostPetPic: base64Data });
+		  }
+		  displayImages();
+		});
+
 		function displayImages() {
-			let images = ""
-			imagesArray.forEach((image, index) => {
-				images += `<div class="image">
-				<img src="${URL.createObjectURL(image)}" alt="image">
-				<span onclick="deleteImage(${index})">&times;</span>
-				</div>`
-			})
-			output.innerHTML = images
+		  let images = "";
+		  imagesArray.forEach((image, index) => {
+		    images += `<div class="image">
+		      <img src="data:image/*;base64,${image.lostPetPic}" alt="image">
+		      <span onclick="deleteImage(${index})">&times;</span>
+		    </div>`;
+		  });
+		  output.innerHTML = images;
 		}
 
 		output.addEventListener("click", (event) => {
@@ -305,8 +302,8 @@
 		});
 
 		function deleteImage(index) {
-			imagesArray.splice(index, 1)
-			displayImages()
+			imagesArray.splice(index, 1);
+			displayImages();
 		}
 
 		numberInput.addEventListener('input', function(event) {
@@ -327,61 +324,45 @@
 			    reader.readAsDataURL(file);
 			  });
 			}
-
-			async function submitForm() {
-				const file = input.files[0];
-				const base64Image = await readFileAsDataURL(file);
-				const base64Data = base64Image.split(',')[1];
-
-			  const jsonData = {
-			    lostPetId: 1,
-			    lostPetPic: base64Data
-			  };
-
-			  const articleData = {
-			    memId: 6,
-			    lostDate: $("#datetime").val(),
-			    lostPlace: $("#lostPlace").val(),
-			    chipNum: $("#chipNum").val(),
-			    species: $("#select-animal").val(),
-			    color: $("#color").val(),
-			    feature: $("#feature").val(),
-			    text: $("#text").val(),
-			    contactPhone: $("#contactPhone").val(),
-			    title: $("#title").val(),
-			    lostPetPic: [jsonData],
-			  };
-			  console.log(articleData);
-
-			  try {
-			    const response = await $.ajax({
-			      url: "/LostPetArticle/create",
-			      type: "POST",
-			      data: JSON.stringify(articleData),
-			      contentType: "application/json",
-			    });
-			    console.log(response);
-			    console.log(JSON.stringify(response));
-			  } catch (error) {
-			    console.error(error);
-			  }
-			}
+		
+		
+		
+		async function submitForm() {
+			
+			const articleData = {
+				  memId: 6,
+				  lostDate: $("#datetime").val(),
+				  lostPlace: $("#lostPlace").val(),
+				  chipNum: $("#chipNum").val(),
+				  species: $("#select-animal").val(),
+				  color: $("#color").val(),
+				  feature: $("#feature").val(),
+				  text: $("#text").val(),
+				  contactPhone: $("#contactPhone").val(),
+				  title: $("#title").val(),
+				  lostPetPic: imagesArray,
+			};
+			console.log(articleData);
+			$.ajax({
+			  url: "/LostPetArticle/create",
+			  type: "POST",
+			  data: JSON.stringify(articleData),
+			  contentType: "application/json",
+			})
+			.then(function(response) {
+		      console.log(response);
+		      window.location.assign("/lostPet/forum.html?id=" + response.articleId); ;
+		    })
+		    .catch(function(error) {
+		      console.error(error);
+		    });
+		}
 
 			$(".btn-submit").click(function(event) {
 			  event.preventDefault();
 			  submitForm();
 			});
 
-
-
-		
-
-
-				
-	
-			      
-				   
-			        
 	</script>
 
 </body>

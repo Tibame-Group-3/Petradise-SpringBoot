@@ -15,8 +15,8 @@ public class RoomReviewServiceImpl implements RoomReviewService {
     }
 
     @Override
-    public RoomReview add(RoomReview roomreview) {
-        return repository.save(roomreview);
+    public RoomReview add(RoomReview roomReview) {
+        return repository.save(roomReview);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RoomReviewServiceImpl implements RoomReviewService {
     }
 
     @Override
-    public RoomReview findRoomReviewByRoomOrederId(Integer roomOrderId) {
+    public RoomReview findRoomReviewByRoomOrderId(Integer roomOrderId) {
         return repository.findByRoomOrderId(roomOrderId);
     }
 
