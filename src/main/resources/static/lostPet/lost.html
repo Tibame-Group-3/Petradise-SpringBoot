@@ -261,7 +261,7 @@ select {
 				<div id="" class="">
 					<div class="">
 						<div class="clear-both block-facets">
-							<select>
+							<select id = "speciesSelect">
 								<option value="AllType">全部種類</option>
 								<option value="Dogs" id ="dog">狗</option>
 								<option value="Cats" id ="cat">貓</option>
@@ -515,6 +515,8 @@ select {
 		</div>
 	</footer>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
 		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
@@ -562,6 +564,209 @@ select {
 		    .catch(error => {
 		      console.error(error);
 		    });
+		    
+		    $(document).ready(function() {
+	    	  $("#speciesSelect").change(function() {
+	    	    var selectedValue = $(this).val();
+	    	    
+	    	    if (selectedValue === "AllType") {
+	    	    	const parentContainer = document.querySelector('.row');
+	    	    	parentContainer.innerHTML = ''; // 清空
+						
+	    	    	axios.get("/LostPetArticle/all")
+	    		    .then(response => {
+	    		      const jsonData = response.data;
+	    		      const parentContainer = document.querySelector('.row');
+	    		      console.log(jsonData);
+
+	    		      jsonData.forEach(data => {
+	    		        const base64Images = data.lostPetPic.map(pic => {
+	    		          return `data:image/*;base64,${pic.lostPetPic}`;
+	    		        });
+
+	    		        const imageSrc = base64Images.length > 0 ? base64Images[0] : 'https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg';
+
+	    		        const card = document.createElement('div');
+	    		        card.classList.add('col-12', 'col-md-6', 'col-lg-3');
+	    		        card.innerHTML = `
+	    		          <div class="card">
+	    		        	<a href="/lostPet/forum.html?id=${data.articleId}">
+	    		              <img class="card-img-top" src="${imageSrc}" alt="image">
+	    		            </a>
+	    		            <div class="card-body">
+	    		              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
+	    		              <div class="card-text">${data.text}</div>
+	    		            </div>
+	    		          </div>
+	    		        `;
+	    		        parentContainer.appendChild(card);
+	    		      });
+	    		    })
+	    		    .catch(error => {
+	    		      console.error(error);
+	    		    });
+	    	    } else if (selectedValue === "Dogs") {
+	    	    	const parentContainer = document.querySelector('.row');
+	    	    	parentContainer.innerHTML = ''; // 清空
+	    	    	axios
+	    	    	.get("/LostPetArticle/selectBySpecies", {
+	    	    		params: { species: "狗" },
+	    	    	})
+	    	    	.then(function (response) {
+	    	    		const jsonData = response.data;
+	    	    		const parentContainer = document.querySelector(".row");
+	    	    		console.log(jsonData);
+	    	    		jsonData.forEach((data) => {
+	    	    			const base64Images = data.lostPetPic.map((pic) => {
+	    	    				return `data:image/*;base64,${pic.lostPetPic}`;
+	    	    			});
+	    	    			const imageSrc =
+	    	    				base64Images.length > 0
+	    	    				? base64Images[0]
+	    	    				: "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
+	    	    				const card = document.createElement("div");
+	    	    				card.classList.add("col-12", "col-md-6", "col-lg-3");
+	    	    				card.innerHTML = `
+		    	    	          <div class="card">
+		    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
+		    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
+		    	    	            </a>
+		    	    	            <div class="card-body">
+		    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
+		    	    	              <div class="card-text">${data.text}</div>
+		    	    	            </div>
+		    	    	          </div>
+		    	    	        `;
+		    	    	        parentContainer.appendChild(card);
+	    	    		});
+	    	    		console.log(response.data);
+	    	    	})
+	    	    	.catch(function (error) {
+	    	    		console.error(error);
+	    	    	});
+	    	    } else if (selectedValue === "Cats") {
+	    	    	const parentContainer = document.querySelector('.row');
+	    	    	parentContainer.innerHTML = ''; // 清空
+	    	    	axios
+    	    	    .get("/LostPetArticle/selectBySpecies", {
+    	    	      params: { species: "貓" },
+    	    	    })
+    	    	    .then(function (response) {
+    	    	      const jsonData = response.data;
+    	    	      const parentContainer = document.querySelector(".row");
+    	    	      console.log(jsonData);
+    	    	      jsonData.forEach((data) => {
+    	    	        const base64Images = data.lostPetPic.map((pic) => {
+    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
+    	    	        });
+    	    	        const imageSrc =
+    	    	          base64Images.length > 0
+    	    	            ? base64Images[0]
+    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
+    	    	        const card = document.createElement("div");
+    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
+    	    	        card.innerHTML = `
+    	    	          <div class="card">
+    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
+    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
+    	    	            </a>
+    	    	            <div class="card-body">
+    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
+    	    	              <div class="card-text">${data.text}</div>
+    	    	            </div>
+    	    	          </div>
+    	    	        `;
+    	    	        parentContainer.appendChild(card);
+    	    	      });
+    	    	      console.log(response.data);
+    	    	    })
+    	    	    .catch(function (error) {
+    	    	      console.error(error);
+    	    	    });
+	    	    	
+	    	    } else if (selectedValue === "Birds") {
+	    	    	const parentContainer = document.querySelector('.row');
+	    	    	parentContainer.innerHTML = ''; // 清空
+	    	    	axios
+    	    	    .get("/LostPetArticle/selectBySpecies", {
+    	    	      params: { species: "鳥" },
+    	    	    })
+    	    	    .then(function (response) {
+    	    	      const jsonData = response.data;
+    	    	      const parentContainer = document.querySelector(".row");
+    	    	      console.log(jsonData);
+    	    	      jsonData.forEach((data) => {
+    	    	        const base64Images = data.lostPetPic.map((pic) => {
+    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
+    	    	        });
+    	    	        const imageSrc =
+    	    	          base64Images.length > 0
+    	    	            ? base64Images[0]
+    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
+    	    	        const card = document.createElement("div");
+    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
+    	    	        card.innerHTML = `
+    	    	          <div class="card">
+    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
+    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
+    	    	            </a>
+    	    	            <div class="card-body">
+    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
+    	    	              <div class="card-text">${data.text}</div>
+    	    	            </div>
+    	    	          </div>
+    	    	        `;
+    	    	        parentContainer.appendChild(card);
+    	    	      });
+    	    	      console.log(response.data);
+    	    	    })
+    	    	    .catch(function (error) {
+    	    	      console.error(error);
+    	    	    });
+	    	    	
+	    	    } else if (selectedValue === "Others") {
+	    	    	const parentContainer = document.querySelector('.row');
+	    	    	parentContainer.innerHTML = ''; // 清空
+	    	    	axios
+    	    	    .get("/LostPetArticle/selectBySpecies", {
+    	    	      params: { species: "其他" },
+    	    	    })
+    	    	    .then(function (response) {
+    	    	      const jsonData = response.data;
+    	    	      const parentContainer = document.querySelector(".row");
+    	    	      console.log(jsonData);
+    	    	      jsonData.forEach((data) => {
+    	    	        const base64Images = data.lostPetPic.map((pic) => {
+    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
+    	    	        });
+    	    	        const imageSrc =
+    	    	          base64Images.length > 0
+    	    	            ? base64Images[0]
+    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
+    	    	        const card = document.createElement("div");
+    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
+    	    	        card.innerHTML = `
+    	    	          <div class="card">
+    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
+    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
+    	    	            </a>
+    	    	            <div class="card-body">
+    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
+    	    	              <div class="card-text">${data.text}</div>
+    	    	            </div>
+    	    	          </div>
+    	    	        `;
+    	    	        parentContainer.appendChild(card);
+    	    	      });
+    	    	      console.log(response.data);
+    	    	    })
+    	    	    .catch(function (error) {
+    	    	      console.error(error);
+    	    	    });
+	    	    }
+	    	  });
+	    	});
+
 
 
         </script>

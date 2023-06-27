@@ -225,6 +225,9 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 	    const btn_create = document.querySelector('.btn-create');
+	    const parentElement = document.querySelector('.article');
+	    const urlParams = new URLSearchParams(window.location.search);
+        const mem_id = parseInt(urlParams.get('id'), 10);
 	    btn_create.addEventListener('click', () => {
 	        const targetPageUrl = './lost_post.html';
 	        window.location.href = targetPageUrl;
@@ -235,7 +238,9 @@
 	    const infoElement = document.querySelector(".info h5");
 	    const moreContentLink = document.querySelector(".btn-more");
 	    const editLink = document.querySelector(".btn-edit");
-	    axios.get("/LostPetArticle/id=1")
+	    let deleteId ;
+
+	    axios.get("/LostPetArticle/memId=" + mem_id)
 	    .then(function (response) {
 	      console.log(response.data);
 	      let data = response.data;
@@ -244,29 +249,32 @@
 	      let html = '';
 
 	      if (Array.isArray(data)) {
-	        data.forEach(function (item) {
-	          html += `
-	        	  <div class="article">
-	              <div class="article-title">
-	                <h5>${item.title}</h5>
-	              </div>
-	              <div class="info">
-	                <h5>${item.text}</h5>
-	                <a href="/lostPet/lost_post_edit.html?id=${item.articleId}" class="btn-edit">修改</a>
-	                <a href="/lostPet/forum.html?id=${item.articleId}" class="btn-more">更多內容</a>
-	                <a href="/delete/${item.id}" class="btn-delete">Delete</a>
-	              </div>
-	            </div>
-	          `;
-	        });
+	    	  parentElement.remove();
+
+	        
+	    	  data.forEach(function (item) {
+		    	  deleteId = item.articleId;
+
+	    		  html += `
+		        	<div class="article">
+		              <div class="article-title">
+		                <h5>${item.title}</h5>
+		              </div>
+		              <div class="info">
+		                <h5>${item.text}</h5>
+		                <a href="/lostPet/lost_post_edit.html?id=${item.articleId}" class="btn-edit">修改</a>
+		                <a href="/lostPet/forum.html?id=${item.articleId}" class="btn-more">更多內容</a>
+		                <button class="btn-delete" id = ${deleteId} >Delete</button>
+		              </div>
+		            </div>
+		            `;
+	    	  });
 	      } else {
 	        titleElement.textContent = data.title;
 	        infoElement.textContent = data.text;
 		    moreContentLink.href = `/lostPet/forum.html?id=${data.articleId}`;
 		    editLink.href = `/lostPet/lost_post_edit.html?id=${data.articleId}`;
-
 	      }
-
 	      conta.innerHTML = html;
 	    })
 	    .catch(function (error) {
@@ -274,12 +282,12 @@
 	    });
 	    
 	    btn_delete.addEventListener('click', function() {
-            var id = 12; 
 			console.log("123");
             $.ajax({
-                url: '/LostPetArticle/id=' + id + '/delete',
+                url: '/LostPetArticle/id=' + deleteId + '/delete',
                 type: 'PUT',
                 success: function(response) {
+                	parentElement.remove();
                     console.log('Article deleted:', response);
                 },
                 error: function(xhr, status, error) {
