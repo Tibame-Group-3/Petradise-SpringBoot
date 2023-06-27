@@ -12,7 +12,7 @@ function setupNavigation(isSignedIn) {
 
 function isSignedIn() {
     const memberId = localStorage.getItem('memberId');
-    return memberId !== undefined && memberId !== null;
+    return !!memberId; // Double negation turns a truthy or falsy value into actual true or false
 }
 
 function setupMemberElements(isSignedIn) {

@@ -49,19 +49,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean changePassword(Integer id, String oldPassword, String newPassword) {
+    public String changePassword(Integer id, String oldPassword, String newPassword) {
 
         var optionalMember = repository.findById(id);
         if (optionalMember.isEmpty()) {
-            return false;
+            return "找不到此用戶";
         }
-       var member = optionalMember.get();
-        if (Objects.equals(member.getPassword(), oldPassword)) {
-            member.setPassword(newPassword);
-            repository.save(member);
-            return true;
+        var member = optionalMember.get();
+        if (!Objects.equals(member.getPassword(), oldPassword)) {
+            return "密碼錯誤";
         }
-        return false;
+        member.setPassword(newPassword);
+        repository.save(member);
+        return "更改密碼成功";
     }
 
 }
