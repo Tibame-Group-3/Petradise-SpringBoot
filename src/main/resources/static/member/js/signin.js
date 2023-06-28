@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    const isSignedIn = !!localStorage.getItem('memberId');
+    if (isSignedIn) {
+        popBack();
+    }
     preventSpaceInput();
     $('#btn_signin')
         .on('click', onClickSignin);
@@ -77,12 +81,18 @@ function signin(account, password) {
         .then(response => {
                 if (response.ok) {
                     return response.json();
+                } else {
+                    return response.json().then(json => {
+                        throw new Error(json.message);
+                    });
                 }
-                throw new Error(response.statusText);
             }
         )
         .then(json => saveMemberID(json.id))
-        .catch(error => showAlert('帳號或密碼有誤'));
+        .catch(error => {
+            console.log(error);
+            showAlert(error.message)
+        });
 }
 
 function saveMemberID(id) {
@@ -96,7 +106,7 @@ function popBack() {
     if (redirect !== null) {
         window.location.href = redirect;
     } else {
-        history.go(-1);
+        window.location.href = '/';
     }
 
 }

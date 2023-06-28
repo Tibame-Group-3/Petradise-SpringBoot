@@ -69,6 +69,12 @@ class MemberController {
         var foundMember = service.login(account, password);
         if (foundMember.isPresent()) {
             // Only return the id of the member
+            var isVerified = foundMember.get().getIsEmailVerified();
+            if (!isVerified) {
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(new MemberNotFoundException("帳號信箱尚未驗證"));
+            }
             ObjectMapper mapper = new ObjectMapper();
             ObjectNode node = mapper.createObjectNode();
             node.put("id", foundMember.get().getId());
