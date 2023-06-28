@@ -29,29 +29,18 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<Pet> getAll() {
-        return petRepository.findAll()
-                .stream()
-                .filter(pet -> pet.getStatus().equals(PetStatus.NORMAL))
-                .collect(Collectors.toList());
+        return petRepository.findAllByStatus(PetStatus.NORMAL);
     }
 
     @Override
     public List<Pet> getPetsByMemId(Integer memId) {
         return petRepository
-                .findByMemberId(memId)
-                .stream()
-                .filter(pet -> pet.getStatus()
-                        .equals(PetStatus.NORMAL))
-                .collect(Collectors.toList());
+                .findByMemberIdAndStatus(memId, PetStatus.NORMAL);
     }
 
     @Override
     public Optional<Pet> getPetById(Integer id) {
-        var pet = petRepository.findById(id);
-        if (pet.isPresent() && pet.get().getStatus().equals(PetStatus.NORMAL)) {
-            return pet;
-        }
-        return Optional.empty();
+        return petRepository.findByIdAndStatus(id, PetStatus.NORMAL);
     }
 
     @Transactional
@@ -70,6 +59,7 @@ public class PetServiceImpl implements PetService {
         return newPet;
     }
 
+    @Transactional
     @Override
     public Pet updatePet(Pet pet) {
         if (!petRepository.existsById(pet.getId())) {
@@ -78,6 +68,7 @@ public class PetServiceImpl implements PetService {
         return petRepository.save(pet);
     }
 
+    @Transactional
     @Override
     public void deletePet(Integer id) {
         var pet = petRepository.findById(id);
