@@ -1,13 +1,18 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
 import java.util.List;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
 @Controller
 @RequestMapping("/roomTypes")
@@ -68,13 +73,32 @@ public class RoomTypeController {
         service.updateRoomType(roomTypeId);
         return ResponseEntity.ok().build();
     }
+    //使用者送篩想要的房型
+    @PostMapping("/search")
+    public ResponseEntity<List<AllHotelDTO>> searchHotels(@RequestBody searchHotelDTO searchDto) {
+        List<AllHotelDTO> searchResults = service.searchHotels(searchDto);
+        return ResponseEntity.ok(searchResults);
+    }
 
-    //更改房型狀態即更新關連到的房間所有狀態
-//    @PostMapping("/{roomTypeId}/setSaleStatus")
-//    public ResponseEntity<?> setRoomTypeSaleStatus(@PathVariable Integer roomTypeId,
-//                                                   @RequestParam Character saleStatus) {
-//        service.updateRoomTypeSaleStatus(roomTypeId, saleStatus);
-//        return ResponseEntity.ok().build();
-//    }
+    //使用者點選符合自己篩選條件的房型
+    @PostMapping ("/choose/{hotelId}/{roomTypeId}")
+    @ResponseBody
+    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @PathVariable Integer roomTypeId) {
+        return service.getSingleHotel(hotelId, roomTypeId);
 
+    }
+
+    //使用者選擇單一房型後顯示圖片
+    @GetMapping("/{roomTypeId}/images")
+    @ResponseBody
+    public List<String> getRoomTypeImages(@PathVariable Integer roomTypeId) {
+        return service.getRoomTypeImages(roomTypeId);
+    }
+
+    //顯示該旅館評論
+    @GetMapping("/hotels/{hotelId}/reviews")
+    public ResponseEntity<List<RoomReview>> getReviewsByHotelId(@PathVariable Integer hotelId) {
+        List<RoomReview> reviews = service.getReviewsByHotelId(hotelId);
+        return ResponseEntity.ok(reviews);
+    }
 }

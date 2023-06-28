@@ -1,24 +1,38 @@
 package tw.idv.petradisespringboot.roomType.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
+import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
+import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
 import java.util.List;
 
 public interface RoomTypeService {
-	List<RoomType> getByHotelId(Integer hotelId);
-
-	
-	RoomType addNewRoomType(RoomType newRoomType);
+    List<RoomType> getByHotelId(Integer hotelId);
 
 
-	RoomType getRoomType(Integer roomTypeId);
+    RoomType addNewRoomType(RoomType newRoomType);
 
 
-	void updateRoomType(Integer roomTypeId);
+    RoomType getRoomType(Integer roomTypeId);
 
 
-	RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
+    void updateRoomType(Integer roomTypeId);
 
+
+    RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
+
+
+    public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto);
+
+    SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId);
+
+    public List<String> getRoomTypeImages(Integer roomTypeId);
+
+    public List<RoomReview> getReviewsByHotelId(Integer hotelId);
 }
+

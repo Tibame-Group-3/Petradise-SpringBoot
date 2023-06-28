@@ -8,11 +8,13 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.member.dto.ChangePasswordDTO;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.Member;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/members")
@@ -30,6 +32,11 @@ class MemberController {
     @GetMapping("/all")
     ResponseEntity<?> all() {
         return ResponseEntity.ok(service.getAll());
+    }
+
+    @PostMapping("/update")
+    ResponseEntity<?> update(@RequestBody Member member) {
+        return ResponseEntity.ok(service.update(member));
     }
 
     @PostMapping("/sign-up")
@@ -81,9 +88,21 @@ class MemberController {
         return ResponseEntity.ok(infos);
     }
 
+    @PostMapping("/change-password")
+    ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO dto) {
+        final var result = service.changePassword(dto.getId(), dto.getOldPassword(), dto.getNewPassword());
+        if (Objects.equals(result, "更改密碼成功")) {
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(result);
+    }
+
     private Resource loadDistricts(){
         return resourceLoader.getResource("classpath:json/address_info.json");
     }
+
 }
 
 

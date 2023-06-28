@@ -8,14 +8,13 @@
   font-family: 'Muli', sans-serif;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   min-height: 100vh;
-  margin: 0;
+  margin-top: 30px;
 }
 
 
-.course {
+.article {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -27,12 +26,12 @@
 }
 
 
-.course h3 {
+.article h5 {
   letter-spacing: 1px;
   margin: 10px 0;
 }
 
-.course-preview {
+.article-title {
   background-color: #574f36;
   color: #fff;
   padding: 30px;
@@ -40,7 +39,7 @@
 }
 
 
-.course-info {
+.info {
   padding: 30px;
   position: relative;
   width: 100%;
@@ -101,5 +100,9 @@
   margin-right: 375px;
   margin-left: auto;
   letter-spacing: 1px;
+}
+
+a {
+  text-decoration: none;
 }
 

@@ -164,10 +164,10 @@
                                                                 id="sale_project_name">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="sale_product_id" class="form-label"
-                                                                style="color: #a67c52;">活動商品編號：</label>
+                                                            <label for="sale_product_type" class="form-label"
+                                                                style="color: #a67c52;">促銷商品編號：</label>
                                                             <input type="text" class="form-control"
-                                                                id="sale_product_id">
+                                                                id="sale_project_id">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="sale_project_discount" class="form-label"
@@ -187,9 +187,6 @@
                                                                 style="color: #a67c52;">活動結束日期：</label>
                                                             <input type="date" class="form-control"
                                                                 id="sale_project_end">
-
-
-
                                                         </div>
                                                     </article>
 
@@ -198,7 +195,8 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-primary">完成</button>
+                                                    <button type="button" class="btn btn-primary" id="add_confirm"
+                                                        data-bs-dismiss="modal">完成</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -260,6 +258,7 @@
 
 
     <!-- script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/jquery/jquery-3.7.0.min.js"></script>

@@ -14,4 +14,6 @@ public interface LostPetArticleRepository extends JpaRepository<LostPetArticle, 
 
 	List<LostPetArticle> findByLostPlace(String lostPlace);
 	
+	List<LostPetArticle> findByMemId(Integer memId);
+	
 }

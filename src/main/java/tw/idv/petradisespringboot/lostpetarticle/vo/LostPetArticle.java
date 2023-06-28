@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.lostpetarticle.vo;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,12 +40,11 @@ public class LostPetArticle implements Serializable{
 	@Column	(name="mem_id")
 	private Integer memId;
 	
-	@Column (name="article_update", insertable = false)
+	@Column (name="article_update", insertable = false, updatable=false)
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date update;
 	
 	@Column (name="lost_date")
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date lostDate;
 	
 	@Column	(name="lost_place")
@@ -69,7 +68,7 @@ public class LostPetArticle implements Serializable{
 	@Column	(name="contact_phone")
 	private String contactPhone;
 	
-	@Column (name="article_status", insertable = false)
+	@Column (name="article_status", insertable = false, updatable=false)
 	private String articleStatus;
 	
 	@Column
@@ -83,4 +82,6 @@ public class LostPetArticle implements Serializable{
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
 	private List<LostPetResponse> lostPetResponse;
+	
+	
 }

@@ -1,13 +1,16 @@
 package tw.idv.petradisespringboot.lostpetarticle.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 public interface LostPetArticleService {
 	
-	List<LostPetArticle> getAllArticles();
+	List<LostPetArticle> getArticlesWithStatus();
+	
+	List<LostPetArticle> getAllArticleByAdmin();
 	
 	LostPetArticle findById(Integer id);
 	
@@ -20,5 +23,9 @@ public interface LostPetArticleService {
 	List<LostPetArticle> findBySpecies(String species);
 	
 	List<LostPetArticle> findByLostPlace(String lostPlace);
+	
+	LostPetArticle update4Status(LostPetArticle lostPetArticle);
+	
+	List<LostPetArticle> findByMemId(Integer memId);
 
 }
