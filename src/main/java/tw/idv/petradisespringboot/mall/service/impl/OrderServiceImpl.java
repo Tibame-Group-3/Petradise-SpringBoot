@@ -1,13 +1,16 @@
 package tw.idv.petradisespringboot.mall.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
 import tw.idv.petradisespringboot.mall.model.repo.OrderDetailRepository;
 import tw.idv.petradisespringboot.mall.model.repo.OrderMasterRepository;
-import tw.idv.petradisespringboot.mall.model.vo.CreateOrderDTO;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetail;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetailCompositePK;
 import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
 import tw.idv.petradisespringboot.mall.service.OrderService;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -47,5 +50,15 @@ public class OrderServiceImpl implements OrderService {
             });
         }
         return savedOrderMaster;
+    }
+    
+    @Override
+    public List<OrderMaster> getAll() {
+    	return orderMasterRepository.findAll();
+    }
+    
+    public OrderMaster updateOrderMaster() {
+    	
+    	return ;
     }
 }

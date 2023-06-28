@@ -1,6 +1,7 @@
-package tw.idv.petradisespringboot.mall.model.vo;
+package tw.idv.petradisespringboot.mall.model.dto;
 
 import lombok.Data;
+import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
 
 import java.util.List;
 
