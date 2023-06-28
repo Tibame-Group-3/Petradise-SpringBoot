@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.stream.Stream;
 
 public enum PetStatus {
-    NORMAL("0"), LOST("1"), DEAD("2");
+    NORMAL("0"), DELETED("1");
 
     private final String value;
 

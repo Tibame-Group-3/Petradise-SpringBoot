@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>客戶-訂單管理</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
+    <!-- <link rel="stylesheet" href="assets/css/Articles-Badges-images.css"> -->
     <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
@@ -80,8 +80,6 @@
         textarea#new-review {
             resize: none;
             height: 100px;
-            /* min-height: 100px;
-    max-height: 100px; */
             width: auto;
             box-sizing: border-box;
         }
@@ -90,7 +88,7 @@
             background-color: transparent;
             /* border-color: tan; */
             /* color: tan; */
-            margin-left: 345px;
+            margin-left: 330px;
             border-radius: 8px;
         }
 
@@ -169,10 +167,11 @@
                                                 <div>入住日期: <span id="check-in-date" style="float: right;"></span></div>
                                                 <div>退房日期: <span id="check-out-date" style="float: right;"></span></div>
                                                 <br>
+                                                <a class="btn btn-primary btn-lg me-2" role="button" href="">查看詳情</a>
                                                 <a class="btn btn-primary btn-lg me-2 toggle-button"
                                                     role="button">留下評論</a>
-                                                <a class="btn btn-outline-primary btn-lg" role="button"
-                                                    href="#">查看詳情</a>
+                                                <a class="btn btn-danger btn-sm" role="button" href="">取消訂單</a>
+
                                                 <!-- --------------------------------------------------------------------------------------------- -->
                                                 <br><br>
                                                 <div class="review-box" style="display: none;">
@@ -197,7 +196,7 @@
                                                     <!-- --------------------------------------------------------------------------------------------- -->
                                                     <div class="col-md-6">
                                                         <form accept-charset="UTF-8">
-                                                            <textarea class="form-control" rows="4" cols="50"
+                                                            <textarea class="review-form" rows="4" cols="50"
                                                                 id="new-review" name="comment"
                                                                 placeholder="Enter your review here..."
                                                                 rows="5"></textarea>
@@ -267,12 +266,20 @@
                 $(this).toggleClass("active");
                 $(".review-box").slideToggle();
             });
+
+            $("form").submit(function (event) {
+                event.preventDefault();
+                $(".toggle-button").text("感謝您的評論！");
+                $(".toggle-button").removeClass("btn-primary").addClass("btn-warning");
+                // Additional code to disable form elements if needed
+            });
         });
+
         // JavaScript code to update the star count dynamically on hover and persist after clicking
         const starLabels = document.querySelectorAll('.rating > label');
         const starCount = document.querySelector('#star-count');
         const publishButton = document.querySelector('.btn-indie-trans');
-        const textArea = document.querySelector('.form-control');
+        const textArea = document.querySelector('.review-form');
         const form = document.querySelector('form');
 
         let selectedCount = 5; // Set the default selected count to 5
@@ -327,7 +334,6 @@
 
             Swal.fire({
                 title: 'Thanks for your review!',
-                text: 'You have earned 10 points!',
                 icon: 'success',
             });
 
@@ -336,6 +342,7 @@
             starLabels.forEach((label) => {
                 label.style.pointerEvents = 'none';
             });
+
         })
         // 評論-----------------------------------------------------------------------------------------------------------
 

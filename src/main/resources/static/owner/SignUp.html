@@ -433,6 +433,7 @@ $(function(){
             reader.onload = function (e) {
             	var hotelLicBase64 = reader.result;
             	var base64Data = e.target.result.split(",")[1]; // 去除前缀部分
+            	console.log(base64Data);
             	allData.imageBase64 = base64Data;
                 var img = $("<img>").attr("src", e.target.result);
                 $(".picture").html(img);

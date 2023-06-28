@@ -35,6 +35,6 @@ public class Pet {
 
     // The mappedBy attribute refers to the property name of the association on the owner side.
     @JsonManagedReference
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER)
     private List<PetPic> petPics;
 }

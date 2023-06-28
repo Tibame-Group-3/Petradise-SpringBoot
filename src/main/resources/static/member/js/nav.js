@@ -13,7 +13,8 @@ const navigationItems = [
         name: '我的寵物',
         root: '/member/pets.html',
         links: [
-            '/member/pets.html'
+            '/member/pets.html',
+            '/member/add_pet.html'
         ]
     },
     {

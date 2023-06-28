@@ -9,7 +9,6 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
     <style>
         @import url("https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css");
 
@@ -144,16 +143,17 @@
 
     <script>
         $(document).ready(function () {
+            const hotelId = getHotelId();
             var table = $('#example').DataTable({
                 "ajax": {
-                    "url": "http://localhost:8080/room-order/all",
+                    "url": `http://localhost:8080/room-order/hotel-id/${hotelId}`,
                     "dataSrc": "" // The data is not wrapped in an object property
                 },
                 "columns": [
                     {
                         "data": "id",
                         "render": function (data, type, row) {
-                            return '<a href="http://localhost:8080/f_27/旅館-訂單明細.html?id=' + data + '" target="_blank">' + data + '</a>';
+                            return '<a href="http://localhost:8080/f_27/hotel-order-detail.html?id=' + data + '" target="_blank">' + data + '</a>';
                         }
                     },
                     { "data": "memId" },
@@ -191,7 +191,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return '<button type="button" class="edit-button">編輯</button>';
+                            return '<button type="button" class="edit-button">取消</button>';
                         }
                     }
                 ]
@@ -230,8 +230,27 @@
                 return `${year}-${month}-${day}`;
             }
 
+            // // Submit event listener for the form
+            // $("form").submit(function (event) {
+            //     event.preventDefault();
+            //     var roomId = $('#roomId').val();
+            //     var status = 2; // Set the status to 2 (cancelled)
+            //     // Additional code to submit the form data and update the status in the backend
+
+            //     // Update the status in the table
+            //     var rowData = table.row($(this).closest('tr')).data();
+            //     rowData.status = status;
+            //     table.row($(this).closest('tr')).data(rowData).invalidate();
+            // });
+
 
         });
+
+        // Function to get hotel id
+        function getHotelId() {
+            return 1;
+            // return localStorage.getItem("hotelId");
+        }
     </script>
 </body>
 

@@ -234,6 +234,9 @@ div.search2 {
 									</thead>
 
 									<tbody class="data-container">
+									<div id="loading" >
+										<img src="../owner/img/loading.gif">
+									</div>
 
 									</tbody>
 									<tfoot>
@@ -296,7 +299,9 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 	
 	//清除頁面資料,刷新用
 	function clearPage() {
+
 	    $("tbody").empty();
+	    $("#loading").hide();
 	  }
 	
 	$.ajax({
@@ -355,7 +360,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 					 var input = $(".owner_search").val();
 					 if(input == ""){
 						 
-						 currentPage = 1; // 将 currentPage 设置为 1
+						 currentPage = 1; //  currentPage 設為 1
 						    displayPage(currentPage, res);
 						    $(".pagination").empty();
 						    for (let page1 = 1; page1 <= page; page1++) {
@@ -363,10 +368,19 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 						      $(".pagination .page-link:first").css("background-color", "#f8c544");
 						    }
 					 }else{
+						 currentPage = 1; //  currentPage 設為 1
+						    displayPage(currentPage, res)
+						  //清除頁籤
+						    $(".pagination").empty();
+					   		//返回第一頁
+						    for (let page1 = 1; page1 <= page; page1++) {
+						      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
+						      $(".pagination .page-link:first").css("background-color", "#f8c544");
+						    }
 						swal.fire({
 							title:"業主不夠多",
 							html:`<img src = "./img/cry.gif">`
-						})
+						})			
 				 }
 			}	
 		});	
@@ -376,7 +390,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		    $(".owner_search").on("blur",function(){
 		   	 var input = $(".owner_search").val();
 		   	 if(input == ""){
-		   		currentPage = 1; // 将 currentPage 设置为 1
+		   		currentPage = 1; //  currentPage 設為 1
 			    displayPage(currentPage, res);
 		   		//清除頁籤
 			    $(".pagination").empty();
@@ -523,21 +537,6 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		      currentPage = parseInt($(this).text());
 		      displayPage(currentPage,res);
 		    });
-		    
-// 		    //圖片還沒好
-// 	        $("tbody").on("click", ".pic", function() {
-// 			      const index = $(this).closest("tr").index(); //找到點擊的tr索引值
-// 			      const imageBase64 = res[index].imageBase64;  // 查詢資料庫該索引值的圖片
-// 			      Swal.fire({
-// 			        title: '特定寵物業許可證',
-// 			        width: '80%',
-// 			        background: '#fff',
-// 			        html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
-// 			      });
-// 			    });
-		    
-		    
-		    
 		  }
 		});
 	

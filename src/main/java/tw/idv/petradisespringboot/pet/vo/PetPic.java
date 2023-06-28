@@ -2,13 +2,12 @@ package tw.idv.petradisespringboot.pet.vo;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -28,4 +27,11 @@ public class PetPic {
     @Column
     private byte[] pic;
 
+    @Override
+    public String toString() {
+        return "PetPic{" +
+                "id=" + id +
+                ", pet=" + pet +
+                '}';
+    }
 }
