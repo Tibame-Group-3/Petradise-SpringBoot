@@ -143,6 +143,7 @@ function submitRegistration() {
         redirect: 'follow'
     };
 
+    showLoadingAlert();
     fetch("http://localhost:8080/members/sign-up", requestOptions)
         .then(response => {
             if (!response.ok) {
@@ -151,15 +152,38 @@ function submitRegistration() {
             return response.json();
         })
         .then(result => {
-            saveMemberId(result.id);
-            redirectToIndex();
+            swal.close();
+            showSuccessMessage();
         })
         .catch(error => {
+            swal.close();
             if (error.message.includes('409')) {
                 showInvalidFeedback(accountElement, 'This account has been used.');
             }
         });
 }
+
+function showSuccessMessage() {
+    Swal.fire({
+        title: '註冊成功',
+        icon: 'success',
+        text: '請至信箱收取驗證信',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        redirectToIndex();
+    });
+}
+
+function showLoadingAlert() {
+    Swal.fire({
+        title: '註冊中...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+}
+
 
 function fetchDistrictData() {
     fetch('/members/districts')
