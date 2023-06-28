@@ -48,15 +48,21 @@ public class PetServiceImpl implements PetService {
     public Pet addPet(NewPetDTO dto) {
         final var pet = dto.getPet();
         final var newPet = petRepository.save(pet);
-        var petPics = dto.getPics().stream().map(pic -> {
-            var byteArray = Base64.getDecoder().decode(pic);
-            var petPic = new PetPic();
-            petPic.setPet(newPet);
-            petPic.setPic(byteArray);
-            return petPicRepository.save(petPic);
-        }).collect(Collectors.toList());
+        var petPics = dto
+                .getPics()
+                .stream()
+                .map(pic -> convertAndSavePic(pic, newPet))
+                .collect(Collectors.toList());
         newPet.setPetPics(petPics);
         return newPet;
+    }
+
+    private PetPic convertAndSavePic(String pic, Pet newPet) {
+        var byteArray = Base64.getDecoder().decode(pic);
+        var petPic = new PetPic();
+        petPic.setPet(newPet);
+        petPic.setPic(byteArray);
+        return petPicRepository.save(petPic);
     }
 
     @Transactional
