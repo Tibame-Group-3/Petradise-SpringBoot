@@ -14,4 +14,8 @@ public interface RoomOrderService {
     List<RoomOrder> getAll();
     RoomOrder getRoomOrderById(Integer id);
     RoomOrder modify(Integer id, RoomOrder modifiedRoomOrder);
+
+    List<RoomOrder> getRoomOrdersByHotelId(Integer hotelId);
+
+
 }

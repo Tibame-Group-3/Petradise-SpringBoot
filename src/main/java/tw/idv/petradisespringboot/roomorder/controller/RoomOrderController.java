@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.roomorder.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
@@ -46,4 +47,11 @@ public class RoomOrderController {
     public RoomOrder modify(@PathVariable Integer id, @RequestBody RoomOrder modifiedRoomOrder){
         return service.modify(id, modifiedRoomOrder);
     }
+
+    @GetMapping("/hotel-id/{hotelId}")
+    public ResponseEntity<List<RoomOrder>> getRoomOrdersByHotelId(@PathVariable Integer hotelId) {
+        List<RoomOrder> roomOrders = service.getRoomOrdersByHotelId(hotelId);
+        return ResponseEntity.ok(roomOrders);
+    }
+
 }

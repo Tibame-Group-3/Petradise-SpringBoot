@@ -32,17 +32,16 @@ public class AdminServiceImpl implements AdminService {
         var admin = dto.getAdmin();
         // Save the Admin entity first so that it has an ID
         var newAdmin = adminRepository.save(admin);
-        var functions = dto.getFunctions();
-        if (functions != null) {
-            for (var function : functions) {
-
-                if (function != null) {
+        var functionIds = dto.getFunctionId();
+        if (functionIds != null) {
+            for (var functionId : functionIds) {
+                if (functionId != null) {
                     var access = new AdminAccess();
                     // Create the composite key
-                    var accessId = new AdminAccessId(newAdmin.getId(), function.getId());
+                    var accessId = new AdminAccessId(newAdmin.getId(), functionId);
                     access.setId(accessId);
                     access.setAdmin(newAdmin);
-                    access.setAccessFunction(function);
+                    access.setAccessFunction(accessFunctionRepository.findById(functionId).orElse(null));
                     // Save the AdminAccess entity
                     var newAccess = adminAccessRepository.save(access);
                     var existingAccesses = newAdmin.getAccesses();
@@ -61,11 +60,14 @@ public class AdminServiceImpl implements AdminService {
     public Admin modify(Integer id, Admin updatedAdmin) {
         return adminRepository.findById(id).map(existingAdmin -> {
             existingAdmin.setName(updatedAdmin.getName());
-            existingAdmin.setAccount(updatedAdmin.getAccount());
+//            existingAdmin.setAccount(updatedAdmin.getAccount());
             existingAdmin.setPassword(updatedAdmin.getPassword());
             existingAdmin.setPhone(updatedAdmin.getPhone());
             existingAdmin.setAddress(updatedAdmin.getAddress());
             existingAdmin.setEmail(updatedAdmin.getEmail());
+            existingAdmin.setTitle(updatedAdmin.getTitle());
+            existingAdmin.setStatus(updatedAdmin.getStatus());
+//            existingAdmin.setAccesses(updatedAdmin.getAccesses());
             return adminRepository.save(existingAdmin);
         }).orElse(null);
     }
