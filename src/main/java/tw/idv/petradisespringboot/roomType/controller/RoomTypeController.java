@@ -12,6 +12,7 @@ import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
 import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.service.RoomTypeService;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
 @Controller
 @RequestMapping("/roomTypes")
@@ -80,10 +81,24 @@ public class RoomTypeController {
     }
 
     //使用者點選符合自己篩選條件的房型
-    @PostMapping ("/choose/{hotelId}")
+    @PostMapping ("/choose/{hotelId}/{roomTypeId}")
     @ResponseBody
-    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @RequestParam("petType") String petType, @RequestParam("roomTypeSize") Character roomTypeSize) {
-        System.out.println(petType+roomTypeSize);
-        return service.getSingleHotel(hotelId, petType, roomTypeSize);
+    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @PathVariable Integer roomTypeId) {
+        return service.getSingleHotel(hotelId, roomTypeId);
+
+    }
+
+    //使用者選擇單一房型後顯示圖片
+    @GetMapping("/{roomTypeId}/images")
+    @ResponseBody
+    public List<String> getRoomTypeImages(@PathVariable Integer roomTypeId) {
+        return service.getRoomTypeImages(roomTypeId);
+    }
+
+    //顯示該旅館評論
+    @GetMapping("/hotels/{hotelId}/reviews")
+    public ResponseEntity<List<RoomReview>> getReviewsByHotelId(@PathVariable Integer hotelId) {
+        List<RoomReview> reviews = service.getReviewsByHotelId(hotelId);
+        return ResponseEntity.ok(reviews);
     }
 }

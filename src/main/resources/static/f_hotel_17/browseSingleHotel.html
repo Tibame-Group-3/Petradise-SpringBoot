@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/Articles-Badges-images.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/card-3-column-animation-shadows-images.css">
+    <link rel="stylesheet" href="/f_hotel_17/assets17/css/custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="/f_hotel_17/assets17/css/Navbar-Centered-Links-icons.css">
 </head>
@@ -140,7 +141,7 @@
     <div>
         <!-- Hotel Name -->
         <div style="margin-left: 40px;">
-            <h2 id="single-hotel-name" style="position: relative; left: 20px;margin-bottom:20px;">旅館名字</h2>
+            <h2 id="single-hotel-name" style="position: relative; left: 20px;margin-bottom:20px;"></h2>
             <div class="address-container" style=" display: flex; align-items: center;margin-left: 20px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                      class="bi bi-pin-map-fill" viewBox="0 0 16 16" style="margin-right: 10px;margin-bottom: 7px;">
@@ -149,7 +150,7 @@
                     <path fill-rule="evenodd"
                           d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
                 </svg>
-                <h5 id="single-hotel-add" name="ingle-hotel-add">旅館地址</h5>
+                <h5 id="single-hotel-add" name="ingle-hotel-add"></h5>
             </div>
             <div class="address-container" style=" display: flex; align-items: center;margin-left: 20px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -172,11 +173,12 @@
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/f_hotel_17/assets17/img/旅館照1-2.jpg" class="d-block w-100"
+                                    <img pic src="/f_hotel_17/assets17/img/loading.gif" class="d-block w-100 room-image"
                                          alt="Slide Image">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/f_hotel_17/assets17/img/旅館照1-1.jpg" class="d-block w-100" alt="...">
+                                    <img pic src="/f_hotel_17/assets17/img/loading.gif" class="d-block w-100 room-image"
+                                         alt="...">
                                 </div>
                             </div>
                             <!-- 左右控制按鈕 -->
@@ -198,22 +200,13 @@
                             <div class="card-body" style="margin-right: 10px;width: 140%;">
                                 <div>
                                     <h5 class="card-title" id="type-name"
-                                        style="display: inline-block; margin-right: 10px;">房型名字</h5>
-                                    <p class="card-text" id="price" style="display: inline-block;">房型價格</p>
+                                        style="display: inline-block; margin-right: 10px;"></h5>
+
+                                    <p class="card-text" id="price" style="display: inline-block;"></p>
                                 </div>
 
                                 <p class="card-text" id="intro" style="margin-right: 10px;">
-                                    擁有獨棟挑高貓房及隔間連通設計，
-                                    打造更寬敞自由的空間。
-                                    由專業照護員細心的照顧，讓貓咪住的自在，
-                                    主人在外安心。 每隻貓皆採取客製化服務，
-                                    能與同伴社交，也可以獨立放風。
-                                    擁有獨棟挑高貓房及隔間連通設計，
-                                    打造更寬敞自由的空間。
-                                    由專業照護員細心的照顧，讓貓咪住的自在，
-                                    主人在外安心。 每隻貓皆採取客製化服務，
-                                    能與同伴社交，也可以獨立放風。 擁有獨棟挑高貓房及隔間連通設計，
-                                    打造
+
                                 </p>
                             </div>
                         </div>
@@ -242,26 +235,8 @@
                 </svg>
                 <h4>評論</h4>
             </div>
-            <div class="card" style="width: 65rem;">
-                <div class="card-body">
-                    <div style="display: inline;">
-                        <h5 class="card-title" style="display: inline-block;">評論者名稱 ★★★★☆</h5>
-                        <h5 class="card-score" style="display: inline-block;margin-left: 10px;">4.0</h5>
-                    </div>
-                    <p class="card-text">這個旅館真的很棒...</p>
-                </div>
+            <div id="comment">
             </div>
-            <div class="card" style="width: 65rem;">
-                <div class="card-body">
-                    <div style="display: inline;">
-                        <h5 class="card-title" style="display: inline-block;">評論者名稱 ★★★★☆</h5>
-                        <h5 class="card-score" style="display: inline-block;margin-left: 10px;">4.0</h5>
-                    </div>
-                    <p class="card-text">這個旅館真的很棒...</p>
-                </div>
-            </div>
-
-
         </div>
         <!-- Bootstrap JavaScript -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -317,33 +292,92 @@
 <script>
     // 文件載入時期要做的事
     $(document).ready(function () {
+        var urlParams = new URLSearchParams(window.location.search); //取得查詢字串
+        var hotelId = urlParams.get('hotelId');
+        var roomTypeId = urlParams.get('roomTypeId');
+        console.log(hotelId);
+        console.log(roomTypeId);
+
         $.ajax({
-            url: "/roomTypes/choose/5",
+            url: `/roomTypes/choose/${hotelId}/${roomTypeId}`,
             type: "POST",
-            contentType: "application/x-www-form-urlencoded;charset=utf-8",
-            data: {
-                petType: "貓",
-                roomTypeSize: '0'
-            },
             success: function (res) {
                 $("#single-hotel-name").text(res.hotelName);
                 $("#single-hotel-add").text(res.hotelAddress);
                 $("#type-name").text(res.roomTypeName);
-                $("#price").text(res.roomTypePrice);
+                $("#price").text(res.roomTypePrice + "元/一晚");
                 $("#intro").text(res.roomTypeAbout);
                 console.log(res);
-                alert("查詢成功");
-                // 在這裡處理成功回應，可以根據需要進行後續操作
-                // res 是伺服器返回的回應結果
             },
             error: function (xhr) {
                 console.log(xhr);
                 alert("查詢失敗");
-                // 在這裡處理錯誤回應，可以根據需要進行後續操作
-                // xhr 是代表錯誤的 XMLHttpRequest 物件
             }
         });
     });
+    $(document).ready(function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var roomTypeId = urlParams.get('roomTypeId');
+        $.ajax({
+            url: '/roomTypes/' + roomTypeId + '/images',
+            type: 'GET',
+            success: function (images) {
+                $('.room-image').each(function (index, img) {
+                    if (index < images.length) {
+                        $(img).attr('src', images[index]);
+                    }
+                });
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                alert("Failed to load images");
+            }
+        });
+    });
+    $(document).ready(function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var hotelId = urlParams.get('hotelId');
+        function generateStars(score) {
+            var stars = '';
+            for (var i = 0; i < 5; i++) {
+                if (i < score) {
+                    stars += '★';
+                } else {
+                    stars += '☆';
+                }
+            }
+            return stars;
+        }
+        $.ajax({
+            url: '/roomTypes/hotels/' + hotelId + '/reviews',
+            type: 'GET',
+            success: function (reviews) {
+                console.log(reviews);
+                if (reviews.length === 0) {
+                    $('#comment').append('<p>尚無評論 留下你的評論吧!</p>');
+                } else {
+                    reviews.forEach(function (review) {
+                        var reviewElement = `
+                    <div class="card-body card-body-custom">
+                        <div style="display: inline;">
+                            <h5 class="card-title" style="display: inline-block;">匿名 </h5>
+                           <h5 class="card-score" style="display: inline-block;margin-left: 10px; color: #fd780f;">${generateStars(review.score)} ${review.score}</h5>
+
+                        </div>
+                        <p class="card-text">${review.content}</p>
+                    </div>
+                `;
+                        $('#comment').append(reviewElement);
+                    });
+                }
+            },
+            error: function () {
+                console.log('Error fetching reviews');
+            }
+        });
+    });
+
+
 
 </script>
 </body>

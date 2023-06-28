@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class AllHotelDTO {
+    private Integer hotelId;
+    private Integer roomTypeId;
     private String hotelName;
     private String hotelAddress;
     private String roomTypeName;
