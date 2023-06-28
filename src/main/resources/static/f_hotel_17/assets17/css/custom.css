@@ -140,3 +140,17 @@ div.overlay>article {
   padding: 10px;
   margin-bottom: 10px;
 }
+.priceStyle {
+  font-size: 2em; /* 調整文本的大小 */
+  color: #f8c544; /* 調整文本的顏色 */
+}
+.defaultStyle {
+  color: black;
+}
+.stars {
+  color: #fd780f;
+}
+
+.review-score {
+  color: #000000; /* 這是黑色的十六進位碼 */
+}
