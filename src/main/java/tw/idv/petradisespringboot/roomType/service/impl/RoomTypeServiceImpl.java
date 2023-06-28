@@ -138,21 +138,17 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     //單一房型拿到文字資料
     @Override
     @Transactional
-    public SingleHotelDTO getSingleHotel(Integer hotelId, String petType, Character roomTypeSize) {
+    public SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId) {
         SingleHotelDTO singleHotelDTO = new SingleHotelDTO();
         HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.getReferenceById(hotelId);
         singleHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
         singleHotelDTO.setHotelAddress(hotelOwnerVO.getHotelAddress());
-        List<RoomType> list = typeRepository.findAllByHotelId(hotelId);
-        for (RoomType r : list
-        ) {
-            if (petType.equals(r.getRoomPetType()) && roomTypeSize == r.getRoomTypeSize()) {
-                singleHotelDTO.setRoomTypeName(r.getRoomTypeName());
-                singleHotelDTO.setRoomTypePrice(r.getRoomTypePrice());
-                singleHotelDTO.setRoomTypeAbout(r.getRoomTypeAbout());
-            }
+        RoomType roomType = typeRepository.getReferenceById(roomTypeId);
+        singleHotelDTO.setRoomTypeAbout(roomType.getRoomTypeAbout());
+        singleHotelDTO.setRoomTypePrice(roomType.getRoomTypePrice());
+        singleHotelDTO.setRoomTypeName(roomType.getRoomTypeName());
 
-        }
+
         return singleHotelDTO;
     }
 
@@ -181,7 +177,8 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             // 用hotelOwnerRepository拿HotelOwnerVO
             HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.findById(roomType.getHotelId())
                     .orElseThrow(() -> new ResourceNotFoundException("HotelOwner not found with id " + roomType.getHotelId()));
-
+            allHotelDTO.setHotelId(hotelOwnerVO.getHotelId());
+            allHotelDTO.setRoomTypeId(roomType.getRoomTypeId());
             allHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
             allHotelDTO.setHotelAddress(hotelOwnerVO.getHotelAddress());
             allHotelDTO.setRoomTypeName(roomType.getRoomTypeName());
@@ -204,5 +201,22 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return allHotelDTOs;
     }
 
+    @Override
+    public List<String> getRoomTypeImages(Integer roomTypeId) {
+        RoomType roomType = typeRepository.findById(roomTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException("RoomType not found with id " + roomTypeId));
+        List<RoomPic> roomPics = roomType.getRoomPics();
+        List<String> images = new ArrayList<>();
+        for (RoomPic pic : roomPics) {
+            byte[] roomPicBytes = pic.getRoomPic();
+            String encodedImage = Base64.getEncoder().encodeToString(roomPicBytes);
+            String imageUrl = "data:image/*;base64," + encodedImage;
+            images.add(imageUrl);
+        }
+        return images;
+    }
 
+    public List<RoomReview> getReviewsByHotelId(Integer hotelId) {
+        return roomReviewRepository.findByHotelId(hotelId);
+    }
 }
