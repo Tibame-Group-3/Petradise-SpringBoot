@@ -3,12 +3,12 @@ package tw.idv.petradisespringboot.member.controller;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import lombok.Data;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.member.dto.ChangePasswordDTO;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.Member;
@@ -103,13 +103,6 @@ class MemberController {
         return resourceLoader.getResource("classpath:json/address_info.json");
     }
 
-
-    @Data
-    private static class ChangePasswordDTO {
-        Integer id;
-        String oldPassword;
-        String newPassword;
-    }
 }
 
 

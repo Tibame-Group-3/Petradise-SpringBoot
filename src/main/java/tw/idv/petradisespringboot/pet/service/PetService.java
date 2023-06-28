@@ -1,6 +1,6 @@
 package tw.idv.petradisespringboot.pet.service;
 
-import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 import java.util.List;

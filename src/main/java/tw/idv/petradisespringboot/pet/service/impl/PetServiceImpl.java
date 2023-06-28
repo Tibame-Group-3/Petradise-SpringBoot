@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.pet.repo.PetPicRepository;
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.service.PetService;
-import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
 import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
