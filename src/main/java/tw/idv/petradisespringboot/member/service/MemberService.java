@@ -17,4 +17,6 @@ public interface MemberService {
     Member update(Member newMember);
 
     String changePassword(Integer id, String oldPassword, String newPassword);
+
+    boolean verifyEmail(String token);
 }

@@ -99,6 +99,17 @@ class MemberController {
                 .body(result);
     }
 
+    @GetMapping("/verify-email")
+    ResponseEntity<?> verifyEmail(@RequestParam String token) {
+        final var result = service.verifyEmail(token);
+        if (result) {
+            return ResponseEntity.ok("驗證成功");
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("驗證失敗");
+    }
+
     private Resource loadDistricts(){
         return resourceLoader.getResource("classpath:json/address_info.json");
     }
