@@ -15,6 +15,7 @@ $(document).ready(function () {
                                     <img class="card-img-top" src="${base64Img}" alt="image"></td>
                                 <td class="pdType" style="color: #a67c52;">${element.pdType}</td>
                                 <td class="pdName" style="color: #a67c52;">${element.pdName}</td>
+                                <td class="pdName" style="color: #a67c52;">${element.pdStatus === "0" ? "下架" : "上架"}</td>
                                 <td class="pdPrice" style="color: #a67c52;">\$ ${element.pdPrice}</td>
                                 <td class="pdDate" style="color: #a67c52;">${element.pdDate}</td>
                                 <td>
