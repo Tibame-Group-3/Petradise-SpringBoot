@@ -40,7 +40,4 @@ public class Product {
     @Lob
     byte[] pdImg;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<Sale> sale;
 }

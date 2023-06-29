@@ -18,6 +18,7 @@ public class OrderDetailCompositePK implements Serializable {
 
 	@Column(name = "od_id")
 	private Integer odId;
+	
 	@Column(name = "pd_id")
 	private Integer pdId;
 
