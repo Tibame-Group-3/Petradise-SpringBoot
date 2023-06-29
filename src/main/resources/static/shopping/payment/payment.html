@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500" style="position: sticky;top: 0;background: #ffffff;z-index: 10;border-color: #f1ecd1;height: 75px;">
@@ -60,7 +60,8 @@
   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
 </svg>會員</button><button class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" type="button" style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
-            <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item" href="#" style="color: #ffffff;">會員中心</a></div></div></div></div></nav><main class="payment-body">
+            <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a class="dropdown-item" href="#" style="color: #ffffff;">會員中心</a></div></div></div></div></nav>
+<main class="payment-body">
         <section class="payment-form">
             <div class="header">
                 <h3 class="heading">付款方式</h3>
@@ -103,8 +104,14 @@
 
 
                     <hr class="diver">
+                    <span class="tol" style="color: #f8c544">訂購金額
+                        <span class="items-price">+ $ 0</span>
+                    </span>
+                    <span class="tol" style="color: #f8c544">運費
+                        <span class="ship-price">+ $ 0</span>
+                    </span>
                     <span class="tol">付款總金額
-                        <span class="tol-price">$ 0</span>
+                        <span class="tol-price">= $ 0</span>
                     </span>
                 </div>
 
@@ -125,11 +132,11 @@
 
                     <div class="credit-card -off">
                         <div class="form-group">
-                            <label for="card-number">信用卡卡號</label>
+                            <label for="card-number">信用卡卡號：</label>
                             <input id="card-number" type="text" class="form-control" placeholder="ex. 000011112222">
                         </div>
                         <div class="form-group">
-                            <label>失效日期</label>
+                            <label>失效日期：</label>
                             <div class="input-group expiration-date">
                                 <input type="text" class="form-control" placeholder="MM">
                                 <span class="date-separator"> ／ </span>
@@ -137,11 +144,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="cvc">安全碼</label>
+                            <label for="cvc">安全碼：</label>
                             <input id="cvc" type="text" class="form-control" placeholder="ex. 012">
                         </div>
                         <div class="form-group">
-                            <label for="card-holder">持有人姓名</label>
+                            <label for="card-holder">持有人姓名：</label>
                             <input id="card-holder" type="text" class="form-control" placeholder="ex. 吳大衛">
                         </div>
                     </div>
@@ -155,11 +162,11 @@
                             <label>帳號：1234-5678-9000</label>
                         </div>
                         <div class="form-group">
-                            <label for="remitter-name">匯款人姓名</label>
+                            <label for="remitter-name">匯款人姓名：</label>
                             <input id="remitter-name" type="text" class="form-control" placeholder="ex. 吳大衛">
                         </div>
                         <div class="form-group">
-                            <label for="last-number">匯款帳號後5碼</label>
+                            <label for="last-number">匯款帳號後5碼：</label>
                             <input id="last-number" type="text" class="form-control" placeholder="ex. 01234">
                         </div>
                     </div>
@@ -183,30 +190,30 @@
 
                     <div class="home-delivery -off">
                         <div class="form-group">
-                            <label>收件人姓名</label>
+                            <label>收件人姓名：</label>
                             <input type="text" class="form-control recipient-name" placeholder="ex. 吳大衛">
                         </div>
                         <div class="form-group">
-                            <label>收件人連絡電話</label>
-                            <input type="tel" class="form-control recipient-phonel" placeholder="ex. 0987654321">
+                            <label>收件人連絡電話：</label>
+                            <input type="tel" class="form-control recipient-phone" placeholder="ex. 0987654321">
                         </div>
                         <div class="form-group">
-                            <label for="recipient-address">收件人地址</label>
+                            <label for="recipient-address">收件人地址：</label>
                             <input id="recipient-address" type="text" class="form-control" placeholder="ex. 330桃園市中壢區">
                         </div>
                     </div>
 
                     <div class="pickup -off">
                         <div class="form-group">
-                            <label for="store-name">取貨門市名</label>
+                            <label for="store-name">取貨門市名：</label>
                             <input id="store-name" type="text" class="form-control" placeholder="EX. 中壢店">
                         </div>
                         <div class="form-group">
-                            <label>收件人姓名</label>
+                            <label>收件人姓名：</label>
                             <input type="text" class="form-control recipient-name" placeholder="EX. David Wu">
                         </div>
                         <div class="form-group">
-                            <label>收件人連絡電話</label>
+                            <label>收件人連絡電話：</label>
                             <input type="tel" class="form-control recipient-phone" placeholder="EX. 0987654321">
                         </div>
 
@@ -217,6 +224,7 @@
                     </div>
                 </div>
             </form>
+
         </section>
     </main>
 

@@ -41,8 +41,8 @@
 
 .info {
   padding: 30px;
-  position: relative;
-  width: 100%;
+  width: auto;
+  display: inline-block;
 }
 
 .btn-more {
@@ -53,7 +53,8 @@
   color: #fff;
   font-size: 16px;
   padding: 12px 25px;
-  position: absolute;
+  display: inline-block;
+  margin-left: 140px;
   bottom: 30px;
   right: 30px;
   letter-spacing: 1px;

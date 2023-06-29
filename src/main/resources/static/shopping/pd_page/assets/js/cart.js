@@ -29,22 +29,22 @@ $(document).ready(function () {
 
         const row = `
         <div class="cart-items" id="${id}">
-            <div class="check">
-                <input type="checkbox">
-            </div>
-            <div id="preview" class="image-box">
-                <img src="${base64Img}" style="height: 120px">
-            </div>
-
-            <div class="item-about">
-                <span id="id" style="display: none">${id}</span>
-                <span id="pdPetType"> ${pdPetType}</span> / <span id="pdType">${pdType}</span>
-                <h1 id="pdName" class="title">${name}</h1>
-            </div>
-
+                <div class="check">
+                    <input type="checkbox">
+                </div>
+                <div id="preview" class="image-box">
+                    <img src="${base64Img}" style="height: 120px">
+                </div>
+    
+                <div class="item-about">
+                    <span id="id" style="display: none">${id}</span>
+                    <span id="pdPetType" class="type">${pdPetType} \/ </span><span id="pdType" class="type">${pdType}</span>
+                    <h1 id="pdName" class="title">${name}</h1>
+                </div>
+            
             <div class="item-counter">
                 <div class="item-btn item-decrease">-</div>
-                <div id="" class="item-count">${quantity}</div>
+                <div class="item-count">${quantity}</div>
                 <div class="item-btn item-increase">+</div>
 
             </div>
@@ -82,6 +82,7 @@ $(document).ready(function () {
         item.quantity--; // 遞減數量---------------------------------------------------------
         if (item.quantity < 0) {    // 確保數量不小於 0---------------------------------------
             item.quantity = 0;
+            
         }
         updateQuantity(productId, item.quantity); // 更新顯示的數量---------------------------
         updateCheckoutItem();

@@ -32,7 +32,7 @@ public class LostPetResponseServiceImpl implements LostPetResponseService{
 		// 透過article repository 取得該id的article
 		var article = articleRepository.findById(articleId).orElseThrow(IllegalAccessError::new);
 		// 在把Repository找到的article放入要新增的LostPetResponse中
-		response.setArticleId(article);
+		response.setArticle(article);
 		// Call LostPetResponse repo 的 save方法, 存完順便回傳給前端表示成功
 		return lostPetResponseRepo.save(response);
 	}
