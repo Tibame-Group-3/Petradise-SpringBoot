@@ -49,9 +49,9 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     public RoomOrder modify(Integer id, RoomOrder modifiedRoomOrder) {
         // Update the fields of the existing room order with the new values
         return repository.findById(id).map(existingRoomOrder ->{
-            existingRoomOrder.setRoomTypeId(modifiedRoomOrder.getRoomTypeId());
+//            existingRoomOrder.setRoomTypeId(modifiedRoomOrder.getRoomTypeId());
             existingRoomOrder.setRoomId(modifiedRoomOrder.getRoomId());
-            existingRoomOrder.setPetId(modifiedRoomOrder.getPetId());
+//            existingRoomOrder.setPetId(modifiedRoomOrder.getPetId());
             existingRoomOrder.setOrderDate(modifiedRoomOrder.getOrderDate());
             existingRoomOrder.setCheckInDate(modifiedRoomOrder.getCheckInDate());
             existingRoomOrder.setCheckOutDate(modifiedRoomOrder.getCheckOutDate());
@@ -63,4 +63,10 @@ public class RoomOrderServiceImpl implements RoomOrderService {
             return repository.save(existingRoomOrder);
         }).orElse(null);
     }
+
+    @Override
+    public List<RoomOrder> getRoomOrdersByHotelId(Integer hotelId) {
+        return repository.findByHotelId(hotelId);
+    }
+
 }

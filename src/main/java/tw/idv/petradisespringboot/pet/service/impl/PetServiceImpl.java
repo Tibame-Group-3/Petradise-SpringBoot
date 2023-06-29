@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.pet.repo.PetPicRepository;
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.service.PetService;
-import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
 import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
@@ -29,29 +29,18 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<Pet> getAll() {
-        return petRepository.findAll()
-                .stream()
-                .filter(pet -> pet.getStatus().equals(PetStatus.NORMAL))
-                .collect(Collectors.toList());
+        return petRepository.findAllByStatus(PetStatus.NORMAL);
     }
 
     @Override
     public List<Pet> getPetsByMemId(Integer memId) {
         return petRepository
-                .findByMemberId(memId)
-                .stream()
-                .filter(pet -> pet.getStatus()
-                        .equals(PetStatus.NORMAL))
-                .collect(Collectors.toList());
+                .findByMemberIdAndStatus(memId, PetStatus.NORMAL);
     }
 
     @Override
     public Optional<Pet> getPetById(Integer id) {
-        var pet = petRepository.findById(id);
-        if (pet.isPresent() && pet.get().getStatus().equals(PetStatus.NORMAL)) {
-            return pet;
-        }
-        return Optional.empty();
+        return petRepository.findByIdAndStatus(id, PetStatus.NORMAL);
     }
 
     @Transactional
@@ -59,17 +48,24 @@ public class PetServiceImpl implements PetService {
     public Pet addPet(NewPetDTO dto) {
         final var pet = dto.getPet();
         final var newPet = petRepository.save(pet);
-        var petPics = dto.getPics().stream().map(pic -> {
-            var byteArray = Base64.getDecoder().decode(pic);
-            var petPic = new PetPic();
-            petPic.setPet(newPet);
-            petPic.setPic(byteArray);
-            return petPicRepository.save(petPic);
-        }).collect(Collectors.toList());
+        var petPics = dto
+                .getPics()
+                .stream()
+                .map(pic -> convertAndSavePic(pic, newPet))
+                .collect(Collectors.toList());
         newPet.setPetPics(petPics);
         return newPet;
     }
 
+    private PetPic convertAndSavePic(String pic, Pet newPet) {
+        var byteArray = Base64.getDecoder().decode(pic);
+        var petPic = new PetPic();
+        petPic.setPet(newPet);
+        petPic.setPic(byteArray);
+        return petPicRepository.save(petPic);
+    }
+
+    @Transactional
     @Override
     public Pet updatePet(Pet pet) {
         if (!petRepository.existsById(pet.getId())) {
@@ -78,6 +74,7 @@ public class PetServiceImpl implements PetService {
         return petRepository.save(pet);
     }
 
+    @Transactional
     @Override
     public void deletePet(Integer id) {
         var pet = petRepository.findById(id);

@@ -1,6 +1,8 @@
 package tw.idv.petradisespringboot.roomorder.vo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,15 +20,20 @@ public class RoomOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_order_id")
     private Integer id;
+
     @Column(name = "mem_id")
     private Integer memId;
+
     @Column(name = "room_type_id")
     private Integer roomTypeId;
+
     @Column(name = "room_id")
     private Integer roomId;
+
     @Column(name = "pet_id")
-    private Integer petId;
-    @Column(name = "room_order_date")
+    private  Integer petId;
+
+    @Column(name = "room_order_date", insertable = false)
     private Date orderDate;
     @Column(name = "check_in_date")
     private LocalDate checkInDate;
@@ -42,4 +49,5 @@ public class RoomOrder {
     private Integer bonus;
     @Column(name = "room_od_special_req")
     private String specialReq;
+
 }

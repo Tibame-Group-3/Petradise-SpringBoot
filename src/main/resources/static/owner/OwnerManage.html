@@ -23,6 +23,7 @@
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="./css/all.css">
 
 
 <style>
@@ -59,6 +60,18 @@ div.search2 {
 
 .data-container tr>td {
 	width: 15%;
+}
+
+.hotel_owner_text{
+display: inline-block;
+width:auto;
+}
+.reload{
+display: inline-block;
+width:auto;
+}
+.reload_btn{
+background: #ffe7dd;
 }
 </style>
 </head>
@@ -185,15 +198,16 @@ div.search2 {
 					<h3 class="text-dark mb-4">旅館業主資料管理</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">旅館業主列表</p>
+							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">旅館業主列表</p></div>
+							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
 						</div>
 						<div class="card-body">
 							<div class="row">
 								<div class="search">
-									業主搜尋: <input class="owner_search" type="text" name="Search"
-										placeholder="請輸入業主編號">
+									關鍵字搜尋: <input class="owner_search" type="text" name="Search"
+										placeholder="請輸入關鍵字">
 
-									<button class="search_btn">
+									<button class="search_btn" style="background: #ffe7dd">
 										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
 											style="color: #4c51a4;"></i>
 									</button>
@@ -208,7 +222,7 @@ div.search2 {
 										name="option1" value="option1"> 停權
 									</label>
 									<!-- 圖標 -->
-									<button type="button" class="Access_btn">
+									<button type="button" class="Access_btn" style="background: #ffe7dd">
 										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
 											style="color: #4c51a4;"></i>
 									</button>
@@ -293,16 +307,31 @@ div.search2 {
 
 $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}))
 	
-
+//reload按鈕
+	$(".reload").hover(
+			function(){
+		//移入
+		$(this).find('i').addClass('fa-spin');
+			},
+			function(){
+				$(this).find('i').removeClass('fa-spin');
+			});
+	$(".reload").on("click",function(){
+		location.reload();
+	});
+	
+	
+	
 	var data ; //存回應資料的長度用(res.length)
 	var currentPage = 1; //起始頁
 	
 	//清除頁面資料,刷新用
 	function clearPage() {
-
 	    $("tbody").empty();
 	    $("#loading").hide();
 	  }
+	
+	
 	
 	$.ajax({
 		  url: "/ownerManage/getAll",
@@ -333,15 +362,30 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		    displayPage(currentPage,res);
 		    
 		    
-//===================================================依業主ID搜尋↓===========================================================//
+//===================================================依關鍵字搜尋↓===========================================================//
 		    $(".search_btn").on("click",function(){
 		    	
-		    	clearPage();// 先清空頁面
-		    	
-		    	appendTableData(res);// 再呼叫創建td的函式,此時會一次顯示全部資料在頁面上
-		    	
+// 		    	clearPage();// 先清空頁面		    	
+// 		    	appendTableData(res);// 再呼叫創建td的函式,此時會一次顯示全部資料在頁面上		    	
 				var number =  parseInt($(".owner_search").val());
-				var error = true; //用來處理空值情形
+		    	var keyword = $(".owner_search").val();
+		    	
+		    	var error = true; //用來處理空值情形
+		    	if(keyword === ""){
+		    		 currentPage = 1; //  currentPage 設為 1
+					   displayPage(currentPage, res);
+					    $(".pagination").empty();
+					    for (let page1 = 1; page1 <= page; page1++) {
+					      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
+					      $(".pagination .page-link:first").css("background-color", "#f8c544");
+					    }
+					 
+		    	
+		    	
+		    	}else if (!isNaN(number)) {		
+		    		clearPage();// 先清空頁面
+			    	
+	 		    	appendTableData(res);// 再呼叫創建td的函式,此時會一次顯示全部資料在頁面上
 				// 遍歷每個tr
 				 $("tbody tr").each(function() {
 					var tdNumber = parseInt($(this).find("td").text());
@@ -350,39 +394,117 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 						$(".pagination").empty();
 						$(this).show();
 						error = false;
-					}else if(number !== tdNumber){
+					}else{
 						$(this).hide();
-			
 					}
 				});
-				//如果沒輸入任何資料,就顯示頁籤一的資料,如果輸入的資料不存在,跳出訊息
-				 if(error){
-					 var input = $(".owner_search").val();
-					 if(input == ""){
-						 
-						 currentPage = 1; //  currentPage 設為 1
-						    displayPage(currentPage, res);
-						    $(".pagination").empty();
-						    for (let page1 = 1; page1 <= page; page1++) {
-						      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
-						      $(".pagination .page-link:first").css("background-color", "#f8c544");
-						    }
-					 }else{
-						 currentPage = 1; //  currentPage 設為 1
-						    displayPage(currentPage, res)
-						  //清除頁籤
-						    $(".pagination").empty();
-					   		//返回第一頁
-						    for (let page1 = 1; page1 <= page; page1++) {
-						      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
-						      $(".pagination .page-link:first").css("background-color", "#f8c544");
-						    }
-						swal.fire({
+				if(error){
+					  swal.fire({
 							title:"業主不夠多",
 							html:`<img src = "./img/cry.gif">`
-						})			
-				 }
-			}	
+						})
+				}
+				
+				//如果沒輸入任何資料,就顯示頁籤一的資料,如果輸入的資料不存在,跳出訊息
+// 				 if(error){
+// 					 var input = $(".owner_search").val();
+// 					 if(input == ""){
+						 
+// 						 currentPage = 1; //  currentPage 設為 1
+// 						    displayPage(currentPage, res);
+// 						    $(".pagination").empty();
+// 						    for (let page1 = 1; page1 <= page; page1++) {
+// 						      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
+// 						      $(".pagination .page-link:first").css("background-color", "#f8c544");
+// 						    }
+// 					 }else{
+// 						 currentPage = 1; //  currentPage 設為 1
+// 						    displayPage(currentPage, res)
+// 						  //清除頁籤
+// 						    $(".pagination").empty();
+// 					   		//返回第一頁
+// 						    for (let page1 = 1; page1 <= page; page1++) {
+// 						      $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
+// 						      $(".pagination .page-link:first").css("background-color", "#f8c544");
+// 						    }
+// 						swal.fire({
+// 							title:"業主不夠多",
+// 							html:`<img src = "./img/cry.gif">`
+// 						})			
+// 				 	}
+// 				 }
+				
+			}else if(keyword != null){
+				 swal.fire({
+			            title: 'Loading',
+			            html:`<img src = "./img/appleCat.gif" style="width:200px; height:200px;" >`,
+			            showConfirmButton: false,
+						allowOutsideClick: true,
+			            onBeforeOpen: () => {
+			            swal.showLoading()
+			            }
+			        });
+		    	$.ajax({
+		    		url: "/ownerManage/getAll",
+		    		type: "GET",
+		    		data: { keyword:keyword },
+		    		dataType: "JSON",
+		    		success: function(res){		    			
+		    			swal.close();	    			
+		    			console.log(res);		    			
+		    			clearPage();
+		    			if(res.length !== 0){
+		    			for (let i = 0; i < res.length; i++) {
+		    		        $("tbody").append(`<tr ${i}>
+		    		          <td>${res[i].hotelId}</td>
+		    		          <td>${res[i].ownerName}</td>
+		    		          <td>${res[i].hotelName}</td>
+		    		          <td><button class="owner btn btn-primary" type="button" style="background: #f8c544;">📝</button></td>
+		    		          <td><button class="hotel btn btn-primary" type="button" style="background: #f8c544;">🏨</button></td>
+		    		          <td><button class="pic btn btn-primary" type="button" style="background: #f8c544;">🖼️</button></td>
+		    		          <td>
+		    		            <select class="ownerAccess" style="width:70px;">
+		    		              <optgroup label="權限更改"> 
+		    		                ${res[i].ownerAccess === '0' ? `<option value="0" selected>正常</option>` : `<option value="0">正常</option>`}
+		    		                ${res[i].ownerAccess === '1' ? `<option value="1" selected>停權</option>` : `<option value="1">停權</option>`}
+		    		                ${res[i].ownerAccess === '2' ? `<option value="2" selected>未審核</option>` : `<option value="2">未審核</option>`}
+		    		              </optgroup>
+		    		            </select>
+		    		          </td>
+		    		         <!-- <td><button class="update btn btn-primary" type="button" style="background: #f8c544;">編輯</td>-->
+		    		        </tr>`);
+		    			}
+		    			currentPage = 1;
+						displayPage(currentPage,res);
+						var filteredData = res.length;
+				        var filteredPage = Math.ceil(filteredData / 5);
+				        $(".pagination").empty(); // 清空頁籤
+				        //依符合條件的資料顯示頁籤
+				        for (let page1 = 1; page1 <= filteredPage; page1++) {
+				          $(".pagination").append(`<li class="page-item"><a class="page-link" href="#">${page1}</a></li>`);
+				          $(".pagination .page-link:first").css("background-color", "#f8c544");
+				        }
+						 $(".pagination").on("click", "li", function() {
+						      currentPage = parseInt($(this).text());
+						      displayPage(currentPage,res);
+						    });
+		    			}else if(res.length === 0){
+		    				swal.fire({
+								title:"搜尋不到包含此關鍵字之項目",
+								html:`<img src = "./img/cry.gif" style="width:200px; height:200px;" ><br>跳轉中．．．`,
+								showConfirmButton: false,
+								allowOutsideClick: true
+							});	
+		    				 setTimeout(function() {
+		    				        location.reload();
+		    				    }, 1000); // Change this to the number of milliseconds you want to wait
+		    				    return;		    				
+		    			}
+		    		}
+		    		
+		    	});
+		    	
+		    }	
 		});	
 		  
 		  
@@ -402,7 +524,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		   	 }
 
 		   });
-//===================================================依業主ID搜尋↑===========================================================//
+//===================================================依關鍵字搜尋↑===========================================================//
 		    
 		    
 //====================================================依權限搜尋↓===========================================================//	

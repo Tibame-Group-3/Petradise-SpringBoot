@@ -1,6 +1,7 @@
-package tw.idv.petradisespringboot.pet.vo;
+package tw.idv.petradisespringboot.pet.dto;
 
 import lombok.Data;
+import tw.idv.petradisespringboot.pet.vo.Pet;
 
 import java.util.List;
 

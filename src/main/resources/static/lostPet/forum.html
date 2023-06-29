@@ -460,9 +460,12 @@
         .then(function(response) {
           let data = response.data;
         
-		  if (data["articleStatus"] == undefined) {
-			  window.location.assign("/lostPet/forum_deleted.html");
-		  }
+          console.log(data);
+			
+          if (data["articleStatus"] == undefined) {
+		
+        	  window.location.assign("/lostPet/forum_deleted.html");
+		  } 
           const originalDate = data.lostDate;
 		  const parsedDate = new Date(originalDate);
 		  const formattedDate = parsedDate.toISOString().replace("T", " ").slice(0, 16);
@@ -521,17 +524,17 @@
           }
 
           if (data.lostPetResponse && data.lostPetResponse.length > 0) {
-            const commentHTML = data.lostPetResponse.map(response => `
-              <div>
-                <span class="an">${response.memId}</span>
-                <span class="f3 push-content">：${response.responseContent}</span>
-                <span class="push-ipdatetime">${response.responseTime}</span>
-              </div>
-              <br>
-            `).join('');
+        	  const commentHTML = data.lostPetResponse.map((response, index) => `
+        	    <div>
+        	      <span class="an">${index + 1}F</span>
+        	      <span class="f3 push-content">：${response.responseContent}</span>
+        	      <span class="push-ipdatetime">${response.responseTime}</span>
+        	    </div>
+        	    <br>
+        	  `).join('');
 
-            comment.innerHTML = commentHTML;
-          }
+        	  comment.innerHTML = commentHTML;
+        	}
         })
         .catch((error) => console.log(error));
 
