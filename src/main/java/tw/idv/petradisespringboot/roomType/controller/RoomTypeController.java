@@ -105,4 +105,5 @@ public class RoomTypeController {
         List<RoomReview> reviews = service.getReviewsByHotelId(hotelId);
         return ResponseEntity.ok(reviews);
     }
+
 }

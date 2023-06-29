@@ -154,3 +154,9 @@ div.overlay>article {
 .review-score {
   color: #000000; /* 這是黑色的十六進位碼 */
 }
+.product-item {
+  width: 25%;
+  float: left;
+  box-sizing: border-box;
+  padding: 10px;
+}

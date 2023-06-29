@@ -37,5 +37,7 @@ public interface RoomTypeService {
     public List<String> getRoomTypeImages(Integer roomTypeId);
 
     public List<RoomReview> getReviewsByHotelId(Integer hotelId);
+
+    RoomType getRoomTypeById(Integer roomTypeId);
 }
 

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,9 +207,6 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return allHotelDTOs;
     }
 
-
-
-
     @Override
     public List<String> getRoomTypeImages(Integer roomTypeId) {
         RoomType roomType = typeRepository.findById(roomTypeId)
@@ -226,5 +224,14 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     public List<RoomReview> getReviewsByHotelId(Integer hotelId) {
         return roomReviewRepository.findByHotelId(hotelId);
+    }
+    @Override
+    public RoomType getRoomTypeById(Integer roomTypeId) {
+        Optional<RoomType> optionalRoomType = typeRepository.findById(roomTypeId);
+        if (optionalRoomType.isPresent()) {
+            return optionalRoomType.get();
+        } else {
+            throw new RuntimeException("RoomType not found for id :: " + roomTypeId);
+        }
     }
 }
