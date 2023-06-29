@@ -36,5 +36,7 @@ public class Member {
     private MemberAccess access = MemberAccess.ACTIVE;
     @Column(name = "mem_bonus", insertable = false)
     private Integer bonus = 0;
+    @Column(name = "mem_is_email_verified", insertable = false)
+    private Boolean isEmailVerified = false;
 
 }

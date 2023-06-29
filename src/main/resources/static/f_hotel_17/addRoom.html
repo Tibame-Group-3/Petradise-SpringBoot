@@ -242,11 +242,19 @@
                             url: `http://localhost:8080/roomTypes/updateRooms/${selectedRoomTypeId}`,
                             type: 'POST',
                             success: function(response) {
-                                console.log("jjj");
-                                toastr.success('房間數量已更新');
-                                setTimeout(function() {
-                                    window.location.href = "/f_hotel_17/room.html"; // 回到上一頁
-                                }, 1500); // 延遲執行
+                                Swal.fire({
+                                    title: '查無相關房型 請重新輸入條件',
+                                    showClass: {
+                                        popup: 'animate__animated animate__fadeInDown'
+                                    },
+                                    hideClass: {
+                                        popup: 'animate__animated animate__fadeOutUp'
+                                    },
+                                    confirmButtonColor: '#f8c544',
+                                })
+                                // setTimeout(function() {
+                                //     window.location.href = "/f_hotel_17/room.html"; // 回到上一頁
+                                // }, 1500); // 延遲執行
                             },
                             error: function(jqXHR, textStatus, errorThrown) {
                                 toastr.error('更新房間數量失敗');

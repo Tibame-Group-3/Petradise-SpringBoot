@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.pet.service.PetService;
-import tw.idv.petradisespringboot.pet.vo.NewPetDTO;
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 @RestController

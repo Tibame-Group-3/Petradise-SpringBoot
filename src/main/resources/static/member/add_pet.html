@@ -20,28 +20,28 @@
     <h2 class="mb-4">新增寵物</h2>
     <form class="bg-light shadow p-5 rounded" id="form" novalidate>
       <div class="form-group">
-        <label for="name">Pet Name:</label><br>
+        <label for="name">寵物名字:</label><br>
         <input type="text" id="name" name="name" class="form-control"><br>
       </div>
       <div class="form-group">
-        <label for="type">Pet Type:</label><br>
+        <label for="type">寵物種類:</label><br>
         <select id="type" name="type" class="form-control">
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-          <option value="Bird">Bird</option>
-          <option value="Other">Other</option>
+          <option value="Dog">狗</option>
+          <option value="Cat">貓</option>
+          <option value="Bird">鳥</option>
+          <option value="Other">其他</option>
         </select><br>
       </div>
       <div class="form-group">
-        <label for="size">Pet Size:</label><br>
+        <label for="size">寵物大小:</label><br>
         <select id="size" name="size" class="form-control">
-          <option value="S">Small</option>
-          <option value="M">Medium</option>
-          <option value="L">Large</option>
+          <option value="S">小型</option>
+          <option value="M">中型</option>
+          <option value="L">大型</option>
         </select><br>
       </div>
       <div class="form-group">
-        <label for="petPics">Pet Pictures:</label><br>
+        <label for="petPics">寵物照片:</label><br>
         <input type="file" id="petPics" name="petPics" accept="image/*" multiple class="form-control"><br>
         <div id="imagePreview"></div>
       </div>
@@ -55,6 +55,7 @@
         crossorigin="anonymous"></script>
 
 <!-- Add nav bar -->
+<script src="../assets/js/login.js"></script>
 <script src="./js/nav.js"></script>
 <script src="./js/add_pet.js"></script>
 </body>

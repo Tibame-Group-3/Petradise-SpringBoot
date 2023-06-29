@@ -51,9 +51,9 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 		lostPetArticleRepository.deleteById(id);
 	}
 	
-	@Override
 	public LostPetArticle update4Status(LostPetArticle lostPetArticle) {
-		return lostPetArticleRepository.save(lostPetArticle);
+	    lostPetArticle.setArticleStatus("1"); 
+	    return lostPetArticleRepository.save(lostPetArticle);
 	}
 
 
@@ -63,7 +63,7 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 	}
 
 	@Override
-	public LostPetArticle findById(Integer id) {
+	public LostPetArticle findByIdWithStatus(Integer id) {
 
 		LostPetArticle article = lostPetArticleRepository.findById(id).orElse(null);
 
@@ -82,6 +82,11 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 	@Override
 	public List<LostPetArticle> findByMemId(Integer memId) {
 		return lostPetArticleRepository.findByMemId(memId);
+	}
+
+	@Override
+	public LostPetArticle findById(Integer id) {
+		return lostPetArticleRepository.findById(id).orElseThrow();
 	}
 
 }
