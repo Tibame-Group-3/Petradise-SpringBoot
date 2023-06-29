@@ -52,7 +52,11 @@ checkoutItem = JSON.parse(checkoutItem);
 
 // ------------------渲染購物車項目----------------------------------------------------
 const payBody = document.getElementById('payBody');
+const itemsPriceElement = $(".items-price");
+const shipPriceElement = $(".ship-price");
 const totalPriceElement = $(".tol-price");
+let itemsPrice = 0;
+let shipPrice = 60;
 let totalPrice = 0;
 
 for (const productId in checkoutItem) {
@@ -71,7 +75,7 @@ for (const productId in checkoutItem) {
             </div>
 
             <div class="item-about">
-                <span class="item-type pdPetType"> ${pdPetType}</span> / <span class="item-type pdType">${pdType}</span>
+                <span class="item-type pdPetType"> ${pdPetType} / </span><span class="item-type pdType">${pdType}</span>
                 <h1 class="item-title pdName">${name}</h1>
             </div>
 
@@ -81,8 +85,64 @@ for (const productId in checkoutItem) {
     payBody.innerHTML += row;
 
     // 付款總金額----------------------------------------------------
-    totalPrice += item.price * item.quantity;
-    totalPriceElement.text(`$ ${totalPrice}`);
+    itemsPrice += item.price * item.quantity;
+    totalPrice = itemsPrice + shipPrice;
+    itemsPriceElement.text(`+ $ ${itemsPrice}`);
+    shipPriceElement.text(`+ $ ${shipPrice}`);
+    totalPriceElement.text(`= $ ${totalPrice}`);
 
 }
 
+// ------------------送出Form表單----------------------------------------------------
+$('.confirm-payment').click(function () {
+    // 檢查表單內容是否填寫完整
+    let isFormValid = true;
+
+    // 檢查信用卡表單----------------------------------------------------
+    if(!$("#sel1").val()) {
+        isFormValid = false;
+    } else if ($("#sel1").val() === "credit-card") {
+        if (!$('#card-number').val() || !$('.expiration-date input').eq(0).val() || !$('.expiration-date input').eq(1).val() || !$('#cvc').val() || !$('#card-holder').val()) {
+            isFormValid = false;
+        }
+    // 檢查轉帳/匯款表單----------------------------------------------------
+    } else if ($("#sel1").val() === "wire-transfers") {
+        if (!$('#remitter-name').val() || !$('#last-number').val()) {
+            isFormValid = false;
+        }
+    }
+
+    // 檢查宅配到府表單----------------------------------------------------
+    if(!$("#sel2").val()) {
+        isFormValid = false;
+    } else if ($("#sel2").val() === "home-delivery") {
+        if (!$('.home-delivery input.recipient-name').val() || !$('.home-delivery input.recipient-phone').val() || !$('#recipient-address').val()) {
+            isFormValid = false;
+        }
+    // 檢查超商取貨表單----------------------------------------------------
+    } else if ($("#sel2").val() === "pickup") {
+        if (!$('#store-name').val() || !$('.pickup input.recipient-name').val() || !$('.pickup input.recipient-phone').val()) {
+            isFormValid = false;
+        }
+    }
+
+    // 如果表單不完整，顯示警示訊息
+    if (!isFormValid) {
+        Swal.fire({
+            icon: 'error',
+            title: '齁...',
+            text: '欄位不可以空著唷!',
+        });
+    } else {
+        Swal.fire({
+            icon: 'success',
+            title: '訂購成功了唷！',
+            text: '請耐心等待出貨~',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = "/front-product-list/front-product-list.html";
+            }
+        });
+    }
+
+})

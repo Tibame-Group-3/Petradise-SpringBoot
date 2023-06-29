@@ -42,23 +42,26 @@
     margin-left: 5%
 }
 
-.payment-body .payment-items {
-    margin: auto auto 10px;
+.payment-items {
+    margin: auto auto 12px;
+    padding: 0px 0px 8px;
     width: 70%;
     height: 20%;
     display: flex;
-    justify-content: space-between;
     align-items: center
 }
 
 .payment-body .image-box {
-    width: 10%;
-    text-align: center
+    /*border: 1px solid red;*/
+    width: 100px;
+    text-align: center;
+    margin: 0px 20px
 }
 
 .payment-body .item-about {
-    height: 100%;
-    margin-left: -20px
+    /*border: 1px solid blueviolet;*/
+    width: 200px;
+    margin: 0px 70px
 }
 
 .payment-body .item-type {
@@ -75,10 +78,13 @@
 }
 
 .payment-body .item-price {
-    height: 100%;
-    text-align: right;
+    /*height: 100%;*/
+    /*border: 1px solid green;*/
     font-size: 18px;
-    color: #f8c544
+    color: #f8c544;
+    text-align: right;
+    width: 100px;
+    margin: 0px 10px 0px 60px
 }
 
 .payment-body .tol {
@@ -89,8 +95,18 @@
     margin-left: 44%
 }
 
+.payment-body .items-price {
+    margin-left: 184px;
+    color: #f8c544
+}
+
+.payment-body .ship-price {
+    margin-left: 240px;
+    color: #f8c544
+}
+
 .payment-body .tol-price {
-    margin-left: 25%
+    margin-left: 165px
 }
 
 .payment-body .checkout-items,
@@ -116,8 +132,8 @@
     width: 300%
 }
 
-.payment-body::placeholder {
-    color: #f1ecd1
+.payment-body ::placeholder {
+    color: #d5c589
 }
 
 .payment-body .-off {
@@ -127,7 +143,7 @@
 .payment-body .confirm-payment {
     height: 40px;
     width: 500%;
-    margin-left: 140%;
+    margin-left: 150%;
     margin-top: 50%;
     border: none;
     background: #f8c544;
