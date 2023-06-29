@@ -1,4 +1,20 @@
 const data = {};
+// ------------------選單------------------
+const selector = {
+    "寶可夢": ["寶可夢球", "樹果", "回復道具", "戰鬥道具", "其他"],
+    "狗": ["飼料", "罐罐", "零食", "玩具", "保健", "其他"],
+    "貓": ["飼料", "罐罐", "零食", "玩具", "保健", "其他"]
+}
+$("#pdPetType").on("change", function (e){
+    $("#pdType").empty();
+    const pdTypeArr = selector[e.target.value];
+    pdTypeArr.forEach( function (type) {
+        const option = $(`<option>`).val(type).text(type);
+        $("#pdType").append(option);
+    });
+})
+
+
 // ------------------預覽------------------
 $("#pdImg").on("change", function () {         // 監聽input讀取圖片
     // 有選圖片的話
@@ -25,8 +41,10 @@ $("#submit").on('click', function (e) {
     let pdName = $("#pdName").val().trim();
     let pdPetType = $("#pdPetType").val();
     let pdType = $("#pdType").val();
+    let pdStatus = $("#pdStatus").val();
     let pdPrice = $("#pdPrice").val();
     let pdImg = $("#pdImg")[0].files[0];
+    let pdInfo = $("#pdInfo").val();
 
     if(pdName.length === 0 || pdPetType === "" || pdType === "" || pdPrice.length === 0 || !pdImg) {
         Swal.fire({
@@ -45,8 +63,8 @@ $("#submit").on('click', function (e) {
         data.pdPetType = pdPetType;
         data.pdType = pdType;
         data.pdPrice = pdPrice;
-        data.pdStatus = "0";
-        data.pdInfo = $("#pdInfo").val();
+        data.pdStatus = pdStatus;
+        data.pdInfo = pdInfo;
         data.pdDate = formattedDate;
         console.log(data);
 
