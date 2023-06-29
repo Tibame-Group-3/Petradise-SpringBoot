@@ -179,6 +179,10 @@
                                 style="background: #a67c52;border-style: none;text-align: left;margin-left: 90px;color: #f1ecd1;">
                             送出
                         </button>
+                        <button class="btn btn-primary"
+                                style="background: #a67c52; border-style: none; text-align: left; margin-left: 0.5rem; color: #f1ecd1;"
+                                onclick="closeButtonClicked()">關閉
+                        </button>
                     </div>
 
                     <div style="margin: 20px;">
@@ -203,7 +207,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-
+<script>
+    //按關閉會導回前一頁
+    function closeButtonClicked() {
+        window.location.href = '/f_hotel_17/roomType.html';
+    }
+</script>
 <script>
     // 新增房型
     $(document).ready(function () {
