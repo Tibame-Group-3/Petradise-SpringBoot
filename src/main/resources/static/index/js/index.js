@@ -3,6 +3,7 @@ $(document).ready(function () {
     setupMemberElements(signedIn);
     setupNavigation(signedIn);
     $('.logout').on('click', logout);
+    setupLostPetNavigation();
 })
 
 function setupNavigation(isSignedIn) {
@@ -45,3 +46,11 @@ function logout() {
     // console.log(sessionStorage.getItem('memberId'));
     location.reload();
 }
+
+// 遺失
+function setupLostPetNavigation() {
+	$('.lostPet')
+		.attr('href', '/lostPet/lost.html');
+}
+
+
