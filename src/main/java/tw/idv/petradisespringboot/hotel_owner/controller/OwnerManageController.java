@@ -35,6 +35,9 @@ public class OwnerManageController {
 			// 查資料庫
 			List<HotelOwnerVO> list = hotelOwnerServiceImpl.getAll();
 
+			// 首先過濾hotelStatus為"2"的項目
+			list = list.stream().filter(vo -> "2".equals(vo.getHotelStatus())).collect(Collectors.toList());
+
 			if (keyword != null) {
 				list = list.stream()
 						.filter(vo -> vo.getOwnerName().contains(keyword) || vo.getHotelName().contains(keyword))

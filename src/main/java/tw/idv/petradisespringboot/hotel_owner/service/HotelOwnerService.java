@@ -9,22 +9,26 @@ import java.util.List;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 public interface HotelOwnerService {
-    // 新增
-    void insert(HotelOwnerVO hotelOwnerVO);
+	// 新增
+	void insert(HotelOwnerVO hotelOwnerVO);
 
-    // 刪除
-    void delete(Integer hotelId);
+	// 刪除
+	void delete(Integer hotelId);
 
-    // 修改
-    void update(HotelOwnerVO hotelOwnerVO);
+	// 修改
+	void update(HotelOwnerVO hotelOwnerVO);
 
-    // 查詢單筆資料
-    HotelOwnerVO findByPrimaryKey(Integer hotelId);
+	// 查詢單筆資料
+	HotelOwnerVO findByPrimaryKey(Integer hotelId);
 
-    // 查詢所有資料
-    List<HotelOwnerVO> getAll();
+	// 查詢所有資料
+	List<HotelOwnerVO> getAll();
+
+	// 查詢權限
+	List<HotelOwnerVO> getStatus(String hotelStatus);
+
+	void updateOwnerStatus(Integer hotelId, String hotelStatus);
 }
-
 
 //@Service
 //public class HotelOwnerService {
@@ -62,8 +66,7 @@ public interface HotelOwnerService {
 //    public List<HotelOwnerVO> getAll() {
 //        return hotelOwnerRepository.findAll();
 //    }
-    
-    
+
 //============servlet寫法=================//
 //	private HotelOwnerDAO_interface dao;// 先用介面宣告參數,取得見面內所有方法
 
@@ -153,6 +156,3 @@ public interface HotelOwnerService {
 //
 //		return hotelOwnerVO;
 //	}
-
-
-
