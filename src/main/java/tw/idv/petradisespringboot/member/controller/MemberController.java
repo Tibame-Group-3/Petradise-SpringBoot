@@ -1,19 +1,16 @@
 package tw.idv.petradisespringboot.member.controller;
 
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.member.dto.ChangePasswordDTO;
+import tw.idv.petradisespringboot.member.dto.LoginDTO;
+import tw.idv.petradisespringboot.member.dto.SignUpDTO;
+import tw.idv.petradisespringboot.member.dto.UpdateDTO;
 import tw.idv.petradisespringboot.member.service.MemberService;
-import tw.idv.petradisespringboot.member.vo.AddressInfo;
-import tw.idv.petradisespringboot.member.vo.Member;
 
-import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -22,11 +19,8 @@ class MemberController {
 
     private final MemberService service;
 
-    private final ResourceLoader resourceLoader;
-
-    public MemberController(MemberService service, ResourceLoader resourceLoader) {
+    public MemberController(MemberService service) {
         this.service = service;
-        this.resourceLoader = resourceLoader;
     }
 
     @GetMapping("/all")
@@ -35,14 +29,14 @@ class MemberController {
     }
 
     @PostMapping("/update")
-    ResponseEntity<?> update(@RequestBody Member member) {
-        return ResponseEntity.ok(service.update(member));
+    ResponseEntity<?> update(@RequestBody UpdateDTO dto) {
+        return ResponseEntity.ok(service.update(dto));
     }
 
     @PostMapping("/sign-up")
-    ResponseEntity<?> signUp(@RequestBody Member member) {
+    ResponseEntity<?> signUp(@RequestBody SignUpDTO dto) {
         try {
-            var newMember = service.signUp(member);
+            var newMember = service.signUp(dto);
             return ResponseEntity.ok(newMember);
         } catch (Exception e) {
             return ResponseEntity
@@ -63,10 +57,8 @@ class MemberController {
     }
 
     @PostMapping("/login")
-    ResponseEntity<?> login(@RequestBody Member member) {
-        var account = member.getAccount();
-        var password = member.getPassword();
-        var foundMember = service.login(account, password);
+    ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+        var foundMember = service.login(dto.getAccount(), dto.getPassword());
         if (foundMember.isPresent()) {
             // Only return the id of the member
             var isVerified = foundMember.get().getIsEmailVerified();
@@ -87,11 +79,7 @@ class MemberController {
 
     @GetMapping("/districts")
     ResponseEntity<?> districts() throws Exception {
-        Resource resource = loadDistricts();
-        ObjectMapper mapper = new ObjectMapper();
-        JavaType type = mapper.getTypeFactory().constructParametricType(List.class, AddressInfo.class);
-        List<AddressInfo> infos = mapper.readValue(resource.getInputStream(), type);
-        return ResponseEntity.ok(infos);
+        return ResponseEntity.ok(service.getAddressInfo());
     }
 
     @PostMapping("/change-password")
@@ -115,11 +103,6 @@ class MemberController {
                 .status(HttpStatus.NOT_FOUND)
                 .body("驗證失敗");
     }
-
-    private Resource loadDistricts(){
-        return resourceLoader.getResource("classpath:json/address_info.json");
-    }
-
 }
 
 
