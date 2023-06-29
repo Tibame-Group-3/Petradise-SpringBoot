@@ -1,12 +1,10 @@
 package tw.idv.petradisespringboot.hotel_owner.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
 import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
@@ -37,7 +33,7 @@ public class OwnerCheckController {
 			String hotelStatus = req.getParameter("hotelStatus");
 //			if("0".equals(hotelStatus)) {
 			List<HotelOwnerVO> list = hotelOwnerServiceImpl.getAll();
-			List<HotelOwnerVO> filteredOwners = list.stream().filter(owner -> "0".equals(owner.getHotelStatus()))
+			List<HotelOwnerVO> filteredOwners = list.stream().filter(owner -> "0".equals(owner.getHotelStatus())) // .stream()就像是迴圈
 					.collect(Collectors.toList()); // 將符合的資料放進新的容器(filteredOwners)
 			for (HotelOwnerVO vo : list) {
 				// 只需獲取圖片的數組
