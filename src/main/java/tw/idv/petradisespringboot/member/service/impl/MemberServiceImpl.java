@@ -10,7 +10,7 @@ import tw.idv.petradisespringboot.email.EmailService;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
 import tw.idv.petradisespringboot.member.dto.SignUpDTO;
 import tw.idv.petradisespringboot.member.dto.UpdateDTO;
-import tw.idv.petradisespringboot.member.exceptions.AccountAlreadyExistsException;
+import tw.idv.petradisespringboot.member.exceptions.*;
 import tw.idv.petradisespringboot.member.repo.EmailVerificationRepository;
 import tw.idv.petradisespringboot.member.repo.MemberRepository;
 import tw.idv.petradisespringboot.member.service.MemberService;
@@ -52,10 +52,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Optional<MemberDTO> login(String account, String password) {
-        return repository
+    public MemberDTO login(String account, String password) {
+        var dto = repository
                 .findByAccountAndPassword(account, password)
-                .map(member -> mapper.map(member, MemberDTO.class));
+                .map(member -> mapper.map(member, MemberDTO.class))
+                .orElseThrow(() -> new LoginException("帳號或密碼錯誤"));
+        if (!dto.getIsEmailVerified()) {
+            throw new LoginException("請先驗證電子郵件");
+        }
+        return dto;
     }
 
     @Transactional
@@ -94,10 +99,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Optional<MemberDTO> getById(Integer id) {
+    public MemberDTO getById(Integer id) {
         return repository
                 .findById(id)
-                .map(m -> mapper.map(m, MemberDTO.class));
+                .map(m -> mapper.map(m, MemberDTO.class))
+                .orElseThrow(() -> new MemberNotFoundException(id));
     }
 
     @Override
@@ -113,39 +119,36 @@ public class MemberServiceImpl implements MemberService {
         member.setAddress(dto.getAddress());
         member.setBirthday(dto.getBirthday());
         var saved = repository.save(member);
-        return mapper.map(saved, MemberDTO.class) ;
+        return mapper.map(saved, MemberDTO.class);
     }
 
     @Override
-    public String changePassword(Integer id, String oldPassword, String newPassword) {
+    public void changePassword(Integer id, String oldPassword, String newPassword) {
 
         var optionalMember = repository.findById(id);
         if (optionalMember.isEmpty()) {
-            return "找不到此用戶";
+            throw new ChangePasswordException("找不到此用戶");
         }
         var member = optionalMember.get();
         if (!Objects.equals(member.getPassword(), oldPassword)) {
-            return "密碼錯誤";
+            throw new ChangePasswordException("密碼錯誤");
         }
         member.setPassword(newPassword);
         repository.save(member);
-        return "更改密碼成功";
     }
 
     @Transactional
     @Override
-    public boolean verifyEmail(String token) {
-        var verification = emailVerificationRepository.findByToken(token);
-        if (verification.isPresent()) {
-            var member = repository.findById(verification.get().getMemberId());
-            member.ifPresent(m -> {
-                m.setIsEmailVerified(true);
-                repository.save(m);
-            });
-            emailVerificationRepository.delete(verification.get());
-            return true;
-        }
-        return false;
+    public void verifyEmail(String token) {
+        var verification = emailVerificationRepository
+                .findByToken(token)
+                .orElseThrow(() -> new VerificationException("驗證失敗，請再次註冊"));
+        var member = repository
+                .findById(verification.getMemberId())
+                .orElseThrow(() -> new VerificationException("驗證失敗，請再次註冊"));
+        member.setIsEmailVerified(true);
+        repository.save(member);
+        emailVerificationRepository.delete(verification);
     }
 
     @Override
@@ -156,7 +159,7 @@ public class MemberServiceImpl implements MemberService {
         return mapper.readValue(resource.getInputStream(), type);
     }
 
-    private Resource loadDistricts(){
+    private Resource loadDistricts() {
         return resourceLoader.getResource("classpath:json/address_info.json");
     }
 
