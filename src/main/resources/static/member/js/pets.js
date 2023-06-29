@@ -1,24 +1,29 @@
-document.addEventListener('DOMContentLoaded', fetchPets);
+(() => {
 
-function fetchPets() {
-    fetch(`/pets/memberId=${getMemberId()}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(displayPets)
-        .catch(e => console.error('Fetch failed: ', e));
-}
+    document.addEventListener('DOMContentLoaded', function() {
+        guardIsSignedIn();
+        fetchPets();
+    });
 
-function createPetCard(pet) {
-    let image = 'https://placehold.co/268x180';
-    const petPics = pet.petPics;
-    if (petPics !== undefined && petPics.length > 0) {
-        image = ` data:image/jpeg;base64,${petPics[0].pic}`;
+    function fetchPets() {
+        fetch(`/pets/memberId=${getMemberId()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(displayPets)
+            .catch(e => console.error('Fetch failed: ', e));
     }
-    return `
+
+    function createPetCard(pet) {
+        let image = 'https://placehold.co/268x180';
+        const petPics = pet.petPics;
+        if (petPics !== undefined && petPics.length > 0) {
+            image = ` data:image/jpeg;base64,${petPics[0].pic}`;
+        }
+        return `
         <div class="col-md-4" id="pet-card-${pet.id}">
             <div class="card mb-4">
                 <div class="img-container">
@@ -35,12 +40,12 @@ function createPetCard(pet) {
             </div>
         </div>
     `;
-}
+    }
 
 
 
-function createNewPetCard() {
-    return `
+    function createNewPetCard() {
+        return `
         <div class="col-md-4">
             <div class="card mb-4 new-pet-card" onClick="window.location.href='/member/add_pet.html'" style="cursor:pointer;">
                 <div class="card-body text-center d-flex flex-column justify-content-center">
@@ -53,115 +58,114 @@ function createNewPetCard() {
             </div>
         </div>
     `;
-}
+    }
 
-function displayPets(pets) {
-    const petsRow = document.getElementById('pets-row');
+    function displayPets(pets) {
+        const petsRow = document.getElementById('pets-row');
 
-    // Clear existing pet cards
-    petsRow.innerHTML = '';
+        // Clear existing pet cards
+        petsRow.innerHTML = '';
 
-    // Add "New Pet" card
-    petsRow.insertAdjacentHTML('afterbegin', createNewPetCard());
+        // Add "New Pet" card
+        petsRow.insertAdjacentHTML('afterbegin', createNewPetCard());
 
-    // Display actual pet cards
-    pets.forEach(pet => {
-        petsRow.insertAdjacentHTML('beforeend', createPetCard(pet));
-    });
-
-    // Add event listeners to delete buttons
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', showDeleteAlert);
-    });
-}
-
-function showDeleteAlert(event) {
-    const petId = event.target.dataset.petId;
-    Swal.fire({
-        title: '確定要刪除寵物嗎？',
-        text: '刪除後無法復原',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '確定',
-        cancelButtonText: '取消',
-    }).then(result => {
-        if (result.isConfirmed) {
-            deletePet(petId);
-        }
-    });
-}
-
-function deletePet(petId) {
-    fetch(`/pets/delete/id=${petId}`, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('請確認網路環境正常');
-            }
-            // Remove the pet card from the UI
-            removePetCard(petId);
-            showDeleteSuccessAlert(petId);
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: '刪除寵物失敗',
-                text: error.message,
-            });
+        // Display actual pet cards
+        pets.forEach(pet => {
+            petsRow.insertAdjacentHTML('beforeend', createPetCard(pet));
         });
-}
+
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', showDeleteAlert);
+        });
+    }
+
+    function showDeleteAlert(event) {
+        const petId = event.target.dataset.petId;
+        Swal.fire({
+            title: '確定要刪除寵物嗎？',
+            text: '刪除後無法復原',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '確定',
+            cancelButtonText: '取消',
+        }).then(result => {
+            if (result.isConfirmed) {
+                deletePet(petId);
+            }
+        });
+    }
+
+    function deletePet(petId) {
+        fetch(`/pets/delete/id=${petId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('請確認網路環境正常');
+                }
+                // Remove the pet card from the UI
+                removePetCard(petId);
+                showDeleteSuccessAlert(petId);
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '刪除寵物失敗',
+                    text: error.message,
+                });
+            });
+    }
 
 
-function removePetCard(petId) {
-    let petCard = document.getElementById(`pet-card-${petId}`);
-    petCard.classList.add("fade-out"); // Adding the animation class
-    setTimeout(() => {
-        petCard.remove();
-    }, 500); // Set timeout equal to the animation duration
-}
+    function removePetCard(petId) {
+        let petCard = document.getElementById(`pet-card-${petId}`);
+        petCard.classList.add("fade-out"); // Adding the animation class
+        setTimeout(() => {
+            petCard.remove();
+        }, 500); // Set timeout equal to the animation duration
+    }
 
-function showDeleteSuccessAlert(petId) {
-    Swal.fire({
-        icon: 'success',
-        title: '刪除寵物成功',
-        showConfirmButton: false,
-        timer: 1500,
-        didClose: () => {
-            // Refresh the pet list after successful deletion
-            fetchPets();
+    function showDeleteSuccessAlert(petId) {
+        Swal.fire({
+            icon: 'success',
+            title: '刪除寵物成功',
+            showConfirmButton: false,
+            timer: 1500,
+            didClose: () => {
+                // Refresh the pet list after successful deletion
+                fetchPets();
+            }
+        });
+    }
+
+    function getPetTypeText(type) {
+        switch (type) {
+            case 'Dog':
+                return '狗';
+            case 'Cat':
+                return '貓';
+            case 'Bird':
+                return '鳥';
+            case 'Other':
+                return '其他';
+            default:
+                return '未知';
         }
-    });
-}
-
-function getPetTypeText(type) {
-    switch (type) {
-        case 'Dog':
-            return '狗';
-        case 'Cat':
-            return '貓';
-        case 'Bird':
-            return '鳥';
-        case 'Other':
-            return '其他';
-        default:
-            return '未知';
     }
-}
 
-function getPetSizeText(size) {
-    switch (size) {
-        case 'S':
-            return '小型';
-        case 'M':
-            return '中型';
-        case 'L':
-            return '大型';
-        default:
-            return '未知';
+    function getPetSizeText(size) {
+        switch (size) {
+            case 'S':
+                return '小型';
+            case 'M':
+                return '中型';
+            case 'L':
+                return '大型';
+            default:
+                return '未知';
+        }
     }
-}
 
-function getMemberId() {
-    return localStorage.getItem('memberId');
-}
+
+})();

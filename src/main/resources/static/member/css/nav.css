@@ -11,6 +11,8 @@ body {
     position: fixed;
     height: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Sidebar links */
@@ -23,13 +25,13 @@ body {
 
 /* Active/current link */
 .sidebar a.active {
-    background-color: #04AA6D;
+    background-color: #fd780f;
     color: white;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-    background-color: #555;
+    background-color: #574f36;
     color: white;
 }
 
@@ -64,4 +66,15 @@ div.content {
         text-align: center;
         float: none;
     }
+}
+.logout-btn {
+    margin-top: auto;   /* Added */
+    border: none;  /* Added */
+    text-align: left; /* Added */
+    text-decoration: none; /* Added */
+    display: block; /* Added */
+    width: 100%; /* Added */
+    cursor: pointer; /* Added */
+    border-radius: 0 !important;
+    background-color: #fd780f !important;
 }

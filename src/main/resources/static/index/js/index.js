@@ -10,11 +10,6 @@ function setupNavigation(isSignedIn) {
     setupSigninNavigation();
 }
 
-function isSignedIn() {
-    const memberId = localStorage.getItem('memberId');
-    return !!memberId; // Double negation turns a truthy or falsy value into actual true or false
-}
-
 function setupMemberElements(isSignedIn) {
     if (isSignedIn) {
         $('.navigate-signin')
@@ -37,11 +32,4 @@ function setupMemberCenterNavigation(isSignedIn) {
 function setupSigninNavigation() {
     $('.navigate-signin')
         .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
-}
-
-function logout() {
-    // console.log('logging out');
-    localStorage.removeItem('memberId');
-    // console.log(sessionStorage.getItem('memberId'));
-    location.reload();
 }
