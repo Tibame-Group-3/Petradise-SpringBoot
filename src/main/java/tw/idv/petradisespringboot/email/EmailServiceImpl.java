@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.email;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
+    @Async("taskExecutor")
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("tibamegp3@gmail.com");
