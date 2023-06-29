@@ -279,7 +279,7 @@
 		    const file = files[i];
 		    const base64Image = await readFileAsDataURL(file);
 		    const base64Data = base64Image.split(',')[1]; // 除去前缀詞
-		    imagesArray.push({ lostPetId: i + 1, lostPetPic: base64Data });
+		    imagesArray.push({ lostPetPic: base64Data });
 		  }
 		  displayImages();
 		});

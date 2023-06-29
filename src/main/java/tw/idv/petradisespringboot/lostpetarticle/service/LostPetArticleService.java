@@ -8,9 +8,11 @@ import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 public interface LostPetArticleService {
 	
-	List<LostPetArticle> getAllArticles();
+	List<LostPetArticle> getArticlesWithStatus();
 	
-	LostPetArticle findById(Integer id);
+	List<LostPetArticle> getAllArticleByAdmin();
+	
+	LostPetArticle findByIdWithStatus(Integer id);
 	
 	LostPetArticle add(LostPetArticle lostPetArticle);
 	
@@ -23,5 +25,10 @@ public interface LostPetArticleService {
 	List<LostPetArticle> findByLostPlace(String lostPlace);
 	
 	LostPetArticle update4Status(LostPetArticle lostPetArticle);
+	
+	List<LostPetArticle> findByMemId(Integer memId);
+	
+	LostPetArticle findById(Integer id);
+
 
 }

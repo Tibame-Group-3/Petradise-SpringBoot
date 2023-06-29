@@ -1,11 +1,22 @@
-'use strict';
-
-
-
 $(document).ready(function() {
-   
+
+    var usernamePage = $('#username-page');
+    var chatPage = $('#chat-page');
+    var usernameForm = $('#usernameForm');
+    var messageForm = $('#messageForm');
+    var messageInput = $('#message');
+    var messageArea = $('#messageArea');
+    var connectingElement = $('.connecting');
+    var nameInput = $('#name');
+    var popup = $('#hint');
+
+    var stompClient = null;
+    var username = null;
+
+    var colors = [ '#2196F3', '#32c787', '#00bcd4','#4dbb00', '#ff5652', '#ffc107',
+        '#ff85af', '#ff9800', '#39bbb0', '#b0c503' ];
+
     loadMessages();
-});
 
 //消息拿出顯示到前端
 function loadMessages() {
@@ -29,10 +40,16 @@ function loadMessages() {
 
 function appendMessage(message) {
 	
-	if (message.content !== null && message.content !== "") { 
-    var messageElement = $('<li></li>');
+	var messageElement = $('<li></li>');
     
-    var senderElement = $('<span></span>').text(message.sender + ": ");
+	var timestampElement = $('<br><span class="timestamp"></span>');
+    var timestampText = new Date(message.timestamp).toLocaleTimeString();
+    timestampElement.text(timestampText);
+    
+	
+	if (message.content !== null && message.content !== "") { 
+    
+    var senderElement = $('<span class="name"></span>').text(message.sender + ": ");
     messageElement.append(senderElement);
     
     var contentElement = $('<span></span>');
@@ -40,99 +57,70 @@ function appendMessage(message) {
         contentElement.text(message.content);
     }
     messageElement.append(contentElement);
+    messageElement.append(timestampElement);
     
     $('#messageArea').append(messageElement);
     }
+    
 }
 
 
-var usernamePage = document.querySelector('#username-page');
-var chatPage = document.querySelector('#chat-page');
-var usernameForm = document.querySelector('#usernameForm');
-var messageForm = document.querySelector('#messageForm');
-var messageInput = document.querySelector('#message');
-var messageArea = document.querySelector('#messageArea');
-var connectingElement = document.querySelector('.connecting');
-var nameInput = document.querySelector('#name');
-var popup = document.querySelector('#hint');
 
-var stompClient = null;
-var username = null;
+// 連線
+ function connect(event) {
+        username = $('#name').val().trim();
 
-/**
- * 頭像的顏色
- */
-var colors = [ '#2196F3', '#32c787', '#00bcd4','#4dbb00', '#ff5652', '#ffc107',
-        '#ff85af', '#ff9800', '#39bbb0', '#b0c503' ];
+        if (username) {
+            usernamePage.addClass('hidden');
+            chatPage.removeClass('hidden');
 
-/**
- * 連線
- * @param event
- * @returns
- */
-function connect(event) {
-    username = document.querySelector('#name').value.trim();
+            var socket = new SockJS('/chatroom');
+            stompClient = Stomp.over(socket);
 
-    if (username) {
-        usernamePage.classList.add('hidden');
-        chatPage.classList.remove('hidden');
-
-        var socket = new SockJS('/chatroom');
-        stompClient = Stomp.over(socket);
-
-        stompClient.connect({}, onConnected, onError);
-    } else {
-        popHint();
+            stompClient.connect({}, onConnected, onError);
+        } else {
+            popHint();
+        }
+        event.preventDefault();
     }
-    event.preventDefault();
-}
 
-/**
- * 連線建立後要處理的邏輯
- * @returns
- */
+// 連線建立後要處理的邏輯
 function onConnected() {
     // 訂閱/topic/public
-    stompClient.subscribe('/topic/public', onMessageReceived); // 當後端送訊息至/topic/public時，會執行onMessageReceived()。
+    stompClient.subscribe('/topic/public', onMessageReceived);
 
-    // 發送訊息至/app/join，也就是送到ChatController.addUser()
+    // 發送訊息至/app/join
     stompClient.send("/app/join", {}, JSON.stringify({
         sender : username,
-        type : 'JOIN'
+        type : 'JOIN',
+        
     }))
 
-    connectingElement.classList.add('hidden');
+    $('.connecting').addClass('hidden');
 }
 
-function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-    connectingElement.style.color = 'red';
-}
+ function onError(error) {
+        connectingElement.text('Could not connect to WebSocket server. Please refresh this page to try again!');
+        connectingElement.css('color', 'red');
+    }
 
-/**
- * 彈出提示
- * @returns
- */
-function popHint() {
-    popup.classList.toggle("show");
-}
 
-/**
- * 發送訊息
- * @param event 發送訊息事件
- * @returns
- */
+
+    function popHint() {
+        popup.toggleClass("show");
+    }
+    
 function sendMessage(event) {
-    var messageContent = messageInput.value.trim();
+    var messageContent = messageInput.val().trim();
     if (messageContent && stompClient) {
         var chatMessage = {
             sender : username,
-            content : messageInput.value,
-            type : 'CHAT'
+            content : messageInput.val(),
+            type : 'CHAT',
+            timestamp: new Date().toISOString() // adding current time as timestamp
         };
-        // 發送訊息至/app/chat，也就是送到ChatController.sendMessage()
         stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
-        messageInput.value = '';
+        messageInput.val('');
     }
     event.preventDefault();
 }
@@ -144,63 +132,13 @@ function sendMessage(event) {
  */
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
-
-    var messageElement = document.createElement('li');
-
-    if (message.type === 'JOIN') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' 加入聊天室';
-    } else if (message.type === 'LEAVE') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' 離開聊天室';
-    } else {
-        messageElement.classList.add('chat-message');
-
-        var avatarElement = getAvatarElement(message.sender);
-        messageElement.appendChild(avatarElement);
-
-        var usernameElement = getUsernameElement(message.sender);
-        messageElement.appendChild(usernameElement);
-    }
-
-    var textElement = document.createElement('p');
-    
-    if(message.content !== null){
-    var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
-}
-    messageElement.appendChild(textElement);
-
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+    appendMessage(message);
+    messageArea.scrollTop(messageArea[0].scrollHeight);
 }
 
-/**
- * 取得頭像元素
- * @param sender 訊息發送者名稱
- * @returns
- */
-function getAvatarElement(sender) {
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(sender[0]);
-    avatarElement.appendChild(avatarText);
-    avatarElement.style['background-color'] = getAvatarColor(sender);
-    return avatarElement;
-}
 
-/**
- * 取得頭像顏色
- * @param sender 訊息發送者名稱
- * @returns
- */
-function getAvatarColor(sender) {
-    var hash = 0;
-    for (var i = 0; i < sender.length; i++) {
-        hash = 31 * hash + sender.charCodeAt(i);
-    }
-    var index = Math.abs(hash % colors.length);
-    return colors[index];
-}
+
+
 
 /**
  * 取得使用者名稱的元素
@@ -211,18 +149,65 @@ function getUsernameElement(sender) {
     var usernameElement = document.createElement('span');
     var usernameText = document.createTextNode(sender);
     usernameElement.appendChild(usernameText);
+    usernameElement.className = 'name'; 
     return usernameElement;
 }
 
-/**
- * 移除彈出的提示
- * @param event
- * @returns
- */
-function removePopup (event) {
-    popup.classList.remove("show");
-}
+ function removePopup (event) {
+        popup.removeClass("show");
+    }
+    
+// 監聽 'name' class span 的點擊事件
+$(document).on('click', '.name', function() {
+    var replyBox = $('#replyBox');
+    if(replyBox.length) {
+        // 若已有回覆輸入框存在，則不再創建新的回覆輸入框
+    } else {
+        // 否則，創建一個新的回覆輸入框
+        var replyBox = $('<input id="replyBox" type="text" placeholder="Enter your reply"/>');
+        $(this).parent().append(replyBox); // 將它添加到點擊的 span 的 parent 元素中
+        replyBox.focus();
+    }
+});
 
-nameInput.addEventListener('focus', removePopup, true)
-usernameForm.addEventListener('submit', connect, true)
-messageForm.addEventListener('submit', sendMessage, true)
+// 監聽回覆輸入框的 'blur' 事件
+$(document).on('blur', '#replyBox', function() {
+   if($.contains(this.parentNode, this)) {
+        $(this).remove();
+    }
+});
+
+// 監聽回覆輸入框的 'keydown' 事件
+$(document).on('keydown', '#replyBox', function(e) {
+    if(e.key === 'Enter') {
+        // 當 Enter 鍵被按下時，獲取輸入的回覆
+        var reply = $(this).val().trim();
+        if(reply !== "") {
+            // 如果回覆不為空，則將它添加到相應的訊息後面
+            var replyNameElement = $('<span class="replyName"></span>').text(username + ': '); //回覆人的名稱
+            var replyMessageElement = $('<p class="replyMessage"></p>').text(reply); //回覆的訊息
+            var replyElement = $('<div class="reply"></div>').append(replyNameElement, replyMessageElement);
+            $(this).parent().append(replyElement);
+            // 這裡你可能需要添加一些代碼來將回覆保存到數據庫或其他存儲位置
+             if($.contains(this.parentNode, '#replyBox')) {
+        $('#replyBox').remove();
+    }
+        }
+    }
+});
+function sendReply(replyTo, replyContent) {
+        var chatMessage = {
+            sender: username,
+            replyTo: replyTo,
+            replyContent: replyContent,
+            type: 'REPLY'
+        };
+
+        // 发送消息至/app/chat
+        stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
+    }
+
+    nameInput.on('focus', removePopup);
+    usernameForm.on('submit', connect);
+    messageForm.on('submit', sendMessage);
+    })

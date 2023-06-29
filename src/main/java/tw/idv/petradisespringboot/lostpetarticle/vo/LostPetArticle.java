@@ -68,7 +68,7 @@ public class LostPetArticle implements Serializable{
 	@Column	(name="contact_phone")
 	private String contactPhone;
 	
-	@Column (name="article_status", insertable = false, updatable=false)
+	@Column (name="article_status", insertable = false)
 	private String articleStatus;
 	
 	@Column
@@ -76,24 +76,12 @@ public class LostPetArticle implements Serializable{
 	
 	
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId", fetch = FetchType.EAGER) 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.EAGER, orphanRemoval = true) 
 	private List<LostPetPic> lostPetPic;
 
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "articleId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
 	private List<LostPetResponse> lostPetResponse;
 	
 	
-//	 public List<LostPetPic> getLostPetPic() {
-//	        if (lostPetPic == null || lostPetPic.isEmpty()) {
-//
-////	        	LostPetPic defaultPic = new LostPetPic();
-////	            defaultPic.setLostPetPicId(1); 
-////	            defaultPic.setLostPetPic(new byte[0]);
-//
-////	            return Collections.singletonList(defaultPic);
-//	        } else {
-//	            return lostPetPic;
-//	        }
-//	    }
 }

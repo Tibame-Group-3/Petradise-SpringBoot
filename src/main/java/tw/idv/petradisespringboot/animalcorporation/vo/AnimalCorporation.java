@@ -25,7 +25,7 @@ public class AnimalCorporation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "corp_id")
-	private Integer id ;
+	private Integer corpid ;
 	
 	@Column(name = "applied_status", insertable = false)
 	private Character appliedStatus;
@@ -53,7 +53,14 @@ public class AnimalCorporation {
 	
 	@Column(name = "contact_email")
 	private String contactEmail;
-
+	
 	@Column(name = "corp_access", insertable = false)
 	private Character corpAccess;
+	
+	public String toString() {
+		
+		return "Animal [corpId="+corpid +",appliedStatus="+appliedStatus +",corpAccount="+corpAccount +",corpName="+corpName +"corpRegisteredId=" +corpRegisteredId +"corpAddress=" +corpAddress
+				+"contactName" + contactName +"contactPhone=" +contactPhone +",contactEmail="+contactEmail +" corpaccess="+corpAccess+"]";
+				
+	}
 }

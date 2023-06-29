@@ -7,7 +7,9 @@ import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
 import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
 import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
+import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RoomTypeService {
@@ -25,8 +27,17 @@ public interface RoomTypeService {
 
     RoomType updateRoomType(Integer roomTypeId, RoomType roomType, MultipartFile file1, MultipartFile file2);
 
-    SingleHotelDTO getSingleHotel(Integer hotelId, String petType, Character roomTypeSize);
 
-	public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto) ;
+    public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto);
 
+    SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId,
+                                  LocalDateTime inDay,
+                                  LocalDateTime outDay);
+
+    public List<String> getRoomTypeImages(Integer roomTypeId);
+
+    public List<RoomReview> getReviewsByHotelId(Integer hotelId);
+
+    RoomType getRoomTypeById(Integer roomTypeId);
 }
+

@@ -8176,11 +8176,11 @@
  }
 
  .border {
-     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important
+     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)
  }
 
  .border-0 {
-     border: 0 !important
+     border: 0
  }
 
  .border-top {

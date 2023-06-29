@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.pet.service.PetService;
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 @RestController
@@ -22,8 +23,15 @@ public class PetController {
     }
 
     @PostMapping("/add")
-    ResponseEntity<Pet> newPet(@RequestBody Pet pet) {
-        return ResponseEntity.ok(service.addPet(pet));
+    ResponseEntity<?> newPet(@RequestBody NewPetDTO dto) {
+        try {
+            service.addPet(dto);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/update")
@@ -47,6 +55,17 @@ public class PetController {
         return ResponseEntity.ok(service.getPetsByMemId(memberId));
     }
 
+    @DeleteMapping("/delete/id={id}")
+    ResponseEntity<?> deletePetById(@PathVariable Integer id) {
+        try {
+            service.deletePet(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new PetNotFoundException(id));
+        }
+    }
 
 }
 
