@@ -54,7 +54,7 @@
   font-size: 16px;
   padding: 12px 25px;
   display: inline-block;
-  margin-left: 140px;
+  margin-left: 220px;
   bottom: 30px;
   right: 30px;
   letter-spacing: 1px;
@@ -71,35 +71,6 @@
   display: inline-block;
   bottom: 30px;
   right: 30px;
-  letter-spacing: 1px;
-}
-
-.btn-edit {
-  background-color: #574f36;
-  border: 0;
-  border-radius: 50px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 16px;
-  padding: 12px 25px;
-  display: inline-block;
-  bottom: 30px;
-  right: 30px;
-  letter-spacing: 1px;
-}
-
-.btn-create {
-  background-color: #574f36;
-  border: 0;
-  border-radius: 50px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 16px;
-  padding: 12px 25px;
-  bottom: 30px;
-  float: right;
-  margin-right: 375px;
-  margin-left: auto;
   letter-spacing: 1px;
 }
 

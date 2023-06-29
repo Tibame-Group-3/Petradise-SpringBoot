@@ -2,6 +2,7 @@ package tw.idv.petradisespringboot.lostpetarticle.controller;
 
 import java.util.List;
 
+import org.hibernate.action.internal.OrphanRemovalAction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ public class LostPetArticleController {
 	LostPetArticle getArticle(@PathVariable Integer id) {
 		 
 		
-	    return lostPetArticleService.findById(id);
+	    return lostPetArticleService.findByIdWithStatus(id);
 	}
 	
 	@PostMapping("/create")
@@ -56,6 +57,7 @@ public class LostPetArticleController {
 	
 	@PostMapping("/update")
 	LostPetArticle update(@RequestBody LostPetArticle lostPetArticle) {
+		lostPetArticle.setArticleStatus("0");
 		System.out.println(lostPetArticle);
 		return lostPetArticleService.update(lostPetArticle);
 	}
@@ -67,8 +69,6 @@ public class LostPetArticleController {
 	    if (article == null) {
 	        return ResponseEntity.notFound().build();
 	    }
-
-	    article.setArticleStatus("1");
 
 	    lostPetArticleService.update4Status(article);
 

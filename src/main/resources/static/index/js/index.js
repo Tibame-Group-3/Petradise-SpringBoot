@@ -3,6 +3,7 @@ $(document).ready(function () {
     setupMemberElements(signedIn);
     setupNavigation(signedIn);
     $('.logout').on('click', logout);
+    setupLostPetNavigation();
 })
 
 function setupNavigation(isSignedIn) {
@@ -32,4 +33,10 @@ function setupMemberCenterNavigation(isSignedIn) {
 function setupSigninNavigation() {
     $('.navigate-signin')
         .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
+}
+
+// 遺失
+function setupLostPetNavigation() {
+	$('.lostPet')
+		.attr('href', '/lostPet/lost.html');
 }
