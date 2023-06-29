@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
                 .map(member -> mapper.map(member, MemberDTO.class))
                 .orElseThrow(() -> new LoginException("帳號或密碼錯誤"));
         if (!dto.getIsEmailVerified()) {
-            throw new LoginException("請先驗證電子郵件");
+            throw new MemberNotVerifiedException("請先驗證電子郵件");
         }
         return dto;
     }
