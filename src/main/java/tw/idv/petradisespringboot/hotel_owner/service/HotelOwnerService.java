@@ -23,7 +23,7 @@ public interface HotelOwnerService {
 	List<HotelOwnerVO> getAll();
 
 	// 查詢權限
-	List<HotelOwnerVO> getStatus(String hotelStatus);
+	List<HotelOwnerVO> getStatus();
 
 	void updateOwnerStatus(Integer hotelId, String hotelStatus);
 
