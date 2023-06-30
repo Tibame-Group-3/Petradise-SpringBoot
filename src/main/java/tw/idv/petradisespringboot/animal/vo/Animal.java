@@ -53,7 +53,7 @@ public class Animal {
 	@Column(name = "animal_age")
 	private String animalage;
 	
-	@Column(name = "animalp_pic",columnDefinition = "LONGBLOB")
+	@Column(name = "animal_pic",columnDefinition = "LONGBLOB")
 	private byte[] animalpic;
 	
 	@Column(name = "status", insertable = false)
