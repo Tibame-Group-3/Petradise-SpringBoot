@@ -2,7 +2,7 @@
 const localStorageKey = 'hotelOwner';
 
 function isSignedIn() {
-    const ownerId = localStorage.getItem('ownerId');
+    const ownerId = localStorage.getItem(localStorageKey);
     return !!ownerId; // Double negation turns a truthy or falsy value into actual true or false
 }
 
