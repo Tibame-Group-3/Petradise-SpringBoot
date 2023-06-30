@@ -101,14 +101,12 @@
                         <li class="nav-item dropdown no-arrow">
                             <div class="nav-item dropdown no-arrow">
                                 <a class="dropdown-toggle nav-link" aria-expanded="false"
-                                   data-bs-toggle="dropdown" href="#"><span
-                                        class="d-none d-lg-inline me-2 text-gray-600 small">Valerie
-											Luna</span><img class="border rounded-circle img-profile"
-                                                            src="/f_hotel_17/assets17/img/avatars/avatar1.jpeg"></a>
+                                   data-bs-toggle="dropdown" href="#"><span id="owner-name"
+                                        class="d-none d-lg-inline me-2 text-gray-600 small"></span></a>
                                 <div
                                         class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
                                         style="min-width: 110px;">
-                                    <a class="dropdown-item" href="#"><i
+                                    <a class="dropdown-item" href="#" onclick="logout()"><i
                                             class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
                             </div>
@@ -176,6 +174,12 @@
 
 
 <script>
+    $(document).ready(function() {
+        const ownerName = getHotelOwnerName();
+        if (ownerName) {
+            $('#owner-name').text(ownerName);
+        }
+    });
     $(document).ready(function () {
         const hotelId = getHotelOwnerId();
         $.ajax({
