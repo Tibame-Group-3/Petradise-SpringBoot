@@ -87,7 +87,7 @@
                 }
             )
             .then(json => {
-                saveOwnerId(json.hotelId);
+                saveOwner(json)
                 popBack();
             })
             .catch(error => {
@@ -96,13 +96,7 @@
     }
 
     function popBack() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirect = decodeURIComponent(urlParams.get('redirect'));
-        if (redirect !== null) {
-            window.location.href = redirect;
-        } else {
-            redirectToIndex();
-        }
+        window.location.href = '/owner/OwnerAccount.html';
     }
 
 })();

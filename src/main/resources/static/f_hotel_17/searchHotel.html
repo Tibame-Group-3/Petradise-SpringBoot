@@ -401,8 +401,6 @@
                         </div>
                         <div class="d-flex flex-column mt-4">
                             <button style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;" type="button" onclick="window.open('/f_hotel_17/browseSingleHotel.html?hotelId=${hotel.hotelId}&roomTypeId=${hotel.roomTypeId}&inDay=${inDay}&outDay=${outDay}', '_blank');">查看詳情</button>
-
-                            <button class="favorite-button" style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;" type="button" data-roomTypeId="${hotel.roomTypeId}">加入收藏</button>
                         </div>
                     </div>
                 </div>
@@ -410,43 +408,6 @@
                                 // 把新的HTML元素加到#filter_hotel元素中
                                 $("#filter_hotel").append(newElement);
                             });
-                            var buttons = document.getElementsByClassName('favorite-button');
-                            for (var i = 0; i < buttons.length; i++) {
-                                buttons[i].addEventListener('click', function () {
-                                    console.log("Button clicked!");
-                                    var memberId = localStorage.getItem('memberId');
-                                    if (memberId === null) {
-                                        window.location.href = 'http://localhost:8080/member/signin.html';
-                                    } else {
-                                        var roomTypeId = this.getAttribute("data-roomTypeId");
-                                        console.log(memberId);
-                                        console.log(roomTypeId);
-                                        $.ajax({
-                                            url: "/roomType/favs",
-                                            type: "POST",
-                                            contentType: "application/json",
-                                            data: JSON.stringify({
-                                                memId: memberId,
-                                                roomTypeId: roomTypeId
-
-                                            }),
-
-
-                                            success: function (data) {
-                                                console.log(JSON.stringify({ memberId: memberId, roomTypeId: roomTypeId }));
-                                                if (data === "ALREADY_ADDED") {
-                                                    alert("已經加入收藏惹！")
-                                                } else {
-                                                    alert("收藏成功！");
-                                                }
-                                            },
-                                            error: function (jqXHR) {
-                                                alert(jqXHR.responseText);
-                                            }
-                                        });
-                                    }
-                                });
-                            }
                         }
                     },
                     error: function (error) {

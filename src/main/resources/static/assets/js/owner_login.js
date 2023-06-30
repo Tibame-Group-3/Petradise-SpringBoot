@@ -3,12 +3,32 @@ function isSignedIn() {
     return !!ownerId; // Double negation turns a truthy or falsy value into actual true or false
 }
 
-function saveOwnerId(ownerId) {
-    localStorage.setItem('ownerId', ownerId);
+function saveOwner(owner) {
+    localStorage.setItem('owner', JSON.stringify(owner));
+}
+
+function getOwner() {
+    const owner = localStorage.getItem('owner');
+    if (!owner) {
+        return null;
+    }
+    return JSON.parse(owner);
+}
+
+function getOwnerName() {
+    const owner = getOwner();
+    if (!owner) {
+        return null;
+    }
+    return owner.hotelName;
 }
 
 function getOwnerId() {
-    return localStorage.getItem('ownerId');
+    const owner = getOwner();
+    if (!owner) {
+        return null;
+    }
+    return owner.hotelId;
 }
 
 function redirectToSignin() {

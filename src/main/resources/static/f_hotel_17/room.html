@@ -39,7 +39,7 @@
                     href="#">
                 <div class="sidebar-brand-text mx-3">
                     <img width="59" height="33"
-                         src="/f_hotel_17/assets17/img/avatars/logo-only.png">
+                         src="../f_hotel_17/assets17/img/avatars/logo-only.png">
                 </div>
             </a>
             <hr class="sidebar-divider my-0">
@@ -50,10 +50,8 @@
                         style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">帳號管理</a>
                     <div class="dropdown-menu show" data-bs-popper="none"
                          style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="#"
-                           style="padding: 2px 30px; font-size: 13px;">認證資料查詢</a><a
-                            class="dropdown-item" href="#"
-                            style="padding: 2px 30px; font-size: 13px;">基本資料查詢與修改</a>
+                        <a class="dropdown-item" href="../owner/OwnerAccount.html"
+                           style="padding: 2px 30px; font-size: 13px;">基本資料</a>
                         <div class="dropdown-divider"
                              style="border-color: rgb(255, 255, 255);"></div>
                     </div>
@@ -64,9 +62,9 @@
                         style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">房間管理</a>
                     <div class="dropdown-menu show" data-bs-popper="none"
                          style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="#"
+                        <a class="dropdown-item" href="../f_hotel_17/roomType.html"
                            style="padding: 2px 30px; font-size: 13px;">房型資訊</a><a
-                            class="dropdown-item" href="#"
+                            class="dropdown-item" href="../f_hotel_17/room.html"
                             style="padding: 2px 30px; font-size: 13px;">房間資訊</a>
                     </div>
                 </li>
@@ -76,28 +74,8 @@
                         style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">訂單管理</a>
                     <div class="dropdown-menu show" data-bs-popper="none"
                          style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="#"
-                           style="padding: 2px 30px; font-size: 13px;">新增商品</a><a
-                            class="dropdown-item" href="#"
-                            style="padding: 2px 30px; font-size: 13px;">商品列表</a><a
-                            class="dropdown-item" href="#"
-                            style="padding: 2px 30px; font-size: 13px;">新增促銷專案</a><a
-                            class="dropdown-item" href="#"
-                            style="padding: 2px 30px; font-size: 13px;">促銷專案列表</a><a
-                            class="dropdown-item" href="#"
-                            style="padding: 2px 30px; font-size: 13px;">訂單列表</a>
-                        <div class="dropdown-divider"
-                             style="border-color: rgb(255, 255, 255);"></div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown show"><a
-                        class="dropdown-toggle nav-link" aria-expanded="true"
-                        data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-                        style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">即時聊天管理</a>
-                    <div class="dropdown-menu show" data-bs-popper="none"
-                         style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="#"
-                           style="padding: 2px 30px; font-size: 13px;">客服列表</a>
+                        <a class="dropdown-item" href="../f_27/hotel-orders.html"
+                           style="padding: 2px 30px; font-size: 13px;">訂單管理</a>
                         <div class="dropdown-divider"
                              style="border-color: rgb(255, 255, 255);"></div>
                     </div>
@@ -194,11 +172,12 @@
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script src="../assets/js/owner_login.js"></script>
 
 
 <script>
     $(document).ready(function () {
-        const hotelId = getHotelId();
+        const hotelId = getOwnerId();
         $.ajax({
             url: `http://localhost:8080/rooms/hotelId/${hotelId}`,
             type: 'GET',
@@ -255,11 +234,6 @@
             default:
                 return undefined;
         }
-    }
-
-    function getHotelId() {
-        // return localStorage.getItem("hotelId");
-        return 5;
     }
 </script>
 
