@@ -172,11 +172,12 @@
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script src="../assets/js/owner_login.js"></script>
 
 
 <script>
     $(document).ready(function () {
-        const hotelId = getHotelId();
+        const hotelId = getOwnerId();
         $.ajax({
             url: `http://localhost:8080/rooms/hotelId/${hotelId}`,
             type: 'GET',
@@ -233,11 +234,6 @@
             default:
                 return undefined;
         }
-    }
-
-    function getHotelId() {
-        // return localStorage.getItem("hotelId");
-        return 5;
     }
 </script>
 
