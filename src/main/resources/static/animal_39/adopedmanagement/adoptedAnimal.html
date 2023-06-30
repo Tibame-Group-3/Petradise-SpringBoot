@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Table - Brand</title>
+<title>動物資訊</title>
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -64,18 +64,18 @@
 							<a class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">新增動物</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">動物照片</a>
+								style="padding: 2px 30px; font-size: 13px;"></a>
 						</div></li>
 					<li class="nav-item dropdown show"><a
 						class="dropdown-toggle nav-link" aria-expanded="true"
 						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">領養預約管理</a>
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">領養管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
 							<a class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;"></a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">預約管理</a><a
+								style="padding: 2px 30px; font-size: 13px;"></a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">認養管理</a><a
 								class="dropdown-item" href="#"
@@ -152,8 +152,8 @@
 											<th>年齡</th>
 											<th>狀態</th>
 											<!-- <th>備註</th> -->
+											<th>照片</th>
 											<th>修改</th>
-											<th>查詢</th>
 										</tr>
 
 
@@ -199,9 +199,9 @@
     </div>-->
 
 
-									<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-									<script src="assets/js/theme.js"></script>
-									<script
+				<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+			    <script src="assets/js/theme.js"></script>
+			    <script 
 										src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 									<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 									<script
@@ -227,14 +227,15 @@
     </script>
 
 									<!-- JS -->
-									<script
-										src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+							<script
+							src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 										integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
 										crossorigin="anonymous"></script>
-									<script
-										src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+						<script
+							src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
 										integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
 										crossorigin="anonymous"></script>
+
 
 
 <script>
@@ -264,11 +265,17 @@
                 
                 
                 
+            
                 
-                let dataaccount = 0;
+                
+                
+                
+                                
+                               
+                               
+               let dataaccount = 0;
                 let Animal = [];
              
-
                 function getAllAnimal() {
                     console.log('進入getAllAnimal()')
                     fetch("http://localhost:8080/animals/all")
@@ -284,7 +291,7 @@
                                 // 在此處可以處理從 API 獲取的數據
                                 Animal = data;
                                 console.log('獲取動物資訊：', Animal);
-
+                             
 
                                 for (let i = 0; i < Animal.length; i++) {
                                     dataaccount = i;
@@ -297,6 +304,13 @@
                                     const animalsex = row.animalsex;
                                     const animalage = row.animalage;
                                     const aniamlstatus = row.aniamlstatus;
+                                    
+                                    const animalpic = row.animalpic; // 从API响应中获取动物图片数据
+
+                                    const reader = new FileReader();
+                                   
+                                    const imageTag = animalpic;
+                                  
                                     dataTable.row.add([
                                         row.animalid,
                                         row.corpid,
@@ -306,25 +320,27 @@
                                         row.animalsex,
                                         row.animalage,
                                         row.aniamlstatus,
+                                        `<img src='data:image/*;base64,${imageTag}' width="50"  height="50">`,
+                                       
+                                       
                                         `<button type="button" class="btn btn-primary" 
                     data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton">修改
             </button>`,
-                                        `<button type="button" class="btn btn-primary">查詢</button>`
+                                      
 
                                     ]);
                                 }
                                 dataTable.draw();
-                            });
-                        })
-                        .catch(function (err) {
-                            console.log('錯誤：', err);
-                        });
-                }
+                       
+                        }) })}
                 
+               
+              
+
+              
                 
-             
                 $(document).on("click", "#editbutton", function() {
-          
+                    
                     var rowIndex = $(this).closest("tr").index();
 
                     // 使用索引获取对应的动物对象和动物ID
@@ -335,15 +351,11 @@
 
    
                 });
-
-              
-                
-                
                
 
                 // ============================2.  初始化datatable函式========================
 
-                let dataTable = $('#all').DataTable({
+                 let dataTable = $('#all').DataTable({
                     scrollY: '600px',
                     scrollCollapse: true,
                     paging: false,
@@ -352,16 +364,12 @@
                     destroy: true,
                 });
 
-                // ============================３. 修改資料進去 editmemberdata()========================
-
-
-
-
-                // ===============================^^^方法區^^^====================================
-
-                // ===============================VVV使用方法區VVV================================
-
-                //=================================1. 總之先查一次=================================
+              
+                
+                
+                
+                
+                
                 getAllAnimal();
 
             })();

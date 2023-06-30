@@ -2,13 +2,14 @@ package tw.idv.petradisespringboot.member.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tw.idv.petradisespringboot.member.dto.ChangePasswordDTO;
-import tw.idv.petradisespringboot.member.dto.LoginDTO;
-import tw.idv.petradisespringboot.member.dto.SignUpDTO;
-import tw.idv.petradisespringboot.member.dto.UpdateDTO;
+import tw.idv.petradisespringboot.member.dto.*;
 import tw.idv.petradisespringboot.member.service.MemberService;
+import tw.idv.petradisespringboot.member.vo.AddressInfo;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -21,27 +22,27 @@ class MemberController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<?> all() {
+    ResponseEntity<List<MemberDTO>> all() {
         return ResponseEntity.ok(service.getAll());
     }
 
     @PostMapping("/update")
-    ResponseEntity<?> update(@RequestBody UpdateDTO dto) {
+    ResponseEntity<MemberDTO> update(@RequestBody UpdateDTO dto) {
         return ResponseEntity.ok(service.update(dto));
     }
 
     @PostMapping("/sign-up")
-    ResponseEntity<?> signUp(@RequestBody SignUpDTO dto) {
-        return ResponseEntity.ok(service.signUp(dto));
+    ResponseEntity<MemberDTO> signUp(@RequestBody SignUpDTO dto) {
+        return new ResponseEntity<>(service.signUp(dto), HttpStatus.CREATED);
     }
 
     @GetMapping("/id={id}")
-    ResponseEntity<?> one(@PathVariable Integer id) {
+    ResponseEntity<MemberDTO> one(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @PostMapping("/login")
-    ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+    ResponseEntity<ObjectNode> login(@RequestBody LoginDTO dto) {
         var member = service.login(dto.getAccount(), dto.getPassword());
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
@@ -50,18 +51,18 @@ class MemberController {
     }
 
     @GetMapping("/districts")
-    ResponseEntity<?> districts() throws Exception {
+    ResponseEntity<List<AddressInfo>> districts() throws Exception {
         return ResponseEntity.ok(service.getAddressInfo());
     }
 
     @PostMapping("/change-password")
-    ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO dto) {
+    ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO dto) {
         service.changePassword(dto.getId(), dto.getOldPassword(), dto.getNewPassword());
         return ResponseEntity.ok("密碼修改成功");
     }
 
     @GetMapping("/verify-email")
-    ResponseEntity<?> verifyEmail(@RequestParam String token) {
+    ResponseEntity<String> verifyEmail(@RequestParam String token) {
         service.verifyEmail(token);
         return ResponseEntity
                 .ok("驗證成功");

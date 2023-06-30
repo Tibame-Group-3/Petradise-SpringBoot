@@ -114,10 +114,10 @@ background: #ffe7dd;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">業主管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="http://localhost:8080/owner/OwnerChack.html"
+							<a class="dropdown-item" href="/owner/OwnerCheck.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主審核</a><a
-								class="dropdown-item" href="http://localhost:8080/owner/OwnerManage.html#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主列表</a><a
+								class="dropdown-item" href="owner/OwnerManage.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館主業列表</a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主審核</a><a
 								class="dropdown-item" href="#"
@@ -195,10 +195,10 @@ background: #ffe7dd;
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">旅館業主資料管理</h3>
+					<h3 class="text-dark mb-4">旅館業主列表</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">旅館業主列表</p></div>
+							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">列表刷新</p></div>
 							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
 						</div>
 						<div class="card-body">
@@ -247,16 +247,15 @@ background: #ffe7dd;
 										</tr>
 									</thead>
 
-									<tbody class="data-container">
-									<div id="loading" >
-										<img src="../owner/img/loading.gif">
-									</div>
-
+									<tbody class="data-container">									
 									</tbody>
 									<tfoot>
 										<tr></tr>
 									</tfoot>
 								</table>
+								<div id="loading" >
+										<img src="../owner/img/loading.gif">
+									</div>
 							</div>
 							<div class="row">
 
@@ -506,6 +505,12 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		    	
 		    }	
 		});	
+		
+		    $(".owner_search").keyup(function(event) {
+		        if (event.keyCode === 13) { // 13 是 enter 鍵的鍵碼
+		            $(".search_btn").click(); // 觸發搜尋按鈕的點擊事件
+		        }
+		    });
 		  
 		  
 		    //離開搜尋欄位的時候,如果搜尋欄位為空值,顯示第一頁

@@ -22,10 +22,7 @@ public class MemberExceptionHandler extends ResponseEntityExceptionHandler {
             Exception ex,
             WebRequest request
     ) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return buildErrorResponse(ex, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AccountAlreadyExistsException.class)
@@ -33,10 +30,7 @@ public class MemberExceptionHandler extends ResponseEntityExceptionHandler {
             Exception ex,
             WebRequest request
     ) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+        return buildErrorResponse(ex, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler({
@@ -48,10 +42,14 @@ public class MemberExceptionHandler extends ResponseEntityExceptionHandler {
             Exception ex,
             WebRequest request
     ) {
+        return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED);
+    }
+
+    private ResponseEntity<?> buildErrorResponse(Exception ex, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(body, status);
     }
 
 

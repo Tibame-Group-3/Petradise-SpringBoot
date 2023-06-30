@@ -30,7 +30,6 @@ import tw.idv.petradisespringboot.lostpetresponse.vo.LostPetResponse;
 @Table(name = "lost_pet_article")
 public class LostPetArticle implements Serializable{
 
-	private static final long serialVersionUID = 2L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
