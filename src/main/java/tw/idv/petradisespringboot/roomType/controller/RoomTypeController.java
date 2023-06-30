@@ -1,7 +1,9 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -81,12 +83,14 @@ public class RoomTypeController {
     }
 
     //使用者點選符合自己篩選條件的房型
-    @PostMapping ("/choose/{hotelId}/{roomTypeId}")
+    @PostMapping ("/choose/{hotelId}/{roomTypeId}/{inDay}/{outDay}")
     @ResponseBody
-    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @PathVariable Integer roomTypeId) {
-        return service.getSingleHotel(hotelId, roomTypeId);
-
+    public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @PathVariable Integer roomTypeId, @PathVariable
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime inDay, @PathVariable
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime outDay) {
+        return service.getSingleHotel(hotelId, roomTypeId, inDay, outDay);
     }
+
 
     //使用者選擇單一房型後顯示圖片
     @GetMapping("/{roomTypeId}/images")
@@ -101,4 +105,5 @@ public class RoomTypeController {
         List<RoomReview> reviews = service.getReviewsByHotelId(hotelId);
         return ResponseEntity.ok(reviews);
     }
+
 }

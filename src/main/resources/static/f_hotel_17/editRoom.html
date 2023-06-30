@@ -165,6 +165,10 @@
                                 style="background: #a67c52;border-style: none;text-align: left;margin-left: 90px;color: #f1ecd1;">
                             送出
                         </button>
+                        <button class="btn btn-primary"
+                                style="background: #a67c52; border-style: none; text-align: left; margin-left: 0.5rem; color: #f1ecd1;"
+                                onclick="closeButtonClicked()">關閉
+                        </button>
                     </div>
 
                 </form>
@@ -183,6 +187,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
+    //按關閉會導回前一頁
+    function closeButtonClicked() {
+        window.location.href = '/f_hotel_17/room.html';
+    }
+</script>
+<script>
+
     // 拿到該筆房間資訊
     // 動態生成房型select
     var roomTypeMapping;
