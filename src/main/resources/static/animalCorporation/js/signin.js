@@ -71,7 +71,7 @@
             'content-type': 'application/json'
         }
 
-        fetch('/ownerLogin/login', {
+        fetch('/animalCorporation/login', {
             body: JSON.stringify(data),
             method: "POST",
             headers: headers
@@ -87,7 +87,7 @@
                 }
             )
             .then(json => {
-                saveHotelOwner(json)
+                saveAnimalCorporation(json)
                 popBack();
             })
             .catch(error => {
@@ -96,7 +96,7 @@
     }
 
     function popBack() {
-        window.location.href = '/owner/OwnerAccount.html';
+        // 請實作登入後的頁面跳轉
     }
 
 })();
