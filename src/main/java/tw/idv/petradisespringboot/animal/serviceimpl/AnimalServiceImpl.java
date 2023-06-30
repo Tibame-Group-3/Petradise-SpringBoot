@@ -2,12 +2,14 @@ package tw.idv.petradisespringboot.animal.serviceimpl;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import tw.idv.petradisespringboot.animal.contrllor.AnimalSpecifications;
 import tw.idv.petradisespringboot.animal.repo.AnimalRepository;
 import tw.idv.petradisespringboot.animal.service.AnimalService;
 import tw.idv.petradisespringboot.animal.vo.Animal;
-import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
+
 
 @Service
 public class AnimalServiceImpl implements AnimalService {
@@ -42,13 +44,17 @@ public class AnimalServiceImpl implements AnimalService {
 
 		return repository.save(animal);
 	}
-
-
 	
 
 
-}
+//  用TYPE找動物	
+	@Override
+	public List<Animal> findAnimalByAnimaltypeAndAnimalsex(String animaltype, String animalsex) {
+		
+		return repository.findAnimalByAnimaltypeAndAnimalsex(animaltype, animalsex);
+	}
 
+}
 class AnimalNotFoundException extends RuntimeException {
 	AnimalNotFoundException(Integer id) {
 		super("找不到會員ID: " + id);
