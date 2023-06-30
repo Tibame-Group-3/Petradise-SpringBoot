@@ -11,7 +11,6 @@ import java.util.List;
 public interface RoomOrderRepository extends JpaRepository<RoomOrder, Integer> {
 
     List<RoomOrder> findByMemId(Integer memId);
-    List<RoomOrder> findByPetId(Integer petId);
     List<RoomOrder> findByStatus(Character status);
 
     @Query("SELECT ro FROM RoomOrder ro, RoomType rt WHERE ro.roomTypeId = rt.roomTypeId AND rt.hotelId = :hotelId")

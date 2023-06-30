@@ -106,7 +106,7 @@
                         <tr>
                             <th>訂單編號</th>
                             <th>會員名稱</th>
-                            <th>寵物名稱&種類</th>
+                            <th>寵物名稱</th>
                             <th>住宿日期</th>
                             <th>房型、房號</th>
                             <th>狀態</th>
@@ -117,7 +117,7 @@
                         <tr>
                             <th>訂單編號</th>
                             <th>會員名稱</th>
-                            <th>寵物名稱&種類</th>
+                            <th>寵物名稱</th>
                             <th>住宿日期</th>
                             <th>房型、房號</th>
                             <th>狀態</th>
@@ -156,8 +156,29 @@
                             return '<a href="http://localhost:8080/f_27/hotel-order-detail.html?id=' + data + '" target="_blank">' + data + '</a>';
                         }
                     },
-                    { "data": "memId" },
-                    { "data": "petId" },
+                    {
+                        "data": "memId",
+                        "render": function (data, type, row) {
+                            var memberId = data;
+                            var memberName = ""; // Variable to store the member name
+
+                            // Fetch the member name using AJAX
+                            $.ajax({
+                                url: `http://localhost:8080/members/id=${memberId}`,
+                                method: "GET",
+                                async: false, // Set async to false to wait for the response
+                                success: function (response) {
+                                    memberName = response.name;
+                                },
+                                error: function (error) {
+                                    console.error("Error:", error);
+                                    // Handle the error case
+                                }
+                            });
+                            return memberName;
+                        }
+                    },
+                    { "data": "petName" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -166,7 +187,28 @@
                             return "入住: " + checkInDate + "<br>退房: " + checkOutDate;
                         }
                     },
-                    { "data": "roomTypeId" },
+                    {
+                        "data": "roomTypeId",
+                        "render": function (data, type, row) {
+                            var roomTypeId = data;
+                            var roomTypeName = ""; // Variable to store the room type name
+
+                            // Fetch the room type name using AJAX
+                            $.ajax({
+                                url: `http://localhost:8080/roomTypes/${roomTypeId}`,
+                                method: "GET",
+                                async: false, // Set async to false to wait for the response
+                                success: function (response) {
+                                    roomTypeName = response.roomTypeName;
+                                },
+                                error: function (error) {
+                                    console.error("Error:", error);
+                                    // Handle the error case
+                                }
+                            });
+                            return roomTypeName;
+                        }
+                    },
                     {
                         "data": "status",
                         "render": function (data, type, row) {
@@ -185,9 +227,10 @@
                                     statusText = "即將到來";
                                     break;
                             }
-                            return statusText;
+                            return '<span class="status-cell">' + statusText + '</span>';
                         }
-                    },
+                    }
+                    ,
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -199,6 +242,10 @@
 
             // Add event listener for "編輯" button click
             $('#example').on('click', '.edit-button', function () {
+                var data = table.row($(this).closest('tr')).data();
+                var orderId = data.id;
+                console.log(orderId);
+
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -206,17 +253,47 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Yes, cancel it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
+                        // Make the AJAX request to change the room status
+                        $.ajax({
+                            url: `http://localhost:8080/room-order/id/${orderId}/change-status`,
+                            method: 'PUT',
+                            data: JSON.stringify({ "status": "2" }),
+                            contentType: "application/json",
+                            success: function (response) {
+                                // Get the DataTable row corresponding to the order ID
+                                var row = table.row('.status-cell[data-order-id="' + orderId + '"]').node();
+
+                                // Update the status column with the updated status text
+                                var statusCell = $('.status-cell[data-order-id="' + orderId + '"]');
+                                statusCell.html('<span class="cancelled-status">已取消</span>');
+
+                                Swal.fire(
+                                    'Cancelled!',
+                                    'The order has been cancelled.',
+                                    'success'
+                                );
+
+                                // Invalidate the row and redraw the DataTable
+                                table.row(row).invalidate().draw(false);
+                            },
+                            error: function (error) {
+                                console.error("Error:", error);
+                                Swal.fire(
+                                    'Error!',
+                                    'Failed to cancel the order.',
+                                    'error'
+                                );
+                            }
+                        });
                     }
                 });
             });
+
+
+
 
             // Function to format date and time
             function formatDate(date) {
@@ -248,7 +325,7 @@
 
         // Function to get hotel id
         function getHotelId() {
-            return 1;
+            return 2;
             // return localStorage.getItem("hotelId");
         }
     </script>
