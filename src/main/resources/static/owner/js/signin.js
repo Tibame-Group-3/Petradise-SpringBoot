@@ -1,7 +1,6 @@
 (() => {
 
     $(document).ready(function () {
-        guardIsSignedIn();
         preventSpaceInput();
         $('#btn_signin')
             .on('click', onClickSignin);
@@ -72,7 +71,7 @@
             'content-type': 'application/json'
         }
 
-        fetch('/members/login', {
+        fetch('/ownerLogin/login', {
             body: JSON.stringify(data),
             method: "POST",
             headers: headers
@@ -81,14 +80,14 @@
                     if (response.ok) {
                         return response.json();
                     } else {
-                        return response.json().then(json => {
-                            throw new Error(json.message);
+                        return response.text().then(text => {
+                            throw new Error(text);
                         });
                     }
                 }
             )
             .then(json => {
-                saveMemberId(json.id);
+                saveOwnerId(json.hotelId);
                 popBack();
             })
             .catch(error => {
