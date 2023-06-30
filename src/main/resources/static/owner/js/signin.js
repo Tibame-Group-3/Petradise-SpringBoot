@@ -87,7 +87,7 @@
                 }
             )
             .then(json => {
-                saveOwner(json)
+                saveHotelOwner(json)
                 popBack();
             })
             .catch(error => {

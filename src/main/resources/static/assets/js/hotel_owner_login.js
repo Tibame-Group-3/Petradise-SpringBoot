@@ -1,30 +1,33 @@
+
+const localStorageKey = 'hotelOwner';
+
 function isSignedIn() {
     const ownerId = localStorage.getItem('ownerId');
     return !!ownerId; // Double negation turns a truthy or falsy value into actual true or false
 }
 
-function saveOwner(owner) {
-    localStorage.setItem('owner', JSON.stringify(owner));
+function saveHotelOwner(owner) {
+    localStorage.setItem(localStorageKey, JSON.stringify(owner));
 }
 
-function getOwner() {
-    const owner = localStorage.getItem('owner');
+function getHotelOwner() {
+    const owner = localStorage.getItem(localStorageKey);
     if (!owner) {
         return null;
     }
     return JSON.parse(owner);
 }
 
-function getOwnerName() {
-    const owner = getOwner();
+function getHotelOwnerName() {
+    const owner = getHotelOwner();
     if (!owner) {
         return null;
     }
     return owner.hotelName;
 }
 
-function getOwnerId() {
-    const owner = getOwner();
+function getHotelOwnerId() {
+    const owner = getHotelOwner();
     if (!owner) {
         return null;
     }
@@ -40,6 +43,6 @@ function redirectToIndex() {
 }
 
 function logout() {
-    localStorage.removeItem('ownerId');
+    localStorage.removeItem(localStorageKey);
     redirectToSignin();
 }

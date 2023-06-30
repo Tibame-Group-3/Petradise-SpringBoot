@@ -388,10 +388,10 @@ button:active {
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../assets/js/owner_login.js"></script>
+<script src="../assets/js/hotel_owner_login.js"></script>
 <script>
     $(function () {
-		const hotelId = getOwnerId();
+		const hotelId = getHotelOwnerId();
    
     //====================================查詢使用者資料============================================//
     	$.ajax({
@@ -441,7 +441,7 @@ button:active {
         
         //修改用function , 因為有兩個部分都會用到
         function updateOwnerAccount(data) {
-			const hotelId = getOwnerId();
+			const hotelId = getHotelOwnerId();
             $.ajax({
                 url: `/ownerAccount/${hotelId}`,
                 type: 'POST',
