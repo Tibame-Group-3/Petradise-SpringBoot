@@ -21,11 +21,11 @@ public class OwnerCheckController {
 	private HotelOwnerService hotelOwnerService;
 
 	@GetMapping("/getAll")
-	public List<HotelOwnerVO> getAllOwners(@RequestParam String hotelStatus) {
+	public List<HotelOwnerVO> getAllOwners() {
 
 		try {
 			List<HotelOwnerVO> list = hotelOwnerService.getAll();
-			List<HotelOwnerVO> statusList = hotelOwnerService.getStatus(hotelStatus);
+			List<HotelOwnerVO> statusList = hotelOwnerService.getStatus();
 			for (HotelOwnerVO vo : list) {
 				// 只需獲取圖片的數組
 				byte[] imageBytes = vo.getHotelLicPic();

@@ -1,18 +1,19 @@
 package tw.idv.petradisespringboot.hotel_owner.service.impl;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tw.idv.petradisespringboot.hotel_owner.exceptions.AccountNotFoundException;
 import tw.idv.petradisespringboot.hotel_owner.exceptions.NotVerifiedException;
 import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerAccess;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class HotelOwnerServiceImpl implements HotelOwnerService {
@@ -83,9 +84,9 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 	}
 
 	@Override
-	public List<HotelOwnerVO> getStatus(String hotelStatus) {
+	public List<HotelOwnerVO> getStatus() {
 		List<HotelOwnerVO> list = getAll();
-		// 過濾status為2的選項
+
 		list = list.stream().filter(vo -> "0".equals(vo.getHotelStatus())).collect(Collectors.toList());
 		return list;
 	}
@@ -99,6 +100,7 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 			vo.setHotelStatus(hotelStatus);
 			vo.setHotelId(hotelId);
 			hotelOwnerRepository.save(vo);
+
 		} else {
 			throw new NoSuchElementException("Hotel not found with id: " + hotelId);
 		}
