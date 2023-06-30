@@ -1,6 +1,8 @@
 package tw.idv.petradisespringboot.hotel_owner.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,5 +77,27 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 	@Override
 	public List<HotelOwnerVO> getAll() {
 		return hotelOwnerRepository.findAll();
+	}
+
+	@Override
+	public List<HotelOwnerVO> getStatus(String hotelStatus) {
+		List<HotelOwnerVO> list = getAll();
+		// 過濾status為2的選項
+		list = list.stream().filter(vo -> "0".equals(vo.getHotelStatus())).collect(Collectors.toList());
+		return list;
+	}
+
+	@Override
+	public void updateOwnerStatus(Integer hotelId, String hotelStatus) {
+		HotelOwnerVO vo = findByPrimaryKey(hotelId);
+
+		// 因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
+		if (vo != null) {
+			vo.setHotelStatus(hotelStatus);
+			vo.setHotelId(hotelId);
+			hotelOwnerRepository.save(vo);
+		} else {
+			throw new NoSuchElementException("Hotel not found with id: " + hotelId);
+		}
 	}
 }
