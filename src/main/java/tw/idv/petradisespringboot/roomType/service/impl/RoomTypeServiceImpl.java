@@ -1,9 +1,11 @@
 package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +140,9 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     //單一房型拿到文字資料
     @Override
     @Transactional
-    public SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId) {
+    public SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId,
+                                         LocalDateTime inDay,
+                                         LocalDateTime outDay) {
         SingleHotelDTO singleHotelDTO = new SingleHotelDTO();
         HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.getReferenceById(hotelId);
         singleHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
@@ -147,8 +151,8 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         singleHotelDTO.setRoomTypeAbout(roomType.getRoomTypeAbout());
         singleHotelDTO.setRoomTypePrice(roomType.getRoomTypePrice());
         singleHotelDTO.setRoomTypeName(roomType.getRoomTypeName());
-
-
+        singleHotelDTO.setInDay(inDay);
+        singleHotelDTO.setOutDay(outDay);
         return singleHotelDTO;
     }
 
@@ -185,6 +189,8 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             allHotelDTO.setRoomTypeAbout(roomType.getRoomTypeAbout());
             allHotelDTO.setRoomTypePrice(roomType.getRoomTypePrice());
             allHotelDTO.setReviewScoreTotal(hotelOwnerVO.getReviewScoreTotal());
+            allHotelDTO.setInDay(searchDto.getInDay());
+            allHotelDTO.setOutDay(searchDto.getOutDay());
             if (!roomType.getRoomPics().isEmpty()) {
                 RoomPic firstRoomPic = roomType.getRoomPics().get(0);  // 拿第一張圖片
                 byte[] roomPicBytes = firstRoomPic.getRoomPic();
@@ -218,5 +224,14 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     public List<RoomReview> getReviewsByHotelId(Integer hotelId) {
         return roomReviewRepository.findByHotelId(hotelId);
+    }
+    @Override
+    public RoomType getRoomTypeById(Integer roomTypeId) {
+        Optional<RoomType> optionalRoomType = typeRepository.findById(roomTypeId);
+        if (optionalRoomType.isPresent()) {
+            return optionalRoomType.get();
+        } else {
+            throw new RuntimeException("RoomType not found for id :: " + roomTypeId);
+        }
     }
 }

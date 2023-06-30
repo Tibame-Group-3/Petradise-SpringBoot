@@ -214,7 +214,8 @@
 					<label>寵物圖片：</label> <br> <input type="file" class="input"
 						id="file" name="file" multiple="multiple" accept="image/*">
 					<br>
-					<output class="output" id="imageOutput"></output>
+					<output class="output output1"></output>
+					<output class="output output2"></output>
 				</div>
 
 				<hr class="mb-4">
@@ -267,40 +268,26 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js'></script>
 
 	<script>
-		const output = document.querySelector(".output");
+		const output1 = document.querySelector(".output1");
+		const output2 = document.querySelector(".output2");
 		const input = document.querySelector(".input");
 		const urlParams = new URLSearchParams(window.location.search);
 		const id = parseInt(urlParams.get('id'), 10);
-		let imagesArray = []
+		let imagesArray = [];
 		let numberInput = document.getElementById('contactPhone');
 		let base64Image = "";
 		let jsonData = [];
-				
-		function displayPreImages(images) {
-		  let imagesHtml = "";
-		  images.forEach((imageData, index) => {
-		    imagesHtml += `<div class="image">
-		      <img src="data:image/*;base64,${imageData.lostPetPic}" alt="image">
-		      <span class="delete-image" onclick="deletePreImage(${index})">&times;</span>
-		    </div>`;
-		  });
+		let resLostPetPic = []; 		
+		
 
-		  output.innerHTML = imagesHtml;
-
-		}
-		function deletePreImage(index) {
-			  const updatedImagesArray = [...imagesArray];
-			  updatedImagesArray.splice(index, 1);
-			  imagesArray = updatedImagesArray; // 更新 imagesArray
-			  displayPreImages(updatedImagesArray);
-		}
 		
 		$.ajax({
 		  url: `/LostPetArticle/id=${id}`,
 		  method: 'GET',
 		  dataType: 'json',
 		  success: res => {
-			  console.log(res);
+			  /* console.log(res); */
+			  let html = "";
 			  $("#title").val(res.title);
 			  const originalDate = res.lostDate;
 			  const parsedDate = new Date(originalDate);
@@ -313,7 +300,13 @@
 			  $("#feature").val(res.feature);
 			  $("#text").val(res.text);
 			  $("#contactPhone").val(res.contactPhone);
-			  displayPreImages(res.lostPetPic);
+			  for(let i = 0; i < res.lostPetPic.length; i++) {
+				  resLostPetPic.push({
+					  lostPetPicId: res.lostPetPic[i].lostPetPicId,
+					  lostPetPic: res.lostPetPic[i].lostPetPic
+				  })
+			  }
+			  getPreImages();
 		  },
 		  error: err => {
 		    console.log(err);
@@ -322,6 +315,16 @@
 		  },
 		});
 		
+		function getPreImages() {
+			  let images = "";
+			  resLostPetPic.forEach((image, index) => {
+			    images += `<div class="image">
+			      <img src="data:image/*;base64,${image.lostPetPic}" alt="image">
+			      <span onclick="deletePreImage(${index})">&times;</span>
+			    </div>`;
+			  });
+			  output1.innerHTML = images;
+		}
 		 
 
 		
@@ -332,32 +335,35 @@
 		    const file = files[i];
 		    const base64Image = await readFileAsDataURL(file);
 		    const base64Data = base64Image.split(",")[1]; // 去除前缀
-		    const newImage = 
-		    		{ article: id,
-		    		lostPetPic: base64Data };
-		    imagesArray.push(newImage);
+		    imagesArray.push({ 
+	    		lostPetPic: base64Data 
+	    	});
 		  }
+		  displayImages();
 		});
 		
-		/* function displayImages() {
+		function displayImages() {
 		  let images = "";
 		  imagesArray.forEach((image, index) => {
 		    images += `<div class="image">
-		      <img src="data:image/jpeg;base64,${image.lostPetPic}" alt="image">
+		      <img src="data:image/*;base64,${image.lostPetPic}" alt="image">
 		      <span onclick="deleteImage(${index})">&times;</span>
 		    </div>`;
 		  });
-		  output.innerHTML = images;
+		  output2.innerHTML = images;
+
+
 		} 
-		output.addEventListener("click", (event) => {
-		  if (event.target.classList.contains("delete-image")) {
-		    deleteImage();
-		  }
-		});
+		
 		function deleteImage(index) {
+			console.log(imagesArray);
 			imagesArray.splice(index, 1);
 			displayImages();
-		} */
+		} 
+		function deletePreImage(index) {
+			resLostPetPic.splice(index, 1);
+			getPreImages();
+		} 
 
 		// 錯誤處理
 		numberInput.addEventListener('input', function(event) {
@@ -382,6 +388,7 @@
 			  });
 			}
 		async function submitForm() {
+			resLostPetPic = resLostPetPic.concat(imagesArray);
 			
 			const articleData = {
 					articleId: id ,
@@ -395,9 +402,11 @@
 					text: $("#text").val(),
 					contactPhone: $("#contactPhone").val(),
 					title: $("#title").val(),
-					lostPetPic: imagesArray,
+					lostPetPic: resLostPetPic,
 			};
 			console.log(articleData);
+			console.log(articleData.lostPetPic);
+			
 			$.ajax({
 			  url: "/LostPetArticle/update",
 			  type: "POST",
@@ -410,13 +419,13 @@
 		    })
 		    .catch(function(error) {
 		      console.error(error);
-		    });
+		    }); 
 		}
 
-			$(".btn-submit").click(function(event) {
-			  event.preventDefault();
-			  submitForm();
-			});
+		$(".btn-submit").click(function(event) {
+		  event.preventDefault();
+		  submitForm();
+		});
 
 	</script>
 

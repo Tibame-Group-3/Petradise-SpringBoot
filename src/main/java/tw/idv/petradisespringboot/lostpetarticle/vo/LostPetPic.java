@@ -37,9 +37,9 @@ public class LostPetPic {
 	
 	@ToString.Exclude
 	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "article_id")
-	private LostPetArticle articleId;
+	private LostPetArticle article;
 	
 	@Lob
 	@Column(name = "lost_pet_pic", columnDefinition = "LONGBLOB")

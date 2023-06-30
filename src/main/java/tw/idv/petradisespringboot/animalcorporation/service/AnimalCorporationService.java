@@ -15,5 +15,7 @@ public interface AnimalCorporationService {
 	List<AnimalCorporation> findAll();
 	
 	AnimalCorporation findByID(Integer id);
+	
+	AnimalCorporation updateByCorpAccess(AnimalCorporation animalCorporation);
 
 }

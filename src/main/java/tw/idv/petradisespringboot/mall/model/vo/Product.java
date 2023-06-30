@@ -37,6 +37,6 @@ public class Product {
     @Lob
     byte[] pdImg;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Sale> sale;
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<Sale> sale;
 }

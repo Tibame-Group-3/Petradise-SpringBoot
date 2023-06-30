@@ -12,7 +12,7 @@ public interface LostPetArticleService {
 	
 	List<LostPetArticle> getAllArticleByAdmin();
 	
-	LostPetArticle findById(Integer id);
+	LostPetArticle findByIdWithStatus(Integer id);
 	
 	LostPetArticle add(LostPetArticle lostPetArticle);
 	
@@ -27,5 +27,8 @@ public interface LostPetArticleService {
 	LostPetArticle update4Status(LostPetArticle lostPetArticle);
 	
 	List<LostPetArticle> findByMemId(Integer memId);
+	
+	LostPetArticle findById(Integer id);
+
 
 }

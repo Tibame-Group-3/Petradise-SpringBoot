@@ -42,7 +42,7 @@ public class LostPetResponse {
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "article_id")
-	private LostPetArticle articleId;
+	private LostPetArticle article;
 	
 	@Column(name = "response_content")
 	private String responseContent;
