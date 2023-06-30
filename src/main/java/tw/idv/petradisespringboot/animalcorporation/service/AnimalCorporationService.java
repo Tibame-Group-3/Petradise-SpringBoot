@@ -1,9 +1,8 @@
 package tw.idv.petradisespringboot.animalcorporation.service;
 
-import java.util.List;
-
-
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
+
+import java.util.List;
 
 
 public interface AnimalCorporationService {
@@ -17,5 +16,7 @@ public interface AnimalCorporationService {
 	AnimalCorporation findByID(Integer id);
 	
 	AnimalCorporation updateByCorpAccess(AnimalCorporation animalCorporation);
+
+	AnimalCorporation login(String account, String password);
 
 }

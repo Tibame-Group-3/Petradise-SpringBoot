@@ -1,19 +1,12 @@
 package tw.idv.petradisespringboot.animalcorporation.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.animalcorporation.dto.LoginDTO;
 import tw.idv.petradisespringboot.animalcorporation.service.AnimalCorporationService;
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/animalCorporation")
@@ -56,5 +49,15 @@ public class AnimalCorporationController {
 		service.updateByCorpAccess(corporation);
 		return ResponseEntity.ok(corporation);
 		
+	}
+
+	@PostMapping("/login")
+	ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+		try {
+			var vo = service.login(dto.getAccount(), dto.getPassword());
+			return ResponseEntity.ok(vo);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 }
