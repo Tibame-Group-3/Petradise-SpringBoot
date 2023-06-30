@@ -570,7 +570,6 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 		        html += "<tr>" + "<td style='text-align: left;'>" + "會員帳號 : " + res[i].corpAccount + "</td>" + "<tr>"
 		        html += "<tr>" + "<td style='text-align: left;'>" + "聯絡電話 : " + res[i].contactPhone + "</td>" + "<tr>"
 		        html += "<tr>" + "<td style='text-align: left;'>" + "電子信箱 : " + res[i].contactEmail + "</td>" + "<tr>"
-		        html += "<tr>" + "<td style='text-align: left;'>" + "業主地址 : " + res[i].corpAddress + "</td>" + "<tr>"
 		        html += "</table>"
 		        swal.fire({
 		          html: html
@@ -585,9 +584,9 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
 			      let html = "";
 			      if (res[i].corpId == click) {
 			        html += "<table>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "法人名稱 : " + res[i].corpName + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "法人登記案號 : " + res[i].corpRegisteredId + "</td>" + "<tr>"     
-			        html += "<tr>" + "<td style='text-align: left;'>" + "業主地址 : " + res[i].corpAddress + "</td>" + "<tr>"
+			        html += "<tr>" + "<td style='text-align: left;'>" + "收容所法人名稱 : " + res[i].corpName + "</td>" + "<tr>"
+			        html += "<tr>" + "<td style='text-align: left;'>" + "收容所法人登記案號 : " + res[i].corpRegisteredId + "</td>" + "<tr>"     
+			        html += "<tr>" + "<td style='text-align: left;'>" + "收容所地址 : " + res[i].corpAddress + "</td>" + "<tr>"
 			        html += "</table>"
 			        swal.fire({
 			          html: html
@@ -623,7 +622,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
     	  let corpName = $row.find("td:eq(1)").text(); //:eq(1)1為索引值,從0開始 ,取第二個td的值
 
     	  $.ajax({
-   		    url: '/animalCorporation/id=' + corpId + '/updateStatus',
+   		    url: '/animalCorporation/id=' + corpId + '/editCorpAccess',
    		    type: "PUT",
     	    success: function(res) {
     	      console.log("更新成功");

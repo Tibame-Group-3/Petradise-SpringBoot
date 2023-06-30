@@ -2,6 +2,8 @@ package tw.idv.petradisespringboot.animalcorporation.service.impl;
 
 import java.util.List;
 
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Service;
 
 import tw.idv.petradisespringboot.animalcorporation.repo.AnimalCorporationRepository;
@@ -9,13 +11,13 @@ import tw.idv.petradisespringboot.animalcorporation.service.AnimalCorporationSer
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
 
 @Service
-public class AnimalCorporationImpl implements AnimalCorporationService{
+public class AnimalCorporationServiceImpl implements AnimalCorporationService{
 	
 	private AnimalCorporationRepository animalCorporationRepository;
 	
 	
 
-	public AnimalCorporationImpl(AnimalCorporationRepository animalCorporationRepository) {
+	public AnimalCorporationServiceImpl(AnimalCorporationRepository animalCorporationRepository) {
 		this.animalCorporationRepository = animalCorporationRepository;
 	}
 
@@ -30,8 +32,11 @@ public class AnimalCorporationImpl implements AnimalCorporationService{
 	}
 
 	@Override
-	public List<AnimalCorporation> findAll() {
-		return animalCorporationRepository.findAll();
+	public List<AnimalCorporation> findAllWithStatusNo1() {
+		
+		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatusNot('1');
+		
+		return animalCorporations;
 	}
 
 	@Override
@@ -51,5 +56,14 @@ public class AnimalCorporationImpl implements AnimalCorporationService{
 	    }
 		return animalCorporationRepository.save(animalCorporation);
 	}
+
+	@Override
+	public List<AnimalCorporation> findByStatus0() {
+		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatus('0');
+		
+		return animalCorporations;
+	}
+
+	
 
 }

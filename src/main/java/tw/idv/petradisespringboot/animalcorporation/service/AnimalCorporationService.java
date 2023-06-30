@@ -12,10 +12,11 @@ public interface AnimalCorporationService {
 	
 	AnimalCorporation update(AnimalCorporation animalCorporation);
 	
-	List<AnimalCorporation> findAll();
+	List<AnimalCorporation> findAllWithStatusNo1();
 	
 	AnimalCorporation findByID(Integer id);
 	
 	AnimalCorporation updateByCorpAccess(AnimalCorporation animalCorporation);
 
+	List<AnimalCorporation> findByStatus0();
 }
