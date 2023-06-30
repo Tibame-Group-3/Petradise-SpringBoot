@@ -2,11 +2,9 @@ package tw.idv.petradisespringboot.hotel_owner.service;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
-//import org.springframework.stereotype.Service;
-//import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
+
+import java.util.List;
 
 public interface HotelOwnerService {
 	// 新增
@@ -28,6 +26,8 @@ public interface HotelOwnerService {
 	List<HotelOwnerVO> getStatus(String hotelStatus);
 
 	void updateOwnerStatus(Integer hotelId, String hotelStatus);
+
+	HotelOwnerVO login(String account, String password);
 }
 
 //@Service

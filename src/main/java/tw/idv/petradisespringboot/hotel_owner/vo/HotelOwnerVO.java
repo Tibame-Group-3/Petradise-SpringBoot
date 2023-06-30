@@ -1,17 +1,11 @@
 package tw.idv.petradisespringboot.hotel_owner.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -47,7 +41,7 @@ public class HotelOwnerVO {
 	@Column(name = "owner_email")
 	private String ownerEmail;
 	@Column(name = "owner_access" , insertable = false)
-	private String ownerAccess;
+	private HotelOwnerAccess ownerAccess;
 	@Column(name = "review_score_people" , insertable = false, updatable = false)
 	private Integer reviewScorePeople;
 	@Column(name = "review_score_total" , insertable = false)
@@ -62,4 +56,5 @@ public class HotelOwnerVO {
 	public String getBase64Image() {
 		return imageBase64;
 	}
+
 }

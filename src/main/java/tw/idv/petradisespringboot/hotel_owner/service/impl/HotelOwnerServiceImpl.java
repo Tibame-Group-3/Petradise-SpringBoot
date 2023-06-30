@@ -1,15 +1,18 @@
 package tw.idv.petradisespringboot.hotel_owner.service.impl;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import tw.idv.petradisespringboot.hotel_owner.exceptions.AccountNotFoundException;
+import tw.idv.petradisespringboot.hotel_owner.exceptions.NotVerifiedException;
 import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerAccess;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class HotelOwnerServiceImpl implements HotelOwnerService {
@@ -100,4 +103,21 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 			throw new NoSuchElementException("Hotel not found with id: " + hotelId);
 		}
 	}
+
+	@Override
+	public HotelOwnerVO login(String account, String password) {
+		var optionalVO = hotelOwnerRepository.findByOwnerAccountAndOwnerPassword(account, password);
+		if (optionalVO.isEmpty()) {
+			throw new AccountNotFoundException("帳號或密碼錯誤");
+		}
+		final var vo = optionalVO.get();
+		if (Objects.equals(vo.getOwnerAccess(), HotelOwnerAccess.SUSPENDED)) {
+			throw new AccountNotFoundException("帳號已被停權");
+		}
+		if (Objects.equals(vo.getOwnerAccess(), HotelOwnerAccess.NOT_VERIFIED)) {
+			throw new NotVerifiedException("帳號尚未驗證");
+		}
+		return vo;
+	}
+
 }
