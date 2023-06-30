@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Blank Page - Brand</title>
+<title>修改收容檔案</title>
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -116,7 +116,7 @@ div.text {
 							<a class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">新增動物</a><a
 								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">動物照片</a><a
+								style="padding: 2px 30px; font-size: 13px;"></a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;"></a>
 							<div class="dropdown-divider"
@@ -125,11 +125,11 @@ div.text {
 					<li class="nav-item dropdown show"><a
 						class="dropdown-toggle nav-link" aria-expanded="true"
 						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">領養預約管理</a>
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">領養管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
 							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px;">預約管理</a><a
+								style="padding: 2px 30px; font-size: 13px;"></a><a
 								class="dropdown-item" href="#"
 								style="padding: 2px 30px; font-size: 13px;">認養管理</a>
 
@@ -193,7 +193,7 @@ div.text {
 
 								<label for="owner_name">
 									<div class="text">姓名:</div>
-								</label> <input id="owner_name" class="form-control" type="owner_name"
+								</label> <input id="owner_name" class="form-control" type="owner_name" readonly
 									placeholder="業主姓名" name="owner_name">
 								<div class="messages"></div>
 							</div>
@@ -201,7 +201,7 @@ div.text {
 
 								<label for="owner_id">
 									<div class="text">帳號:</div>
-								</label> <input id="corpAccount" class="form-control" type="corpAccount"
+								</label> <input id="corpAccount" class="form-control" type="corpAccount" readonly
 									placeholder="帳號" name="corpAccount">
 								<div class="messages"></div>
 							</div>
@@ -210,7 +210,7 @@ div.text {
 
 								<label for="email">
 									<div class="text">Email:</div>
-								</label> <input id="email" class="form-control" type="email" autocomplete="username" placeholder="Email">
+								</label> <input id="email" class="form-control" type="email" readonly autocomplete="username" placeholder="Email">
 								<div id="errorContainer"></div>
 
 
@@ -219,7 +219,7 @@ div.text {
 
 								<label for="password">
 									<div class="text">密碼:</div>
-								</label> <input id="password" class="form-control" type="password"
+								</label> <input id="password" class="form-control" type="password" readonly
 									placeholder="Password" name="密碼"
 									autocomplete="current-password">
 
@@ -229,7 +229,7 @@ div.text {
 
 								<label for="phone">
 									<div class="text">電話:</div>
-								</label> <input id="phone" class="form-control" type="text"
+								</label> <input id="phone" class="form-control" type="text" readonly
 									placeholder="0912-345-678" name="電話">
 								<div class="messages"></div>
 							</div>
@@ -238,7 +238,7 @@ div.text {
 
 								<label for="corpName">
 									<div class="text">法人名稱:</div>
-								</label> <input id="corpName" class="form-control" type="text"
+								</label> <input id="corpName" class="form-control" type="text" readonly
 									placeholder="填入名稱" name="corpName">
 								<div class="messages"></div>
 							</div>
@@ -246,14 +246,14 @@ div.text {
 							<div class="form-group">
 								<label for="corpRegisteredId">
 									<div class="text">法人登記案號:</div>
-								</label> <input type="text" class="form-control" name="corpRegisteredId"
+								</label> <input type="text"  readonly class="form-control" name="corpRegisteredId"
 									id="corpRegisteredId" maxlength="30" placeholder="請輸入法人登記案號"></span>
 							</div>
 
 							<div class="form-group">
 								<label for="address">
 									<div class="text">收容地址:</div>
-								</label> <input type="text" class="form-control" name="address"
+								</label> <input type="text" readonly class="form-control" name="address"
 									id="address" maxlength="100" placeholder="請輸入登記之地址">
 							</div>
 							
@@ -261,8 +261,8 @@ div.text {
 
 
 							<div class="button-container">
-								<button class="edit-button">編輯</button>
-								<button class="save-button">保存</button>
+								<button id="editButton">编辑</button>
+								<button id="saveButton">保存</button>
 							</div>
 
 						</form>
@@ -326,7 +326,10 @@ div.text {
             }
         }
     });
+           
+   
 
+   
     
     var urlParams = new URLSearchParams(window.location.search);
 	var id = urlParams.get('id');
@@ -376,7 +379,7 @@ div.text {
 	        contentType: "application/json",
 	        success: function (response) {
 	            alert("確認修改?");
-	            window.location.href = "http://localhost:8080/animal_39/animalform/updatecorporationaccountedit.html";
+	            
 	        },
 	        error: function (error) {
 	            console.error("AJAX Error: " + error);
@@ -384,13 +387,37 @@ div.text {
 	    });
 	});
 
-	// 保存按钮點擊事件处理程序
-	$(".save-button").click(function () {
-	    // 添加保存按钮的操作
-	});
-    
-    
-    
+	  //編輯
+    document.getElementById("editButton").addEventListener("click", enableEdit);
+
+    function enableEdit() {
+      //可编辑狀態
+      document.getElementById("owner_name").readOnly = false;
+      document.getElementById("corpAccount").readOnly = true;
+      document.getElementById("email").readOnly = false;
+      document.getElementById("password").readOnly = false;
+      document.getElementById("phone").readOnly = false;
+      document.getElementById("corpName").readOnly = false;
+      document.getElementById("corpRegisteredId").readOnly = false;
+      document.getElementById("address").readOnly = false;
+
+    }
+	
+    document.getElementById("saveButton").addEventListener("click", saveData);
+
+    function saveData() {
+   //可保存
+    document.getElementById("owner_name").readOnly = true;
+    document.getElementById("corpAccount").readOnly =false;
+    document.getElementById("email").readOnly = true;
+    document.getElementById("password").readOnly = true;
+    document.getElementById("phone").readOnly = true;
+    document.getElementById("corpName").readOnly = true;
+    document.getElementById("corpRegisteredId").readOnly = true;
+    document.getElementById("address").readOnly = true;
+    alert("確認修改?");
+  }
+	
     
    </script>
 </body>
