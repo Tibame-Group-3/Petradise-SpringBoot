@@ -39,4 +39,17 @@ public class AnimalCorporationImpl implements AnimalCorporationService{
 		return animalCorporationRepository.findById(id).orElseThrow();
 	}
 
+	@Override
+	public AnimalCorporation updateByCorpAccess(AnimalCorporation animalCorporation) {
+
+		Character currentCorpAccess = animalCorporation.getCorpAccess();
+
+	    if (currentCorpAccess.equals('1')) {
+	        animalCorporation.setCorpAccess('0');
+	    } else if (currentCorpAccess.equals('0')) {
+	        animalCorporation.setCorpAccess('1');
+	    }
+		return animalCorporationRepository.save(animalCorporation);
+	}
+
 }

@@ -8,15 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="animal_corporation")
@@ -25,7 +21,7 @@ public class AnimalCorporation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "corp_id")
-	private Integer corpid ;
+	private Integer corpId ;
 	
 	@Column(name = "applied_status", insertable = false)
 	private Character appliedStatus;
@@ -57,10 +53,4 @@ public class AnimalCorporation {
 	@Column(name = "corp_access", insertable = false)
 	private Character corpAccess;
 	
-	public String toString() {
-		
-		return "Animal [corpId="+corpid +",appliedStatus="+appliedStatus +",corpAccount="+corpAccount +",corpName="+corpName +"corpRegisteredId=" +corpRegisteredId +"corpAddress=" +corpAddress
-				+"contactName" + contactName +"contactPhone=" +contactPhone +",contactEmail="+contactEmail +" corpaccess="+corpAccess+"]";
-				
-	}
 }
