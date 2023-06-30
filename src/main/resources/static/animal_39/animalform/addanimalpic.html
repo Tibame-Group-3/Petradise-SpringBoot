@@ -184,7 +184,8 @@ div.text {
 				<div class="container">
 					<h3>動物照片檔案</h3>
 					<div form-container>
-						<form id="animalpicForm" action="" method="post" class="contact_form">
+						<form id="animalpicForm" action="" method="post"
+							class="contact_form">
 							<!-- <div class="form-row"> -->
 							<div class="form-group ">
 
@@ -206,21 +207,19 @@ div.text {
 
 
 
-							<!-- <div class="form-row"> -->
 
 
-							<!-- </div> -->
-
+						
 
 
 
-							<div>
-								<label>動物圖片：</label> <input type="file" id="p_file"> <br>
-								<div id="preview">
-									<span class="text">預覽圖</span>
-								</div>
-							</div>
-
+							<form name="form0" id="form0">
+								<input type="file" name="file0" id="file0" multiple="multiple" /><br>
+								<img src="" id="img0">
+							</form>
+							
+							
+							
 							<hr class="mb-4">
 
 
@@ -257,81 +256,93 @@ div.text {
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script>
-	
-	const fileInput = document.getElementById('p_file');
-	const previewContainer = document.getElementById('preview');
-	// 監聽文件选择事件
-	fileInput.addEventListener('change', function(event) {
-	  // 检查是否有選擇文件
-	  if (event.target.files.length > 0) {
-	    // 取得文件
-	    const file = event.target.files[0];
-	    // 創建文件读取器
-	    const reader = new FileReader();
-	    // 讀取文件完成时的回掉函數
-	    reader.onload = function(e) {
-	      // 圖像元素
-	      const image = document.createElement('img');
-	      image.src = e.target.result;
-	      image.classList.add('preview-image');
-	      // 清空预览容器
-	      previewContainer.innerHTML = '';
-	      // 将图像元素添加到预览容器中
-	      previewContainer.appendChild(image);
-	    };
-	    // 读取文件为数据URL
-	    reader.readAsDataURL(file);
-	  } else {
-	    // 清空预览容器
-	    previewContainer.innerHTML = '';
-	  }
-	});
-	
-	$(document).ready(function() {
-		  
-	    $('#edit-button').click(function() {
-	       
-	    });
+		const fileInput = document.getElementById('p_file');
+		const previewContainer = document.getElementById('preview');
+		// 監聽文件选择事件
+		fileInput.addEventListener('change', function(event) {
+			// 检查是否有選擇文件
+			if (event.target.files.length > 0) {
+				// 取得文件
+				const file = event.target.files[0];
+				// 創建文件读取器
+				const reader = new FileReader();
+				// 讀取文件完成时的回掉函數
+				reader.onload = function(e) {
+					// 圖像元素
+					const image = document.createElement('img');
+					image.src = e.target.result;
+					image.classList.add('preview-image');
+					// 清空预览容器
+					previewContainer.innerHTML = '';
+					// 将图像元素添加到预览容器中
+					previewContainer.appendChild(image);
+				};
+				// 读取文件为数据URL
+				reader.readAsDataURL(file);
+			} else {
+				// 清空预览容器
+				previewContainer.innerHTML = '';
+			}
+		});
 
-	    $('#save-button').click(function() {
-	        
-	    });
-	
-	   // 表单提交事件处理
-	    $('#animalpicForm').submit(function(e) {
-	        e.preventDefault(); 
+		$(document)
+				.ready(
+						function() {
 
-	        const newAnimal = {
-	            corpid: $("input[name='corpid']").val(),
-	          
-	            animalname: $("input[name='animalname']").val(),
-	            
-	            animaltype: $("#animal_type").val(),
-	            animalsex: $("select[name='animalsex']").val(),
-	            animalage: $("#animalage").val(),
-	            
-	            animalstatus: $("select[name='animalstatus']").val(),
-	        };
-	        console.log(newAnimal);
+							$('#edit-button').click(function() {
 
-	        $.ajax({
-	            url:"/animals/save",
-	            type:"POST",
-	            data: JSON.stringify(newAnimal),
-	            contentType: "application/json",
-	            success: function(response) {
-	                window.location.href = "http://localhost:8080/animal_39/animalform/animalpic.html";
-	                console.log("Data saved successfully!");
-	            },
-	        });
-	    });
-	});
-	
-	
-	
-	
-	
-	
+							});
+
+							$('#save-button').click(function() {
+
+							});
+
+							// 表单提交事件处理
+							$('#animalpicForm')
+									.submit(
+											function(e) {
+												e.preventDefault();
+
+												const newAnimal = {
+													corpid : $(
+															"input[name='corpid']")
+															.val(),
+
+													animalname : $(
+															"input[name='animalname']")
+															.val(),
+
+													animaltype : $(
+															"#animal_type")
+															.val(),
+													animalsex : $(
+															"select[name='animalsex']")
+															.val(),
+													animalage : $("#animalage")
+															.val(),
+
+													animalstatus : $(
+															"select[name='animalstatus']")
+															.val(),
+												};
+												console.log(newAnimal);
+
+												$
+														.ajax({
+															url : "/animals/save",
+															type : "POST",
+															data : JSON
+																	.stringify(newAnimal),
+															contentType : "application/json",
+															success : function(
+																	response) {
+																window.location.href = "http://localhost:8080/animal_39/animalform/animalpic.html";
+																console
+																		.log("Data saved successfully!");
+															},
+														});
+											});
+						});
 	</script>
 </body>
 </html>
