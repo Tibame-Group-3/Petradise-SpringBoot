@@ -142,7 +142,7 @@
 	border: 3px solid black;
 }
 
-.button {
+.button-res {
 	display: inline-block;
 	padding: 10px 20px;
 	font-size: 16px;
@@ -167,6 +167,22 @@
   width: 70%; 
   margin-left: 65px;
   margin-bottom: 10px; 
+}
+
+.button-redi {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	background-color: #fd780f;
+	color: #fff;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	transition: #fd780f 0.3s ease;
+	margin-right: 400px;
 }
 
 
@@ -341,7 +357,9 @@
 			<div class="comment"></div>
 		</div>
 		<br>
-		<button class="button" id="res">回文</button>
+		<button class="button-redi" id="redi">回瀏覽頁面</button>
+		<button class="button-res" id="res">回文</button>
+		
 
 	</div>
 
@@ -394,9 +412,14 @@
 	<script>
 		const urlParams = new URLSearchParams(window.location.search);
         const id = parseInt(urlParams.get('id'), 10);
-		document.getElementById("res").addEventListener("click", function () {
+        const btn_redi = document.querySelector('.button-redi');
+    	btn_redi.addEventListener('click', () => {
+	        const targetPageUrl = './lost.html';
+	        window.location.href = targetPageUrl;
+	    });
+    	document.querySelector('.button-res').addEventListener("click", function () {
 			Swal.fire({
-		        title: 'Input something',
+		        title: '回覆文章ㄅ',
 		        input: 'textarea'
 		    }).then(function (result) {
 		    	 if (result.value != null && result.value.trim() !== ""){	            
@@ -437,9 +460,12 @@
         .then(function(response) {
           let data = response.data;
         
-		  if (data["articleStatus"] == undefined) {
-			  window.location.assign("/lostPet/forum_deleted.html");
-		  }
+          console.log(data);
+			
+          if (data["articleStatus"] == undefined) {
+		
+        	  window.location.assign("/lostPet/forum_deleted.html");
+		  } 
           const originalDate = data.lostDate;
 		  const parsedDate = new Date(originalDate);
 		  const formattedDate = parsedDate.toISOString().replace("T", " ").slice(0, 16);
@@ -498,17 +524,17 @@
           }
 
           if (data.lostPetResponse && data.lostPetResponse.length > 0) {
-            const commentHTML = data.lostPetResponse.map(response => `
-              <div>
-                <span class="an">${response.memId}</span>
-                <span class="f3 push-content">：${response.responseContent}</span>
-                <span class="push-ipdatetime">${response.responseTime}</span>
-              </div>
-              <br>
-            `).join('');
+        	  const commentHTML = data.lostPetResponse.map((response, index) => `
+        	    <div>
+        	      <span class="an">${index + 1}F</span>
+        	      <span class="f3 push-content">：${response.responseContent}</span>
+        	      <span class="push-ipdatetime">${response.responseTime}</span>
+        	    </div>
+        	    <br>
+        	  `).join('');
 
-            comment.innerHTML = commentHTML;
-          }
+        	  comment.innerHTML = commentHTML;
+        	}
         })
         .catch((error) => console.log(error));
 

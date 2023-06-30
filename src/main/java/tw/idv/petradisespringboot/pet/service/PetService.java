@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.pet.service;
 
+import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 
 import java.util.List;
@@ -13,7 +14,9 @@ public interface PetService {
 
     Optional<Pet> getPetById(Integer id);
 
-    Pet addPet(Pet pet);
+    Pet addPet(NewPetDTO dto);
 
     Pet updatePet(Pet pet);
+
+    void deletePet(Integer id);
 }

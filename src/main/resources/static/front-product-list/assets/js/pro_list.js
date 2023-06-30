@@ -30,14 +30,18 @@ $(document).ready(function () {
   const tableBody = document.getElementById('tableBody');
   axios.get("/product/get/all")
       .then( function (res) {
-        console.log(res.data);
+        // console.log(res.data);
+
         res.data.forEach(element => {
 
           const base64Img = `data:image/*;base64,${element.pdImg}`;
-			
-			console.log(base64Img);
+          // console.log(base64Img);
+
+          // 下架的商品不須呈現，判斷 pdStatus 的值是否為 "0"
+          const displayPd = (element.pdStatus === "0" ? 'style="display: none"' : '');
+
           const row = `
-                            <div class="products-row">
+                            <div class="products-row" ${displayPd}>
                             <div class="product-cell image">
                                 <img src="${base64Img}" alt="image">
                             </div>

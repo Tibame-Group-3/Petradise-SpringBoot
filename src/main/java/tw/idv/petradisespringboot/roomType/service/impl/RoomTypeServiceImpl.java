@@ -1,9 +1,11 @@
 package tw.idv.petradisespringboot.roomType.service.impl;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,21 +140,19 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     //單一房型拿到文字資料
     @Override
     @Transactional
-    public SingleHotelDTO getSingleHotel(Integer hotelId, String petType, Character roomTypeSize) {
+    public SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId,
+                                         LocalDateTime inDay,
+                                         LocalDateTime outDay) {
         SingleHotelDTO singleHotelDTO = new SingleHotelDTO();
         HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.getReferenceById(hotelId);
         singleHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
         singleHotelDTO.setHotelAddress(hotelOwnerVO.getHotelAddress());
-        List<RoomType> list = typeRepository.findAllByHotelId(hotelId);
-        for (RoomType r : list
-        ) {
-            if (petType.equals(r.getRoomPetType()) && roomTypeSize == r.getRoomTypeSize()) {
-                singleHotelDTO.setRoomTypeName(r.getRoomTypeName());
-                singleHotelDTO.setRoomTypePrice(r.getRoomTypePrice());
-                singleHotelDTO.setRoomTypeAbout(r.getRoomTypeAbout());
-            }
-
-        }
+        RoomType roomType = typeRepository.getReferenceById(roomTypeId);
+        singleHotelDTO.setRoomTypeAbout(roomType.getRoomTypeAbout());
+        singleHotelDTO.setRoomTypePrice(roomType.getRoomTypePrice());
+        singleHotelDTO.setRoomTypeName(roomType.getRoomTypeName());
+        singleHotelDTO.setInDay(inDay);
+        singleHotelDTO.setOutDay(outDay);
         return singleHotelDTO;
     }
 
@@ -181,13 +181,16 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             // 用hotelOwnerRepository拿HotelOwnerVO
             HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.findById(roomType.getHotelId())
                     .orElseThrow(() -> new ResourceNotFoundException("HotelOwner not found with id " + roomType.getHotelId()));
-
+            allHotelDTO.setHotelId(hotelOwnerVO.getHotelId());
+            allHotelDTO.setRoomTypeId(roomType.getRoomTypeId());
             allHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
             allHotelDTO.setHotelAddress(hotelOwnerVO.getHotelAddress());
             allHotelDTO.setRoomTypeName(roomType.getRoomTypeName());
             allHotelDTO.setRoomTypeAbout(roomType.getRoomTypeAbout());
             allHotelDTO.setRoomTypePrice(roomType.getRoomTypePrice());
             allHotelDTO.setReviewScoreTotal(hotelOwnerVO.getReviewScoreTotal());
+            allHotelDTO.setInDay(searchDto.getInDay());
+            allHotelDTO.setOutDay(searchDto.getOutDay());
             if (!roomType.getRoomPics().isEmpty()) {
                 RoomPic firstRoomPic = roomType.getRoomPics().get(0);  // 拿第一張圖片
                 byte[] roomPicBytes = firstRoomPic.getRoomPic();
@@ -204,5 +207,31 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return allHotelDTOs;
     }
 
+    @Override
+    public List<String> getRoomTypeImages(Integer roomTypeId) {
+        RoomType roomType = typeRepository.findById(roomTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException("RoomType not found with id " + roomTypeId));
+        List<RoomPic> roomPics = roomType.getRoomPics();
+        List<String> images = new ArrayList<>();
+        for (RoomPic pic : roomPics) {
+            byte[] roomPicBytes = pic.getRoomPic();
+            String encodedImage = Base64.getEncoder().encodeToString(roomPicBytes);
+            String imageUrl = "data:image/*;base64," + encodedImage;
+            images.add(imageUrl);
+        }
+        return images;
+    }
 
+    public List<RoomReview> getReviewsByHotelId(Integer hotelId) {
+        return roomReviewRepository.findByHotelId(hotelId);
+    }
+    @Override
+    public RoomType getRoomTypeById(Integer roomTypeId) {
+        Optional<RoomType> optionalRoomType = typeRepository.findById(roomTypeId);
+        if (optionalRoomType.isPresent()) {
+            return optionalRoomType.get();
+        } else {
+            throw new RuntimeException("RoomType not found for id :: " + roomTypeId);
+        }
+    }
 }

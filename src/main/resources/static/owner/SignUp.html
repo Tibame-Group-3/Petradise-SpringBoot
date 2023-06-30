@@ -82,9 +82,14 @@ h1 {
 }
 
 .btn_set:hover {
-	background: rgb(80, 159, 190);;
+	background:#f9ecdb;
 	color: #333;;
 	cursor: pointer;
+	 box-shadow: 0 0 5px #ffe7dd,
+              0 0 25px #ffe7dd,
+              0 0 50px #ffe7dd,
+              0 0 100px #ffe7dd;
+
 }
 
 /* Main Styling */
@@ -127,6 +132,11 @@ html, body {
 #form-wrap .form-group input:focus {
 	outline: none;
 	border: 1px solid rgb(210, 134, 12);
+	box-shadow: 0 0 5px #ffe7dd,
+              0 0 10px #ffe7dd,
+              0 0 10px #ffe7dd,
+              0 0 10px #ffe7dd;
+	
 }
 
 #form-wrap .bottom-text {
@@ -215,7 +225,13 @@ ul.navbar {
 div.collapse {
 	padding: 0;
 }
-</style>
+
+.trainer_gif{
+position: absolute;
+ margin-top: -30px; 
+
+}
+
 </style>
 </head>
 
@@ -263,7 +279,7 @@ div.collapse {
 
 					<h1>業主您好,歡迎加入我們!</h1>
 
-					<span class="mark">業主資料</span>
+					<span class="mark">業主資料<img class="trainer_gif" src="./img/trainer.gif" style="width:70px; height:100px;"></span>
 					<fieldset class="form">
 						<div class="form-group">
 							<label for="owner_name">
@@ -433,6 +449,7 @@ $(function(){
             reader.onload = function (e) {
             	var hotelLicBase64 = reader.result;
             	var base64Data = e.target.result.split(",")[1]; // 去除前缀部分
+            	console.log(base64Data);
             	allData.imageBase64 = base64Data;
                 var img = $("<img>").attr("src", e.target.result);
                 $(".picture").html(img);
@@ -763,7 +780,7 @@ $(function(){
               type: "POST",
               url: "/ownerSignUP/insert",
               contentType: "application/json",
-              data: JSON.stringify(allData),
+              data: JSON.stringify(allData), 
               success: function(res) {
               },
             });

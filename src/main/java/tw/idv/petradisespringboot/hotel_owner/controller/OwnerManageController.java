@@ -1,11 +1,10 @@
 package tw.idv.petradisespringboot.hotel_owner.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,33 +12,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
 import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
 @RequestMapping("/ownerManage")
 public class OwnerManageController {
-	
-	@Autowired
-	private  HotelOwnerServiceImpl hotelOwnerServiceImpl;
 
-	
+	@Autowired
+	private HotelOwnerServiceImpl hotelOwnerServiceImpl;
+
 	@GetMapping("/getAll")
-	public void getAllOwners(HttpServletRequest req, HttpServletResponse res) {
-		
+	public void getAllOwners(@RequestParam(required = false) String keyword, HttpServletRequest req,
+			HttpServletResponse res) {
+
 		try {
 			// 查資料庫
 			List<HotelOwnerVO> list = hotelOwnerServiceImpl.getAll();
-			
+
+			// 首先過濾hotelStatus為"2"的項目
+			list = list.stream().filter(vo -> "2".equals(vo.getHotelStatus())).collect(Collectors.toList());
+
+			if (keyword != null) {
+				list = list.stream()
+						.filter(vo -> vo.getOwnerName().contains(keyword) || vo.getHotelName().contains(keyword))
+						.collect(Collectors.toList());
+			}
+
 			for (HotelOwnerVO vo : list) {
 				// 只需獲取圖片的數組
-				byte[] imageBytes = vo.getHotelLicPic(); 
+				byte[] imageBytes = vo.getHotelLicPic();
 				// 只要圖片不為空 就轉為Base64
 				if (imageBytes != null) {
 					String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
@@ -48,8 +55,7 @@ public class OwnerManageController {
 					vo.setBase64Image(imageBase64);
 				}
 			}
-			
-			
+
 //			
 			// json 傳給前端
 			Gson gson = new Gson();
@@ -71,10 +77,10 @@ public class OwnerManageController {
 		String ownerAccess = req.getParameter("ownerAccess");
 		String hotelid = req.getParameter("hotelId");
 		Integer hotelId = Integer.valueOf(hotelid);
-		//找到要做更新的hotelId
+		// 找到要做更新的hotelId
 		HotelOwnerVO vo = hotelOwnerServiceImpl.findByPrimaryKey(hotelId);
 
-		//因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
+		// 因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
 		if (vo != null) {
 			vo.setOwnerAccess(ownerAccess);
 			vo.setHotelId(hotelId);
@@ -94,4 +100,3 @@ public class OwnerManageController {
 		}
 	}
 }
-

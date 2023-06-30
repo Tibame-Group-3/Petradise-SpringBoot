@@ -1,12 +1,14 @@
 package tw.idv.petradisespringboot.chat.vo;
 
+import java.time.Instant;
+
 import javax.persistence.Id;
 
 import org.springframework.data.redis.core.RedisHash;
 
 @RedisHash("chatMessage")
 public class ChatMessage {
-//	private String type;
+
 	
 	@Id
 	private String id;
@@ -15,14 +17,14 @@ public class ChatMessage {
     private String sender;
     /** 訊息內容 */
     private String content;
-    private String receiver;
-	
+    private Instant timestamp;
+
 	 /**
      * 訊息種類Enum
      */
 	   public enum ChatType {
 	        CHAT,
-	        JOIN,
+	     
 	        LEAVE
 	    }
 	   public void setChatType(ChatType type) {
@@ -48,4 +50,12 @@ public class ChatMessage {
 		   public String getContent() {
 		   return this.content;
 		   }
+
+		public Instant getTimestamp() {
+			return timestamp;
+		}
+
+		public void setTimestamp(Instant timestamp) {
+			this.timestamp = timestamp;
+		}
 }
