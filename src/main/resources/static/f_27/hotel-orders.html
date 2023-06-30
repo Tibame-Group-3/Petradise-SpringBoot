@@ -229,12 +229,15 @@
                             }
                             return '<span class="status-cell">' + statusText + '</span>';
                         }
-                    }
-                    ,
+                    },
                     {
-                        "data": null,
+                        "data": "status",
                         "render": function (data, type, row) {
-                            return '<button type="button" class="edit-button">取消</button>';
+                            var cancelButton = '';
+                            if (data === '0') {
+                                cancelButton = '<button type="button" class="edit-button">取消</button>';
+                            }
+                            return cancelButton;
                         }
                     }
                 ]
@@ -263,9 +266,6 @@
                             data: JSON.stringify({ "status": "2" }),
                             contentType: "application/json",
                             success: function (response) {
-                                // Get the DataTable row corresponding to the order ID
-                                var row = table.row('.status-cell[data-order-id="' + orderId + '"]').node();
-
                                 // Update the status column with the updated status text
                                 var statusCell = $('.status-cell[data-order-id="' + orderId + '"]');
                                 statusCell.html('<span class="cancelled-status">已取消</span>');
@@ -275,9 +275,8 @@
                                     'The order has been cancelled.',
                                     'success'
                                 );
-
-                                // Invalidate the row and redraw the DataTable
-                                table.row(row).invalidate().draw(false);
+                                // Reload the DataTable to reflect the updated status
+                                table.ajax.reload(null, false).draw(false);
                             },
                             error: function (error) {
                                 console.error("Error:", error);
