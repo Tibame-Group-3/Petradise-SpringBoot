@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 public class CreateOrderDTO {
 
-	private Member member;
     private OrderMaster orderMaster;
     private List<ProductDTO> products;
 

@@ -1,64 +1,22 @@
+
 $(document).ready(function () {
+    findAllOrder();
+})
+
+$('.view_order').click(function () {
+    const orderId = $(this).closest('tr').find('.order_id').text();
+    fetchOrderDetail(orderId);
+})
+
+function findAllOrder() {
     const tableBody = document.getElementById('table_body');
-    fetch("/order_master/all", {
+    fetch('/order/allOrder', {
         method: 'GET'
     })
         .then(response => response.json())
         .then(onReceivedJSON)
         .then(initDataTable)
-        .catch(error => console.log('There was a problem with the fetch operation', error));
-})
-
-function initDataTable() {
-    $("#my_table").DataTable({
-        "language": {
-            "lengthMenu": "顯示 _MENU_ 筆訂單",
-            "zeroRecords": "沒有符合的結果",
-            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-            "infoEmpty": "共 0 項",
-            "infoFiltered": "(從 _MAX_ 條資料中過濾)",
-            "search": "搜尋:",
-            "paginate": {
-                "next": ">",
-                "previous": "<",
-                "first": "第一頁",
-                "last": "最後一頁"
-            },
-            "aria": {
-                "sortAscending": ": 升冪排列",
-                "sortDescending": ": 降冪排列"
-            }
-        }
-    });
-}
-
-function convertStatus(odStatus) {
-    let ststus = '';
-
-    switch (odStatus) {
-        case '0':
-            return status = '待結帳';
-            break;
-        case '1':
-            return ststus = '訂單失效';
-            break;
-        case '2':
-            return status = '訂單成立';
-            break;
-        case '3':
-            return status = '備貨中';
-            break;
-        case '4':
-            return status = '已出貨';
-            break;
-        case '5':
-            return status = '已送達';
-            break;
-        case '6':
-            return status = '訂單完成';
-            break;
-    }
-    
+        .catch(error => console.error('There was a problem with the fetch operation', error));
 }
 
 function onReceivedJSON(jsonData) {
@@ -72,7 +30,7 @@ function onReceivedJSON(jsonData) {
                 <td class="price_od" style="color: #a67c52;">${i.priceOd}</td>
                 <td class="reci_name" style="color: #a67c52;">${i.reciName}</td>
                 <td class="reci_phone" style="color: #a67c52;">${i.reciPhone}</td>
-                <td class="order_status" style="color: #a67c52;">${convertStatus(i.odStatus)}</td>
+                <td class="order_status" style="color: #a67c52;">${convertOrderStatus(i.odStatus)}</td>
 
                 <!-- 查看訂單 -->
                 <td class="view_order_work">
@@ -121,8 +79,29 @@ function onReceivedJSON(jsonData) {
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="color: #a67c52;">
-                                                    會員姓名</th>
+                                                    商品名稱</th>
                                                 <td>${i.pdName}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="row" style="color: #a67c52;">
+                                                    數量</th>
+                                                <td>${i.pdAmount}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="color: #a67c52;">
+                                                    訂購金額</th>
+                                                <td>${i.priceOri}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="color: #a67c52;">
+                                                    運費</th>
+                                                <td>${i.priceShip}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="color: #a67c52;">
+                                                    付款總金額</th>
+                                                <td>${i.priceOri + i.priceShip}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="color: #a67c52;">
@@ -132,13 +111,8 @@ function onReceivedJSON(jsonData) {
 
                                             <tr>
                                                 <th scope="row" style="color: #a67c52;">
-                                                    運費</th>
-                                                <td>${i.priceShip}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" style="color: #a67c52;">
-                                                    實際總金額</th>
-                                                <td>${i.priceOd}</td>
+                                                    取貨方式</th>
+                                                <td>${i.odShip}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="color: #a67c52;">
@@ -152,7 +126,12 @@ function onReceivedJSON(jsonData) {
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="color: #a67c52;">
-                                                    收件人地址</th>
+                                                    收件門市</th>
+                                                <td>${i.reciStore}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="color: #a67c52;">
+                                                    收件地址</th>
                                                 <td>${i.reciAdd}</td>
                                             </tr>
 
@@ -175,4 +154,85 @@ function onReceivedJSON(jsonData) {
             ;
         table_body.innerHTML += row;
     }
+}
+
+function fetchOrderDetail(orderId) {
+    fetch(`order/showOrderDetail/id=${orderId()}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error status: ${response.status}`)
+            }
+            response.json();
+        })
+        .then(onReceivedOrderDetail)
+        .catch(error => console.error('There was a problem with the fetch operation', error));
+}
+
+function onReceivedOrderDetail() {
+
+}
+
+function convertOrderStatus(odStatus) {
+    switch (odStatus) {
+        case '0':
+            return '待結帳';
+        case '1':
+            return '訂單失效';
+        case '2':
+            return '訂單成立';
+        case '3':
+            return '備貨中';
+        case '4':
+            return '已出貨';
+        case '5':
+            return '已送達';
+        case '6':
+            return '訂單完成';
+    }
+}
+
+function convertOrderPayment(odPay) {
+    switch (odPay) {
+        case '0':
+            return '貨到付款';
+        case '1':
+            return '信用卡結帳';
+        case '2':
+            return '匯款轉帳';
+    }
+}
+
+function convertOrderDelivery(odShip) {
+    switch (odShip) {
+        case '0':
+            return '宅配';
+        case '1':
+            return '711取貨';
+        case '2':
+            return '全家取貨';
+    }
+}
+
+function initDataTable() {
+    $('#my_table').DataTable({
+        // JSON cannot use ''
+        "language": {
+            "lengthMenu": "顯示 _MENU_ 筆訂單",
+            "zeroRecords": "沒有符合的結果",
+            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "infoEmpty": "共 0 項",
+            "infoFiltered": "(從 _MAX_ 條資料中過濾)",
+            "search": "搜尋:",
+            "paginate": {
+                "next": ">",
+                "previous": "<",
+                "first": "第一頁",
+                "last": "最後一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪排列",
+                "sortDescending": ": 降冪排列"
+            }
+        }
+    });
 }

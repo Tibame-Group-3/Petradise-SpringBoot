@@ -4,14 +4,19 @@ import org.springframework.stereotype.Service;
 
 import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
 import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
 import tw.idv.petradisespringboot.mall.model.repo.OrderDetailRepository;
 import tw.idv.petradisespringboot.mall.model.repo.OrderMasterRepository;
+import tw.idv.petradisespringboot.mall.model.repo.ProductDAO;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetail;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetailCompositePK;
 import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
+import tw.idv.petradisespringboot.mall.model.vo.Product;
 import tw.idv.petradisespringboot.mall.service.OrderService;
+import tw.idv.petradisespringboot.member.repo.MemberRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -54,10 +59,15 @@ public class OrderServiceImpl implements OrderService {
 		return savedOrderMaster;
 	}
 	
-	public List<OrderDetailDTO> findDetailedOrderById() {
-		return orderMasterRepository.findDetailedOrderById();
+	@Override
+	public List<AllOrderMasterDTO> findAllOrderMaster() {
+		return orderMasterRepository.findAllOrderMaster();
 	}
 	
+	@Override
+	public List<OrderDetailDTO> findOrderDetailById(Integer id) {
+		return orderDetailRepository.findOrderDetailById(id);
+	}
 
 	@Override
     public OrderMaster updateOrderStatus() {
