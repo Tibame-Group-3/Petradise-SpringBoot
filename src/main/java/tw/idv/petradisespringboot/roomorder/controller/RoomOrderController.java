@@ -6,6 +6,7 @@ import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/room-order")
@@ -23,10 +24,6 @@ public class RoomOrderController {
     @GetMapping("/customer/mem-id/{memId}")
     public List<RoomOrder> getRoomOrdersByMemId(@PathVariable Integer memId) {
         return service.getRoomOrdersByMemId(memId);
-    }
-    @GetMapping("/customer/pet-id/{petId}")
-    public List<RoomOrder> getRoomOrdersByPetId(@PathVariable Integer petId) {
-        return service.getRoomOrdersByPetId(petId);
     }
     @GetMapping("/customer/status/{status}")
     public List<RoomOrder> getRoomOrdersByStatus(@PathVariable Character status) {
@@ -46,6 +43,13 @@ public class RoomOrderController {
     @PutMapping("id/{id}/modify")
     public RoomOrder modify(@PathVariable Integer id, @RequestBody RoomOrder modifiedRoomOrder){
         return service.modify(id, modifiedRoomOrder);
+    }
+
+    @PutMapping("id/{id}/change-status")
+    public RoomOrder changeRoomOrderStatus(@PathVariable Integer id, @RequestBody Map<String, String> requestBody){
+        String newStatus = requestBody.get("status");
+        char status = newStatus.charAt(0);
+        return service.changeRoomOrderStatus(id, status);
     }
 
     @GetMapping("/hotel-id/{hotelId}")

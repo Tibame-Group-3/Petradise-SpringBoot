@@ -473,23 +473,6 @@
                     return "";
                 }
             }
-
-            // Helper function to get the access text
-            function getAccessText(access) {
-                var accessList = {
-                    "1": "Access 1",
-                    "2": "Access 2",
-                    "3": "Access 3"
-                };
-                var accessText = "";
-                if (access) {
-                    var accessArray = access.split(",");
-                    accessArray.forEach(function (item) {
-                        accessText += accessList[item] + "<br>";
-                    });
-                }
-                return accessText;
-            }
         });
 
         function getEmployeeInfoTable() {
