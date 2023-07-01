@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>動物資訊</title>
+<title>動物認養申請書</title>
 <link rel="stylesheet"
 	href="/assets/bootstrap/css/bootstrap.min.css?h=f1a8fe9e98944b9d682ec5c3efac8f17">
 <link rel="stylesheet"
@@ -21,14 +21,6 @@
 	align-items: center;
 	text-align: center;
 	height: 200vh; /* 可根据需要进行调整 */
-	
- .custom-btn {
-  background-color: #EB9900 !important;
-  border-color: #dd7500 !important;
-}
-
-	
-	
 }
 </style>
 </head>
@@ -175,9 +167,8 @@
 		<li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
 		<li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
 	</ol>
-	</div>
-	<!-- End: Hero Carousel -->
-	<!-- Start: Features Small Icons -->
+
+	
 	<div class="container py-4 py-xl-5">
 		<div class="row mb-5">
 			<div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -185,43 +176,35 @@
 			</div>
 		</div>
 	</div>
+	<!-- End: Features Small Icons -->
 
 
-	<form>
-		<div class="container">
-			<div class="row row-cols-1 row-cols-md-2">
-				<div class="col text-center"></div>
-
-
-
-				<div class="col offset-md-2" id="animalList">
-					<table class="table table-borderless">
-						<tbody class="caption-top">
-							<tr>
-								<td
-									style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">
-									<span
-									style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);"></span>
-								</td>
-								<td style="font-size: 16px;"></td>
-							</tr>
+	<!-- Start: Features Image -->
 
 
 
+	<div class="row row-cols-1 row-cols-md-2">
+		<div class="col text-center"></div>
 
-						</tbody>
-						<tfoot>
-							<tr></tr>
-						</tfoot>
-					</table>
-				</div>
-				<div class="d-flex justify-content-end">
-					<div class="btn-group" role="group">
-						<button class="btn btn-primary" type="submit">認養</button>
-					</div>
-				</div>
+
+
+		<div class="col offset-md-2" id="animalList">
+			<table class="table table-borderless">
+				<tbody class="caption-top">
+					
+				</tbody>
+				<tfoot>
+					<tr></tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="d-flex justify-content-end">
+			<div class="btn-group" role="group">
+				<button class="btn btn-primary" type="submit">確認認養</button>
 			</div>
-	</form>
+		</div>
+	</div>
+
 
 
 
@@ -417,76 +400,93 @@
 		src="/assets/js/script.min.js?h=32682494dce76d2a09f180028c2dbc34"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
-		$(document).ready(function() {
-		$.ajax({
-				url : "/animals/" + 4,
-				type : "GET",
-			    success : function(response) {
-			    console.log("Data received successfully:",response);
-				var animal = response; // 單一動物的資料
+	$(document).ready(function() {
+		  $.ajax({
+		    url: "/animals/" + 4,
+		    type: "GET",
+		    success: function(response) {
+		      console.log("Data received successfully:", response);
+		      var animal = response; // 單一動物的資料
 
-				var imageUrl = "data:image/jpeg;base64,"+ animal.animalpic;
-				var cardHtml = '<div class="row row-cols-2 ">'
-													+ '<div class="col text-center justify-content-center">'
-													+ '<img src="' + imageUrl + '" class="rounded" alt="...">'
-													+ '</div>'
-													+ '<div class="coljustify-content-center">'
-													+ '<table class="table table-borderless">'
-													+ '<tbody class="caption-top">'
-													+ '<tr>'
-													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
-													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalname
-													+ '</span>'
-													+ '</td>'
-													+ '</tr>'
-													+ '<tr>'
-													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
-													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalsex
-													+ '</span>'
-													+ '</td>'
-													+ '</tr>'
-													+ '<tr>'
-													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
-													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalage
-													+ '</span>'
-													+ '</td>'
-													+ '</tr>'
-													+ '<tr>'
-													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
-													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animaltype
-													+ '</span>'
-													+ '</td>'
-													+ '</tr>'
-													+ '<tr>'
-													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px ;">'
-													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalinfo
-													+ '</span>'
-													+ '</td>'
-													+ '</tr>'
-													+ '</tbody>'
-													+ '</table>'
-													+ '</div>'
-													+ '</div>';
-											$('#animalList').append(cardHtml);
-										},
-										error : function(xhr, status, error) {
-											console.log("Error occurred:",
-													error);
-										}
-									});
-						});
-		
-		
-		
-		
-		
+		      var imageUrl = "data:image/jpeg;base64," + animal.animalpic;
+		      var cardHtml = '<div class="row row-cols-2 ">' +
+		        '<div class="col text-center justify-content-center">' +
+		        '<img src="' + imageUrl + '" class="rounded" alt="...">' +
+		        '</div>' +
+		        '<div class="col justify-content-center">' +
+		        '<table class="table table-borderless">' +
+		        '<tbody class="caption-top">' +
+		        '<tr>' +
+		        '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
+		        '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
+		        animal.animalname +
+		        '</span>' +
+		        '</td>' +
+		        '</tr>' +
+		        '<tr>' +
+		        '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
+		        '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
+		        animal.animalsex +
+		        '</span>' +
+		        '</td>' +
+		        '</tr>' +
+		        '<tr>' +
+		        '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
+		        '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
+		        animal.animalage +
+		        '</span>' +
+		        '</td>' +
+		        '</tr>' +
+		        '<tr>' +
+		        '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
+		        '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
+		        animal.animaltype +
+		        '</span>' +
+		        '</td>' +
+		        '</tr>' +
+		        '<tr>' +
+		        '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
+		        '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
+		        animal.animalinfo +
+		        '</span>' +
+		        '</td>' +
+		        '</tr>' +
+		        '</tbody>' +
+		        '</table>' +
+		        '</div>' +
+		        '</div>';
+
+		      $('#animalList').append(cardHtml);
+		    },
+		    error: function(xhr, status, error) {
+		      console.log("Error occurred:", error);
+		    }
+		  });
+
+		  // 監聽「確定認養」按鈕的點擊事件
+		  $('.btn-primary').click(function() {
+		    Swal.fire({
+		      title: '口袋夠深嗎?',
+		      text: '您確定要認養此動物嗎？',
+		      icon: 'warning',
+		      showCancelButton: true,
+		      confirmButtonText: '確定',
+		      cancelButtonText: '取消'
+		    }).then((result) => {
+		      // 如果使用者點擊了確定按鈕
+		      if (result.isConfirmed) {
+		        redirectToNextPage();
+		      }
+		    });
+		  });
+
+		  function redirectToNextPage() {
+		    window.location.href = "/animal_39/Frontanimal/adoptapplication.html?#carousel-1";
+		  }
+		});
+
 	</script>
 
 </body>
