@@ -204,7 +204,7 @@
 
             // 創建新的newType實體
             var newRoomType = {
-                hotelId: getHotelId(),
+                hotelId: getHotelOwnerId(),
                 roomTypeName: $("input[name='room_type_name']").val(),
                 roomTypeSaleStatus: $("select[name='room_type_sale_status']").val(),
                 roomTypePrice: $("input[name='room_type_price']").val(),
@@ -234,10 +234,7 @@
         });
     });
 
-    function getHotelId() {
-        // return localStorage.getItem("hotelId");
-        return 5;
-    }
+
 </script>
 
 </body>
