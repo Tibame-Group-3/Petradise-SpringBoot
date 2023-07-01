@@ -35,12 +35,12 @@ public class AdminController {
         return service.searchAdminsByName(keyword);
     }
     @GetMapping("/title/{title}")
-    List<Admin> findByTitle(@PathVariable char title){
-        return service.findAdminsByTitle(title);
+    List<Admin> findByTitle(@PathVariable String title){
+        return service.findAdminsByTitle(AdminTitle.getByValue(title));
     }
     @GetMapping("/status/{status}")
-    List<Admin> findByStatus(@PathVariable char status){
-        return service.findAdminsByStatus(status);
+    List<Admin> findByStatus(@PathVariable String status){
+        return service.findAdminsByStatus(AdminStatus.getByValue(status));
     }
     @GetMapping("/all")
     List<Admin> getAdminsByIdOrderByTitle(){

@@ -86,12 +86,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Admin> findAdminsByTitle(char title) {
+    public List<Admin> findAdminsByTitle(AdminTitle title) {
         return adminRepository.findAdminsByTitle(title);
     }
 
     @Override
-    public List<Admin> findAdminsByStatus(char status) {
+    public List<Admin> findAdminsByStatus(AdminStatus status) {
         return adminRepository.findAdminsByStatus(status);
     }
 

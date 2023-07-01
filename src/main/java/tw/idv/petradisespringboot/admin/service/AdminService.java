@@ -13,8 +13,8 @@ public interface AdminService {
     Admin modify(Integer id, Admin updatedAdmin);
     Admin findById(Integer id);
     List<Admin> searchAdminsByName(String keyword);
-    List<Admin> findAdminsByTitle(char title);
-    List<Admin> findAdminsByStatus(char status);
+    List<Admin> findAdminsByTitle(AdminTitle title);
+    List<Admin> findAdminsByStatus(AdminStatus status);
     List<Admin> getAdminsByIdOrderByTitle();
     List<Admin> getAdminsByIdOrderByStatusDesc();
     Admin changeAdminTitle(Integer id, AdminTitle newTitle);
