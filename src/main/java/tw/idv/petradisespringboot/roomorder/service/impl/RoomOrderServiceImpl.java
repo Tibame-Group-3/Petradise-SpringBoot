@@ -51,8 +51,8 @@ public class RoomOrderServiceImpl implements RoomOrderService {
             existingRoomOrder.setCheckInDate(modifiedRoomOrder.getCheckInDate());
             existingRoomOrder.setCheckOutDate(modifiedRoomOrder.getCheckOutDate());
             existingRoomOrder.setStatus(modifiedRoomOrder.getStatus());
-            existingRoomOrder.setOrigPrice(modifiedRoomOrder.getOrigPrice());
-            existingRoomOrder.setFinalPrice(modifiedRoomOrder.getFinalPrice());
+            existingRoomOrder.setPayMethod(modifiedRoomOrder.getPayMethod());
+            existingRoomOrder.setPrice(modifiedRoomOrder.getPrice());
             existingRoomOrder.setSpecialReq(modifiedRoomOrder.getSpecialReq());
             return repository.save(existingRoomOrder);
         }).orElse(null);
