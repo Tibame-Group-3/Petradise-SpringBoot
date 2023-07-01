@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import tw.idv.petradisespringboot.animlpic.vo.AnimalPic;
 
 @Entity
@@ -23,6 +24,8 @@ import tw.idv.petradisespringboot.animlpic.vo.AnimalPic;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+
 @Table(name = "animal")
 public class Animal {
 	
@@ -30,6 +33,7 @@ public class Animal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "animal_id")
 	private Integer animalid;
+	
 	
 	@Column(name = "corp_id")
 	private Integer corpid;
@@ -49,20 +53,26 @@ public class Animal {
 	@Column(name = "animal_age")
 	private String animalage;
 	
+	@Column(name = "animal_pic",columnDefinition = "LONGBLOB")
+	private byte[] animalpic;
+	
 	@Column(name = "status", insertable = false)
 	private String aniamlstatus;
 	
 	@Column(name ="animal_info_note", insertable = false )
 	private String animalinfo;
 	
-//	@OneToOne(mappedBy = "animalid", cascade = CascadeType.ALL)
-//    private List<AnimalPic> animalPics;
+
 	
 	public String toString() {
 		return "Animal [animalID="+animalid +",corpID="+corpid +",menID="+ memid +",Type="+animaltype +"animalName=" +animalname +"animalStatus=" +aniamlstatus
 				+"animalSex" + animalsex +"animalAge=" +animalage +",animalInfonote="+animalinfo + "]";
 				
 	}
+
+
+
+	
 
 	
 }

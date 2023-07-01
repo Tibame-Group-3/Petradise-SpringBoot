@@ -1,12 +1,18 @@
 package tw.idv.petradisespringboot.hotel_owner.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.idv.petradisespringboot.hotel_owner.exceptions.AccountNotFoundException;
+import tw.idv.petradisespringboot.hotel_owner.exceptions.NotVerifiedException;
 import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerAccess;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @Service
@@ -76,4 +82,44 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 	public List<HotelOwnerVO> getAll() {
 		return hotelOwnerRepository.findAll();
 	}
+
+	@Override
+	public List<HotelOwnerVO> getStatus() {
+		List<HotelOwnerVO> list = getAll();
+
+		list = list.stream().filter(vo -> "0".equals(vo.getHotelStatus())).collect(Collectors.toList());
+		return list;
+	}
+
+	@Override
+	public void updateOwnerStatus(Integer hotelId, String hotelStatus) {
+		HotelOwnerVO vo = findByPrimaryKey(hotelId);
+
+		// 因為不會每個項目都更新到,這時候其他沒更新的會回傳null,與資料庫不相符,所以要設判斷
+		if (vo != null) {
+			vo.setHotelStatus(hotelStatus);
+			vo.setHotelId(hotelId);
+			hotelOwnerRepository.save(vo);
+
+		} else {
+			throw new NoSuchElementException("Hotel not found with id: " + hotelId);
+		}
+	}
+
+	@Override
+	public HotelOwnerVO login(String account, String password) {
+		var optionalVO = hotelOwnerRepository.findByOwnerAccountAndOwnerPassword(account, password);
+		if (optionalVO.isEmpty()) {
+			throw new AccountNotFoundException("帳號或密碼錯誤");
+		}
+		final var vo = optionalVO.get();
+		if (Objects.equals(vo.getOwnerAccess(), HotelOwnerAccess.SUSPENDED)) {
+			throw new AccountNotFoundException("帳號已被停權");
+		}
+		if (Objects.equals(vo.getOwnerAccess(), HotelOwnerAccess.NOT_VERIFIED)) {
+			throw new NotVerifiedException("帳號尚未驗證");
+		}
+		return vo;
+	}
+
 }
