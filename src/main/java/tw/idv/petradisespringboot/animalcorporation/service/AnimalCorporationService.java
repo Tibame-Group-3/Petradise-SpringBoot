@@ -11,7 +11,7 @@ public interface AnimalCorporationService {
 	
 	AnimalCorporation update(AnimalCorporation animalCorporation);
 	
-	List<AnimalCorporation> findAll();
+	List<AnimalCorporation> findAllWithStatusNot1();
 	
 	AnimalCorporation findByID(Integer id);
 	
@@ -19,4 +19,5 @@ public interface AnimalCorporationService {
 
 	AnimalCorporation login(String account, String password);
 
+	List<AnimalCorporation> findByStatus0();
 }

@@ -1,25 +1,34 @@
 package tw.idv.petradisespringboot.animalcorporation.service.impl;
 
+import java.util.List;
+
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.animalcorporation.exceptions.AccountNotActiveException;
 import tw.idv.petradisespringboot.animalcorporation.exceptions.AccountNotFoundException;
 import tw.idv.petradisespringboot.animalcorporation.repo.AnimalCorporationRepository;
 import tw.idv.petradisespringboot.animalcorporation.service.AnimalCorporationService;
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
+import tw.idv.petradisespringboot.email.EmailService;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-public class AnimalCorporationImpl implements AnimalCorporationService{
+public class AnimalCorporationServiceImpl implements AnimalCorporationService{
 	
 	private AnimalCorporationRepository animalCorporationRepository;
-	
+	private EmailService emailService;
 	
 
-	public AnimalCorporationImpl(AnimalCorporationRepository animalCorporationRepository) {
+	public AnimalCorporationServiceImpl(AnimalCorporationRepository animalCorporationRepository,
+			EmailService emailService) {
 		this.animalCorporationRepository = animalCorporationRepository;
+		this.emailService = emailService;
 	}
+
+	
 
 	@Override
 	public AnimalCorporation add(AnimalCorporation animalCorporation) {
@@ -32,8 +41,11 @@ public class AnimalCorporationImpl implements AnimalCorporationService{
 	}
 
 	@Override
-	public List<AnimalCorporation> findAll() {
-		return animalCorporationRepository.findAll();
+	public List<AnimalCorporation> findAllWithStatusNot1() {
+		
+		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatusNot('1');
+		
+		return animalCorporations;
 	}
 
 	@Override
@@ -67,4 +79,12 @@ public class AnimalCorporationImpl implements AnimalCorporationService{
 		return vo;
 
 	}
+	public List<AnimalCorporation> findByStatus0() {
+		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatus('0');
+		
+		return animalCorporations;
+	}
+
+	
+
 }

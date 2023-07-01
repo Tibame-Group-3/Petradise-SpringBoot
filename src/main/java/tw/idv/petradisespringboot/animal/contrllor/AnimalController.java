@@ -31,7 +31,7 @@ public class AnimalController {
 		List<Animal> list = service.findAllAnimal();
 
 		for (Animal animal : list) {
-			System.out.println(animal.getAnimalpic());
+			System.out.println(animal.getAnimalPic());
 		}
 		return list;
 	}
@@ -60,9 +60,9 @@ public class AnimalController {
 		Animal existingAnimal = service.findAnimalById(id);
 		if (existingAnimal != null) {
 			// 更新动物的相关属性
-			existingAnimal.setAnimalname(animal.getAnimalname());
-			existingAnimal.setAnimalage(animal.getAnimalage());
-			existingAnimal.setAnimalsex(animal.getAnimalsex());
+			existingAnimal.setAnimalName(animal.getAnimalName());
+			existingAnimal.setAnimalAge(animal.getAnimalAge());
+			existingAnimal.setAnimalSex(animal.getAnimalSex());
 
 			// 调用service保存更新后的动物
 			return service.save(existingAnimal);
@@ -97,15 +97,20 @@ public class AnimalController {
 //	}
 
 	@GetMapping("/search")
-	public List<Animal> searchByAnimalTypeSex(@RequestParam("animaltype") String animaltype ,@RequestParam("animalsex")String animalsex ) {
-		System.out.println("種類: " + animaltype + animalsex  );
-		List<Animal> animals = service.findAnimalByAnimaltypeAndAnimalsex(animaltype, animalsex);
+	public List<Animal> searchByAnimalTypeSex(@RequestParam("animaltype") String animalType ,@RequestParam("animalsex")String animalSex ) {
+		System.out.println("種類: " + animalType + animalSex  );
+		List<Animal> animals = service.findAnimalByAnimalTypeAndAnimalSex(animalType, animalSex);
 		System.out.println("列表: "+animals);
 
 		for (Animal animal : animals) {
-			System.out.println(animal.getAnimalpic());
+			System.out.println(animal.getAnimalPic());
 		}
 		return animals;
+	}
+	
+	@GetMapping("corpId={corpId}")
+	List<Animal> findByCorpId(@PathVariable Integer corpId){
+		return service.findByCorpId(corpId);
 	}
 
 }
