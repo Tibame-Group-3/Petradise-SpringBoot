@@ -313,13 +313,13 @@ div.text {
    
 
    
-    
+    // 先用URL的方式 抓取id 
     var urlParams = new URLSearchParams(window.location.search);
 	var id = urlParams.get('id');
   
 	// 先取得原資料並渲染於修改表單
 	$.ajax({
-	    url: `/animalCorporation/id=7`,
+	    url: "/animalCorporation/id=" + id,
 	    method: "GET",
 	    dataType: "json",
 	    success: function (AnimalCorporation) {
@@ -345,6 +345,7 @@ div.text {
 	$("#AnimalCorporation").submit(function (event) {
 	    event.preventDefault();
 	    const updateanimal = {
+	    	corpId: id,
 	        contactName: $("#owner_name").val(),
 	        corpAccount: $("#corpAccount").val(),
 	        contactEmail: $("#email").val(),
@@ -356,7 +357,7 @@ div.text {
 	    };
 
 	    $.ajax({
-	        url: "/animalcorporation/update/" + id,
+	        url: "/animalCorporation/update" ,
 	        type: "POST",
 	        data: JSON.stringify(updateanimal),
 	        contentType: "application/json",
