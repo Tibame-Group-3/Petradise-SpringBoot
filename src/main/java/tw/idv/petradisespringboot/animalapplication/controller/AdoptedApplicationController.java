@@ -51,7 +51,15 @@ public class AdoptedApplicationController {
 	    AdoptedApplication existingApplication = service.findAdoptedApplicationById(id);
 	    if (existingApplication != null) {
 	        // 更新认养申请的相关属性
-	 	      existingApplication.setAnimalId(updatedApplication.getAnimalId());
+	        existingApplication.setMembId(updatedApplication.getMembId());
+	        existingApplication.setAnimalId(updatedApplication.getAnimalId());
+	        existingApplication.setAdopterIdNumber(updatedApplication.getAdopterIdNumber());
+	        existingApplication.setAdopterName(updatedApplication.getAdopterName());
+	        existingApplication.setAdopterAddress(updatedApplication.getAdopterAddress());
+	        existingApplication.setAdopterPhone(updatedApplication.getAdopterPhone());
+	        existingApplication.setAdopterJob(updatedApplication.getAdopterJob());
+	        existingApplication.setAdopterEmail(updatedApplication.getAdopterEmail());
+	        existingApplication.setAdopterStatus(updatedApplication.getAdopterStatus());
 	        
 	        // 调用service保存更新后的认养申请
 	        return service.addAdoptedApplication(existingApplication);
@@ -61,6 +69,7 @@ public class AdoptedApplicationController {
 	        return null;
 	    }
 	}
+
 	
 
 
