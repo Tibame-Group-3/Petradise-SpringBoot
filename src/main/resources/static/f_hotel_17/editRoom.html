@@ -184,7 +184,7 @@
     // 動態生成房型select
     var roomTypeMapping;
     $(document).ready(function () {
-        var hotelId = getHotelId();
+        var hotelId = getHotelOwnerId();
 
         $.ajax({
             url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,

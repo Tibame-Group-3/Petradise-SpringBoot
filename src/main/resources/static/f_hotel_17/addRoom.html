@@ -177,7 +177,7 @@
     // 動態生成房型select
     var roomTypeMapping;
     $(document).ready(function () {
-        var hotelId = getHotelId();
+        var hotelId = getHotelOwnerId();
 
         $.ajax({
             url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
@@ -221,7 +221,7 @@
 
     // 新增房間
     $(document).ready(function () {
-        const hotelId = getHotelId();
+        const hotelId = getHotelOwnerId();
         $("#roomForm").submit(function (e) {
             e.preventDefault();
             var selectedRoomTypeName = $('#roomTypeSelect').val();
@@ -276,10 +276,7 @@
         });
     });
 
-    function getHotelId() {
-        // return localStorage.getItem("hotelId");
-        return 5;
-    }
+
 </script>
 </body>
 
