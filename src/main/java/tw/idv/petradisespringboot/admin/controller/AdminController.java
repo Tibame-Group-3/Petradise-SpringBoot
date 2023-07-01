@@ -3,6 +3,8 @@ package tw.idv.petradisespringboot.admin.controller;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 
 import java.util.List;
 import java.util.Map;
@@ -50,15 +52,13 @@ public class AdminController {
     }
     @PutMapping("/id/{id}/change-title")
     Admin changeAdminTitle(@PathVariable Integer id, @RequestBody Map<String, String> requestBody) {
-        String newTitle = requestBody.get("title");
-        char title = newTitle.charAt(0);
-        return service.changeAdminTitle(id, title);
+        var newTitle = AdminTitle.getByValue(requestBody.get("title"));
+        return service.changeAdminTitle(id, newTitle);
     }
     @PutMapping("/id/{id}/change-status")
     Admin changeAdminStatus(@PathVariable Integer id, @RequestBody Map<String, String> requestBody) {
-        String newStatus = requestBody.get("status");
-        char status = newStatus.charAt(0);
-        return service.changeAdminStatus(id, status);
+        var newStatus = AdminStatus.getByValue(requestBody.get("status"));
+        return service.changeAdminStatus(id, newStatus);
     }
 
 

@@ -10,6 +10,8 @@ import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 import tw.idv.petradisespringboot.admin.vo.AdminAccess;
 import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -105,14 +107,14 @@ public class AdminServiceImpl implements AdminService {
         return adminRepository.findAll(sortByStatus);
     }
     @Override
-    public Admin changeAdminTitle(Integer id, char newTitle) {
+    public Admin changeAdminTitle(Integer id, AdminTitle newTitle) {
         return adminRepository.findById(id).map(admin -> {
             admin.setTitle(newTitle);
             return adminRepository.save(admin);
         }).orElse(null);
     }
     @Override
-    public Admin changeAdminStatus(Integer id, char newStatus) {
+    public Admin changeAdminStatus(Integer id, AdminStatus newStatus) {
         return adminRepository.findById(id).map(admin -> {
             admin.setStatus(newStatus);
             return adminRepository.save(admin);
