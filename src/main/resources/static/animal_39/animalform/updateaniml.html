@@ -293,18 +293,18 @@ div.text {
 	var id = urlParams.get('id');
 	// 先取得原資料並渲染於修改表單
 	$.ajax({
-	    url: `/animals/${id}`,
+	    url: "/animals/"+ id,
 	    method: "GET",
 	    dataType: "json",
 	    success: function (animal) {
 	    	console.log(animal);
 	        // 將取得的資料放在修改表單裡
-	        $("#corpid").val(animal.corpid);
-	        $("#animalname").val(animal.animalname);
-	        $("#animal_type").val(animal.animaltype);
-	        $("#animalsex").find("option[value='" + animal.animalsex + "']").prop("selected", true);
-	        $("#animalage").val(animal.animalage);
-	        $("#animalstatus").find("option[value='" + animal.animalstatus + "']").prop("selected", true);
+	        $("#corpid").val(animal.corpId);
+	        $("#animalname").val(animal.animalName);
+	        $("#animal_type").val(animal.animalType);
+	        $("#animalsex").find("option[value='" + animal.animalSex + "']").prop("selected", true);
+	        $("#animalage").val(animal.animalAge);
+	        $("#animalstatus").find("option[value='" + animal.animalStatus + "']").prop("selected", true);
 	    },
 	    error: function (error) {
 	        console.error("AJAX Error: " + error);
@@ -315,12 +315,12 @@ div.text {
 	$("#updateanimalForm").submit(function (event) {
 	    event.preventDefault();
 	    const updateanimal = {
-	        corpid: $("input[name='corpid']").val(),
-	        animalname: $("input[name='animalname']").val(),
-	        animaltype: $("#animal_type").val(),
-	        animalsex: $("select[name='animalsex']").val(),
-	        animalage: $("#animalage").val(),
-	        animalstatus: $("select[name='animalstatus']").val(),
+	        corpId: $("input[name='corpid']").val(),
+	        animalName: $("input[name='animalname']").val(),
+	        animalType: $("#animal_type").val(),
+	        animalSex: $("select[name='animalsex']").val(),
+	        animalAge: $("#animalage").val(),
+	        animalStatus: $("select[name='animalstatus']").val(),
 	    };
 	
 	    $.ajax({
