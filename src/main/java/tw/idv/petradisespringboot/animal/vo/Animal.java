@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,55 +21,48 @@ import lombok.ToString;
 import tw.idv.petradisespringboot.animlpic.vo.AnimalPic;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-
+@Data
 @Table(name = "animal")
 public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "animal_id")
-	private Integer animalid;
+	private Integer animalId;
 	
 	
 	@Column(name = "corp_id")
-	private Integer corpid;
+	private Integer corpId;
 	
 	@Column(name = "mem_id")
-	private Integer memid;
+	private Integer memId;
 	
 	@Column(name = "type")
-	private String animaltype;
+	private String animalType;
 	
 	@Column(name = "animal_name")
-	private String animalname;
+	private String animalName;
 	
 	@Column(name = "animal_sex")
-	private String animalsex;
+	private String animalSex;
 	
 	@Column(name = "animal_age")
-	private String animalage;
+	private String animalAge;
 	
 	@Column(name = "animal_pic",columnDefinition = "LONGBLOB")
-	private byte[] animalpic;
+	private byte[] animalPic;
 	
 	@Column(name = "status", insertable = false)
-	private String aniamlstatus;
+	private String aniamlStatus;
 	
 	@Column(name ="animal_info_note", insertable = false )
-	private String animalinfo;
+	private String animalInfo;
 	
 
 	
-	public String toString() {
-		return "Animal [animalID="+animalid +",corpID="+corpid +",menID="+ memid +",Type="+animaltype +"animalName=" +animalname +"animalStatus=" +aniamlstatus
-				+"animalSex" + animalsex +"animalAge=" +animalage +",animalInfonote="+animalinfo + "]";
-				
-	}
+	
 
 
 
