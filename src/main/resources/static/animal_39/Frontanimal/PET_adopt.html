@@ -21,15 +21,15 @@
 	align-items: center;
 	text-align: center;
 	height: 200vh; /* 可根据需要进行调整 */
-	
- .custom-btn {
+}	
+.custom-btn {
   background-color: #EB9900 !important;
   border-color: #dd7500 !important;
 }
 
 	
 	
-}
+
 </style>
 </head>
 
@@ -46,7 +46,7 @@
 				data-bs-target="#navcol-3" style="border-color: rgb(241, 236, 209);">
 				<span class="visually-hidden">Toggle navigation</span><span
 					class="navbar-toggler-icon"
-					style="-bs-primary: #fd780f; - -bs-primary-rgb: 253, 120, 15; - -bs-secondary: #e69609; - -bs-secondary-rgb: 230, 150, 9; color: rgb(241, 236, 209);"></span>
+					style="-bs-primary: #fd780f;  -bs-primary-rgb: 253, 120, 15;  -bs-secondary: #e69609;  -bs-secondary-rgb: 230, 150, 9; color: rgb(241, 236, 209);"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navcol-3"
 				style="background: #ffffff;">
@@ -129,7 +129,7 @@
 				</button>
 				<div class="btn-group" style="margin: 10px 0px 0px;">
 					<button class="btn btn-primary" type="button"
-						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; padding-top: 6px;">
+						style="height: 38px; width: 90px; background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; padding-top: 6px;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
 							fill="currentColor" viewBox="0 0 16 16"
 							class="bi bi-person-circle"
@@ -144,7 +144,7 @@
 					<button
 						class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 						data-bs-toggle="dropdown" aria-expanded="false" type="button"
-						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255,; border-right-color: 255,; border-bottom-color: 255); border-left-color: 255,; width: 29.5833px;"></button>
+						style="background: #fd780f; border-color: rgb(255, 255, 255); border-top-color: rgb(255, border-right-color 255, border-bottom-color 255); border-left-color: 255,; width: 29.5833px;"></button>
 					<div class="dropdown-menu"
 						style="min-width: 118px; background: #fd780f; margin: 1px 0px 0px;">
 						<a class="dropdown-item" href="#" style="color: #ffffff;">登入/註冊</a><a
@@ -427,7 +427,7 @@
 			    console.log("Data received successfully:",response);
 				var animal = response; // 單一動物的資料
 
-				var imageUrl = "data:image/jpeg;base64,"+ animal.animalpic;
+				var imageUrl = "data:image/jpeg;base64,"+ animal.animalPic;
 				var cardHtml = '<div class="row row-cols-2 ">'
 													+ '<div class="col text-center justify-content-center">'
 													+ '<img src="' + imageUrl + '" class="rounded" alt="...">'
@@ -438,35 +438,35 @@
 													+ '<tr>'
 													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
 													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalname
+													+ animal.animalName
 													+ '</span>'
 													+ '</td>'
 													+ '</tr>'
 													+ '<tr>'
 													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
 													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalsex
+													+ animal.animalSex
 													+ '</span>'
 													+ '</td>'
 													+ '</tr>'
 													+ '<tr>'
 													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
 													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalage
+													+ animal.animalAge
 													+ '</span>'
 													+ '</td>'
 													+ '</tr>'
 													+ '<tr>'
 													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">'
 													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animaltype
+													+ animal.animalType
 													+ '</span>'
 													+ '</td>'
 													+ '</tr>'
 													+ '<tr>'
 													+ '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px ;">'
 													+ '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">'
-													+ animal.animalinfo
+													+ animal.animalInfo
 													+ '</span>'
 													+ '</td>'
 													+ '</tr>'
