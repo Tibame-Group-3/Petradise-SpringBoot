@@ -2,6 +2,8 @@ package tw.idv.petradisespringboot.animalapplication.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,10 +49,10 @@ public class AdoptedApplicationController {
 	
 	@PostMapping("/update/{id}")
 	public AdoptedApplication updateAdoptedApplication(@PathVariable Integer id, @RequestBody AdoptedApplication updatedApplication) {
-	    // 先通过ID查找要更新的认养申请
+	   
 	    AdoptedApplication existingApplication = service.findAdoptedApplicationById(id);
 	    if (existingApplication != null) {
-	        // 更新认养申请的相关属性
+	        
 	        existingApplication.setMembId(updatedApplication.getMembId());
 	        existingApplication.setAnimalId(updatedApplication.getAnimalId());
 	        existingApplication.setAdopterIdNumber(updatedApplication.getAdopterIdNumber());
@@ -61,13 +63,23 @@ public class AdoptedApplicationController {
 	        existingApplication.setAdopterEmail(updatedApplication.getAdopterEmail());
 	        existingApplication.setAdopterStatus(updatedApplication.getAdopterStatus());
 	        
-	        // 调用service保存更新后的认养申请
+	       
 	        return service.addAdoptedApplication(existingApplication);
 	    } else {
-	        // 如果找不到对应ID的认养申请，可以根据实际情况返回适当的响应或错误处理
-	        // 这里只是简单地返回null
+	        
 	        return null;
 	    }
+	}
+	@PostMapping("/save/{id}")
+	public AdoptedApplication newAdoptedApplication(@RequestBody AdoptedApplication adoptedApplication, HttpSession session) {
+	    Integer memberId = (Integer) session.getAttribute("memberId");
+	    if (memberId == null) {
+	        // 会员ID不存在，处理相应的逻辑
+	    } else {
+	        adoptedApplication.setMembId(memberId);
+	        return service.addAdoptedApplication(adoptedApplication);
+	    }
+		return adoptedApplication;
 	}
 
 	
