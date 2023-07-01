@@ -82,14 +82,11 @@ h1 {
 }
 
 .btn_set:hover {
-	background:#f9ecdb;
+	background: #f9ecdb;
 	color: #333;;
 	cursor: pointer;
-	 box-shadow: 0 0 5px #ffe7dd,
-              0 0 25px #ffe7dd,
-              0 0 50px #ffe7dd,
-              0 0 100px #ffe7dd;
-
+	box-shadow: 0 0 5px #ffe7dd, 0 0 25px #ffe7dd, 0 0 50px #ffe7dd, 0 0
+		100px #ffe7dd;
 }
 
 /* Main Styling */
@@ -132,11 +129,8 @@ html, body {
 #form-wrap .form-group input:focus {
 	outline: none;
 	border: 1px solid rgb(210, 134, 12);
-	box-shadow: 0 0 5px #ffe7dd,
-              0 0 10px #ffe7dd,
-              0 0 10px #ffe7dd,
-              0 0 10px #ffe7dd;
-	
+	box-shadow: 0 0 5px #ffe7dd, 0 0 10px #ffe7dd, 0 0 10px #ffe7dd, 0 0
+		10px #ffe7dd;
 }
 
 #form-wrap .bottom-text {
@@ -226,12 +220,10 @@ div.collapse {
 	padding: 0;
 }
 
-.trainer_gif{
-position: absolute;
- margin-top: -30px; 
-
+.trainer_gif {
+	position: absolute;
+	margin-top: -30px;
 }
-
 </style>
 </head>
 
@@ -279,7 +271,8 @@ position: absolute;
 
 					<h1>業主您好,歡迎加入我們!</h1>
 
-					<span class="mark">業主資料<img class="trainer_gif" src="./img/trainer.gif" style="width:70px; height:100px;"></span>
+					<span class="mark">業主資料<img class="trainer_gif"
+						src="./img/trainer.gif" style="width: 70px; height: 100px;"></span>
 					<fieldset class="form">
 						<div class="form-group">
 							<label for="owner_name">
@@ -304,12 +297,15 @@ position: absolute;
 						</div>
 						<div class="form-group">
 							<label for="owner_email">
-								<div>Email:<button type="button" class="emailCheck">檢查</button></div> <span><input type="email"
-									name="owner_email" id="owner_email" maxlength="50"
+								<div>
+									Email:
+									<button type="button" class="emailCheck">檢查</button>
+								</div> <span><input type="email" name="owner_email"
+									id="owner_email" maxlength="50"
 									placeholder="請輸入常用電子信箱,通知信將發送至此信箱"></span>
 							</label>
 						</div>
-												
+
 						<div class="form-group">
 							<label for="owner_password">
 								<div>密碼:</div> <span><input type="password"
@@ -692,7 +688,6 @@ $(function(){
 
 			$(".btn_set").click(function(e) {
 				e.preventDefault();
-				
 				if (!isEmailVerified) {
 					Swal.fire({
 						allowOutsideClick: false,
@@ -712,6 +707,7 @@ $(function(){
   			}).then((result) => {
   				e.preventDefault();
     			if (result.isConfirmed) {
+	
       			for (const key in allData) {
        			// 如果為null或空字串
        				if (!allData[key]) {
@@ -734,19 +730,41 @@ $(function(){
                               contentType: "application/json",
                               data: JSON.stringify(allData),
                               success: function(res) {
+                            	  
+                            	  Swal.fire({
+                  	          		confirmButtonText: '確定',
+                  	          		title: '歡迎您的加入'
+                  	        		}).then((result) => {
+                  	        			if (result.isConfirmed) {
+                  	        				location.reload();
+                  	        		}
+                  	        	});
+                            	
                               },
+                              
+                              error: function(xhr, textStatus, errorThrown) {
+                                  Swal.fire({
+                                      allowOutsideClick: false,
+                                      icon: 'error',
+                                      title: '統一編號已被註冊',
+                                      text: xhr.responseText // 顯示後端傳回的錯誤信息
+                                  });
+                              }
                           })
-        	   		Swal.fire({
-        	          		confirmButtonText: '確定',
-        	          		title: '歡迎您的加入'
-        	        		}).then((result) => {
-        	        			if (result.isConfirmed) {
-        	        				location.reload();
-        	        		}
-        	        	});
+//         	   		Swal.fire({
+//         	          		confirmButtonText: '確定',
+//         	          		title: '歡迎您的加入'
+//         	        		}).then((result) => {
+//         	        			if (result.isConfirmed) {
+//         	        				location.reload();
+//         	        		}
+//         	        	});
+        				  
+        				  
         	     	}
         		
       		}
+    			
     	
   	});
 }
@@ -809,6 +827,8 @@ $(function(){
         	    });
         	    return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
         	  }
+        	
+        	
         	//正則化驗證地址
         	const hotelAddress = $('#hotel_address').val();
         	const addressRegex = /^[\u4E00-\u9FFF0-9\u3105-\u3129\-]+$/;
