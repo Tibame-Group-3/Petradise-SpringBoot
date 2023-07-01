@@ -10,6 +10,7 @@ import tw.idv.petradisespringboot.animalcorporation.exceptions.AccountNotFoundEx
 import tw.idv.petradisespringboot.animalcorporation.repo.AnimalCorporationRepository;
 import tw.idv.petradisespringboot.animalcorporation.service.AnimalCorporationService;
 import tw.idv.petradisespringboot.animalcorporation.vo.AnimalCorporation;
+import tw.idv.petradisespringboot.email.EmailService;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,12 +19,16 @@ import java.util.Objects;
 public class AnimalCorporationServiceImpl implements AnimalCorporationService{
 	
 	private AnimalCorporationRepository animalCorporationRepository;
-	
+	private EmailService emailService;
 	
 
-	public AnimalCorporationServiceImpl(AnimalCorporationRepository animalCorporationRepository) {
+	public AnimalCorporationServiceImpl(AnimalCorporationRepository animalCorporationRepository,
+			EmailService emailService) {
 		this.animalCorporationRepository = animalCorporationRepository;
+		this.emailService = emailService;
 	}
+
+	
 
 	@Override
 	public AnimalCorporation add(AnimalCorporation animalCorporation) {
@@ -36,7 +41,7 @@ public class AnimalCorporationServiceImpl implements AnimalCorporationService{
 	}
 
 	@Override
-	public List<AnimalCorporation> findAllWithStatusNo1() {
+	public List<AnimalCorporation> findAllWithStatusNot1() {
 		
 		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatusNot('1');
 		

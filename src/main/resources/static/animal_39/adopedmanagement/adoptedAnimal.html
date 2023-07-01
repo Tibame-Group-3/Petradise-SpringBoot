@@ -133,7 +133,7 @@
 										<tr>
 											<!--<th>動物編號</th>-->
 											<th>動物</th>
-											<!--<th>業主</th>-->
+											<th>業主</th>
 											<th>種類</th>
 											<th>名字</th>
 											<th>性別</th>
@@ -263,10 +263,12 @@
                                
                let dataaccount = 0;
                 let Animal = [];
-             
+                // 先用URL的方式 抓取id 
+                var urlParams = new URLSearchParams(window.location.search);
+            	var corpId = urlParams.get('id');
                 function getAllAnimal() {
                     console.log('進入getAllAnimal()')
-                    fetch("http://localhost:8080/animals/all")
+                    fetch("/animals/corpId=" + corpId)
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {
@@ -284,30 +286,30 @@
                                 for (let i = 0; i < Animal.length; i++) {
                                     dataaccount = i;
                                     let row = Animal[i];
-                                    const animalid = row. animalid;
-                                    //const corpid = row.corpid;
+                                    const animalid = row. animalId;
+                                    const corpid = row.corpId;
                                     //const memid = row.memid;
-                                    const animaltype = row.animaltype;
-                                    const animalname = row.animalname;
-                                    const animalsex = row.animalsex;
-                                    const animalage = row.animalage;
-                                    const aniamlstatus = row.aniamlstatus;
+                                    const animaltype = row.animalType;
+                                    const animalname = row.animalName;
+                                    const animalsex = row.animalSex;
+                                    const animalage = row.animalAge;
+                                    const aniamlstatus = row.aniamlStatus;
                                     
-                                    const animalpic = row.animalpic; // 从API响应中获取动物图片数据
+                                    const animalpic = row.animalPic; // 从API响应中获取动物图片数据
 
                                     const reader = new FileReader();
                                    
                                     const imageTag = animalpic;
                                   
                                     dataTable.row.add([
-                                        row.animalid,
-                                        //row.corpid,
-                                        //row.memid,
-                                        row.animaltype,
-                                        row.animalname,
-                                        row.animalsex,
-                                        row.animalage,
-                                        row.aniamlstatus,
+                                        row.animalId,
+                                        row.corpId,
+                                        //row.memId,
+                                        row.animalType,
+                                        row.animalName,
+                                        row.animalSex,
+                                        row.animalAge,
+                                        row.aniamlStatus,
                                         `<img src='data:image/*;base64,${imageTag}' width="50"  height="50">`,
                                        
                                        
@@ -333,7 +335,7 @@
 
                     // 使用索引获取对应的动物对象和动物ID
                     var row = Animal[rowIndex];
-                    var animalId = row.animalid;
+                    var animalId = row.animalId;
 
                     window.location.href  = "/animal_39/animalform/updateaniml.html?id=" + animalId;
 
