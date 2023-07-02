@@ -146,25 +146,48 @@
 					</div>
 				</nav>
 
-				<div class="container_re">
-					<h3 class="text-dark mb-4">
-						遺失寵物貼文管理
-						</h3>
+				<div class="container-fluid">
+					<h3 class="text-dark mb-4">遺失寵物貼文管理</h3>
+					<div class="card shadow">
+						<div class="card-header py-3">
+							<p class="text-primary m-0 fw-bold">文章列表</p>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive table mt-2" id="dataTable"
+								role="grid" aria-describedby="dataTable_info"
+								style="text-align: center;">
+								<table class="table my-0" id="dataTable">
+									<thead>
+										<tr>
+											<th>文章編號</th>
+											<th>會員編號</th>
+											<th>標題</th>
+											<th>更多內容</th>
+											<th>刪除</th>
+										</tr>
+									</thead>
+									<tbody class="data-container">
+									</tbody>
+									<tfoot>
+										<tr></tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="row">
 
-						<div class="article-container">
-							<div class="article">
-								<div class="article-title">
-									<h5></h5>
-								</div>
-								<div class="info">
-									<h5></h5>
-									<button class="btn-delete">刪除</button>
-									<a href="/lostPet/forum.html?" class="btn-more">更多內容</a>
+								<div class="col-md-6">
+									<nav
+										class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+										<ul class="pagination">
+
+										</ul>
+									</nav>
 								</div>
 							</div>
-							<div class="conta"></div>
 						</div>
+					</div>
 				</div>
+				
 
 
 
@@ -200,68 +223,78 @@
 	    let deleteId ;
 	    
 	   
-	    axios.get("/LostPetArticle/admin/all")
-	    .then(function (response) {
-	      console.log(response.data);
-	      let data = response.data;
+	    $.ajax({
+	        url: "/LostPetArticle/admin/all",
+	        type: "GET",
+	        success: function(response) {
+	            console.log(response);
 
-	      
-	      let html = '';
+	            for (let i = 0; i < response.length; i++) {
+	                $("tbody").append(`
+	                    <tr>
+	                        <td>${response[i].articleId}</td>
+	                        <td>${response[i].memId}</td>
+	                        <td>${response[i].title}</td>
+	                        <td><a href="/lostPet/forum.html?id=${response[i].articleId}" class="btn-more">更多內容</a></td>
+	                        <td><button class="btn-delete" id=${response[i].articleId} type="button">刪除</button></td>
+	                    </tr>
+	                `);
+	            }
 
-	      if (Array.isArray(data)) {
-	    	  let parentElement = document.querySelector(".article");
-	    	  parentElement.remove();
-	    	  
-	        
-	    	  data.forEach(function (item) {
-		    	  deleteId = item.articleId;
-					
-	    		  html += `
-		        	<div class="article article${item.articleId}">
-		              <div class="article-title">
-		                <h5>${item.title}</h5>
-		              </div>
-		              <div class="info">
-		                <h5>${item.text}</h5>
-		                <button class="btn-delete" id = ${deleteId} >刪除</button>
-		                <a href="/lostPet/forum.html?id=${item.articleId}" class="btn-more">更多內容</a>
-		              </div>
-		            </div>
-		            `;
-		    	 
-	    	  });
-	      } 
-	      conta.innerHTML = html;
-	      
-	      
-	      const deleteButtons = document.querySelectorAll('.btn-delete');
-	      deleteButtons.forEach(function(button) {
-	          button.addEventListener('click', function() {
-	              deleteId = button.getAttribute('id');
-	              console.log(deleteId);
-	              $.ajax({
-	                  url: '/LostPetArticle/id=' + deleteId + '/delete',
-	                  type: 'PUT',
-	                  success: function(response) {
-	                      console.log('Article deleted:', response);
-	                      let className = '.article'+deleteId ;
-	                      let parentElement = document.querySelector(className);
-	                      
-	                      parentElement.remove();
-	                  },
-	                  error: function(xhr, status, error) {
-	                      console.log('Error:', error);
-	                  }
-	              });
-	          });
-	      });
-	    })
-	    .catch(function (error) {
-	      console.log(error);
+	           /*  let data = response.data;
+	            let html = '';
+
+	            if (Array.isArray(data)) {
+	                let parentElement = document.querySelector(".article");
+	                parentElement.remove();
+
+	                data.forEach(function(item) {
+	                    deleteId = item.articleId;
+
+	                    html += `
+	                        <div class="article article${item.articleId}">
+	                            <div class="article-title">
+	                                <h5>${item.title}</h5>
+	                            </div>
+	                            <div class="info">
+	                                <h5>${item.text}</h5>
+	                                <button class="btn-delete" id=${deleteId}>刪除</button>
+	                                <a href="/lostPet/forum.html?id=${item.articleId}" class="btn-more">更多內容</a>
+	                            </div>
+	                        </div>
+	                    `;
+	                });
+	            }
+
+	            conta.innerHTML = html; */
+
+	            const deleteButtons = document.querySelectorAll('.btn-delete');
+	            deleteButtons.forEach(function(button) {
+	                button.addEventListener('click', function() {
+	                    deleteId = button.getAttribute('id');
+	                    console.log(deleteId);
+	                    $.ajax({
+	                        url: '/LostPetArticle/delete/id=' + deleteId,
+	                        type: 'PUT',
+	                        success: function(response) {
+	                            console.log('Article deleted:', response);
+	                            let className = '.article' + deleteId;
+	                            let parentElement = document.querySelector(className);
+	                            parentElement.remove();
+	                        },
+	                        error: function(xhr, status, error) {
+	                            console.log('Error:', error);
+	                        }
+	                    });
+	                });
+	            });
+	        },
+	        error: function(xhr, status, error) {
+	            console.log('Error:', error);
+	        }
 	    });
-	    
-	   
-		    
+
+	        
 	   
     </script>
 </html>
