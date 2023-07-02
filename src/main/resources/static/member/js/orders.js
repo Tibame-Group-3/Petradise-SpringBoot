@@ -37,7 +37,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="view_order" id="order_detail_check" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
-                        <img src="assets/img/view_icon.png" style="background-color: transparent">
+                        詳情
                     </button>
 
                     <!-- Modal -->
