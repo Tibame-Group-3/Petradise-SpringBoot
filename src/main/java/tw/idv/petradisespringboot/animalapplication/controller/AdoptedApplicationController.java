@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.animalapplication.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,17 +70,17 @@ public class AdoptedApplicationController {
 	        return null;
 	    }
 	}
-	@PostMapping("/save/{id}")
-	public AdoptedApplication newAdoptedApplication(@RequestBody AdoptedApplication adoptedApplication, HttpSession session) {
-	    Integer memberId = (Integer) session.getAttribute("memberId");
-	    if (memberId == null) {
-	        // 会员ID不存在，处理相应的逻辑
-	    } else {
-	        adoptedApplication.setMembId(memberId);
-	        return service.addAdoptedApplication(adoptedApplication);
-	    }
-		return adoptedApplication;
-	}
+//	@PostMapping("/save/{id}")
+//	public AdoptedApplication newAdoptedApplication(@RequestBody AdoptedApplication adoptedApplication, HttpSession session) {
+//	    Integer memberId = (Integer) session.getAttribute("memberId");
+//	    if (memberId == null) {
+//	     
+//	    } else {
+//	        adoptedApplication.setMembId(memberId);
+//	        return service.addAdoptedApplication(adoptedApplication);
+//	    }
+//		return adoptedApplication;
+//	}
 
 	
 
