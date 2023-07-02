@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,9 +36,9 @@ public class Admin {
     @Column(name = "admin_email")
     private String email;
     @Column(name = "admin_title")
-    private Character title;
+    private AdminTitle title;
     @Column(name = "admin_status", insertable = false)
-    private Character status;
+    private AdminStatus status;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

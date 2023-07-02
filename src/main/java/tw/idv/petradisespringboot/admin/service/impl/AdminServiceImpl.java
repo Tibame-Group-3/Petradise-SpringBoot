@@ -11,10 +11,14 @@ import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 import tw.idv.petradisespringboot.admin.vo.AdminAccess;
 import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
+import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
@@ -85,12 +89,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Admin> findAdminsByTitle(char title) {
+    public List<Admin> findAdminsByTitle(AdminTitle title) {
         return adminRepository.findAdminsByTitle(title);
     }
 
     @Override
-    public List<Admin> findAdminsByStatus(char status) {
+    public List<Admin> findAdminsByStatus(AdminStatus status) {
         return adminRepository.findAdminsByStatus(status);
     }
 
@@ -106,22 +110,30 @@ public class AdminServiceImpl implements AdminService {
         return adminRepository.findAll(sortByStatus);
     }
     @Override
-    public Admin changeAdminTitle(Integer id, char newTitle) {
+    public Admin changeAdminTitle(Integer id, AdminTitle newTitle) {
         return adminRepository.findById(id).map(admin -> {
             admin.setTitle(newTitle);
             return adminRepository.save(admin);
         }).orElse(null);
     }
     @Override
-    public Admin changeAdminStatus(Integer id, char newStatus) {
+    public Admin changeAdminStatus(Integer id, AdminStatus newStatus) {
         return adminRepository.findById(id).map(admin -> {
             admin.setStatus(newStatus);
             return adminRepository.save(admin);
         }).orElse(null);
     }
 
-
-
+    @Override
+    public Admin login(String account, String password) {
+        var vo = adminRepository
+                .findByAccountAndPassword(account, password)
+                .orElseThrow(() -> new AdminNotFoundException("帳號或密碼錯誤"));
+        if (Objects.equals(vo.getStatus(), AdminStatus.INACTIVE)) {
+            throw new AdminNotFoundException("帳號已停用");
+        }
+        return vo;
+    }
 }
 
 

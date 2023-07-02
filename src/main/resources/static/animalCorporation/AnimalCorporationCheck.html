@@ -372,12 +372,7 @@ $(function() {
 	    		  title:"業主編號 : " + corpId +"<br>" + "業主名稱 : "+  corpName +"<br>" + "已成為合作業主!"
 	    	  });
 	     	
-	      } else {
-	    	  Swal.fire({
-		    	  iconHtml:`<img src= "./img/happy.gif" style="with 200px; height:200px;">`,
-		    	  title:"業主編號 : " + corpId +"<br>" + "業主名稱 : "+  corpName +"<br>" + "沒成為合作業主!"
-		    	  });
-	      }
+	      } 
 	      clearPage();
 	    }).catch(function(error) {
 		      console.error(error);

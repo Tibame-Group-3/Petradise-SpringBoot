@@ -96,7 +96,7 @@
     }
 
     function popBack() {
-        // 請實作登入後的頁面跳轉
+        window.location.href = '/animal_39/adopedmanagement/adoptedAnimal.html';
     }
 
 })();
