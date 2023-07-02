@@ -1,6 +1,7 @@
-package tw.idv.petradisespringboot.roomorder.service;
+package tw.idv.petradisespringboot.roomorder.controller;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 
 @Component
 public class RoomOrderScheduler {
@@ -12,7 +13,7 @@ public class RoomOrderScheduler {
     }
 
     @Scheduled(cron = "0 0 0 * * *") // Runs at midnight every day
-    public void updateStatusOfUpcomingOrders() {
-        roomOrderService.updateStatusOfUpcomingOrders();
+    public void updateExpiredOrderStatus() {
+        roomOrderService.updateExpiredOrderStatus();
     }
 }

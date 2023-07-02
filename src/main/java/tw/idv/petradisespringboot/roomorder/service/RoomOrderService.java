@@ -15,6 +15,7 @@ public interface RoomOrderService {
     RoomOrder modify(Integer id, RoomOrder modifiedRoomOrder);
     RoomOrder changeRoomOrderStatus(Integer id, char newStatus);
 
+    void updateExpiredOrderStatus();
 
     List<RoomOrder> getRoomOrdersByHotelId(Integer hotelId);
 

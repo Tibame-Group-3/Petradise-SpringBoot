@@ -240,7 +240,7 @@
                         "render": function (data, type, row) {
                             var cancelButton = '';
                             if (data === '0') {
-                                cancelButton = '<button type="button" class="edit-button">取消</button>';
+                                cancelButton = '<button type="button" class="edit-button">編輯</button>';
                             }
                             return cancelButton;
                         }
@@ -258,12 +258,40 @@
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
                     icon: 'warning',
+                    showDenyButton: true,
                     showCancelButton: true,
+                    confirmButtonText: '完成訂單',
+                    denyButtonText: `刪除訂單`,
+                    cancelButtonText: `什麼事都不做`,
                     confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, cancel it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        // Make the AJAX request to change the room status
+                        $.ajax({
+                            url: `http://localhost:8080/room-order/id/${orderId}/change-status`,
+                            method: 'PUT',
+                            data: JSON.stringify({ "status": "1" }),
+                            contentType: "application/json",
+                            success: function (response) {
+
+                                Swal.fire(
+                                    'Completed!',
+                                    'The order has been completed.',
+                                    'success'
+                                );
+                                // Reload the DataTable to reflect the updated status
+                                table.ajax.reload(null, false).draw(false);
+                            },
+                            error: function (error) {
+                                console.error("Error:", error);
+                                Swal.fire(
+                                    'Error!',
+                                    'Failed to complete the order.',
+                                    'error'
+                                );
+                            }
+                        });
+                    } else if (result.isDenied) {
                         // Make the AJAX request to change the room status
                         $.ajax({
                             url: `http://localhost:8080/room-order/id/${orderId}/change-status`,
