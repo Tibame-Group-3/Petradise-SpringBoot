@@ -1,6 +1,8 @@
 package tw.idv.petradisespringboot.admin.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.admin.dto.LoginDTO;
 import tw.idv.petradisespringboot.admin.service.AdminService;
 import tw.idv.petradisespringboot.admin.vo.Admin;
 import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
@@ -61,5 +63,14 @@ public class AdminController {
         return service.changeAdminStatus(id, newStatus);
     }
 
+    @PostMapping("/login")
+    ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+        try {
+            var admin = service.login(dto.getAccount(), dto.getPassword());
+            return ResponseEntity.ok(admin);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

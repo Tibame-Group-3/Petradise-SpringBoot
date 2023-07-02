@@ -16,6 +16,8 @@ import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
@@ -123,7 +125,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin login(String account, String password) {
-        return adminRepository.findByAccountAndPassword(account, password).orElse(null);
+        var vo = adminRepository
+                .findByAccountAndPassword(account, password)
+                .orElseThrow(() -> new AdminNotFoundException("帳號或密碼錯誤"));
+        if (Objects.equals(vo.getStatus(), AdminStatus.INACTIVE)) {
+            throw new AdminNotFoundException("帳號已停用");
+        }
+        return vo;
     }
 }
 
