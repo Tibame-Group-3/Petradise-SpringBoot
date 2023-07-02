@@ -121,7 +121,9 @@ public class AdminServiceImpl implements AdminService {
         }).orElse(null);
     }
 
-
-
+    @Override
+    public Admin login(String account, String password) {
+        return adminRepository.findByAccountAndPassword(account, password).orElse(null);
+    }
 }
 

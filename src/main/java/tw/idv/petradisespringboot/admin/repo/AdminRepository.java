@@ -7,6 +7,7 @@ import tw.idv.petradisespringboot.admin.vo.enums.AdminStatus;
 import tw.idv.petradisespringboot.admin.vo.enums.AdminTitle;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends JpaRepository <Admin, Integer> {
@@ -15,6 +16,6 @@ public interface AdminRepository extends JpaRepository <Admin, Integer> {
     List<Admin> findAdminsByTitle(AdminTitle title);
     List<Admin> findAdminsByStatus(AdminStatus status);
 
-
+    Optional<Admin> findByAccountAndPassword(String account, String password);
 
 }

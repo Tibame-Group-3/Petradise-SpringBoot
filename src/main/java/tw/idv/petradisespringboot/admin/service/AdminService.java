@@ -20,7 +20,6 @@ public interface AdminService {
     Admin changeAdminTitle(Integer id, AdminTitle newTitle);
     Admin changeAdminStatus(Integer id, AdminStatus newStatus);
 
-
-
+    Admin login(String account, String password);
 
 }
