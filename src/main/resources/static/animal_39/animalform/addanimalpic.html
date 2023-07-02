@@ -258,6 +258,7 @@ div.text {
 	<script>
 		const fileInput = document.getElementById('p_file');
 		const previewContainer = document.getElementById('preview');
+		
 		// 監聽文件选择事件
 		fileInput.addEventListener('change', function(event) {
 			// 检查是否有選擇文件
@@ -285,43 +286,36 @@ div.text {
 			}
 		});
 
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(
+		function() {
 
-							$('#edit-button').click(function() {
+	$('#edit-button').click(function() {});
 
-							});
-
-							$('#save-button').click(function() {
-
-							});
+	$('#save-button').click(function() {
+});
 
 							// 表单提交事件处理
 							$('#animalpicForm')
 									.submit(
 											function(e) {
 												e.preventDefault();
-
+												var corpId = getAnimalCorporationId();
 												const newAnimal = {
-													corpid : $(
-															"input[name='corpid']")
-															.val(),
-
-													animalname : $(
+													corpId :corpId,
+													animalName : $(
 															"input[name='animalname']")
 															.val(),
 
-													animaltype : $(
+													animalType : $(
 															"#animal_type")
 															.val(),
-													animalsex : $(
+													animalSex : $(
 															"select[name='animalsex']")
 															.val(),
-													animalage : $("#animalage")
+													animalAge : $("#animalage")
 															.val(),
 
-													animalstatus : $(
+													animalStatus : $(
 															"select[name='animalstatus']")
 															.val(),
 												};
