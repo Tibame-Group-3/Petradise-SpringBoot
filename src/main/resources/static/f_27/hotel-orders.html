@@ -141,17 +141,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/hotel_owner_login.js"></script>
     <script>
-        // $(document).ready(function () {
-        //     const ownerName = getHotelOwnerName();
-        //     if (ownerName) {
-        //         $('#owner-name').text(ownerName);
-        //     }
-        // });
         $(document).ready(function () {
-            // const hotelId = getHotelOwnerId();
+            const ownerName = getHotelOwnerName();
+            if (ownerName) {
+                $('#owner-name').text(ownerName);
+            }
+        });
+        $(document).ready(function () {
+            const hotelId = getHotelOwnerId();
             var table = $('#example').DataTable({
                 "ajax": {
-                    "url": `http://localhost:8080/room-order/hotel-id/2`,
+                    "url": `http://localhost:8080/room-order/hotel-id/${hotelId}`,
                     "dataSrc": "" // The data is not wrapped in an object property
                 },
                 "columns": [
