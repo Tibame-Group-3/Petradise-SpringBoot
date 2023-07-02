@@ -36,10 +36,10 @@ public class RoomOrder {
     private LocalDate checkOutDate;
     @Column(name = "room_order_status")
     private Character status;
-    @Column(name = "room_original_price")
-    private Integer origPrice;
-    @Column(name = "room_final_price")
-    private Integer finalPrice;
+    @Column(name = "room_payment_method")
+    private Character payMethod;
+    @Column(name = "room_price")
+    private Integer price;
     @Column(name = "room_od_special_req")
     private String specialReq;
 

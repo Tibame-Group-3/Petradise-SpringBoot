@@ -107,17 +107,23 @@
                     <h5 class="mb-0">付款資料</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">信用卡號:<br></p>
-                    <div class="form-group">
+                    <label class="form-label">
+                        <select class="d-inline-block form-select form-select-sm">
+                            <option selected="">到店付款</option>
+                            <option>信用卡結帳</option>
+                        </select><br>
+                    </label>
+                    <div class="form-group credit-card-fields">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group credit-card-fields">
                         <input type="text" class="form-control" maxlength="3" placeholder="CVV">
                         <input type="text" class="form-control" maxlength="4" placeholder="Expiration Date">
                     </div>
+
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -152,6 +158,12 @@
                 <h5>房型資訊</h5>
                 <p id="room-type-about"></p>
             </div>
+            <strong>
+                <div class="room-info">
+                    <h5>總金額TWD</h5>
+                    <p id="room-type-price"></p>
+                </div>
+            </strong>
             <button class="confirm-button" id="confirm-pay">確認訂房&付款</button>
         </aside>
     </div>
@@ -163,6 +175,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+        // Function to get member id
+        function getMemberId() {
+            return 1;
+            // return localStorage.getItem("memberId");
+        }
+
         $(document).ready(function () {
 
             // Retrieve member Id from local storage
@@ -172,11 +190,17 @@
             var checkInDate = "2023-06-29";     // sessionStorage.getItem('checkInDate');
             var checkOutDate = "2023-06-30";    // sessionStorage.getItem('checkOutDate');
             var roomTypeId = 5;                 // sessionStorage.getItem('roomTypeId');
-            var roomType = "XX房";                // sessionStorage.getItem('roomType');
 
             // Update the corresponding elements with the retrieved values
             $('#check-in-date').text(checkInDate);
             $('#check-out-date').text(checkOutDate);
+
+            // Call the functions to fetch dynamic content when the page is ready
+            fetchCustomerInfo();
+            fetchImage();
+            fetchRoomInfo();
+
+
 
             // Function to fetch customer information
             function fetchCustomerInfo() {
@@ -223,30 +247,29 @@
                 });
             }
 
-
-            // Call the functions to fetch dynamic content when the page is ready
-            fetchCustomerInfo();
-            fetchImage();
-
             // Fetch the room type information
-            $.ajax({
-                url: `http://localhost:8080/roomTypes/${roomTypeId}`, // Replace with the actual API endpoint
-                method: 'GET',
-                success: function (response) {
-                    // Update the room type information
-                    var roomTypeName = response.roomTypeName
-                    var roomTypeAbout = response.roomTypeAbout;
-                    var roomPetType = response.roomPetType;
+            function fetchRoomInfo() {
+                $.ajax({
+                    url: `http://localhost:8080/roomTypes/${roomTypeId}`, // Replace with the actual API endpoint
+                    method: 'GET',
+                    success: function (response) {
+                        // Update the room type information
+                        var roomTypeName = response.roomTypeName
+                        var roomPetType = response.roomPetType;
+                        var roomTypeAbout = response.roomTypeAbout;
+                        var roomTypePrice = response.roomTypePrice;
 
-                    $('#room-type-name').text(roomTypeName);
-                    $('#room-pet-type').text(roomPetType);
-                    $('#room-type-about').text(roomTypeAbout);
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                    // Handle error case
-                }
-            });
+                        $('#room-type-name').text(roomTypeName);
+                        $('#room-pet-type').text(roomPetType);
+                        $('#room-type-about').text(roomTypeAbout);
+                        $('#room-type-price').text(roomTypePrice);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle error case
+                    }
+                });
+            }
 
             // Add event listener to the "確認訂房&付款" button
             $('#confirm-pay').click(function () {
@@ -262,8 +285,8 @@
                         checkInDate: checkInDate,
                         checkOutDate: checkOutDate,
                         status: '0',
-                        origPrice: 200, // Replace with the actual original price
-                        finalPrice: 180, // Replace with the actual final price
+                        payMethod: '0', // Replace with the actual payment method
+                        price: 180, // Replace with the actual final price
                         specialReq: $('#new-review').val() // Get the special request from the textarea
                     };
 
@@ -301,14 +324,14 @@
                     })
                 }
             });
+
+            // Add event listener to the payment method
+            $('.form-select').on('change', function () {
+                $('.credit-card-fields').toggle($(this).val() === '信用卡結帳');
+            }).trigger('change');
+
         });
 
-
-        // Function to get member id
-        function getMemberId() {
-            return 1;
-            // return localStorage.getItem("memberId");
-        }
     </script>
 
 </body>

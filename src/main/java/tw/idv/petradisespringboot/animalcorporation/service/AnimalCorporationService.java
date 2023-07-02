@@ -11,7 +11,7 @@ public interface AnimalCorporationService {
 	
 	AnimalCorporation update(AnimalCorporation animalCorporation);
 	
-	List<AnimalCorporation> findAllWithStatusNo1();
+	List<AnimalCorporation> findAllWithStatusNot1();
 	
 	AnimalCorporation findByID(Integer id);
 	

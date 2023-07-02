@@ -622,7 +622,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
     	  let corpName = $row.find("td:eq(1)").text(); //:eq(1)1為索引值,從0開始 ,取第二個td的值
 
     	  $.ajax({
-   		    url: '/animalCorporation/id=' + corpId + '/editCorpAccess',
+   		    url: '/animalCorporation/editCorpAccess/id=' + corpId ,
    		    type: "PUT",
     	    success: function(res) {
     	      console.log("更新成功");

@@ -49,9 +49,14 @@ public class AnimalServiceImpl implements AnimalService {
 
 //  用TYPE找動物	
 	@Override
-	public List<Animal> findAnimalByAnimaltypeAndAnimalsex(String animaltype, String animalsex) {
+	public List<Animal> findAnimalByAnimalTypeAndAnimalSex(String animalType, String animalSex) {
 		
-		return repository.findAnimalByAnimaltypeAndAnimalsex(animaltype, animalsex);
+		return repository.findAnimalByAnimalTypeAndAnimalSex(animalType, animalSex);
+	}
+
+	@Override
+	public List<Animal> findByCorpId(Integer corpId) {
+		return repository.findByCorpId(corpId);
 	}
 
 }
