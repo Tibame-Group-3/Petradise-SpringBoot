@@ -7,14 +7,14 @@
           content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>房型資訊管理</title>
     <link rel="stylesheet"
-          href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
+          href="/hotel/assets17/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet"
-          href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/f_hotel_17/assets17/css/custom.css">
+          href="/hotel/assets17/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/hotel/assets17/css/custom.css">
     <link rel="stylesheet"
-          href="/f_hotel_17/assets17/css/Ludens---3-Edit-Dark-mode.css">
+          href="/hotel/assets17/css/Ludens---3-Edit-Dark-mode.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet"
@@ -37,7 +37,7 @@
                     href="#">
                 <div class="sidebar-brand-text mx-3">
                     <img width="59" height="33"
-                         src="../f_hotel_17/assets17/img/avatars/logo-only.png">
+                         src="./assets17/img/avatars/logo-only.png">
                 </div>
             </a>
             <hr class="sidebar-divider my-0">
@@ -60,9 +60,9 @@
                         style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">房間管理</a>
                     <div class="dropdown-menu show" data-bs-popper="none"
                          style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="../f_hotel_17/roomType.html"
+                        <a class="dropdown-item" href="roomType.html"
                            style="padding: 2px 30px; font-size: 13px;">房型資訊</a><a
-                            class="dropdown-item" href="../f_hotel_17/room.html"
+                            class="dropdown-item" href="room.html"
                             style="padding: 2px 30px; font-size: 13px;">房間資訊</a>
                     </div>
                 </li>
@@ -160,8 +160,8 @@
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i
             class="fas fa-angle-up"></i></a>
 </div>
-<script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
-<script src="/f_hotel_17/assets17/js/theme.js"></script>
+<script src="/hotel/assets17/bootstrap/js/bootstrap.min.js"></script>
+<script src="/hotel/assets17/js/theme.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8"
@@ -258,7 +258,7 @@
     $(document).ready(function () {
         $("#room-data-list").on("click", ".btn-edit", function () {
             var roomTypeId = $(this).data("room-type-id");
-            window.location.href = "/f_hotel_17/editRoomType.html?roomTypeId=" + roomTypeId;
+            window.location.href = "editRoomType.html?roomTypeId=" + roomTypeId;
         });
     });
 </script>
