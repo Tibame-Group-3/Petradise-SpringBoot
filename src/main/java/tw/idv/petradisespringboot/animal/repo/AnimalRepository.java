@@ -30,9 +30,9 @@ public interface AnimalRepository extends JpaRepository<Animal, Integer> {
 //	    List<Animal> findByAnimaltype(String animaltype);
 
 
-	List<Animal> findAnimalByAnimaltypeAndAnimalsex(String animaltype, String animalsex);
+	List<Animal> findAnimalByAnimalTypeAndAnimalSex(String animalType, String animalSex);
 
-	
+	List<Animal> findByCorpId(Integer corpId);
 
 	
 	

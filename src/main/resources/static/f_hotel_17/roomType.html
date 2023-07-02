@@ -190,6 +190,7 @@
 
     $(document).ready(function () {
         const hotelId = getHotelOwnerId();
+        console.log(hotelId);
         $.ajax({
             url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
             type: 'GET',

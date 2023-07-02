@@ -26,6 +26,13 @@ function getAnimalCorporationId() {
     }
     return owner.corpId;
 }
+function getAnimalCorporationName() {
+    const owner = getAnimalCorporation();
+    if (!owner) {
+        return null;
+    }
+    return owner.corpName;
+}
 
 function redirectToSignin() {
     window.location.href = '/animalCorporation/signin.html?redirect=' + encodeURIComponent(window.location.href);

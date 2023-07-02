@@ -92,13 +92,18 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
+<<<<<<< HEAD
 										data-bs-toggle="dropdown" href="#"><span
 										class="d-none d-lg-inline me-2 text-gray-600 small">社團法人台灣寶貝動物協會</span></a>
+=======
+									   data-bs-toggle="dropdown" href="#"><span id="owner-name"
+																				class="d-none d-lg-inline me-2 text-gray-600 small"></span></a>
+>>>>>>> main
 									<div
-										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-										style="min-width: 110px;">
-										<a class="dropdown-item" href="#"><i
-											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+											class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+											style="min-width: 110px;">
+										<a class="dropdown-item" href="#" onclick="logout()"><i
+												class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
 									</div>
 								</div>
 							</li>
@@ -220,6 +225,17 @@
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
 			integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
 			crossorigin="anonymous"></script>
+		<script src="../../assets/js/animal_corporation_login.js"></script>
+
+		<!-- 新引入的JS檔案或套件請由此往下放 -->
+		<script>
+			$(document).ready(function () {
+				const ownerName = getAnimalCorporationName();
+				if (ownerName) {
+					$('#owner-name').text(ownerName);
+				}
+			});
+		</script>
 		<script>
             (() => {
                 const tbody = document.querySelector('#tbody');
