@@ -7,11 +7,11 @@
           content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>編輯房型資訊</title>
     <link rel="stylesheet"
-          href="/f_hotel_17/assets17/bootstrap/css/bootstrap.min.css">
+          href="/hotel/assets17/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet"
-          href="/f_hotel_17/assets17/fonts/fontawesome-all.min.css">
+          href="/hotel/assets17/fonts/fontawesome-all.min.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                     href="#">
                 <div class="sidebar-brand-text mx-3">
                     <img width="59" height="33"
-                         src="../f_hotel_17/assets17/img/avatars/logo-only.png">
+                         src="./assets17/img/avatars/logo-only.png">
                 </div>
             </a>
             <hr class="sidebar-divider my-0">
@@ -48,9 +48,9 @@
                         style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">房間管理</a>
                     <div class="dropdown-menu show" data-bs-popper="none"
                          style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-                        <a class="dropdown-item" href="../f_hotel_17/roomType.html"
+                        <a class="dropdown-item" href="roomType.html"
                            style="padding: 2px 30px; font-size: 13px;">房型資訊</a><a
-                            class="dropdown-item" href="../f_hotel_17/room.html"
+                            class="dropdown-item" href="room.html"
                             style="padding: 2px 30px; font-size: 13px;">房間資訊</a>
                     </div>
                 </li>
@@ -207,10 +207,12 @@
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i
             class="fas fa-angle-up"></i></a>
 </div>
-<script src="/f_hotel_17/assets17/bootstrap/js/bootstrap.min.js"></script>
+<script src="/hotel/assets17/bootstrap/js/bootstrap.min.js"></script>
 <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../assets/js/hotel_owner_login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(document).ready(function () {
         const ownerName = getHotelOwnerName();
@@ -222,7 +224,7 @@
 <script>
     //按關閉會導回前一頁
     function closeButtonClicked() {
-        window.location.href = '/f_hotel_17/roomType.html';
+        window.location.href = 'roomType.html';
     }
 </script>
 <script>
@@ -285,9 +287,9 @@
     // 送圖片
     var urlParams = new URLSearchParams(window.location.search);
     var roomTypeId = urlParams.get('roomTypeId');
-    <!--   按下送出按鈕後 把formdata往後端送 -->
-    $(document).ready(function () {
-        $('#submitBtn').click(function (e) {
+
+    $(document).ready(function() {
+        $('#submitBtn').click(function(e) {
             e.preventDefault();
 
             var formData = new FormData($('#roomTypeForm')[0]);
@@ -295,18 +297,29 @@
                 url: '/roomTypes/' + roomTypeId,
                 type: 'POST',
                 data: formData,
-                processData: false,  // 告訴jQuery不要處理數據
-                contentType: false,  // 告訴jQuery不要設定Content-Type請求頭
-                success: function (response) {
-                    alert('更新成功');
-                    window.location.href = '/f_hotel_17/roomType.html';
+                processData: false, // 告訴jQuery不要處理數據
+                contentType: false, // 告訴jQuery不要設定Content-Type請求頭
+                success: function(response) {
+                    Swal.fire({
+                        title: '房型資訊已更新',
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        },
+                        confirmButtonColor: '#f8c544',
+                    }).then(() => {
+                        window.location.href = "roomType.html"; // 回到上一頁
+                    });
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     alert('更新失敗');
                 }
             });
         });
     });
+
 </script>
 
 </body>
