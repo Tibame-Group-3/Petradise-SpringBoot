@@ -7,7 +7,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<title>sign_up</title>
+<title>收容業主註冊</title>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap"
@@ -497,7 +497,7 @@ $(function(){
                         },
                         stringLength: {
                             min: 5,
-                            message: " "
+                            message: "案號格式不正確，需含有中文及數字"
                         }
                     }
 
@@ -644,6 +644,7 @@ $(function(){
               contentType: "application/json",
               data: JSON.stringify(allData),
               success: function(res) {
+            	  window.location.href = "/";
               },
             });
           } catch (err) {

@@ -46,26 +46,25 @@
 }
 
 .btn-more {
-  background-color: #574f36;
+  background-color: rgb(241,238,208);
   border: 0;
   border-radius: 50px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: rgb(134,134,151);
   font-size: 16px;
   padding: 12px 25px;
   display: inline-block;
-  margin-left: 220px;
   bottom: 30px;
   right: 30px;
   letter-spacing: 1px;
 }
 
 .btn-delete {
-  background-color: #574f36;
+  background-color: rgb(241,238,208);
   border: 0;
   border-radius: 50px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: rgb(134,134,151);
   font-size: 16px;
   padding: 12px 25px;
   display: inline-block;
