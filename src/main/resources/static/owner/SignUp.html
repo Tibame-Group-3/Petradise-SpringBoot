@@ -203,9 +203,9 @@ div.picture {
 	color: red;
 }
 
-/* .navbar-collapse { */
-/* 	padding-left: 0; */
-/* } */
+ .navbar-collapse { 
+ 	padding-left: 0; 
+ } 
 
 .btn_set[disabled] {
 	pointer-events: auto !important;
@@ -214,9 +214,9 @@ div.picture {
 	background-color: gray;
 }
 
-/* ul.navbar { */
-/* 	display: inline-block; */
-/* } */
+ ul.navbar { 
+ 	display: inline-block; 
+ }
 
 div.collapse {
 	padding: 0;
@@ -253,9 +253,14 @@ div.collapse {
  
 
 .emailCheck{
-border:3px solid black;
+	display:inline-block;
+	position:relative;
+	top:-10px;
+	
+	border:3px solid black;
     animation: emailcheck 1s linear infinite;
     background-color:#f1ecd1;
+    font-size:16px;   
 }
 
 @keyframes emailcheck {
@@ -263,7 +268,7 @@ border:3px solid black;
     50% {border-color: #f8c544;}
     100% {border-color: red;}
 }
- 
+
 </style>
 </head>
 
@@ -315,9 +320,9 @@ border:3px solid black;
 						</div>
 						<div class="form-group">
 							<label for="owner_email">
-								<div>
+								<div style="height:25px;">
 									Email:
-									<button type="button" class="emailCheck">信箱驗證</button>
+									<button type="button" class="emailCheck">驗證</button>
 								</div> <span><input type="email" name="owner_email"
 									id="owner_email" maxlength="50"
 									placeholder="請輸入常用電子信箱,輸入完畢後請進行驗證,通知信將發送至此信箱"></span>
@@ -485,6 +490,7 @@ $(function(){
 		                	});
 		                }
 		            }).then(function(result) {
+		            	if(result.isConfirmed){
 		            	isEmailVerified = true;
 		                Swal.fire({
 		                    title: result.value,
@@ -492,6 +498,9 @@ $(function(){
 		                    showCancelButton: false,
 		                    confirmButtonText: '確定'
 		                });
+		            	}else if(result.isDismissed){
+		            		
+		            	}
 		            }).catch(function(error) {
 		                Swal.fire({
 		                    title: error,
