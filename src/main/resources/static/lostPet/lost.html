@@ -89,7 +89,7 @@ select {
 		url(https://www.animalhumanesociety.org/themes/ahs/images/arrow_dropdown.svg);
 	background-repeat: no-repeat;
 	background-position: center right;
-	background-size: 25px 25px
+	background-size: 25px 25px;
 }
 
 .container .card .card-img-top {
@@ -255,88 +255,30 @@ select {
 				<div id="block-pagetitle-2"
 					class="content--contained block block-core block-page-title-block block-block-pagetitle-2 block-">
 					<div class="content--contained block-pagetitle-2">
-						<h1 class="page-title">Lost Pet</h1>
+						<h1 class="page-title">遺失寵物區</h1>
 					</div>
 				</div>
-				<div id="" class="">
-					<div class="">
-						<div class="clear-both block-facets">
-							<select id = "speciesSelect">
-								<option value="AllType">全部種類</option>
-								<option value="Dogs" id ="dog">狗</option>
-								<option value="Cats" id ="cat">貓</option>
-								<option value="Birds" id = "bird">鳥</option>
-								<option value="Others" id = "other">其他</option>
-							</select>
-						</div>
+				<div class="text-center">
+					<div class="clear-both block-facets">
+						<select id="speciesSelect" style="display: block; margin: 0 auto;">
+							<option value="AllType">全部種類</option>
+							<option value="Dogs" id="dog">狗</option>
+							<option value="Cats" id="cat">貓</option>
+							<option value="Birds" id="bird">鳥</option>
+							<option value="Others" id="other">其他</option>
+						</select>
 					</div>
 				</div>
-				<div class="facet-inactive block-facet--dropdown block block-facets"
-					id="">
-					<div class="">
-						<div class="">
-							<select>
-								<option value="#">Male And Female</option>
-								<option value="#">Male</option>
-								<option value="#">Female</option>
-								<option value="#">Unknown</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div
-					class="facet-inactive block-facet--dropdown block block-facets block-facet-blockage-group-cats block-block-agegroupcats block-"
-					id="">
-					<div class="f">
-						<div class="">
-							<select>
-								<option value="#">All age groups</option>
-								<option value="#">More than 6 months</option>
-								<option value="#">More than 5 years</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div
-					class="facet-inactive block-facet--checkbox block block-facets block-facet-blockanimal-breed-cats block-block-animalbreedcats block-"
-					id="">
-					<div class="">
-						<div class="">
-							<select>
-								<option value="#">All breeds</option>
-								<option value="#"></option>
-								<option value="#"></option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div
-					class="facet-inactive block-facet--dropdown block block-facets block-facet-blockanimal-location-cats block-block-animallocationcats block-"
-					id="">
-					<div class="">
-						<div class="">
-							<select>
-								<option value="#">All locations</option>
-								<option value="#">北</option>
-								<option value="#">中</option>
-								<option value="#">南</option>
-								<option value="#">東</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div
-					class="facet-inactive block-facet--checkbox block block-facets block-facet-blockanimal-other-options-cats block-block-animalotheroptionscats block-"
-					id="">
-					<div class="">
-						<div class="">
-							<select>
-								<option value="#">Other options</option>
-								<option value="#"></option>
-								<option value="#"></option>
-								<option value="#"></option>
-							</select>
-						</div>
+
+				<div class="text-center">
+					<div class="clear-both block-facets">
+						<select class="lostPlace" style="display: block; margin: 0 auto;">
+							<option value="#">全部地區</option>
+							<option value="#">北</option>
+							<option value="#">中</option>
+							<option value="#">南</option>
+							<option value="#">東</option>
+						</select>
 					</div>
 				</div>
 
@@ -349,132 +291,7 @@ select {
 		</button>
 	</div>
 	<div class="container mt-3">
-		<div class="row justify-content-center ">
-			<!-- <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="https://www.google.com.tw/?hl=zh_TW" target="_blank">
-                        <img class="card-img-top"
-                            src="https://i.ssjz8.com/upload/1/img2.baidu.com%2Fit%2Fu%3D3606509669%2C3409681973%26fm%3D253%26fmt%3Dauto%26app%3D138%26f%3DJPEG%3Fw%3D640%26h%3D358"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top"
-                            src="https://tw.portal-pokemon.com/play/resources/pokedex/img/pm/0bca57b27bed8e50cf33ac9411a45482d61d807b.png"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top"
-                            src="https://memeprod.ap-south-1.linodeobjects.com/user-template/e0fb0fc67e8eebc55ba5e57040cb7d4d.png"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top"
-                            src="https://p0.itc.cn/images01/20200917/1afe533dea1c4597858f64529fe47106.jpeg"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top"
-                            src="https://truth.bahamut.com.tw/s01/201908/51f909bbf92f544203f7b78a91b1ec2b.JPG"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="https://image1.gamme.com.tw/news2/2016/60/83/qJeXn6aZmKaWsKg.jpg"
-                            alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="./images/dog.JPG" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <a href="#">
-                        <img class="card-img-top" src="./images/cat.JPG" alt="Card image cap">
-                    </a>
-                    <div class="card-body">
-                        <div class="card-title"><a href="#">標題</a></div>
-                        <div class="card-text">內容內容....</div>
-                        <div class="image-container">
-                            <img src="./images/comment-alt.png" class="comment_icon" alt="Comment Icon">
-                        </div>
-                    </div>
-                </div> 
-            </div>-->
-		</div>
+		<div class="row justify-content-center "></div>
 	</div>
 	<footer class="text-center">
 		<div class="container text-muted py-4 py-lg-5">
@@ -516,7 +333,8 @@ select {
 	</footer>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"
-		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
 		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="

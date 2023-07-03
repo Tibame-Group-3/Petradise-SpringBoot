@@ -1,23 +1,18 @@
 package tw.idv.petradisespringboot.hotel_owner.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
+
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
-import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
-
+// 業主審核
 @RestController
 @RequestMapping("/ownerCheck")
 public class OwnerCheckController {
@@ -26,11 +21,11 @@ public class OwnerCheckController {
 	private HotelOwnerService hotelOwnerService;
 
 	@GetMapping("/getAll")
-	public List<HotelOwnerVO> getAllOwners(@RequestParam String hotelStatus) {
+	public List<HotelOwnerVO> getAllOwners() {
 
 		try {
 			List<HotelOwnerVO> list = hotelOwnerService.getAll();
-			List<HotelOwnerVO> statusList = hotelOwnerService.getStatus(hotelStatus);
+			List<HotelOwnerVO> statusList = hotelOwnerService.getStatus();
 			for (HotelOwnerVO vo : list) {
 				// 只需獲取圖片的數組
 				byte[] imageBytes = vo.getHotelLicPic();

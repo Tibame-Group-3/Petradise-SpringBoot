@@ -8,12 +8,14 @@ public interface RoomOrderService {
 
     RoomOrder add(RoomOrder order);
     List<RoomOrder> getRoomOrdersByMemId(Integer memId);
-    List<RoomOrder> getRoomOrdersByPetId(Integer petId);
     List<RoomOrder> getRoomOrdersByStatus(Character status);
 
     List<RoomOrder> getAll();
     RoomOrder getRoomOrderById(Integer id);
     RoomOrder modify(Integer id, RoomOrder modifiedRoomOrder);
+    RoomOrder changeRoomOrderStatus(Integer id, char newStatus);
+
+    void updateExpiredOrderStatus();
 
     List<RoomOrder> getRoomOrdersByHotelId(Integer hotelId);
 

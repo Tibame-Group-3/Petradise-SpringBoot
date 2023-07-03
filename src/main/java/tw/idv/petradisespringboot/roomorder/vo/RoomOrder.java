@@ -20,19 +20,14 @@ public class RoomOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_order_id")
     private Integer id;
-
     @Column(name = "mem_id")
     private Integer memId;
-
     @Column(name = "room_type_id")
     private Integer roomTypeId;
-
     @Column(name = "room_id")
     private Integer roomId;
-
-    @Column(name = "pet_id")
-    private  Integer petId;
-
+    @Column(name = "room_pet_name")
+    private String petName;
     @Column(name = "room_order_date", insertable = false)
     private Date orderDate;
     @Column(name = "check_in_date")
@@ -41,12 +36,10 @@ public class RoomOrder {
     private LocalDate checkOutDate;
     @Column(name = "room_order_status")
     private Character status;
-    @Column(name = "room_original_price")
-    private Integer origPrice;
-    @Column(name = "room_final_price")
-    private Integer finalPrice;
-    @Column(name = "room_bonus")
-    private Integer bonus;
+    @Column(name = "room_payment_method")
+    private Character payMethod;
+    @Column(name = "room_price")
+    private Integer price;
     @Column(name = "room_od_special_req")
     private String specialReq;
 

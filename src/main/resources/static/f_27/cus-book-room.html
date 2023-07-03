@@ -7,7 +7,6 @@
     <title>客戶-預約訂房</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/Simple-Slider-Simple-Slider.css">
     <style>
         .container {
             display: flex;
@@ -71,45 +70,60 @@
             border-color: tan;
             border-width: 5px;
         }
+
+        .is-invalid {
+            border: 1px solid red;
+            /* Add a red border for invalid input */
+        }
+
+        .error-message {
+            color: red;
+            /* Set the color of the error message to red */
+            font-size: 14px;
+            /* Customize the font size of the error message */
+            margin-top: 5px;
+            /* Add some spacing above the error message */
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="content">
-            <div class="simple-slider">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper"></div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">基本資料</h5>
                 </div>
                 <div class="card-body">
-                    <div class="card-text">客戶名稱: <span id="customer-name">name</span></div>
-                    <div>寵物名稱: <span id="pet-name">e</span></div>
-                    <div>連絡電話: <span id="phone">e</span></div>
-                    <div>Email: <span id="email">e</span></div>
+                    <div class="card-text">客戶名稱: <span id="customer-name"></span></div>
+                    <div>連絡電話: <span id="phone"></span></div>
+                    <div>Email: <span id="email"></span></div>
                 </div>
+                <div class="card-header">
+                    <h5 class="mb-0">寵物資料</h5>
+                </div>
+                <div class="card-body">寵物名稱: <input type="text" class="form-control" id="pet-name"></div>
                 <div class="card-header">
                     <h5 class="mb-0">付款資料</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">信用卡號:<br></p>
-                    <div class="form-group">
+                    <label class="form-label">
+                        <select class="d-inline-block form-select form-select-sm">
+                            <option selected="">到店付款</option>
+                            <option>信用卡結帳</option>
+                        </select><br>
+                    </label>
+                    <div class="form-group credit-card-fields">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                         <input type="text" class="form-control" maxlength="4" placeholder="XXXX">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group credit-card-fields">
                         <input type="text" class="form-control" maxlength="3" placeholder="CVV">
                         <input type="text" class="form-control" maxlength="4" placeholder="Expiration Date">
                     </div>
+
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -125,7 +139,7 @@
 
         <aside class="aside">
             <div class="image">
-                <img src="assets/img/xxx.jpg" alt="Hotel Image">
+                <img id="room-image" src="">
             </div>
             <div class="room-info">
                 <h5>入住 / 退房日期</h5>
@@ -134,27 +148,192 @@
             </div>
             <div class="room-info">
                 <h5>房型</h5>
-                <p>xx房<span id="room-type"></span></p>
+                <p><span id="room-type-name"></span></p>
             </div>
             <div class="room-info">
-                <h5>Room Info</h5>
-                <p>Max Occupancy: 2</p>
-                <p>Bed Type: Queen</p>
-                <p>View: City</p>
+                <h5>寵物類型</h5>
+                <p id="room-pet-type"></p>
             </div>
             <div class="room-info">
-                <h5>Other Information</h5>
-                <p>Free Wi-Fi</p>
-                <p>Breakfast included</p>
-                <p>Pet-friendly</p>
+                <h5>房型資訊</h5>
+                <p id="room-type-about"></p>
             </div>
-            <button class="confirm-button">確認訂房&付款</button>
+            <strong>
+                <div class="room-info">
+                    <h5>總金額TWD</h5>
+                    <p id="room-type-price"></p>
+                </div>
+            </strong>
+            <button class="confirm-button" id="confirm-pay">確認訂房&付款</button>
         </aside>
     </div>
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
-    <script src="assets/js/Simple-Slider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Add this script block after including the jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Function to get member id
+        function getMemberId() {
+            return 1;
+            // return localStorage.getItem("memberId");
+        }
+
+        $(document).ready(function () {
+
+            // Retrieve member Id from local storage
+            const memberId = getMemberId();
+
+            // Retrieve the values from session storage
+            var checkInDate = "2023-06-29";     // sessionStorage.getItem('checkInDate');
+            var checkOutDate = "2023-06-30";    // sessionStorage.getItem('checkOutDate');
+            var roomTypeId = 5;                 // sessionStorage.getItem('roomTypeId');
+
+            // Update the corresponding elements with the retrieved values
+            $('#check-in-date').text(checkInDate);
+            $('#check-out-date').text(checkOutDate);
+
+            // Call the functions to fetch dynamic content when the page is ready
+            fetchCustomerInfo();
+            fetchImage();
+            fetchRoomInfo();
+
+
+
+            // Function to fetch customer information
+            function fetchCustomerInfo() {
+                $.ajax({
+                    url: `http://localhost:8080/members/id=${memberId}`, // Replace with the actual API endpoint
+                    method: 'GET',
+                    success: function (response) {
+                        // Update the customer information elements
+                        $('#customer-name').text(response.name);
+                        $('#phone').text(response.phone);
+                        $('#email').text(response.email);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle error case
+                    }
+                });
+            }
+
+            // Function to fetch image
+            function fetchImage() {
+                $.ajax({
+                    url: `http://localhost:8080/roomTypes/${roomTypeId}/images`,
+                    method: 'GET',
+                    success: function (response) {
+                        // Update the room image
+                        var imageUrl = response[0];
+                        var img = new Image();
+                        img.onload = function () {
+                            // Image loaded successfully
+                            $('#room-image').attr('src', imageUrl);
+                        };
+                        img.onerror = function () {
+                            // Image failed to load, display substitute image
+                            $('#room-image').attr('src', '../assets/img/logo-only.png');
+                            $('#room-image').attr('alt', 'No Image Available');
+                        };
+                        img.src = imageUrl;
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle error case
+                    }
+                });
+            }
+
+            // Fetch the room type information
+            function fetchRoomInfo() {
+                $.ajax({
+                    url: `http://localhost:8080/roomTypes/${roomTypeId}`, // Replace with the actual API endpoint
+                    method: 'GET',
+                    success: function (response) {
+                        // Update the room type information
+                        var roomTypeName = response.roomTypeName
+                        var roomPetType = response.roomPetType;
+                        var roomTypeAbout = response.roomTypeAbout;
+                        var roomTypePrice = response.roomTypePrice;
+
+                        $('#room-type-name').text(roomTypeName);
+                        $('#room-pet-type').text(roomPetType);
+                        $('#room-type-about').text(roomTypeAbout);
+                        $('#room-type-price').text(roomTypePrice);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle error case
+                    }
+                });
+            }
+
+            // Add event listener to the "確認訂房&付款" button
+            $('#confirm-pay').click(function () {
+                var petName = $('#pet-name').val();
+                if (petName.trim() !== '') {
+
+                    // Create the data object with the required information
+                    var data = {
+                        memId: memberId,
+                        roomTypeId: 5, // Replace with the actual room type ID
+                        roomId: 2, // Replace with the actual room ID
+                        petName: petName, // Replace with the actual pet ID
+                        checkInDate: checkInDate,
+                        checkOutDate: checkOutDate,
+                        status: '0',
+                        payMethod: '0', // Replace with the actual payment method
+                        price: 180, // Replace with the actual final price
+                        specialReq: $('#new-review').val() // Get the special request from the textarea
+                    };
+
+                    // Send the data to the specified endpoint
+                    $.ajax({
+                        url: 'http://localhost:8080/room-order/customer/add', // Replace with the actual API endpoint
+                        method: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (response) {
+                            // Show the success message using SweetAlert
+                            Swal.fire({
+                                title: '感謝您的預定!',
+                                imageUrl: 'https://unsplash.it/400/200',
+                                imageWidth: 400,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                            }).then(function () {
+                                // After pressing "OK", redirect the user to the specified page
+                                window.location.href = 'http://localhost:8080/f_27/cus-orders.html';
+                            });
+                        }
+                        ,
+                        error: function (error) {
+                            console.error('Error:', error);
+                            // Handle error case
+                        }
+                    });
+                } else {
+                    $('#pet-name').focus(); // Focus on the input box
+                    $('#pet-name').addClass('is-invalid'); // Add a CSS class to indicate the error
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Please enter a pet name.'
+                    })
+                }
+            });
+
+            // Add event listener to the payment method
+            $('.form-select').on('change', function () {
+                $('.credit-card-fields').toggle($(this).val() === '信用卡結帳');
+            }).trigger('change');
+
+        });
+
+    </script>
+
 </body>
 
 </html>
