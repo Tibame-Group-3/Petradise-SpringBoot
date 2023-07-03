@@ -1,12 +1,18 @@
 package tw.idv.petradisespringboot.hotel_owner.repo;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
-
+import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 public interface HotelOwnerRepository extends JpaRepository<HotelOwnerVO, Integer> {
 
-    Optional<HotelOwnerVO> findByOwnerAccountAndOwnerPassword(String account, String password);
+	Optional<HotelOwnerVO> findByOwnerAccountAndOwnerPassword(String account, String password);
+
+	List<HotelOwnerVO> findByOwnerAccount(String ownerAccount);
+
+	List<HotelOwnerVO> findByhotelId(Integer hotelId);
 
 }

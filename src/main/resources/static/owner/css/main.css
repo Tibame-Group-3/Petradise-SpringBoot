@@ -341,3 +341,29 @@ button.accent {
     from {opacity: 0;}
     to {opacity:1 ;}
 }
+
+.messageBox{
+	border:1px solid black;
+	display: inline-block;
+	padding:5px 10px;
+	background-color:lightgreen;
+  	border-radius: 10px; /* 设置边框圆角半径为20像素 */
+
+}
+h2{
+	background-color:#f8c544;
+}
+
+button.accent,button.primary{
+	background-color:#f8c544;
+	transition: transform 0.1s ease-in-out;
+}
+button:active {
+	background-color:#f8c544;
+  	transform: scale(0.9);
+}
+
+.right-align {
+  text-align: right;
+}
+

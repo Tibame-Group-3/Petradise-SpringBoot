@@ -20,7 +20,7 @@
             align-items-md-center justify-content-xl-center" style="margin: 0px;">
                 <div style="max-width:50%; margin-left: 100px;">
                     <h5><span id="order-status"></span></h5>
-                    <h2 class="text-uppercase fw-bold">XX 旅館</h2>
+                    <h2 class="text-uppercase fw-bold"><span id="hotel-name"></span></h2>
                     <div class="my-3"><br>
                         <div>訂單編號: <span id="order-id"></span></div>
                         <div>訂單日期: <span id="order-date"></span></div>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 60%; margin-left: 25%;">
+        <div style="width: 60%; margin-left: 23%;">
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">客房資訊</h5>
@@ -77,9 +77,22 @@
 
     <script>
 
+
+
         // Retrieve the order ID from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get('id');
+
+        // Fetch hotel name
+        fetch(`http://localhost:8080/room-order/hotel-name/${orderId}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('hotel-name').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error case
+            });
 
         // Fetch order details
         fetch(`http://localhost:8080/room-order/id/${orderId}`)
@@ -88,6 +101,7 @@
                 // Update the HTML elements with the order information
                 document.getElementById('order-id').textContent = data.id;
                 document.getElementById('order-status').textContent = getStatusText(data.status);
+
                 // Fetch additional member details
                 const memberId = data.memId;
                 const memberUrl = `http://localhost:8080/members/id=${memberId}`;

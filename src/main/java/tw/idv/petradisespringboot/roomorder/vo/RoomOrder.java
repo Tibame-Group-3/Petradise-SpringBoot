@@ -24,7 +24,7 @@ public class RoomOrder {
     private Integer memId;
     @Column(name = "room_type_id")
     private Integer roomTypeId;
-    @Column(name = "room_id")
+    @Column(name = "room_id", insertable = false)
     private Integer roomId;
     @Column(name = "room_pet_name")
     private String petName;

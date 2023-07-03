@@ -8,14 +8,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +23,7 @@ import tw.idv.petradisespringboot.hotel_owner.repo.HotelOwnerRepository;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @Controller
-public class ChatController {
+public class GuestChatController {
 
 	@Autowired
 	private ChatMessageRepository chatMessageRepository;
@@ -34,28 +31,38 @@ public class ChatController {
 	@Autowired
 	private HotelOwnerRepository hotelOwnerRepository;
 
-	@GetMapping("/api/messages")
+	@GetMapping("/api/messages/guest")
 	@ResponseBody
 	public List<ChatMessage> getRecentMessages(@RequestParam String hotelId) {
-//	public List<ChatMessage> getRecentMessages(@RequestParam String hotelName) {
-		System.out.println(hotelId);
 		List<ChatMessage> messages = new ArrayList<>(chatMessageRepository.findAll());
 
 		messages = messages.stream().filter(msg -> hotelId.equals(msg.getHotelId())).collect(Collectors.toList());
+		System.out.println(messages);
 		messages.sort(
 				Comparator.comparing(message -> Optional.ofNullable(message.getTimestamp()).orElse(Instant.EPOCH)));
-		return messages;
+		return messages; // 返回排序后的messages，而不是findAll的结果
+	}
+
+	@GetMapping("/hotelName")
+	@ResponseBody
+	public List<HotelOwnerVO> getHotelName(@RequestParam String hotelId) {
+		int hotelid = Integer.parseInt(hotelId);
+		List<HotelOwnerVO> hotel = hotelOwnerRepository.findByhotelId(hotelid);
+		System.out.println(hotel);
+		return hotel;
 	}
 
 	// 處理訊息
-	@MessageMapping("/chat")
+	@MessageMapping("/guest-chat")
 	@SendTo("/topic/public")
 	public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
 
 		String content = chatMessage.getContent();
 
 		String username = chatMessage.getSender();
+
 		String hotelId = chatMessage.getHotelId();
+		System.out.println(hotelId);
 		chatMessage.setSender(username);
 		if (content != null) {
 			chatMessage.setContent(content);
@@ -65,18 +72,7 @@ public class ChatController {
 		chatMessage.setChatType(ChatType.CHAT);
 		chatMessage.setHotelId(hotelId);
 		chatMessageRepository.save(chatMessage);
-//		chatMessage.setHotelName(chatMessage.getHotelName());
 		return chatMessage; // 返回時會將訊息送至/topic/public
 	}
 
-//	業主聊天室
-	@PostMapping("/login")
-	public ResponseEntity<?> ownerLogin(@RequestParam String account, @RequestParam String password) {
-		Optional<HotelOwnerVO> user = hotelOwnerRepository.findByOwnerAccountAndOwnerPassword(account, password);
-		if (!user.isPresent()) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("帳號或密碼錯誤");
-		}
-		return ResponseEntity.ok(user);
-
-	}
 }

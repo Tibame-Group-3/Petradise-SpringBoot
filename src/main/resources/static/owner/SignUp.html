@@ -52,6 +52,11 @@
 <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
 <link rel="stylesheet" href="./css/styles.min.css">
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@600&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+
 <style>
 /* Reset */
 * {
@@ -82,14 +87,11 @@ h1 {
 }
 
 .btn_set:hover {
-	background:#f9ecdb;
+	background: #f9ecdb;
 	color: #333;;
 	cursor: pointer;
-	 box-shadow: 0 0 5px #ffe7dd,
-              0 0 25px #ffe7dd,
-              0 0 50px #ffe7dd,
-              0 0 100px #ffe7dd;
-
+	box-shadow: 0 0 5px #ffe7dd, 0 0 25px #ffe7dd, 0 0 50px #ffe7dd, 0 0
+		100px #ffe7dd;
 }
 
 /* Main Styling */
@@ -107,6 +109,7 @@ html, body {
 	border-radius: 5px;
 	max-width: 80%;
 }
+
 
 #form-wrap h1, #form-wrap p {
 	text-align: center;
@@ -132,11 +135,8 @@ html, body {
 #form-wrap .form-group input:focus {
 	outline: none;
 	border: 1px solid rgb(210, 134, 12);
-	box-shadow: 0 0 5px #ffe7dd,
-              0 0 10px #ffe7dd,
-              0 0 10px #ffe7dd,
-              0 0 10px #ffe7dd;
-	
+	box-shadow: 0 0 5px #ffe7dd, 0 0 10px #ffe7dd, 0 0 10px #ffe7dd, 0 0
+		10px #ffe7dd;
 }
 
 #form-wrap .bottom-text {
@@ -188,11 +188,7 @@ div.preview {
 	background-color: white;
 }
 
-.contact_form {
-	padding: 20px;
-	border: 15px solid transparent;
-	border-image: url(img/cat.gif ) 35 round;
-}
+
 
 div.picture {
 	background-image: url(img/bg.gif);
@@ -207,9 +203,9 @@ div.picture {
 	color: red;
 }
 
-.navbar-collapse {
-	padding-left: 0;
-}
+/* .navbar-collapse { */
+/* 	padding-left: 0; */
+/* } */
 
 .btn_set[disabled] {
 	pointer-events: auto !important;
@@ -218,20 +214,56 @@ div.picture {
 	background-color: gray;
 }
 
-ul.navbar {
-	display: inline-block;
-}
+/* ul.navbar { */
+/* 	display: inline-block; */
+/* } */
 
 div.collapse {
 	padding: 0;
 }
 
-.trainer_gif{
-position: absolute;
- margin-top: -30px; 
-
+.trainer_gif {
+	position: absolute;
+	margin-top: -30px;
+}
+.hotel_gif{
+	position: absolute;
+	margin-top: -40px;
 }
 
+  #navbar {
+  	font-family: "Noto Sans JP", sans-serif; 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+    font-size:32px;
+    padding-right:135px;
+    letter-spacing: 1em;
+ 	color: white;  /* 文字填充顏色 */
+    text-shadow: -3px 0 #fd780f, 0 3px #fd780f, 3px 0 #fd780f, 0 -3px #fd780f;
+    
+ }
+ .navbar-brand p{
+	font-family: "Noto Sans JP", sans-serif;
+	color: white;  /* 文字填充顏色 */
+    text-shadow: -1px 0 #fd780f, 0 1px #fd780f, 1px 0 #fd780f, 0 -1px #fd780f;
+ }
+ 
+
+.emailCheck{
+border:3px solid black;
+    animation: emailcheck 1s linear infinite;
+    background-color:#f1ecd1;
+}
+
+@keyframes emailcheck {
+    0% {border-color: red;}
+    50% {border-color: #f8c544;}
+    100% {border-color: red;}
+}
+ 
 </style>
 </head>
 
@@ -239,34 +271,12 @@ position: absolute;
 	<nav class="navbar navbar-light navbar-expand-md py-3"
 		style="position: sticky; top: 0; background: #ffffff; z-index: 10; border-left-width: 0px; border-right-width: 0px; border-top-width: 0px; border-bottom-width: 0px; margin-bottom: 0px; height: 83px;">
 		<div class="container">
-			<a class="navbar-brand d-flex align-items-center" href="#"
+			<a class="navbar-brand d-flex align-items-center" href="http://localhost:8080/"
 				style="position: sticky; top: 0; margin-left: 0px; padding-left: 0px; padding-right: 0px;"><img
-				width="75" height="41" src="img/logo-only.png"></a>
-			<button data-bs-toggle="collapse" class="navbar-toggler"
-				data-bs-target="#navcol-3">
-				<span class="visually-hidden">Toggle navigation</span><span
-					class="navbar-toggler-icon"></span>
-			</button>
+				width="75" height="41" src="img/logo-only.png"><p>回首頁</p></a>
+		
 			<div class="collapse navbar-collapse" id="navcol-3">
-				<ul class="navbar-nav mx-auto">
-					<li class="nav-item"><a class="nav-link active" href="#"
-						style="color: #fd780f;">關於我們</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: rgb(253, 120, 15);">毛孩旅館</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: rgb(253, 120, 15);">浪浪收容</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: rgb(253, 120, 15);">寵物商城</a></li>
-					<li class="nav-item"></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: rgb(253, 120, 15);">遺失協尋</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						style="color: rgb(253, 120, 15);">客服中心</a></li>
-				</ul>
-				<button class="btn btn-primary" type="button"
-					style="background: #fd780f; border-color: #fd780f; position: sticky;">會員登入</button>
-				<button class="btn btn-primary" type="button"
-					style="background: #ffffff; border-color: #fd780f; color: #fd780f; position: sticky;">會員中心</button>
+			<span id="navbar">寵物旅館　業主註冊</span>
 			</div>
 		</div>
 	</nav>
@@ -279,7 +289,8 @@ position: absolute;
 
 					<h1>業主您好,歡迎加入我們!</h1>
 
-					<span class="mark">業主資料<img class="trainer_gif" src="./img/trainer.gif" style="width:70px; height:100px;"></span>
+					<span class="mark">業主資料<img class="trainer_gif"
+						src="./img/trainer.gif" style="width: 70px; height: 100px;"></span>
 					<fieldset class="form">
 						<div class="form-group">
 							<label for="owner_name">
@@ -304,12 +315,15 @@ position: absolute;
 						</div>
 						<div class="form-group">
 							<label for="owner_email">
-								<div>Email:<button type="button" class="emailCheck">檢查</button></div> <span><input type="email"
-									name="owner_email" id="owner_email" maxlength="50"
-									placeholder="請輸入常用電子信箱,通知信將發送至此信箱"></span>
+								<div>
+									Email:
+									<button type="button" class="emailCheck">信箱驗證</button>
+								</div> <span><input type="email" name="owner_email"
+									id="owner_email" maxlength="50"
+									placeholder="請輸入常用電子信箱,輸入完畢後請進行驗證,通知信將發送至此信箱"></span>
 							</label>
 						</div>
-												
+
 						<div class="form-group">
 							<label for="owner_password">
 								<div>密碼:</div> <span><input type="password"
@@ -330,7 +344,8 @@ position: absolute;
 									placeholder="交易完成時,款項將轉入之銀行帳戶"></span>
 							</label>
 						</div>
-						<br> <span class="mark">旅館資料</span>
+						<br> <span class="mark">旅館資料<img class="hotel_gif" src="./img/rainbowcat.gif" style="width: 70px; height: 100px;"></span>
+						
 						<div class="form-group">
 							<label for="hotel_name">
 								<div>旅館名稱:</div> <span><input type="text"
@@ -692,7 +707,6 @@ $(function(){
 
 			$(".btn_set").click(function(e) {
 				e.preventDefault();
-				
 				if (!isEmailVerified) {
 					Swal.fire({
 						allowOutsideClick: false,
@@ -712,6 +726,7 @@ $(function(){
   			}).then((result) => {
   				e.preventDefault();
     			if (result.isConfirmed) {
+	
       			for (const key in allData) {
        			// 如果為null或空字串
        				if (!allData[key]) {
@@ -734,19 +749,34 @@ $(function(){
                               contentType: "application/json",
                               data: JSON.stringify(allData),
                               success: function(res) {
+                            	  
+                            	  Swal.fire({
+                  	          		confirmButtonText: '確定',
+                  	          		title: '表單提交完成',
+                  	          		iconHtml:`<img src= "./img/happy.gif" style="with 200px; height:200px;">`,
+                  	          		text: '審核完畢後會寄發通知信,請留意您的電子信箱',
+                  	        		}).then((result) => {
+                  	        			if (result.isConfirmed) {
+                  	        				location.reload();
+                  	        		}
+                  	        	});
+                            	
                               },
+                              
+                              error: function(xhr, textStatus, errorThrown) {
+                                  Swal.fire({
+                                      allowOutsideClick: false,
+                                      icon: 'error',
+                                      title: '統一編號已被註冊',
+                                      text: xhr.responseText // 顯示後端傳回的錯誤信息
+                                  });
+                              }
                           })
-        	   		Swal.fire({
-        	          		confirmButtonText: '確定',
-        	          		title: '歡迎您的加入'
-        	        		}).then((result) => {
-        	        			if (result.isConfirmed) {
-        	        				location.reload();
-        	        		}
-        	        	});
+        				         				  
         	     	}
         		
       		}
+    			
     	
   	});
 }
@@ -809,6 +839,8 @@ $(function(){
         	    });
         	    return; //只要驗證不通過就阻止後續程式執行,不然資料就進後端了
         	  }
+        	
+        	
         	//正則化驗證地址
         	const hotelAddress = $('#hotel_address').val();
         	const addressRegex = /^[\u4E00-\u9FFF0-9\u3105-\u3129\-]+$/;
@@ -867,18 +899,7 @@ $(function(){
               hotelAddress: hotelAddress,
               hotelLicId: hotelLicId,
               imageBase64:allData.imageBase64
-              
             };
-
-
-//             $.ajax({
-//               type: "POST",
-//               url: "/ownerSignUP/insert",
-//               contentType: "application/json",
-//               data: JSON.stringify(allData), 
-//               success: function(res) {
-//               },
-//             });
           } catch (err) {
             console.log('新增失敗', err);
            

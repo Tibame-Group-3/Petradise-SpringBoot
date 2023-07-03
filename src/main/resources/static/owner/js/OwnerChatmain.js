@@ -1,35 +1,5 @@
 	$(document).ready(function() {
-	
-	function getQueryParam(param) {
-  var urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
-
-var hotelId = getQueryParam('hotelId');
-var hotelName = null;
-console.log(hotelId);
-	
-	
-	$.ajax({
-    url: '/hotelName', 
-    method: 'GET',
-    data: {
-        hotelId: hotelId // replace this with the actual hotel ID
-    },
-    success: function(res) {
-        console.log(res);
-        hotelName = res[0].hotelName;
-        console.log(hotelName);
-   		$('h2').text(hotelName);
-       
-    },
-    error: function(xhr, status, error) {
-        console.error('Failed to get hotel name:', error);
-    }
-});
-	
-	
-	
+		
 	    var usernamePage = $('#username-page');
 	    var chatPage = $('#chat-page');
 	    var usernameForm = $('#usernameForm');
@@ -42,18 +12,62 @@ console.log(hotelId);
 	
 	    var stompClient = null;
 	    var username = null;
+	    var hotelId = null;
+		
+		$('#usernameForm').on('submit', function(event) {
+	    event.preventDefault(); // 阻止表單的默認提交行為
 	
-	    var colors = [ '#2196F3', '#32c787', '#00bcd4','#4dbb00', '#ff5652', '#ffc107',
-	        '#ff85af', '#ff9800', '#39bbb0', '#b0c503' ];
+	    var account = $('#account').val().trim();
+	    var password = $('#password').val().trim();
 	
-	    loadMessages(hotelId);
+	    if (account && password) {
+	        // 向後端的 /login 端點發送 POST 請求
+	        $.ajax({
+	            url: '/login',
+	            type: 'POST',
+	            data: {
+	                account: account,
+	                password: password
+	            },
+	            success: function(res) {
+	                // 如果登入成功，則隱藏登入頁面並顯示聊天頁面
+	                if (res) {
+						console.log(res);
+	                    username ="✨" + res.ownerName; // 將用戶名設置為成功登入的帳號
+	                    hotelId = res.hotelId;
+	                    usernamePage.addClass('hidden');
+	                    chatPage.removeClass('hidden'); //顯示聊天畫面
+	                    $('h2').text(res.hotelName);
+	
+	                    // 預先已經寫好的websocket連接程式碼
+	                    var socket = new SockJS('/chatroom');
+	                    stompClient = Stomp.over(socket);
+	
+	                    stompClient.connect({}, onConnected, onError);
+	                    loadMessages(hotelId);
+	                } else {
+	                    alert(res); // 如果登入失敗，則顯示錯誤消息
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                // 在此處處理錯誤
+	                console.error('Failed to login:', error);
+	            }
+	        });
+	    }
+	});
+	
+//	    loadMessages();
 	
 	//消息拿出顯示到前端
 	function loadMessages() {
-		var hotelId = getQueryParam('hotelId');
+	
 	    $.ajax({
-	        url: '/api/messages/guest?hotelId=' + hotelId, 
+	        url: '/api/messages', 
 	        method: 'GET',
+	        data:{
+				hotelId:hotelId
+			},
 	        success: function(response) {
 	            console.log(response);
 	            var messages = response;
@@ -71,6 +85,7 @@ console.log(hotelId);
 	
 	function appendMessage(message) {
 		
+		
 		var messageElement = $('<li></li>');
 	    
 		var timestampElement = $('<br><span class="timestamp"></span>');
@@ -80,15 +95,14 @@ console.log(hotelId);
 		
 		if (message.content !== null && message.content !== "") { 
 	    
-	    var senderElement = $('<span class="name"></span>').text(message.sender + ": ");
 	    
+	    var senderElement = $('<span class="name"></span>').text(message.sender + ": " );
 	    
-	     if (message.sender === $('#name').val()) {
+	      if (message.sender === username) {
             messageElement.css('text-align', 'right');
         }
+	    
 	    messageElement.append(senderElement);
-	    
-	    
 	    
 	    var contentElement = $('<br><span class="messageBox"></span>');
 	    if (message.content !== null) {
@@ -104,23 +118,7 @@ console.log(hotelId);
 	
 	
 	
-	// 連線
-	 function connect(event) {
-	        username = $('#name').val().trim();
 	
-	        if (username) {
-	            usernamePage.addClass('hidden');
-	            chatPage.removeClass('hidden');
-	
-	            var socket = new SockJS('/chatroom');
-	            stompClient = Stomp.over(socket);
-	
-	            stompClient.connect({}, onConnected, onError);
-	        } else {
-	            popHint();
-	        }
-	        event.preventDefault();
-	    }
 	
 	// 連線建立後要處理的邏輯
 	function onConnected() {
@@ -136,7 +134,6 @@ console.log(hotelId);
 	
 	    $('.connecting').addClass('hidden');
 	}
-	
 	 function onError(error) {
 	        connectingElement.text('Could not connect to WebSocket server. Please refresh this page to try again!');
 	        connectingElement.css('color', 'red');
@@ -156,12 +153,12 @@ console.log(hotelId);
 	            content : messageInput.val(),
 	            type : 'CHAT',
 	            timestamp: new Date().toISOString(), // adding current time as timestamp
-	            hotelId:hotelId
+	            hotelId: hotelId
 	        };
-	        stompClient.send("/app/guest-chat", {}, JSON.stringify(chatMessage));
+	        stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
 	        messageInput.val('');
 	    }
-	   return false;
+	    event.preventDefault();
 	}
 	
 	/**
@@ -196,14 +193,16 @@ console.log(hotelId);
 	        popup.removeClass("show");
 	    }
 	    
+	
 	// 監聽 'name' class span 的點擊事件
 	$(document).on('click', '.name', function() {
 	    var replyName = "回覆#" + $(this).text();
 	    $('#message').val(replyName);
+	   
 	 console.log(replyName);
 	       
 	    });
-
+	
 	
 	// 監聽回覆輸入框的 'blur' 事件
 	$(document).on('blur', '#replyBox', function() {
@@ -223,7 +222,7 @@ console.log(hotelId);
 	            var replyMessageElement = $('<p class="replyMessage"></p>').text(reply); //回覆的訊息
 	            var replyElement = $('<div class="reply"></div>').append(replyNameElement, replyMessageElement);
 	            $(this).parent().append(replyElement);
-	            
+	            // 這裡你可能需要添加一些代碼來將回覆保存到數據庫或其他存儲位置
 	             if($.contains(this.parentNode, '#replyBox')) {
 	        $('#replyBox').remove();
 	    }
@@ -238,11 +237,10 @@ console.log(hotelId);
 	            type: 'REPLY'
 	        };
 	
-	
+	        // 发送消息至/app/chat
 	        stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
 	    }
 	
 	    nameInput.on('focus', removePopup);
-	    usernameForm.on('submit', connect);
 	    messageForm.on('submit', sendMessage);
 	    })

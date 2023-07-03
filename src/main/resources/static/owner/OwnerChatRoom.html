@@ -14,13 +14,18 @@
     <!-- 進入頁面 -->
     <div id="username-page">
         <div class="username-page-container">
-            <h1 class="title">請輸入暱稱</h1>
+            <h1 class="title">業主登入</h1>
             
             <form id="usernameForm" name="usernameForm">
                 <div class="form-group popup">
-                    <input type="text" id="name" placeholder="暱稱"
+                    <input type="text" id="account" placeholder="帳號"
                         autocomplete="off" class="form-control popup" />
-                    <span class="popuptext" id="hint">請輸入名稱</span>
+                    <span class="popuptext" id="hint">請輸入帳號</span>
+                </div>
+                <div class="form-group popup">
+                    <input type="password" id="password" placeholder="密碼"
+                        autocomplete="off" class="form-control popup" />
+                    <span class="popuptext" id="hint">請輸入密碼</span>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="accent username-submit">開始聊天</button>
@@ -33,7 +38,7 @@
     <div id="chat-page" class="hidden">
         <div class="chat-container">
             <div class="chat-header">
-                <h2></h2>
+                <h2>WebSocket Chat Demo</h2>
             </div>
             <div class="connecting">Connecting...</div>
             <ul id="messageArea">
@@ -54,7 +59,7 @@
 	<script src="jquery/jquery3.6.4.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="./js/main.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./js/OwnerChatmain.js"></script>
     
 </body>
 </html>

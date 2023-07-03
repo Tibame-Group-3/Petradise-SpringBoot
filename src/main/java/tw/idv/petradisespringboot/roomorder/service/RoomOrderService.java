@@ -19,5 +19,9 @@ public interface RoomOrderService {
 
     List<RoomOrder> getRoomOrdersByHotelId(Integer hotelId);
 
+    String getHotelNameByRoomOrderId(Integer id);
+
+    byte[] getRoomPicByRoomOrderId(Integer id);
+
 
 }

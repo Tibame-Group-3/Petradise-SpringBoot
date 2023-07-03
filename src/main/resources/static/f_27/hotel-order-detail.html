@@ -183,12 +183,35 @@
                             // Handle error case for member details
                         });
 
+                    // Fetch room type name by room type id
+                    const roomTypeId = data.roomTypeId;
+                    const roomTypeUrl = `http://localhost:8080/roomTypes/${roomTypeId}`;
+                    fetch(roomTypeUrl)
+                        .then(response => response.json())
+                        .then(roomTypeData => {
+                            document.getElementById('room-type').textContent = roomTypeData.roomTypeName;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching room type name:', error);
+                        });
+
+                    // Fetch room name by room id
+                    const roomId = data.roomId;
+                    const roomUrl = `http://localhost:8080/rooms/${roomId}`;
+                    fetch(roomUrl)
+                        .then(response => response.json())
+                        .then(roomData => {
+                            document.getElementById('room-number').textContent = roomData.roomName;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching room type name:', error);
+                        });
+
+
                     document.getElementById('pet-name').textContent = data.petName;
                     document.getElementById('order-date').textContent = formatDateTime(data.orderDate);
                     document.getElementById('check-in-date').textContent = new Date(data.checkInDate).toLocaleDateString();
                     document.getElementById('check-out-date').textContent = new Date(data.checkOutDate).toLocaleDateString();
-                    document.getElementById('room-type').textContent = data.roomTypeId;
-                    document.getElementById('room-number').textContent = data.roomId;
                     document.getElementById('special-req').textContent = data.specialReq;
                     document.getElementById('payment-method').textContent = getMethodText(data.payMethod);
                     document.getElementById('price').textContent = data.price;
