@@ -2,143 +2,139 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>PET_ver3</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>PETRADISE</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
 
 <body>
 <nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#" style="position: sticky;top: 0;">
-            <img width="75" height="41" src="assets/img/logo-only.png">
-        </a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
-                style="border-color: rgb(241,236,209);">
-            <span class="visually-hidden">Toggle navigation</span>
-            <span class="navbar-toggler-icon"
-                  style="--bs-primary: #fd780f;--bs-primary-rgb: 253,120,15;--bs-secondary: #e69609;--bs-secondary-rgb: 230,150,9;color: rgb(241,236,209);">
+      <a class="navbar-brand d-flex align-items-center" href="index.html" style="position: sticky;top: 0;">
+        <img width="75" height="41" src="assets/img/logo-only.png">
+      </a>
+
+      <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
+        style="border-color: rgb(241,236,209);">
+        <span class="visually-hidden">Toggle navigation</span>
+        <span class="navbar-toggler-icon"
+          style="--bs-primary: #fd780f;--bs-primary-rgb: 253,120,15;--bs-secondary: #e69609;--bs-secondary-rgb: 230,150,9;color: rgb(241,236,209);">
         </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-3" style="background: #ffffff;">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item dropdown" style="width: 100px;margin: 0px 10px;margin-right: 0px;">
-                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                       data-bs-auto-close="outside" href="#"
-                       style="color: rgb(253,120,15);margin: 10px 0px 0px;">關於我們</a>
-                    <div class="dropdown-menu"
-                         style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-                        <div class="dropdown-divider"
-                             style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-                        </div>
-                        <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">最新消息</a>
-                        <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">關於我們</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" style="width: 100px;margin: 0px 10px;margin-right: 0px;">
-                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                       data-bs-auto-close="outside" href="#"
-                       style="color: rgb(253,120,15);margin: 10px 0px 0px;">毛孩旅館</a>
-                    <div class="dropdown-menu"
-                         style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-                        <div class="dropdown-divider"
+      </button>
 
-                             style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);"></div>
-                        <a class="dropdown-item"
-                           href="http://localhost:8080/hotel/searchHotel.html" style="font-size: 14px;color: #fd780f;">預約訂房</a>
-                        <a class="dropdown-item" href="#"
-                                                                                           style="font-size: 14px;color: #fd780f;">加入我們</a>
-
-
-                    </div>
-                </li>
-                <li class="nav-item dropdown" style="width: 100px;margin: 0px 10px;margin-right: 0px;">
-                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                       data-bs-auto-close="outside" href="#"
-                       style="color: rgb(253,120,15);margin: 10px 0px 0px;">浪浪收容</a>
-                    <div class="dropdown-menu"
-                         style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-                        <div class="dropdown-divider"
-                             style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-                        </div>
-                        <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">服務說明</a>
-                        <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">浪浪認養</a>
-                        <a class="dropdown-item lostPet" href="#" style="font-size: 14px;color: #fd780f;">遺失協尋</a>
-                        <a class="dropdown-item" href="#" style="font-size: 14px;color: #fd780f;">加入我們</a>
-                    </div>
-                </li>
-                <li class="nav-item" style="height: 50px;margin: 0px 10px;width: 100px;margin-right: 0px;"><a
-                        class="nav-link"
-                        href="#" style="color: rgb(253,120,15);width: 100px;margin: 10px 0px 0px;">寵物商城</a></li>
-            </ul>
-
-            <!-- Shopping Cart -->
-            <div class="btn btn-primary cart"
-                 style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
-                    <span class="fas fa-shopping-cart"
-                          style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
-                        </span>
-                <span class="shopping-cart-total"></span>
+      <div class="collapse navbar-collapse" id="navcol-3" style="background: #ffffff;">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+              data-bs-auto-close="outside" href="index.html" style="margin: 10px 0px 0px;">關於我們</a>
+            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+              <div class="dropdown-divider"
+                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+              </div>
+              <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
+              <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
             </div>
+          </li>
 
-            <div class="btn-group" style="margin: 10px 0px 0px;"><a class="btn btn-primary" type="button"
-                                                                    style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
-                <svg
-
-                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                        viewBox="0 0 16 16"
-                        class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-                    <path fill-rule="evenodd"
-                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
-                    </path>
-                </svg>
-                會員</a>
-                <button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false" type="button"
-                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
-                <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;"><a
-                        class="dropdown-item navigate-signin" href="#" style="color: #ffffff;">登入/註冊</a><a
-                        class="dropdown-item navigate-member-center" href="#"
-                        style="color: #ffffff;">會員中心</a>
-                    <a class="dropdown-item logout"
-                       style="color: #ffffff;">登出</a></div>
-
-
+          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">毛孩旅館</a>
+            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+              </div>
+              <a class="dropdown-item" href="f_hotel_17/searchHotel.html" style="font-size: 14px">預約訂房</a>
+              <a class="dropdown-item" href="owner/SignUp.html" style="font-size: 14px">加入我們</a>
             </div>
+          </li>
+
+          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">浪浪收容</a>
+            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+              <div class="dropdown-divider"
+                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+              </div>
+              <a class="dropdown-item" href="#" style="font-size: 14px">服務說明</a>
+              <a class="dropdown-item" href="#" style="font-size: 14px">浪浪認養</a>
+              <a class="dropdown-item lostPet" href="#" style="font-size: 14px">遺失協尋</a>
+              <a class="dropdown-item" href="#" style="font-size: 14px">加入我們</a>
+            </div>
+          </li>
+          <li class="nav-item" style="height: 50px;width: 100px;margin: 0px 0px 0px 10px">
+            <a class="nav-link" href="front-product-list/front-product-list.html" style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
+          </li>
+          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>
+            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+              </div>
+              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>
+              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>
+              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Shopping Cart -->
+        <div class="btn btn-primary cart" style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
+            <span class="fas fa-shopping-cart"
+                  style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
+            </span>
+          <span class="shopping-cart-total"></span>
         </div>
+
+        <!-- Member -->
+        <div class="btn-group" style="margin: 10px 0px 0px;">
+            <a class="btn btn-primary" type="button" style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+              class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+              <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
+              </path>
+          </svg>會員</a>
+            <button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown" aria-expanded="false" type="button"
+            style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
+          <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;">
+            <a class="dropdown-item navigate-signin" href="#" style="color: #ffffff;">登入/註冊</a>
+            <a class="dropdown-item navigate-member-center" href="#" style="color: #ffffff;">會員中心</a>
+            <a class="dropdown-item logout" style="color: #ffffff;">登出</a>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 </nav>
 
 
-<div class="carousel slide" data-bs-ride="carousel" id="carousel-1" style="height: 495px;">
+  <!-- Carousel -->
+  <div class="carousel slide" data-bs-ride="carousel" id="carousel-1" style="height: 495px;">
     <div class="carousel-inner h-100">
-        <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
-                                                     src="assets/img/jamie-street-s9Tf1eBDFqw-unsplash%20(1).jpg"
-                                                     alt="Slide Image"
-                                                     style="z-index: -1;filter: brightness(80%);">
-            <div class="container d-flex flex-column justify-content-center h-100">
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 offset-md-2">
-                        <div style="max-width: 350px;">
-                            <h1 class="text-uppercase fw-bold"
-                                style="color: #f1ecd1;text-shadow: 2px 2px 4px #fd780f;font-size: 36px;">
-                                <strong>舒適</strong>又<strong>安全</strong>，<br>乾淨又寬敞，<br>讓寶貝賓至如歸
-                            </h1>
-                            <p class="my-3" style="color: #f1ecd1;">透過我們，毛孩爸媽能夠輕鬆的挑選到舒適、安全且大空間的寵物旅館，安心的把寶貝們交給專人照顧。<br>
-                            </p><a
-                                class="btn btn-primary btn-lg me-2" role="button" href="http://localhost:8080/hotel/searchHotel.html"
-                                style="background: #fd780f;border-color: #fd780f;">預約訂房</a><a
-                                class="btn btn-outline-primary btn-lg"
-                                role="button" href="#"
-                                style="color: #fd780f;border-color: #fd780f;background: #ffffff;">加入我們</a>
-                        </div>
-                    </div>
-                </div>
+      <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
+          src="assets/img/jamie-street-s9Tf1eBDFqw-unsplash%20(1).jpg" alt="Slide Image"
+          style="z-index: -1;filter: brightness(80%);">
+        <div class="container d-flex flex-column justify-content-center h-100">
+          <div class="row">
+            <div class="col-md-6 col-xl-3 offset-md-2">
+              <div style="max-width: 350px;">
+                <h1 class="text-uppercase fw-bold"
+                  style="color: #f1ecd1;text-shadow: 2px 2px 4px #fd780f;font-size: 36px;">
+                  <strong>舒適</strong>又<strong>安全</strong>，<br>乾淨又寬敞，<br>讓寶貝賓至如歸
+                </h1>
+                <p class="my-3" style="color: #f1ecd1;">透過我們，毛孩爸媽能夠輕鬆的挑選到舒適、安全且大空間的寵物旅館，安心的把寶貝們交給專人照顧。
+                  <br>
+                </p>
+                <a class="btn btn-primary btn-lg me-2" role="button" href="f_hotel_17/searchHotel.html" style="background: #fd780f;border-color: #fd780f;">預約訂房</a>
+                <a class="btn btn-outline-primary btn-lg" role="button" href="owner/SignUp.html" style="color: #fd780f;border-color: #fd780f;background: #ffffff;">加入我們</a>
+              </div>
+
             </div>
         </div>
         <div class="carousel-item h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
@@ -153,33 +149,49 @@
                                 領養代替購買，<br>請讓牠們再次，<br>擁有被愛的幸福<br></h1>
                             <p class="my-3" style="color: #574f36;">
                                 浪浪們只要稍加整理，再加上您的愛心照顧，也能變的可愛又貼心，您的生活也會因為牠們的陪伴變得更加美好、快樂！</p>
-                            <a
-                                    class="btn btn-primary btn-lg me-2" role="button" href="#"
-                                    style="background: #fd780f;border-color: #fd780f;">預約認養<br></a><a
-                                class="btn btn-outline-primary btn-lg" role="button" href="#"
+                            <a class="btn btn-primary btn-lg me-2" role="button" href="#"
+                                    style="background: #fd780f;border-color: #fd780f;">預約認養
+                              <br></a>
+                            <a class="btn btn-outline-primary btn-lg" role="button" href="#"
                                 style="background: #ffffff;color: #fd780f;border-color: #fd780f;">加入我們</a>
                         </div>
                     </div>
                 </div>
+      </div>
+
+      <div class="carousel-item h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
+          src="assets/img/humberto-arellano-N_G2Sqdy9QY-unsplash.jpg" alt="Slide Image" style="z-index: -1;">
+        <div class="container d-flex flex-column justify-content-center h-100">
+          <div class="row">
+            <div class="col-md-6 col-xl-4 offset-md-2">
+              <div style="max-width: 350px;">
+                <h1 class="text-uppercase fw-bold"
+                  style="color: #fd780f;text-shadow: 2px 2px 4px #f1ecd1;font-size: 36px;">
+                  領養代替購買，<br>請讓牠們再次，<br>擁有被愛的幸福<br></h1>
+                <p class="my-3" style="color: #574f36;">浪浪們只要稍加整理，再加上您的愛心照顧，也能變的可愛又貼心，您的生活也會因為牠們的陪伴變得更加美好、快樂！</p><a
+                  class="btn btn-primary btn-lg me-2" role="button" href="#"
+                  style="background: #fd780f;border-color: #fd780f;">預約認養<br></a><a
+                  class="btn btn-outline-primary btn-lg" role="button" href="/animalCorporation/signup.html"
+                  style="background: #ffffff;color: #fd780f;border-color: #fd780f;">加入我們</a>
+              </div>
             </div>
         </div>
-        <div class="carousel-item h-100"><img class="rounded w-100 d-block position-absolute h-100 fit-cover"
-                                              style="z-index: -1;" src="assets/img/animal-gd8400bf6c_1920.jpg">
-            <div class="container d-flex flex-column justify-content-center h-100">
-                <div class="row">
-                    <div class="col-md-6 col-xl-4 offset-md-2" style="position: relative;">
-                        <div style="max-width: 350px;">
-                            <h1 class="text-uppercase fw-bold"
-                                style="color: #f1ecd1;text-shadow: 2px 2px 4px #fd780f;font-size: 36px;">
-                                物美又價廉，<br>豐富又齊全，<br>優質商品任您選，<br></h1>
-                            <p class="my-3" style="color: #574f36;">
-                                秉持「物美價廉、誠信專業」的精神，提供寵物生活大小事的一切商品，體貼您與毛孩，讓我們成為您的首選！</p>
-                            <a
-                                    class="btn btn-primary btn-lg me-2" role="button" href="#"
-                                    style="background: #fd780f;border-color: #fd780f;">立即選購</a>
-                        </div>
-                    </div>
-                </div>
+      </div>
+
+
+      <div class="carousel-item h-100"><img class="rounded w-100 d-block position-absolute h-100 fit-cover"
+          style="z-index: -1;" src="assets/img/animal-gd8400bf6c_1920.jpg">
+        <div class="container d-flex flex-column justify-content-center h-100">
+          <div class="row">
+            <div class="col-md-6 col-xl-4 offset-md-2" style="position: relative;">
+              <div style="max-width: 350px;">
+                <h1 class="text-uppercase fw-bold"
+                  style="color: #f1ecd1;text-shadow: 2px 2px 4px #fd780f;font-size: 36px;">
+                  物美又價廉，<br>豐富又齊全，<br>優質商品任您選，<br></h1>
+                <p class="my-3" style="color: #574f36;">秉持「物美價廉、誠信專業」的精神，提供寵物生活大小事的一切商品，體貼您與毛孩，讓我們成為您的首選！</p><a
+                  class="btn btn-primary btn-lg me-2" role="button" href="front-product-list/front-product-list.html"
+                  style="background: #fd780f;border-color: #fd780f;">立即選購</a>
+              </div>
             </div>
         </div>
     </div>
@@ -192,8 +204,12 @@
         <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
         <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
     </ol>
-</div>
-<div class="container py-4 py-xl-5" style="height: 470px;margin-bottom: 10px;min-height: 610px">
+
+  </div>
+
+
+  <!-- News -->
+  <div id="news-contain" class="container py-4 py-xl-5" style="height: 470px;margin-bottom: 10px;min-height: 610px">
     <div class="row mb-5" style="margin-bottom: 60px;">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
             <h2 style="color: #fd780f;text-shadow: 2px 2px 1px #f1ecd1;">最新消息</h2>
@@ -202,30 +218,30 @@
     <div id="tableBody" class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3"
          style="margin-top: -40px;margin-bottom: 10px;">
 
-        <!--      <div class="col">-->
-        <!--        <div class="d-flex">-->
-        <!--          <div-->
-        <!--            class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"-->
-        <!--            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"-->
-        <!--              fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill" style="font-size: 16px;">-->
-        <!--              <path-->
-        <!--                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">-->
-        <!--              </path>-->
-        <!--            </svg></div>-->
-        <!--          <div class="px-3">-->
-        <!--            <h4 style="color: #e69609;margin-bottom: 0px;">New Arrivals</h4>-->
-        <!--            <p style="color: #a67c52;margin-bottom: 10px;">2020-01-01</p>-->
-        <!--            <p style="color: #574f36;">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum-->
-        <!--              vulputate cras aenean.</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg-->
-        <!--                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"-->
-        <!--                class="bi bi-caret-right-fill">-->
-        <!--                <path-->
-        <!--                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">-->
-        <!--                </path>-->
-        <!--              </svg></a>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
+<!--      <div class="col">-->
+<!--        <div class="d-flex">-->
+<!--          <div-->
+<!--            class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"-->
+<!--            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"-->
+<!--              fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill" style="font-size: 16px;">-->
+<!--              <path-->
+<!--                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">-->
+<!--              </path>-->
+<!--            </svg></div>-->
+<!--          <div class="px-3">-->
+<!--            <h4 style="color: #e69609;margin-bottom: 0px;">New Arrivals</h4>-->
+<!--            <p style="color: #a67c52;margin-bottom: 10px;">2020-01-01</p>-->
+<!--            <p style="color: #574f36;">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum-->
+<!--              vulputate cras aenean.</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg-->
+<!--                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"-->
+<!--                class="bi bi-caret-right-fill">-->
+<!--                <path-->
+<!--                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">-->
+<!--                </path>-->
+<!--              </svg></a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
 
         <!--      <div class="col">-->
@@ -280,35 +296,63 @@
         <!--      </div>-->
 
 
-        <!--      <div class="col">-->
-        <!--        <div class="d-flex">-->
-        <!--          <div-->
-        <!--            class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"-->
-        <!--            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"-->
-        <!--              fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill" style="font-size: 15px;">-->
-        <!--              <path-->
-        <!--                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">-->
-        <!--              </path>-->
-        <!--            </svg></div>-->
-        <!--          <div class="px-3">-->
-        <!--            <h4 style="color: #e69609;margin-bottom: 0px;">Season sales</h4>-->
-        <!--            <p style="color: #a67c52;margin-bottom: 10px;">2020-01-01</p>-->
-        <!--            <p style="color: #574f36;">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum-->
-        <!--              vulputate cras aenean.</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg-->
-        <!--                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"-->
-        <!--                class="bi bi-caret-right-fill">-->
-        <!--                <path-->
-        <!--                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">-->
-        <!--                </path>-->
-        <!--              </svg></a>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
+<!--      <div class="col">-->
+<!--        <div class="d-flex">-->
+<!--          <div-->
+<!--            class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"-->
+<!--            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"-->
+<!--              fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill" style="font-size: 15px;">-->
+<!--              <path-->
+<!--                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">-->
+<!--              </path>-->
+<!--            </svg></div>-->
+<!--          <div class="px-3">-->
+<!--            <h4 style="color: #e69609;margin-bottom: 0px;">Season sales</h4>-->
+<!--            <p style="color: #a67c52;margin-bottom: 10px;">2020-01-01</p>-->
+<!--            <p style="color: #574f36;">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum-->
+<!--              vulputate cras aenean.</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg-->
+<!--                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"-->
+<!--                class="bi bi-caret-right-fill">-->
+<!--                <path-->
+<!--                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">-->
+<!--                </path>-->
+<!--              </svg></a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="col">-->
+<!--        <div class="d-flex">-->
+<!--          <div-->
+<!--            class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-3 bs-icon"-->
+<!--            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"-->
+<!--              fill="currentColor" viewBox="0 0 16 16" class="bi bi-bell-fill" style="font-size: 15px;">-->
+<!--              <path-->
+<!--                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z">-->
+<!--              </path>-->
+<!--            </svg></div>-->
+<!--          <div class="px-3">-->
+<!--            <h4 style="color: #e69609;margin-bottom: 0px;">Season sales</h4>-->
+<!--            <p style="color: #a67c52;margin-bottom: 10px;">2020-01-01</p>-->
+<!--            <p style="color: #574f36;">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum-->
+<!--              vulputate cras aenean.</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg-->
+<!--                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"-->
+<!--                class="bi bi-caret-right-fill">-->
+<!--                <path-->
+<!--                  d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">-->
+<!--                </path>-->
+<!--              </svg></a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
 
     </div>
-</div>
-<div class="container py-4 py-xl-5" style="margin-top: 10px">
+  </div>
+
+  <!-- About Me -->
+  <div id="aboutMe-contain" class="container py-4 py-xl-5" style="margin-top: 10px">
     <div class="row mb-5"
          style="margin: 5px 0px 10px;margin-bottom: 10px;padding-bottom: 0px;height: 60px;margin-top: 0px;">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -317,28 +361,27 @@
         </div>
     </div>
     <div class="row gy-4 row-cols-2 row-cols-md-4" style="margin-bottom: 22px;">
-        <div class="col">
-            <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
-                <div
-                        class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"
-                        style="background: #fd780f;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                         fill="currentColor" viewBox="0 0 16 16" class="bi bi-house-door-fill">
-                        <path
-                                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z">
-                        </path>
-                    </svg>
-                </div>
-                <div class="px-3">
-                    <h2 class="fw-bold mb-0" style="color: #e69609;">123+</h2>
-                    <p class="mb-0" style="color: #574f36;">合作旅館</p>
-                </div>
-                <div style="width: 255px;height: 150px;">
-                    <p style="height: 145px;min-height: 145px;">
-                        <br>輕鬆挑選到價格合宜又舒適的寵物旅館給寶貝們，讓家長能夠放心毛孩安全，更能安心外出，<br>找喜歡的住宿，過喜歡的假期<br>
-                    </p>
-                </div>
-            </div>
+
+      <div class="col">
+        <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
+          <div
+            class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"
+            style="background: #fd780f;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+              fill="currentColor" viewBox="0 0 16 16" class="bi bi-house-door-fill">
+              <path
+                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z">
+              </path>
+            </svg>
+          </div>
+          <div class="px-3">
+            <h2 class="fw-bold mb-0" style="color: #e69609;">123+</h2>
+            <p class="mb-0" style="color: #574f36;">合作旅館</p>
+          </div>
+          <div style="width: 255px;height: 150px;">
+            <p style="height: 145px;min-height: 145px;">
+              <br>輕鬆挑選到價格合宜又舒適的寵物旅館給寶貝們，讓家長能夠放心毛孩安全，更能安心外出，<br>找喜歡的住宿，過喜歡的假期<br>
+            </p>
+          </div>
         </div>
         <div class="col">
             <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
@@ -404,8 +447,10 @@
             </div>
         </div>
     </div>
-</div>
-<footer class="text-center">
+  </div>
+
+
+  <footer class="text-center">
     <div class="container text-muted py-4 py-lg-5">
         <ul class="list-inline">
             <li class="list-inline-item me-4"><a class="link-secondary" href="#" style="color: #f8c544;">Web design</a>
@@ -443,15 +488,17 @@
         </ul>
         <p class="mb-0">Copyright © 2023 PETRADISE</p>
     </div>
-</footer>
-<script src="assets/js/login.js"></script>
-<script src="vendors/jquery/jquery-3.6.4.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="assets/js/script.min.js"></script>
-<script src="assets/js/index.js"></script>
-<script src="./index/js/index.js"></script>
+  </footer>
+
+  <script src="assets/js/login.js"></script>
+  <script src="vendors/jquery/jquery-3.6.4.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="assets/js/script.min.js"></script>
+  <script src="assets/js/index.js"></script>
+  <script src="./index/js/index.js"></script>
+
 </body>
 
 </html>

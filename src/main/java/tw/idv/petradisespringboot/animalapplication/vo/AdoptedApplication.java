@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,13 +20,11 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Table(name = "adopted_application")
 public class AdoptedApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     @Column(name = "adopted_id")
     private Integer adoptedId;
     
@@ -53,21 +52,14 @@ public class AdoptedApplication {
     @Column(name = "adopter_email")
     private String adopterEmail;
 
-    @Column(name = "status",insertable = false )
+    @Column(name = "status", insertable = false )
     private String adopterStatus;
 
-    @Column(name = "adopter_note",insertable = false)
+    @Column(name = "adopter_note", insertable = false)
     private String adopterNote;
 
     
 	
-    @Override
-	public String toString() {
-		return "AdoptedApplication [adoptedId=" + adoptedId + ", memberId=" + membId + ", animalId=" + animalId
-				+ ", adopterIdNumber=" + adopterIdNumber + ", adopterName=" + adopterName + ", adopterAddress="
-				+ adopterAddress + ", adopterPhone=" + adopterPhone + ", adopterJob=" + adopterJob + ", adopterEmail="
-				+ adopterEmail + ", adopterStatus=" + adopterStatus + ", adopterNote=" + adopterNote + "]";
-	}
 
 
 
