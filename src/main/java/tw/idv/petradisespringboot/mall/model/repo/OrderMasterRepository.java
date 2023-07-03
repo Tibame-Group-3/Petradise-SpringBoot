@@ -23,5 +23,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, Intege
             "FROM OrderMaster om " +
             "JOIN Member m ON m.id = om.memId")
     List<AllOrderMasterDTO> findAllOrderMaster();
+    
+    List<OrderMaster> findByMemId(Integer memId);
 
 }

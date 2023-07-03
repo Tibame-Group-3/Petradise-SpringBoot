@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
 import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
 import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
 import tw.idv.petradisespringboot.mall.service.OrderService;
 
 @RestController
@@ -29,6 +30,16 @@ public class OrderController {
     public List<AllOrderMasterDTO> findAllOrderMaster() {
     	return orderService.findAllOrderMaster();
     }
+    
+    @GetMapping("/memberId={memberId}")
+    public List<OrderMaster> findOrdersByMemberId(@PathVariable Integer memberId) {
+        return orderService.findOrderByMemberId(memberId);
+    }
+    
+//    @GetMapping("/memberId={memberId}")
+//    public List<AllOrderMasterDTO> findOrderByMemberId(@PathVariable Integer memId) {
+//    	return orderService.findOrderByMemberId(memId);
+//    }
     
     @GetMapping("/showOrderDetail/id={id}")
 	public List<OrderDetailDTO> findOrderDetailById(@PathVariable Integer id) {

@@ -1,6 +1,6 @@
 (() => {
     $(document).ready(function () {
-        findAllOrder();
+        fetchOrderMaster();
     })
 
     $('#table_body').on('click', '#order_detail_check', function () {
@@ -8,13 +8,15 @@
         fetchOrderDetail(orderId);
     })
 
-    function findAllOrder() {
-        fetch('/order/allOrder', {
-            method: 'GET'
-        })
-            .then(response => response.json())
+    function fetchOrderMaster() {
+        fetch(`/order/memberId=${getMemberId()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(onReceivedJSON)
-            .then(initDataTable)
             .catch(error => console.error('There was a problem with the fetch operation', error));
     }
 
@@ -25,7 +27,6 @@
             const row = `
             <tr>
                 <td class="order_id" data-order-id="${i.odId}" style="color: #a67c52;">${i.odId}</td>
-                <td class="mem_name" style="color: #a67c52;">${i.name}</td>
                 <td class="order_date" style="color: #a67c52;">${i.odDate}</td>
                 <td class="price_od" style="color: #a67c52;">${i.priceOd}</td>
                 <td class="reci_name" style="color: #a67c52;">${i.reciName}</td>
@@ -67,10 +68,8 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">取消</button>
-                                    <button type="button"
-                                        class="btn btn-primary">確定</button>
+                                    <button type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">確定</button>
                                 </div>
                             </div>
                         </div>
@@ -109,10 +108,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row" style="color: #a67c52;">會員姓名</th>
-                <td id="member_name">${orderJsonData[0].name}</td>
-            </tr>
             <tr>
                 <th scope="row" style="color: #a67c52;">商品</th>
                 <td id="product_name">${productInfo}</td>
@@ -159,10 +154,13 @@
                     <td id="reci_store">${orderJsonData[0].reciStore}</td>
                 </tr>
             ` : ''}
-            <tr>
-                <th scope="row" style="color: #a67c52;">收件地址</th>
-                <td id="reci_add">${orderJsonData[0].reciAdd}</td>
-            </tr>
+            ${!orderJsonData[0].reciStore ? `
+                <tr>
+                    <th scope="row" style="color: #a67c52;">收件地址</th>
+                    <td id="reci_add">${orderJsonData[0].reciAdd}</td>
+                </tr>             
+            ` : ''}
+
         </tbody>
     `;
         orderDetail.innerHTML = table;

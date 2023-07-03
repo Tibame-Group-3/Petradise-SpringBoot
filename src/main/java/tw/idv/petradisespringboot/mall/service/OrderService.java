@@ -13,6 +13,8 @@ public interface OrderService {
     
     List<AllOrderMasterDTO> findAllOrderMaster();
     
+    List<OrderMaster> findOrderByMemberId(Integer memId);
+    
     List<OrderDetailDTO> findOrderDetailById(Integer id);
     
     OrderMaster updateOrderStatus();

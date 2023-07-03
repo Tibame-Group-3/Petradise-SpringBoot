@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 			products.forEach(product -> {
 
 				final var productId = product.getProductId();
-				
+
 				final var productAmount = product.getProductAmount();
 
 				// OrderDetail PK = OrderMaster ID + Product ID
@@ -58,19 +58,36 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return savedOrderMaster;
 	}
-	
+
 	@Override
 	public List<AllOrderMasterDTO> findAllOrderMaster() {
 		return orderMasterRepository.findAllOrderMaster();
 	}
-	
+
+	@Override
+	public List<OrderMaster> findOrderByMemberId(Integer memId) {
+		return orderMasterRepository.findByMemId(memId);
+	}
+
+//	@Override
+//	public List<AllOrderMasterDTO> findOrderByMemberId(Integer memId) {
+//		List<OrderMaster> orderMasters = orderMasterRepository.findAllByMemId(memId);
+//		
+	// convert OrderMaster to AllOrderMasterDTO and return!
+//		return orderMasters.stream().map(this::convertToAllOrderMasterDTO).collect(Collectors.toList());
+//	}
+//	
+//    private AllOrderMasterDTO convertToAllOrderMasterDTO(OrderMaster orderMaster) {
+//        
+//    }
+
 	@Override
 	public List<OrderDetailDTO> findOrderDetailById(Integer id) {
 		return orderDetailRepository.findOrderDetailById(id);
 	}
 
 	@Override
-    public OrderMaster updateOrderStatus() {
-    	return null;
-    }
+	public OrderMaster updateOrderStatus() {
+		return null;
+	}
 }
