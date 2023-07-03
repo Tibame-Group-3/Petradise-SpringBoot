@@ -45,3 +45,4 @@ public class Admin {
     private List<AdminAccess> accesses;
 
 }
+

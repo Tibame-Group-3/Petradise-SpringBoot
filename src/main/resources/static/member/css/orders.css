@@ -1,0 +1,19 @@
+h2 {
+    margin-bottom: 24px;
+}
+
+button.view_order {
+    border: 1px solid lightslategray;
+    border-radius: 7px;
+    background-color: #f9ecdb;
+}
+
+button.view_order:hover {
+    border: 1px solid lightslategray;
+    border-radius: 7px;
+    background-color: #ffe7dd;
+}
+
+td.view_order_work {
+    text-align: center;
+}
