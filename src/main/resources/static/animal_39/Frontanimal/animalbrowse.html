@@ -290,7 +290,7 @@ select {
 						<div id="dropdownButton" class="">
 							<div class="">
 								<div class="clear-both block-facets py-4" id="animalTypeInput">
-									<select id="animaltype">
+									<select id="animalType">
 										<option value="c">種類</option>
 										<option value="狗">狗</option>
 										<option value="貓">貓</option>
@@ -304,7 +304,7 @@ select {
 							id="">
 							<div class="">
 								<div class="" id="animalSexInput">
-									<select id="animalsex">
+									<select id="animalSex">
 										<option value="S">性別</option>
 										<option value="公">公</option>
 										<option value="母">母</option>
@@ -342,7 +342,7 @@ select {
 	<div class="container mt-3">
 		<div class="row justify-content-center " id="animalList"></div>
 	</div>
-	</div>
+	
 	<footer class="text-center">
 		<div class="container text-muted py-4 py-lg-5">
 			<ul class="list-inline">
@@ -407,7 +407,7 @@ select {
                     var nextPageUrl = '/animal_39/Frontanimal/PET_adopt.html';
                     var cardHtml = '<div class="col-12 col-md-6 col-lg-3">' +
                         '<div class="card">' +
-                        '<a href="' + nextPageUrl + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +
+                        '<a href="' + nextPageUrl + '?animalId=' + animal.animalId + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +
                         '<div class="card-body">' +
                         '<div class="card-title"><a href="#">' + animal.animalName + '</a></div>' +
                         '<div class="card-text">' + animal.animalInfo + '</div>' +
