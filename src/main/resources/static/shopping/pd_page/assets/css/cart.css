@@ -6,7 +6,7 @@
 }
 
 .cart-container {
-    width: 70%;
+    width: 850px;
     height: auto;
     background-color: #fff;
     border-radius: 20px;
@@ -166,25 +166,26 @@
 }
 
 .cart-body hr {
-    width: 83%;
+    width: 700px;
     float: right;
-    margin-right: 5%
+    margin-right: 50px
 }
 
 .cart-body .checkout {
     /*border: 1px solid lightgreen;*/
-    margin: 20px 60px 30px
+    margin: 20px 40px 30px
 }
 
 .cart-body .total {
     /*border: 1px solid palevioletred;*/
-    margin: 20px
+    display: inline-block;
+    height: 120px;
+    width: calc(100% - 15px)
 }
 
 .cart-body .item-body {
     position: absolute;
-    transform: translateX(430px);
-    margin-top: 30px;
+    margin: 30px 0px 30px 430px
 }
 
 .cart-body .subtotal {
@@ -206,7 +207,11 @@
     font-weight: 900;
     color: #f8c544;
     text-align: right;
-    transform: translateX(15px)
+    margin: 22px 10px 30px 620px
+}
+
+.total-amount span {
+    margin: 10px;
 }
 
 .cart-body .buttons {

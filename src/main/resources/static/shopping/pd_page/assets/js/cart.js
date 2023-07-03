@@ -92,9 +92,45 @@ $(document).ready(function () {
         const item = shoppingItem[productId];
 
         item.quantity--; // 遞減數量---------------------------------------------------------
-        if (item.quantity < 0) {    // 確保數量不小於 0---------------------------------------
-            item.quantity = 0;
-            
+        if (item.quantity < 1) {    // 確保數量不小於 1---------------------------------------
+            Swal.fire({
+                title: "確定要移除這個品項嗎？",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#f1ecd1",
+                cancelButtonColor: "#f8c544",
+                confirmButtonText: "是，請移除",
+                cancelButtonText: "否，請保留",
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    // 從session的 shoppingItem checkoutItem清掉----------------------------------
+                    const shoppingItem = JSON.parse(sessionStorage.getItem("shoppingItem"));
+                    delete shoppingItem[productId];
+                    sessionStorage.setItem("shoppingItem", JSON.stringify(shoppingItem));
+
+                    // 取消勾選被移除的 checkbox
+                    const checkbox = $(".cart-items").closest(`#${productId}`).find("input[type='checkbox']");
+                    if (checkbox.prop("checked")) {
+                        // alert(checkbox);
+                        checkbox.prop("checked", false);
+                        const checkoutItem = JSON.parse(sessionStorage.getItem("checkoutItem"));
+                        delete checkoutItem[productId];
+                        sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
+                    }
+
+                    $(this).closest(".cart-items").fadeOut(1000, function () {
+                        $(this).remove();
+                    })
+
+                    // 更新購物車品項----------------------------------------------------
+                    updateCheckoutItem();
+                    totalItems = updateTotalItems(shoppingItem);
+                    $(".shopping-cart-total").text(`(${totalItems})`);
+                }
+
+            })
+            item.quantity = 1;
         }
         updateQuantity(productId, item.quantity); // 更新顯示的數量---------------------------
         updateCheckoutItem();
@@ -223,7 +259,7 @@ $(document).ready(function () {
         sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
 
         const itemsElement = $(".items");
-        const totalAmountElement = $(".total-amount");
+        const totalAmountElement = $(".total-amount-span");
 
         let itemsCount = 0;
         let totalAmount = 0;
