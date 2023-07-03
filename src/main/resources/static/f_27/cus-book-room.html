@@ -256,16 +256,37 @@
                         var roomTypeAbout = response.roomTypeAbout;
                         var roomTypePrice = response.roomTypePrice;
 
+                        // Update the DOM with the room type information
                         $('#room-type-name').text(roomTypeName);
                         $('#room-pet-type').text(roomPetType);
                         $('#room-type-about').text(roomTypeAbout);
-                        $('#room-type-price').text(roomTypePrice);
+
+                        // Calculate the total price
+                        const { numNights, totalPrice } = calculateTotalPrice(roomTypePrice, checkInDate, checkOutDate);
+
+                        // Update the room type price with additional text
+                        const additionalText = ` x ${numNights}晚 = ${totalPrice} 元`;
+                        $('#room-type-price').text(roomTypePrice + additionalText);
                     },
                     error: function (error) {
                         console.error('Error:', error);
                         // Handle error case
                     }
                 });
+            }
+
+            // Function to calculate nights of stay
+            function calculateTotalPrice(roomTypePrice, checkInDate, checkOutDate) {
+                const checkInDateCal = new Date(checkInDate);
+                const checkOutDateCal = new Date(checkOutDate);
+                const timeDiffMs = checkOutDateCal.getTime() - checkInDateCal.getTime();
+                const numNights = Math.floor(timeDiffMs / (24 * 60 * 60 * 1000));
+                const totalPrice = roomTypePrice * numNights;
+
+                return {
+                    numNights: numNights,
+                    totalPrice: totalPrice
+                };
             }
 
             // Add event listener to the "確認訂房&付款" button
