@@ -151,7 +151,6 @@ $('.confirm-payment').click(function () {
 
 
 // drop an order ==================================================================================
-// $(document).ready(function () {
 $('.confirm-payment').on('click', function () {
     // const memId = getMemberId();
     const obj = getSession();
@@ -192,7 +191,6 @@ $('.confirm-payment').on('click', function () {
         .then(jsonData => console.log(jsonData))
         .catch(error => console.error('There was a problem with the fetch operation', error));
 });
-// });
 
 function getSession() {
     const jsonValue = sessionStorage.getItem('checkoutItem');
