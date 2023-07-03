@@ -173,23 +173,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Add this script block after including the jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/login.js"></script>
 
     <script>
-        // Function to get member id
-        function getMemberId() {
-            return 1;
-            // return localStorage.getItem("memberId");
-        }
 
         $(document).ready(function () {
 
-            // Retrieve member Id from local storage
+            guardIsSignedIn();
+
             const memberId = getMemberId();
 
             // Retrieve the values from session storage
-            const checkInDate = "2023-07-02";     // sessionStorage.getItem('checkInDate');
-            const checkOutDate = "2023-07-03";    // sessionStorage.getItem('checkOutDate');
-            const roomTypeId = 5;                 // sessionStorage.getItem('roomTypeId');
+            const checkInDate = sessionStorage.getItem('checkInDate');
+            const checkOutDate = sessionStorage.getItem('checkOutDate');
+            const roomTypeId = sessionStorage.getItem('roomTypeId');
 
             // Update the corresponding elements with the retrieved values
             $('#check-in-date').text(checkInDate);

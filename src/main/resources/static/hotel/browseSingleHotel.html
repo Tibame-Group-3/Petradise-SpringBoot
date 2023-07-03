@@ -302,6 +302,7 @@
 
             } else {
                 //如果 memberId 不為空，導向結帳頁面(!!夏!!)
+
             }
         });
     });
@@ -317,8 +318,9 @@
         console.log(roomTypeId);
         console.log(inDay);
         console.log(outDay);
-        sessionStorage.setItem('inDay', inDay);
-        sessionStorage.setItem('outDay', outDay);
+        sessionStorage.setItem('checkInDate', inDay);
+        sessionStorage.setItem('checkOutDate', outDay);
+        sessionStorage.setItem('roomTypeId',roomTypeId);
         
         //聊天
         $(".chat-link").on("click",function(e){

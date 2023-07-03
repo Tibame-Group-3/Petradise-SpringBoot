@@ -213,10 +213,13 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/jquery/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/login.js"></script>
 
     <script>
 
         $(document).ready(function () {
+
+            guardIsSignedIn();
 
             // Function to update the order count and total amount
             function updateOrderCount() {
