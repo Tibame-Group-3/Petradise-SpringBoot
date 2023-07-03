@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.roomType.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -86,8 +87,8 @@ public class RoomTypeController {
     @PostMapping ("/choose/{hotelId}/{roomTypeId}/{inDay}/{outDay}")
     @ResponseBody
     public SingleHotelDTO getSingleHotel(@PathVariable Integer hotelId, @PathVariable Integer roomTypeId, @PathVariable
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime inDay, @PathVariable
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime outDay) {
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inDay, @PathVariable
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate outDay) {
         return service.getSingleHotel(hotelId, roomTypeId, inDay, outDay);
     }
 

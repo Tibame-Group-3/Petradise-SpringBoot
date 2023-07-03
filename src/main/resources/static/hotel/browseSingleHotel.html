@@ -296,13 +296,11 @@
         $('#book').click(function () {
             var memberId = getMemberId();
             if (!memberId) {
-                //如果 memberId 為空，則導向登入頁面
-                window.location.href = '../member/signin.html';
-                //登入完成後導向結帳頁面(!!夏!!)
-
+                //如果 memberId 為空，則導向登入頁面 然後跳到結帳
+                redirectToLogin('../f_27/cus-book-room.html');
             } else {
                 //如果 memberId 不為空，導向結帳頁面(!!夏!!)
-
+                window.location.href = '../f_27/cus-book-room.html';
             }
         });
     });
