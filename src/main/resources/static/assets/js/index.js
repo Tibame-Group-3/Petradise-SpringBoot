@@ -55,8 +55,16 @@ $(document).ready(function () {
 
 
     // ------------------前往購物車------------------
+    function guardIsSignedIn() {
+        if (isSignedIn() === false) {
+            redirectToLogin();
+        } else {
+            location.href = "/shopping/pd_page/Cart.html";
+        }
+    }
+
     $(".cart").on('click', function () {
-        location.href = "/shopping/pd_page/Cart.html";
+        guardIsSignedIn()
     });
 
 
