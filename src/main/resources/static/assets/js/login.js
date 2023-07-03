@@ -21,7 +21,11 @@ function redirectToIndex() {
     window.location.href = '/';
 }
 
-function redirectToLogin() {
+function redirectToLogin(redirectLink) {
+    if(redirectLink){
+        window.location.href = '/member/signin.html?redirect=' + redirectLink;
+        return;
+    }
     window.location.href = '/member/signin.html?redirect=' + window.location.pathname;
 }
 
