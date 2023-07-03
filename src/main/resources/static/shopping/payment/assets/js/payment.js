@@ -34,12 +34,14 @@ $(document).ready(function () {
 
     $('#sel2').change(function () {
         let selectedOption = $(this).val();
-        $('.home-delivery, .pickup').addClass('-off');
+        $('.home-delivery, .pickup-711, .pickup-fami').addClass('-off');
 
         if (selectedOption === 'home-delivery') {
             $('.home-delivery').removeClass('-off');
-        } else if (selectedOption === 'pickup') {
-            $('.pickup').removeClass('-off');
+        } else if (selectedOption === 'pickup-711') {
+            $('.pickup-711').removeClass('-off');
+        } else if (selectedOption === 'pickup-fami') {
+            $('.pickup-fami').removeClass('-off');
         }
     });
 
@@ -120,8 +122,12 @@ $('.confirm-payment').click(function () {
             isFormValid = false;
         }
     // 檢查超商取貨表單----------------------------------------------------
-    } else if ($("#sel2").val() === "pickup") {
-        if (!$('#store-name').val() || !$('.pickup input.recipient-name').val() || !$('.pickup input.recipient-phone').val()) {
+    } else if ($("#sel2").val() === "pickup-711") {
+        if (!$('#store-name-711').val() || !$('.recipient-name-711').val() || !$('.recipient-phone-711').val()) {
+            isFormValid = false;
+        }
+    } else if ($("#sel2").val() === "pickup-fami") {
+        if (!$('#store-name-fami').val() || !$('.recipient-name-fami').val() || !$('.recipient-phone-fami').val()) {
             isFormValid = false;
         }
     }
