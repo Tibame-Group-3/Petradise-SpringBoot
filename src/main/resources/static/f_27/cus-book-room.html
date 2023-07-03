@@ -161,7 +161,8 @@
             <strong>
                 <div class="room-info">
                     <h5>總金額TWD</h5>
-                    <p id="room-type-price"></p>
+                    <span id="room-type-price" style="color: black;"></span>
+                    <span id="total-price" style="color: black;"></span>
                 </div>
             </strong>
             <button class="confirm-button" id="confirm-pay">確認訂房&付款</button>
@@ -266,7 +267,9 @@
 
                         // Update the room type price with additional text
                         const additionalText = ` x ${numNights}晚 = ${totalPrice} 元`;
-                        $('#room-type-price').text(roomTypePrice + additionalText);
+                        $('#room-type-price').text(roomTypePrice);
+                        $('#total-price').text(additionalText);
+
                     },
                     error: function (error) {
                         console.error('Error:', error);
