@@ -22,8 +22,8 @@ class MemberController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<List<MemberDTO>> all() {
-        return ResponseEntity.ok(service.getAll());
+    ResponseEntity<List<MemberDTO>> all(@RequestBody GetAllDTO dto) {
+        return ResponseEntity.ok(service.getAll(dto));
     }
 
     @PostMapping("/update")

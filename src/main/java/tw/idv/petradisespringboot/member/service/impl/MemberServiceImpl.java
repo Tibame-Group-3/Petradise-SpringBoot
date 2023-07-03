@@ -5,8 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.email.EmailService;
+import tw.idv.petradisespringboot.member.dto.GetAllDTO;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
 import tw.idv.petradisespringboot.member.dto.SignUpDTO;
 import tw.idv.petradisespringboot.member.dto.UpdateDTO;
@@ -90,15 +94,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDTO> getAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(m -> mapper.map(m, MemberDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public MemberDTO getById(Integer id) {
         return repository
                 .findById(id)
@@ -157,6 +152,39 @@ public class MemberServiceImpl implements MemberService {
         ObjectMapper mapper = new ObjectMapper();
         JavaType type = mapper.getTypeFactory().constructParametricType(List.class, AddressInfo.class);
         return mapper.readValue(resource.getInputStream(), type);
+    }
+
+    @Override
+    public List<MemberDTO> getAll(GetAllDTO dto) {
+        return getAll(getPageable(dto));
+    }
+
+    private List<MemberDTO> getAll(Pageable pageable) {
+        return repository
+                .findAll(pageable)
+                .stream()
+                .map(m -> mapper.map(m, MemberDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    private Pageable getPageable(GetAllDTO dto) {
+        if (dto == null) {
+            return Pageable.unpaged();
+        }
+        final var needsPage = dto.needsPage();
+        final var needsSort = dto.needsSort();
+        final var page = dto.getPage();
+        final var size = dto.getSize();
+        final var sort = dto.getSort();
+        final var order = dto.getOrder();
+
+        if (needsSort && needsPage) {
+            return PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order), sort));
+        }
+        if (needsPage) {
+            return PageRequest.of(page, size);
+        }
+        return Pageable.unpaged();
     }
 
     private Resource loadDistricts() {
