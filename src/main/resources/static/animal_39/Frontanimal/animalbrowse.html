@@ -404,7 +404,7 @@ select {
                 // 在这里处理接收到的动物列表（response）
                 response.forEach(function(animal) {
                     var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
-                    var nextPageUrl = 'http://localhost:8080/animal_39/Frontanimal/PET_adopt.html';
+                    var nextPageUrl = '/animal_39/Frontanimal/PET_adopt.html';
                     var cardHtml = '<div class="col-12 col-md-6 col-lg-3">' +
                         '<div class="card">' +
                         '<a href="' + nextPageUrl + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +

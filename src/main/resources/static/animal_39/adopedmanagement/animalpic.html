@@ -244,7 +244,7 @@
                     // 监听按钮点击事件
                     $('#animalAddButton').click(function() {
                         // 执行页面重定向
-                        window.location.href = 'http://localhost:8080/animal_39/animalform/addanimalpic.html';
+                        window.location.href = '/animal_39/animalform/addanimalpic.html';
                     });
                 });
 
@@ -260,7 +260,7 @@
 
                 function getAllAnimalPic() {
                     console.log('進入getAllAnimalPic()')
-                    fetch("http://localhost:8080/animal_pics/all ")
+                    fetch("/animal_pics/all ")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {
