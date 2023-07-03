@@ -3,6 +3,9 @@ package tw.idv.petradisespringboot.mall.model.vo;
 import lombok.*;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -37,6 +40,4 @@ public class Product {
     @Lob
     byte[] pdImg;
 
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<Sale> sale;
 }

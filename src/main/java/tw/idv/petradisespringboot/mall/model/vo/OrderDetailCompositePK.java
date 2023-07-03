@@ -3,30 +3,23 @@ package tw.idv.petradisespringboot.mall.model.vo;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Embeddable
+@Component
 public class OrderDetailCompositePK implements Serializable {
 	private static final long serialVersionUID = -783590819230352601L;
 
+	@Column(name = "od_id")
 	private Integer odId;
+	
+	@Column(name = "pd_id")
 	private Integer pdId;
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderDetailCompositePK other = (OrderDetailCompositePK) obj;
-		return Objects.equals(odId, other.odId) && Objects.equals(pdId, other.pdId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(odId, pdId);
-	}
 
 }
