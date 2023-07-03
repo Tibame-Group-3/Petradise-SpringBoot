@@ -62,7 +62,7 @@ public class LostPetArticleController {
 		return lostPetArticleService.update(lostPetArticle);
 	}
 	
-	@PutMapping("/id={id}/delete")
+	@PutMapping("/delete/id={id}")
 	ResponseEntity<LostPetArticle> editStatus(@PathVariable Integer id) {
 	    LostPetArticle article = lostPetArticleService.findById(id);
 

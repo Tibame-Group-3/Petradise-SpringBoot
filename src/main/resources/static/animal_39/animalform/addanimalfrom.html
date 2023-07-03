@@ -164,9 +164,8 @@ div.text {
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
-										class="d-none d-lg-inline me-2 text-gray-600 small">Valerie
-											Luna</span><img class="border rounded-circle img-profile"
-										src="./img/avatars/avatar1.jpeg"></a>
+										class="d-none d-lg-inline me-2 text-gray-600 small">社團法人台灣寶貝動物協會
+										</span></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
 										style="min-width: 110px;">
@@ -186,14 +185,7 @@ div.text {
 					<div form-container>
 						<form id="animalForm" action="" method="post" class="contact_form">
 							<!-- <div class="form-row"> -->
-							<div class="form-group ">
-
-								<label for="owner_name">
-									<div class="text">業主編號:</div>
-								</label> <input id="owner_name" class="form-control" type="owner_name"
-									placeholder="業主姓名" name="corpid">
-								<div class="messages"></div>
-							</div>
+							
 
 							<div class="form-group ">
 								<label for="animal_type">
@@ -239,10 +231,10 @@ div.text {
 									<div class="text">狀態:</div>
 								</label> <select id="animalstatus" class="form-control"
 									name="animalstatus" placeholder="動物狀態">
-									<option value="available">0:在所 && 健康</option>
-									<option value="pending">1:已被認養</option>
-									<option value="adopted">2:已離世</option>
-									<option value="unavailable">3:生病</option>
+									<option value="0">在所 && 健康</option>
+									<option value="1">已被認養</option>
+									<option value="2">已離世</option>
+									<option value="3">生病</option>
 								</select>
 								<div class="messages"></div>
 							</div>
@@ -284,12 +276,17 @@ div.text {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="../../assets/js/animal_corporation_login.js"></script>
 
 <script>
-	    
+$(document).ready(function () {
+    const ownerName = getAnimalCorporationName();
+    if (ownerName) {
+        $('#owner-name').text(ownerName);
+    }
+});
 	   
-	    
+var corpId = getAnimalCorporationId();
 //表单提交事件处理
 $('#animalForm').submit(function(e) {
     e.preventDefault(); // 阻止表单默认提交行为
@@ -308,14 +305,15 @@ $('#animalForm').submit(function(e) {
             output.innerHTML = imageHtml;
             
             function submitAnimal() {
+            	
                 const newAnimal = {
-                    corpid: $("input[name='corpid']").val(),
-                    animalname: $("input[name='animalname']").val(),
-                    animaltype: $("#animal_type").val(),
-                    animalsex: $("select[name='animalsex']").val(),
-                    animalage: $("#animalage").val(),
-                    animalstatus: $("select[name='animalstatus']").val(),
-                    animalpic: base64Image
+                		corpId :corpId,
+                    animalName: $("input[name='animalname']").val(),
+                    animalType: $("#animal_type").val(),
+                    animalSex: $("select[name='animalsex']").val(),
+                    animalAge: $("#animalage").val(),
+                    animalStatus: $("select[name='animalstatus']").val(),
+                    animalPic: base64Image
                 };
 
                 console.log(newAnimal);
@@ -323,7 +321,7 @@ $('#animalForm').submit(function(e) {
                 $.ajax({
                     url: "/animals/save",
                     type: "POST",
-                    data: JSON.stringify(newAnimal),
+                    data: JSON.stringify(newAnimal),	
                     contentType: "application/json",
                     success: function(response) {
                         window.location.href = "/animal_39/adopedmanagement/adoptedAnimal.html";

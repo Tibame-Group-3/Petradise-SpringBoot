@@ -5,6 +5,7 @@ import tw.idv.petradisespringboot.roomorder.repo.RoomOrderRepository;
 import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class RoomOrderServiceImpl implements RoomOrderService {
@@ -37,7 +38,8 @@ public class RoomOrderServiceImpl implements RoomOrderService {
 
     @Override
     public RoomOrder getRoomOrderById(Integer id) {
-        return repository.findById(id).orElseThrow(null);
+        return repository.findById(id).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Order ID"));
     }
 
     @Override
@@ -51,11 +53,12 @@ public class RoomOrderServiceImpl implements RoomOrderService {
             existingRoomOrder.setCheckInDate(modifiedRoomOrder.getCheckInDate());
             existingRoomOrder.setCheckOutDate(modifiedRoomOrder.getCheckOutDate());
             existingRoomOrder.setStatus(modifiedRoomOrder.getStatus());
-            existingRoomOrder.setOrigPrice(modifiedRoomOrder.getOrigPrice());
-            existingRoomOrder.setFinalPrice(modifiedRoomOrder.getFinalPrice());
+            existingRoomOrder.setPayMethod(modifiedRoomOrder.getPayMethod());
+            existingRoomOrder.setPrice(modifiedRoomOrder.getPrice());
             existingRoomOrder.setSpecialReq(modifiedRoomOrder.getSpecialReq());
             return repository.save(existingRoomOrder);
-        }).orElse(null);
+        }).
+        orElseThrow(() -> new IllegalArgumentException("Invalid Order ID"));
     }
 
     @Override
@@ -63,7 +66,19 @@ public class RoomOrderServiceImpl implements RoomOrderService {
         return repository.findById(id).map(roomOrder -> {
             roomOrder.setStatus(newStatus);
             return repository.save(roomOrder);
-        }).orElse(null);
+        }).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Order ID"));
+    }
+
+    @Override
+    public void updateExpiredOrderStatus() {
+        // Implement updateExpiredOrderStatus logic
+        LocalDate currentDate = LocalDate.now();
+        List<RoomOrder> upcomingOrders = repository.findByCheckOutDateGreaterThanAndStatus(currentDate, '0');
+        upcomingOrders.forEach(order -> {
+            order.setStatus('1');
+            repository.save(order);
+        });
     }
 
     @Override

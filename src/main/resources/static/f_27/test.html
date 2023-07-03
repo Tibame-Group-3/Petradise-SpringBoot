@@ -1,183 +1,45 @@
-<script>
-    $(document).ready(function () {
-        var memberId = 1;
+<!DOCTYPE html>
+<html lang="en">
 
-        $.ajax({
-            url: `http://localhost:8080/room-order/customer/mem-id/${memberId}`,
-            method: 'GET',
-            success: function (data) {
-                $('#orders-section').empty();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-                data.forEach(function (order) {
-                    var statusText = '';
-                    if (order.status === '0') {
-                        statusText = '即將到來';
-                    } else if (order.status === '1') {
-                        statusText = '已完成';
-                    } else if (order.status === '2') {
-                        statusText = '已取消';
-                    }
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                    var html = `
-              <div class="container py-4 py-xl-5">
-                <div class="row gy-4 gy-md-0">
-                  <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                    <div style="max-width: 350px;">
-                      <h5><span id="order-status">${statusText}</span></h5>
-                      <h2 class="text-uppercase fw-bold">${order.hotelName}</h2>
-                      <p>訂單編號: <span id="order-id">${order.id}</span></p>
-                      <p>入住日期: <span id="check-in-date">${order.checkInDate}</span></p>
-                      <p>退房日期: <span id="check-out-date">${order.checkOutDate}</span></p>
-                      <br>
-                      <a class="btn btn-primary btn-lg me-2" role="button" href="">查看詳情</a>
-                      <a class="btn btn-primary btn-lg me-2 toggle-button" role="button">留下評論</a>
-                      <a class="btn btn-danger btn-sm" id="cancel-order-button" role="button">取消訂單</a>
-                      <br><br>
-                      <div class="review-box" style="display: none;">
-                        <fieldset class="rating">
-                          <input type="radio" id="star5" name="rating" value="5" checked="checked" />
-                          <label class="full" for="star5" title="Awesome - 5 stars"></label>
-                          <input type="radio" id="star4" name="rating" value="4" />
-                          <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                          <input type="radio" id="star3" name="rating" value="3" />
-                          <label class="full" for="star3" title="Meh - 3 stars"></label>
-                          <input type="radio" id="star2" name="rating" value="2" />
-                          <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                          <input type="radio" id="star1" name="rating" value="1" />
-                          <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                        </fieldset>
-                        <span id="star-count"></span><br>
-                        <div class="col-md-6">
-                          <form accept-charset="UTF-8">
-                            <textarea class="review-form" rows="4" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-                            <div class="text-right">
-                              <br>
-                              <button class="btn-indie-trans" type="submit">Publish</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="p-xl-5 m-xl-5">
-                      <img href="" class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="assets/img/xxx.jpg">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
 
-                    $('#orders-section').append(html);
-                });
+    <script>
+        // Swal.fire({
+        //     title: 'Do you want to save the changes?',
+        //     showDenyButton: true,
+        //     showCancelButton: true,
+        //     confirmButtonText: 'Save',
+        //     denyButtonText: `Don't save`,
+        // }).then((result) => {
+        //     /* Read more about isConfirmed, isDenied below */
+        //     if (result.isConfirmed) {
+        //         Swal.fire('Saved!', '', 'success')
+        //     } else if (result.isDenied) {
+        //         Swal.fire('Changes are not saved', '', 'info')
+        //     }
+        // })
 
-                // Toggle function for review box
-                $(".toggle-button").click(function () {
-                    $(this).toggleClass("active");
-                    $(".review-box").slideToggle();
-                });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            // cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        })
+    </script>
 
-                // Submit review form
-                $("form").submit(function (event) {
-                    event.preventDefault();
-                    $(".toggle-button").text("感謝您的評論！");
-                    $(".toggle-button").removeClass("btn-primary").addClass("btn-warning");
-                    // Additional code to disable form elements if needed
-                });
 
-                // Update star count dynamically on hover and persist after clicking
-                const starLabels = document.querySelectorAll('.rating > label');
-                const starCount = document.querySelector('#star-count');
-                const publishButton = document.querySelector('.btn-indie-trans');
-                const textArea = document.querySelector('.review-form');
-                const form = document.querySelector('form');
+</body>
 
-                let selectedCount = 5; // Set the default selected count to 5
-                starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
-
-                starLabels.forEach((label) => {
-                    label.addEventListener('mouseover', () => {
-                        const count = label.getAttribute('title').split(' - ')[1].split(' ')[0];
-                        starCount.textContent = `(${count})`;
-                    });
-
-                    label.addEventListener('click', () => {
-                        const count = parseFloat(label.getAttribute('title').split(' - ')[1].split(' ')[0]);
-                        selectedCount = count;
-                        starCount.textContent = `(${selectedCount})`;
-                    });
-
-                    label.addEventListener('mouseout', () => {
-                        starCount.textContent = `(${selectedCount})`; // Display the selected count when the mouse leaves
-                    });
-                });
-
-                form.addEventListener('submit', (event) => {
-                    event.preventDefault();
-                    const reviewText = document.querySelector('#new-review').value;
-                    console.log('Review Text:', reviewText);
-                    console.log('Rate:', selectedCount);
-
-                    const hotelId = 1;
-                    const roomOrderId = 1;
-                    var myHeaders = new Headers();
-                    myHeaders.append("Content-Type", "application/json");
-
-                    var raw = JSON.stringify({
-                        "hotelId": hotelId,
-                        "roomOrderId": roomOrderId,
-                        "score": selectedCount,
-                        "content": reviewText
-                    });
-
-                    var requestOptions = {
-                        method: 'POST',
-                        headers: myHeaders,
-                        body: raw,
-                        redirect: 'follow'
-                    };
-
-                    fetch("http://localhost:8080/roomreview/addReview", requestOptions)
-                        .then(response => response.text())
-                        .then(result => console.log(result))
-                        .catch(error => console.log('error', error));
-
-                    Swal.fire({
-                        title: 'Thanks for your review!',
-                        icon: 'success',
-                    });
-
-                    publishButton.style.display = "none";
-                    textArea.setAttribute("disabled", '');
-                    starLabels.forEach((label) => {
-                        label.style.pointerEvents = 'none';
-                    });
-                });
-
-                // Add event listener to the "取消訂單" button
-                $('#cancel-order-button').on('click', function () {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your order has been canceled.',
-                                'success'
-                            );
-                        }
-                    });
-                });
-            },
-            error: function () {
-                $('#orders-section').html('<p>Error loading orders.</p>');
-            }
-        });
-    });
-</script>
+</html>
