@@ -10,6 +10,18 @@ $(document).ready(function () {
     }
     // console.log(shoppingItem);
 
+    // 更新購物車商品數
+    function updateCartIcon() {
+        let totalItems = 0;
+        for (const productId in shoppingItem) {
+            totalItems += shoppingItem[productId].quantity;
+        }
+        $(".shopping-cart-total").text(`(${totalItems})`);
+    }
+
+    // 初始化購物車圖示數量
+    updateCartIcon();
+
     // 初始化 checkoutItem ----------------------------------------------------
     const checkoutItem = {};
 

@@ -87,7 +87,7 @@ function updateCartIcon() {
 // 初始化購物車圖示數量
 updateCartIcon();
 
-// ------------------結帳------------------
+// ------------------前往購物車------------------
 $(".cart").on('click', function () {
     location.href = "/shopping/pd_page/Cart.html";
 });

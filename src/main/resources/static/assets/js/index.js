@@ -20,13 +20,7 @@ $(document).ready(function () {
                               <div class="px-3">
                                 <h4 style="color: #e69609;margin-bottom: 0px;">${element.newsTitle}</h4>
                                 <p style="color: #a67c52;margin-bottom: 10px;">${element.newsDate}</p>
-                                <p style="color: #574f36;">${element.newsContent}</p><a href="#" style="color: #f8c544;">Learn More&nbsp;<svg
-                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
-                                    class="bi bi-caret-right-fill">
-                                    <path
-                                      d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">
-                                    </path>
-                                  </svg></a>
+                                <p style="color: #574f36;">${element.newsContent}</p>
                               </div>
                             </div>
                         </div>
@@ -36,6 +30,34 @@ $(document).ready(function () {
         })
 
         .catch(err => console.log(err));
+
+
+
+    // ------------------購物車項目初始化------------------
+    let shoppingItem = sessionStorage.getItem("shoppingItem");
+    if (shoppingItem) {
+        shoppingItem = JSON.parse(shoppingItem);
+    } else {
+        shoppingItem = {};
+    }
+
+    // 更新購物車商品數
+    function updateCartIcon() {
+        let totalItems = 0;
+        for (const productId in shoppingItem) {
+            totalItems += shoppingItem[productId].quantity;
+        }
+        $(".shopping-cart-total").text(`(${totalItems})`);
+    }
+
+    // 初始化購物車圖示數量
+    updateCartIcon();
+
+
+    // ------------------前往購物車------------------
+    $(".cart").on('click', function () {
+        location.href = "/shopping/pd_page/Cart.html";
+    });
 
 
 })
