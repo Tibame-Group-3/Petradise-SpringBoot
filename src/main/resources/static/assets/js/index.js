@@ -54,6 +54,10 @@ $(document).ready(function () {
     updateCartIcon();
 
 
+    // ------------------前往購物車------------------
+    $(".cart").on('click', function () {
+        location.href = "/shopping/pd_page/Cart.html";
+    });
 
 
 })
