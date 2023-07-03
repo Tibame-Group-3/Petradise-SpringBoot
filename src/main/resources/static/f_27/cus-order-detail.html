@@ -84,7 +84,7 @@
         const orderId = urlParams.get('id');
 
         // Fetch hotel name
-        fetch(`http://localhost:8080/room-order/hotel-name/${orderId}`)
+        fetch(`/room-order/hotel-name/${orderId}`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById('hotel-name').textContent = data;
@@ -95,7 +95,7 @@
             });
 
         // Fetch order details
-        fetch(`http://localhost:8080/room-order/id/${orderId}`)
+        fetch(`/room-order/id/${orderId}`)
             .then(response => response.json())
             .then(data => {
                 // Update the HTML elements with the order information
@@ -104,7 +104,7 @@
 
                 // Fetch additional member details
                 const memberId = data.memId;
-                const memberUrl = `http://localhost:8080/members/id=${memberId}`;
+                const memberUrl = `/members/id=${memberId}`;
                 fetch(memberUrl)
                     .then(response => response.json())
                     .then(memberData => {
@@ -116,7 +116,7 @@
                         const roomTypeId = data.roomTypeId;
 
                         $.ajax({
-                            url: `http://localhost:8080/roomTypes/${roomTypeId}`,
+                            url: `/roomTypes/${roomTypeId}`,
                             method: 'GET',
                             success: function (response) {
                                 // Get room-type-name
@@ -129,7 +129,7 @@
                         });
 
                         $.ajax({
-                            url: `http://localhost:8080/roomTypes/${roomTypeId}/images`,
+                            url: `/roomTypes/${roomTypeId}/images`,
                             method: 'GET',
                             success: function (response) {
                                 // Update the room image

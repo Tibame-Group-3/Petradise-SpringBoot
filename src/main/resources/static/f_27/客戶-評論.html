@@ -277,7 +277,7 @@
                 redirect: 'follow'
             };
 
-            fetch("http://localhost:8080/roomreview/addReview", requestOptions)
+            fetch("/roomreview/addReview", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));

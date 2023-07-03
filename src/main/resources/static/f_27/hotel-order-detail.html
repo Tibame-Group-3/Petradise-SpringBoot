@@ -160,7 +160,7 @@
             const orderId = urlParams.get('id');
 
             // Make an AJAX request to fetch the order details
-            const url = `http://localhost:8080/room-order/id/${orderId}`;
+            const url = `/room-order/id/${orderId}`;
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -170,7 +170,7 @@
 
                     // Fetch additional member details
                     const memberId = data.memId;
-                    const memberUrl = `http://localhost:8080/members/id=${memberId}`;
+                    const memberUrl = `/members/id=${memberId}`;
                     fetch(memberUrl)
                         .then(response => response.json())
                         .then(memberData => {
@@ -185,7 +185,7 @@
 
                     // Fetch room type name by room type id
                     const roomTypeId = data.roomTypeId;
-                    const roomTypeUrl = `http://localhost:8080/roomTypes/${roomTypeId}`;
+                    const roomTypeUrl = `/roomTypes/${roomTypeId}`;
                     fetch(roomTypeUrl)
                         .then(response => response.json())
                         .then(roomTypeData => {
@@ -197,7 +197,7 @@
 
                     // Fetch room name by room id
                     const roomId = data.roomId;
-                    const roomUrl = `http://localhost:8080/rooms/${roomId}`;
+                    const roomUrl = `/rooms/${roomId}`;
                     fetch(roomUrl)
                         .then(response => response.json())
                         .then(roomData => {

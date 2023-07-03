@@ -288,7 +288,7 @@
             var memberId = 1;
 
             $.ajax({
-                url: `http://localhost:8080/room-order/customer/mem-id/${memberId}`,
+                url: `/room-order/customer/mem-id/${memberId}`,
                 method: 'GET',
                 success: function (data) {
                     $('#orders-section').empty();
@@ -312,7 +312,7 @@
 
                         // Make an AJAX request to get the hotel name based on the orderId
                         $.ajax({
-                            url: `http://localhost:8080/room-order/hotel-name/${order.id}`,
+                            url: `/room-order/hotel-name/${order.id}`,
                             method: 'GET',
                             success: function (hotelName) {
                                 // Update the hotel name in the HTML
@@ -365,7 +365,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="p-xl-5 m-xl-5">
-                                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="http://localhost:8080/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
+                                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
                                     </div>
                                 </div>
                             </div>
@@ -379,7 +379,7 @@
                             console.log('Clicked "查看詳情" for Order ID:', `${order.id}`);
 
                             // Construct the URL for the new page
-                            const orderDetailUrl = `http://localhost:8080/f_27/cus-order-detail.html?id=${order.id}`;
+                            const orderDetailUrl = `/f_27/cus-order-detail.html?id=${order.id}`;
 
                             // Open the new page
                             window.open(orderDetailUrl, '_blank');
@@ -412,7 +412,7 @@
                                     $(this).remove();
 
                                     // Call the API to change the order status
-                                    const apiUrl = `http://localhost:8080/room-order/id/${order.id}/change-status`;
+                                    const apiUrl = `/room-order/id/${order.id}/change-status`;
 
                                     fetch(apiUrl, {
                                         method: 'PUT',
@@ -531,7 +531,7 @@
                     //         redirect: 'follow'
                     //     };
 
-                    //     fetch("http://localhost:8080/roomreview/addReview", requestOptions)
+                    //     fetch("/roomreview/addReview", requestOptions)
                     //         .then(response => response.text())
                     //         .then(result => console.log(result))
                     //         .catch(error => console.log('error', error));
@@ -624,7 +624,7 @@
                     redirect: 'follow'
                 };
 
-                fetch("http://localhost:8080/roomreview/addReview", requestOptions)
+                fetch("/roomreview/addReview", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));

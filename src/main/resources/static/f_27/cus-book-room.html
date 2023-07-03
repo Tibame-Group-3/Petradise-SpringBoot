@@ -202,7 +202,7 @@
             // Function to fetch customer information
             function fetchCustomerInfo() {
                 $.ajax({
-                    url: `http://localhost:8080/members/id=${memberId}`, // Replace with the actual API endpoint
+                    url: `/members/id=${memberId}`, // Replace with the actual API endpoint
                     method: 'GET',
                     success: function (response) {
                         // Update the customer information elements
@@ -220,7 +220,7 @@
             // Function to fetch image
             function fetchImage() {
                 $.ajax({
-                    url: `http://localhost:8080/roomTypes/${roomTypeId}/images`,
+                    url: `/roomTypes/${roomTypeId}/images`,
                     method: 'GET',
                     success: function (response) {
                         // Update the room image
@@ -247,7 +247,7 @@
             // Fetch the room type information
             function fetchRoomInfo() {
                 $.ajax({
-                    url: `http://localhost:8080/roomTypes/${roomTypeId}`, // Replace with the actual API endpoint
+                    url: `/roomTypes/${roomTypeId}`, // Replace with the actual API endpoint
                     method: 'GET',
                     success: function (response) {
                         // Update the room type information
@@ -293,7 +293,7 @@
 
                     // Send the data to the specified endpoint
                     $.ajax({
-                        url: 'http://localhost:8080/room-order/customer/add',
+                        url: '/room-order/customer/add',
                         method: 'POST',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -307,7 +307,7 @@
                                 imageAlt: 'Custom image',
                             }).then(function () {
                                 // After pressing "OK", redirect the user to the specified page
-                                window.location.href = 'http://localhost:8080/f_27/cus-orders.html';
+                                window.location.href = '/f_27/cus-orders.html';
                             });
                         }
                         ,
