@@ -233,7 +233,7 @@
     var roomTypeId = urlParams.get('roomTypeId');//找到名為roomTypeId的值
 
     $.ajax({
-        url: 'http://localhost:8080/roomTypes/' + roomTypeId,
+        url: '/roomTypes/' + roomTypeId,
         type: 'GET',
         success: function (roomTypeWithPics) {
             // 顯示房型資訊

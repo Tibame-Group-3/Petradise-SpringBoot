@@ -180,7 +180,7 @@
         var hotelId = getHotelOwnerId();
 
         $.ajax({
-            url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
+            url: `/roomTypes/hotelId/${hotelId}`,
             type: 'GET',
             success: function (data) {
                 roomTypeMapping = {};  // mapping對象
@@ -245,7 +245,7 @@
                     $("#roomForm")[0].reset(); // 清空表單
                     $.ajax({
                         // 更新房型表格內的房間數量
-                        url: `http://localhost:8080/roomTypes/updateRooms/${selectedRoomTypeId}`,
+                        url: `/roomTypes/updateRooms/${selectedRoomTypeId}`,
                         type: 'POST',
                         success: function (response) {
                             Swal.fire({

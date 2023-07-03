@@ -192,7 +192,7 @@
         const hotelId = getHotelOwnerId();
         console.log(hotelId);
         $.ajax({
-            url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
+            url: `/roomTypes/hotelId/${hotelId}`,
             type: 'GET',
 
             success: function (response) {
