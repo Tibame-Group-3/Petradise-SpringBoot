@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.member.service;
 
-import tw.idv.petradisespringboot.member.dto.GetAllDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
 import tw.idv.petradisespringboot.member.dto.SignUpDTO;
 import tw.idv.petradisespringboot.member.dto.UpdateDTO;
@@ -24,5 +25,5 @@ public interface MemberService {
     // 註冊時地址縣市/地區下拉選單
     List<AddressInfo> getAddressInfo() throws Exception;
 
-    List<MemberDTO> getAll(GetAllDTO dto);
+    Page<MemberDTO> getAll(Pageable pageable);
 }
