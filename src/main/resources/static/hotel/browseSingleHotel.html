@@ -289,8 +289,24 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/login.js"></script>
 <script>
-    // 文件載入時期要做的事
+        // 按下直接訂房按鈕時 沒登入導向登入頁面 有登入導向結帳頁面
+        $(document).ready(function() {
+        $('#book').click(function() {
+            var memberId = getMemberId();
+            if (!memberId) {
+                // 如果 memberId 為空，則導向登入頁面
+                window.location.href = '../member/signin.html';
+                var returnUrl = encodeURIComponent(window.location.href);
+                window.location.href = '../member/signin.html?returnUrl=' + returnUrl;
+            } else {
+                // 如果 memberId 不為空，導向結帳頁面
+            }
+        });
+    });
+
+// 文件載入時期要做的事
     $(document).ready(function () {
         var urlParams = new URLSearchParams(window.location.search); //取得查詢字串
         var hotelId = urlParams.get('hotelId');
