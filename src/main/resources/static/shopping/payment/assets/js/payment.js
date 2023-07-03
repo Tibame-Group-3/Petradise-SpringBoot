@@ -156,13 +156,13 @@ $('.confirm-payment').on('click', function () {
     // const memId = getMemberId();
     const obj = getSession();
     let priceOri = 0;
-    const orderJsonDataList = [];
 
+    let orderJsonData;
     for (const objProp in obj) {
         const key = obj[objProp];
         priceOri += key.price * key.quantity;
 
-        const orderJsonData = {
+        orderJsonData = {
             orderMaster: {
                 // memId: $(memId).val(), // ...
                 memId: 1,
@@ -179,7 +179,6 @@ $('.confirm-payment').on('click', function () {
         };
 
         iterateOverEachProduct(orderJsonData);
-        orderJsonDataList.push(orderJsonData);
     }
 
     fetch('/order/add', {
@@ -187,7 +186,7 @@ $('.confirm-payment').on('click', function () {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(orderJsonDataList)
+        body: JSON.stringify(orderJsonData)
     })
         .then(response => response.json())
         .then(jsonData => console.log(jsonData))
