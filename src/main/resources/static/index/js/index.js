@@ -2,6 +2,7 @@ $(document).ready(function () {
     const signedIn = isSignedIn();
     setupMemberElements(signedIn);
     setupNavigation(signedIn);
+    setupHotelOwnerSignUpNavigation();
     $('.logout').on('click', logout);
     setupLostPetNavigation();
 })
@@ -39,4 +40,10 @@ function setupSigninNavigation() {
 function setupLostPetNavigation() {
 	$('.lostPet')
 		.attr('href', '/lostPet/lost.html');
+}
+
+//毛孩旅館 加入我們
+function setupHotelOwnerSignUpNavigation(){
+	$('.join-hotelowner')
+		.attr('href','/owner/SignUp.html')
 }
