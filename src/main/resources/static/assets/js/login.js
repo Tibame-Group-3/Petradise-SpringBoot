@@ -1,6 +1,6 @@
 function guardIsSignedIn() {
     if (isSignedIn() === false) {
-        redirectToIndex();
+        redirectToLogin();
     }
 }
 
@@ -19,6 +19,10 @@ function getMemberId() {
 
 function redirectToIndex() {
     window.location.href = '/';
+}
+
+function redirectToLogin() {
+    window.location.href = '/member/signin.html?redirect=' + window.location.pathname;
 }
 
 function logout() {

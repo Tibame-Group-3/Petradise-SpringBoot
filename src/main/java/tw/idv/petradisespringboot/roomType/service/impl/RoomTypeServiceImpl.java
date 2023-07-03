@@ -202,7 +202,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             }
 
             return allHotelDTO;
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()); //把stream中的元素放到集合中
 
         return allHotelDTOs;
     }

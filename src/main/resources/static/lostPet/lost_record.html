@@ -280,7 +280,7 @@
 	              deleteId = button.getAttribute('id');
 	              console.log(deleteId);
 	              $.ajax({
-	                  url: '/LostPetArticle/id=' + deleteId + '/delete',
+	                  url: '/LostPetArticle/delete/id=' + deleteId,
 	                  type: 'PUT',
 	                  success: function(response) {
 	                      console.log('Article deleted:', response);

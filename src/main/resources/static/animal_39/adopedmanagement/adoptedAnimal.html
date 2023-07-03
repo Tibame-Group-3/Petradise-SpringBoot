@@ -84,71 +84,60 @@
             </div>
         </div>
     </nav>
-    <div class="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-            <nav
-                    class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                <div class="container-fluid">
-                    <button class="btn btn-link d-md-none rounded-circle me-3"
-                            id="sidebarToggleTop" type="button">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <ul class="navbar-nav flex-nowrap ms-auto">
-                        <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow">
-                                <a class="dropdown-toggle nav-link" aria-expanded="false"
-                                   data-bs-toggle="dropdown" href="#"><span id="owner-name"
-                                                                            class="d-none d-lg-inline me-2 text-gray-600 small"></span></a>
-                                <div
-                                        class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-                                        style="min-width: 110px;">
-                                    <a class="dropdown-item" href="#" onclick="logout()"><i
-                                            class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            </nav>
-            <div class="container-fluid">
-                <h3 class="text-dark mb-4">動物資訊</h3>
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <!-- Button -->
-                        <button type="button" class="btn btn-primary"
-                                id="animalAddButton" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-bs-whatever="@mdo">動物新增
-                        </button>
+   
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<nav
+					class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+					<div class="container-fluid">
+						<button class="btn btn-link d-md-none rounded-circle me-3"
+							id="sidebarToggleTop" type="button">
+							<i class="fas fa-bars"></i>
+						</button>
+						<ul class="navbar-nav flex-nowrap ms-auto">
+							<li class="nav-item dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false"
+										data-bs-toggle="dropdown" href="#"><span
+										class="d-none d-lg-inline me-2 text-gray-600 small">社團法人台灣寶貝動物協會</span></a>
+									<div
+										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+										style="min-width: 110px;">
+										<a class="dropdown-item" href="#"><i
+											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				</nav>
+				<div class="container-fluid">
+					<h3 class="text-dark mb-4">動物資訊</h3>
+					<div class="card shadow">
+						<div class="card-header py-3">
+							<!-- Button -->
+							<button type="button" class="btn btn-primary"
+								id="animalAddButton" data-bs-toggle="modal"
+								data-bs-target="#exampleModal" data-bs-whatever="@mdo">動物新增</button>
 
-                        <div class="controll-content activity-order-controll-content">
-                            <table id="all" class="display" style="width: 100%">
-                                <thead>
-                                <tr>
-                                    <!--<th>動物編號</th>-->
-                                    <th>動物</th>
-                                    <th>業主</th>
-                                    <th>種類</th>
-                                    <th>名字</th>
-                                    <th>性別</th>
-                                    <th>年齡</th>
-                                    <th>狀態</th>
-                                    <!-- <th>備註</th> -->
-                                    <th>照片</th>
-                                    <th>修改</th>
-                                </tr>
+							<div class="controll-content activity-order-controll-content">
+								<table id="all" class="display" style="width: 100%">
+									<thead>
+										<tr>
+											<!--<th>動物編號</th>-->
+											<th>動物</th>
+											<th>業主</th>
+											<th>種類</th>
+											<th>名字</th>
+											<th>性別</th>
+											<th>年齡</th>
+											<th>狀態</th>
+											<!-- <th>備註</th> -->
+											<th>照片</th>
+											<th>修改</th>
+										</tr>
 
-
-                                </thead>
-
-
-                                <!---------------------------------主體結束-------------------------------->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- <div class="row">

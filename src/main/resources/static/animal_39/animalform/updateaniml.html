@@ -162,22 +162,17 @@
                     </ul>
                 </div>
             </nav>
-            <div class="container-fluid">
-                <h3 class="text-dark mb-1">修改動物</h3>
-            </div>
-            <div class="container">
-                <h3>動物檔案</h3>
-                <div form-container>
-                    <form id="updateanimalForm" action="" method="post" class="contact_form">
-                        <!-- <div class="form-row"> -->
-                        <div class="form-group ">
-
-                            <label for="ownername">
-                                <div class="text">業主編號:</div>
-                            </label> <input id="corpid" class="form-control" type="ownername"
-                                            placeholder="業主編號" name="corpid">
-                            <div class="messages"></div>
-                        </div>
+           
+		
+				<div class="container-fluid">
+					<h3 class="text-dark mb-1">修改動物</h3>
+				</div>
+				<div class="container">
+					<h3>動物檔案</h3>
+					<div form-container>
+						<form id="updateanimalForm" action="" method="post" class="contact_form">
+							<!-- <div class="form-row"> -->
+							
 
                         <div class="form-group ">
                             <label for="animal_type">
@@ -238,10 +233,13 @@
                         </div>
 
 
-                        <div class="button-container">
-                            <button class="edit-button" type="submit">編輯</button>
-                            <button class="save-button">新增</button>
-                        </div>
+							<div class="button-container">
+								
+								<button class="save-button">修改</button>
+							</div>
+
+                        
+
 
                     </form>
                 </div>
@@ -278,9 +276,8 @@
 <script>
 
 
-    var urlParams = new URLSearchParams(window.location.search);
+   
     var id = getAnimalCorporationId();
-    console.log(id);
     // 先取得原資料並渲染於修改表單
     $.ajax({
         url: `/animals/${id}`,
@@ -289,12 +286,12 @@
         success: function (animal) {
             console.log(animal);
             // 將取得的資料放在修改表單裡
-            $("#corpid").val(animal.corpid);
-            $("#animalname").val(animal.animalname);
-            $("#animal_type").val(animal.animaltype);
-            $("#animalsex").find("option[value='" + animal.animalsex + "']").prop("selected", true);
-            $("#animalage").val(animal.animalage);
-            $("#animalstatus").find("option[value='" + animal.animalstatus + "']").prop("selected", true);
+            $("#corpid").val(animal.corpId);
+            $("#animalname").val(animal.animalName);
+            $("#animal_type").val(animal.animalType);
+            $("#animalsex").find("option[value='" + animal.animalSex + "']").prop("selected", true);
+            $("#animalage").val(animal.animalAge);
+            $("#animalstatus").find("option[value='" + animal.animalStatus + "']").prop("selected", true);
         },
         error: function (error) {
             console.error("AJAX Error: " + error);
@@ -305,12 +302,12 @@
     $("#updateanimalForm").submit(function (event) {
         event.preventDefault();
         const updateanimal = {
-            corpid: $("input[name='corpid']").val(),
-            animalname: $("input[name='animalname']").val(),
-            animaltype: $("#animal_type").val(),
-            animalsex: $("select[name='animalsex']").val(),
-            animalage: $("#animalage").val(),
-            animalstatus: $("select[name='animalstatus']").val(),
+            corpId: $("input[name='corpid']").val(),
+            animalName: $("input[name='animalname']").val(),
+            animalType: $("#animal_type").val(),
+            animalSex: $("select[name='animalsex']").val(),
+            animalAge: $("#animalage").val(),
+            animalStatus: $("select[name='animalstatus']").val(),
         };
 
         $.ajax({
