@@ -1,7 +1,5 @@
 package tw.idv.petradisespringboot.roomType.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import tw.idv.petradisespringboot.roomType.dto.AllHotelDTO;
 import tw.idv.petradisespringboot.roomType.dto.SingleHotelDTO;
@@ -9,7 +7,7 @@ import tw.idv.petradisespringboot.roomType.dto.searchHotelDTO;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomTypeService {
@@ -31,8 +29,8 @@ public interface RoomTypeService {
     public List<AllHotelDTO> searchHotels(searchHotelDTO searchDto);
 
     SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId,
-                                  LocalDateTime inDay,
-                                  LocalDateTime outDay);
+                                  LocalDate inDay,
+                                  LocalDate outDay);
 
     public List<String> getRoomTypeImages(Integer roomTypeId);
 

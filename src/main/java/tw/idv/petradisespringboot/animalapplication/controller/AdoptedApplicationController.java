@@ -2,8 +2,7 @@ package tw.idv.petradisespringboot.animalapplication.controller;
 
 import java.util.List;
 
-
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tw.idv.petradisespringboot.animalapplication.service.AdoptedApplicationService;
 import tw.idv.petradisespringboot.animalapplication.vo.AdoptedApplication;
+import tw.idv.petradisespringboot.member.vo.Member;
 
 
 
@@ -41,7 +41,7 @@ public class AdoptedApplicationController {
 	}
 
 	@ResponseBody
-	@GetMapping("{id}")
+	@GetMapping("{id}") // /adopted_applications/17
 	AdoptedApplication findAdoptedApplicationById(@PathVariable Integer id) {
 		return service.findAdoptedApplicationById(id);
 	}
@@ -70,17 +70,50 @@ public class AdoptedApplicationController {
 	        return null;
 	    }
 	}
-//	@PostMapping("/save/{id}")
-//	public AdoptedApplication newAdoptedApplication(@RequestBody AdoptedApplication adoptedApplication, HttpSession session) {
-//	    Integer memberId = (Integer) session.getAttribute("memberId");
-//	    if (memberId == null) {
-//	     
-//	    } else {
-//	        adoptedApplication.setMembId(memberId);
-//	        return service.addAdoptedApplication(adoptedApplication);
-//	    }
-//		return adoptedApplication;
-//	}
+	
+	@PostMapping("/create")
+	public ResponseEntity<String> createAdoptedApplication(@RequestBody AdoptedApplication request) {
+	
+//	    Member loggedInMember = getCurrentLoggedInMember(); // 请替换成您自己获取当前登录会员的方法
+//
+//	  
+//	    AdoptedApplication application = new AdoptedApplication();
+//	    application.setMembId(loggedInMember.getId());
+//	    application.setAnimalId(request.getAnimalId());
+//	    application.setAdopterIdNumber(request.getAdopterIdNumber());
+//	    application.setAdopterIdNumber(loggedInMember(""));
+//	    application.setAdopterName(loggedInMember.getName());
+//	    application.setAdopterAddress(loggedInMember.getAddress());
+//	    application.setAdopterJob(loggedInMember(""));
+//	    application.setAdopterEmail(loggedInMember.getEmail());
+
+	
+	    service.addAdoptedApplication(request);
+
+	    return ResponseEntity.ok("Adopted application created successfully.");
+	}
+
+
+	private Member getCurrentLoggedInMember() {
+		
+		return null;
+	}
+
+
+	private String loggedInMember(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 

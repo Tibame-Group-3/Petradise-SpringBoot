@@ -1,5 +1,8 @@
 package tw.idv.petradisespringboot.roomorder.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
@@ -57,5 +60,29 @@ public class RoomOrderController {
         List<RoomOrder> roomOrders = service.getRoomOrdersByHotelId(hotelId);
         return ResponseEntity.ok(roomOrders);
     }
+
+    @GetMapping("/hotel-name/{id}")
+    public ResponseEntity<String> getHotelNameByRoomOrderId(@PathVariable Integer id){
+        String hotelName = service.getHotelNameByRoomOrderId(id);
+        if (hotelName != null) {
+            return ResponseEntity.ok(hotelName);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}/room-picture")
+    public ResponseEntity<byte[]> getRoomPictureByRoomOrderId(@PathVariable Integer id) {
+        byte[] roomPicture = service.getRoomPicByRoomOrderId(id);
+        if (roomPicture != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(roomPicture, headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }

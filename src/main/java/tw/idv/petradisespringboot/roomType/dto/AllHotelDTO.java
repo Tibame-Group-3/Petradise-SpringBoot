@@ -3,10 +3,9 @@ package tw.idv.petradisespringboot.roomType.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +19,6 @@ public class AllHotelDTO {
     private Integer roomTypePrice;
     private Integer reviewScoreTotal;
     private List<String> roomPics = new ArrayList<>();
-    private LocalDateTime inDay;
-    private LocalDateTime outDay;
+    private LocalDate inDay;
+    private LocalDate outDay;
 }

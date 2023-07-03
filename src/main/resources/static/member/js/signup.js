@@ -146,7 +146,7 @@
         };
 
         showLoadingAlert();
-        fetch("http://localhost:8080/members/sign-up", requestOptions)
+        fetch("/members/sign-up", requestOptions)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

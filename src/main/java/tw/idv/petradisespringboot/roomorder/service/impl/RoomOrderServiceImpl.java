@@ -86,4 +86,20 @@ public class RoomOrderServiceImpl implements RoomOrderService {
         return repository.findByHotelId(hotelId);
     }
 
+    @Override
+    public String getHotelNameByRoomOrderId(Integer id) {
+        return repository.findHotelNameByRoomOrderId(id);
+    }
+
+    @Override
+    public byte[] getRoomPicByRoomOrderId(Integer roomOrderId) {
+        List<byte[]> roomPictures = repository.findRoomPicturesByRoomOrderId(roomOrderId);
+        if (!roomPictures.isEmpty()) {
+            return roomPictures.get(0);
+        }
+        return null;
+    }
+
+
+
 }

@@ -372,7 +372,7 @@
 
                 function getAllAnimalCorporation() {
                     console.log('進入getAllAnimalCorporation()')
-                    fetch("http://localhost:8080/animalcorporation/all")
+                    fetch("/animalcorporation/all")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {

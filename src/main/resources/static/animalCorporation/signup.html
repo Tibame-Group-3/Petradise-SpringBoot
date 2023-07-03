@@ -497,7 +497,7 @@ $(function(){
                         },
                         stringLength: {
                             min: 5,
-                            message: "案號格式不正確，需含有中文及數字"
+                            message: "請填入含有中文及數字組成之案號"
                         }
                     }
 
@@ -644,7 +644,6 @@ $(function(){
               contentType: "application/json",
               data: JSON.stringify(allData),
               success: function(res) {
-            	  window.location.href = "/";
               },
             });
           } catch (err) {

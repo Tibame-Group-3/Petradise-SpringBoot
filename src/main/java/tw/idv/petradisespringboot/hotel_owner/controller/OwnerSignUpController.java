@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +35,7 @@ public class OwnerSignUpController {
 	}
 
 	@PostMapping("/insert")
-	public void insertOwner(HttpServletRequest req, @RequestBody HotelOwnerVO hotelOwnerVO) {
-
+	public ResponseEntity<String> insertOwner(HttpServletRequest req, @RequestBody HotelOwnerVO hotelOwnerVO) {
 		HttpSession session = req.getSession();
 
 		try {
@@ -43,19 +44,23 @@ public class OwnerSignUpController {
 			session.setAttribute("hotel_owner", hotelOwnerVO);
 			System.out.println("Image data: " + Arrays.toString(imgData));
 			hotelOwnerServiceImpl.insert(hotelOwnerVO);
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
+		return ResponseEntity.ok("新增成功");
+
 	}
 
 	@PostMapping("/checkMail")
 	public void checkMail(HttpServletRequest req, @RequestBody Map<String, String> payload) {
 		HttpSession session = req.getSession();
 		String token = UUID.randomUUID().toString().substring(0, 6);
-		String subject = "Email Verification";
-		String text = "Your verification code is: " + token;
+		String subject = "Petradise 信箱驗證碼";
+		String text = "您好,您的驗證碼為: " + token;
 		String owenrEmail = payload.get("ownerEmail");
 		emailService.sendEmail(owenrEmail, subject, text);
 		session.setAttribute("email_verification_token", token);

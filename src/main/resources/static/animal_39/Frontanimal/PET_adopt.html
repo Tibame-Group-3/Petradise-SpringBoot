@@ -29,7 +29,9 @@
 }
 
 	
-	
+	#animalList img{
+		width: 100%;
+	}
 
 </style>
 </head>
@@ -161,14 +163,14 @@
 	</div>
 	<div>
 		<!-- Start: Previous -->
-		<a class="carousel-control-prev" href="#carousel-1" role="button"
-			data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span
-			class="visually-hidden">Previous</span></a>
+<!-- 		<a class="carousel-control-prev" href="#carousel-1" role="button" -->
+<!-- 			data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span -->
+<!-- 			class="visually-hidden">Previous</span></a> -->
 		<!-- End: Previous -->
 		<!-- Start: Next -->
-		<a class="carousel-control-next" href="#carousel-1" role="button"
-			data-bs-slide="next"><span class="carousel-control-next-icon"></span><span
-			class="visually-hidden">Next</span></a>
+<!-- 		<a class="carousel-control-next" href="#carousel-1" role="button" -->
+<!-- 			data-bs-slide="next"><span class="carousel-control-next-icon"></span><span -->
+<!-- 			class="visually-hidden">Next</span></a> -->
 		<!-- End: Next -->
 	</div>
 	<ol class="carousel-indicators">
@@ -192,8 +194,9 @@
 
 
 
-	<div class="row row-cols-1 row-cols-md-2">
-		<div class="col text-center"></div>
+	<div class="row col-6 mx-auto">
+<!-- 	<div class="row row-cols-1 row-cols-md-2"> -->
+<!-- 		<div class="col text-center"></div> -->
 
 
 
@@ -207,7 +210,7 @@
 				</tfoot>
 			</table>
 		</div>
-		<div class="d-flex justify-content-end">
+		<div class="d-flex justify-content-center">
 			<div class="btn-group" role="group">
 				<button class="btn btn-primary" type="submit">確認認養</button>
 			</div>
@@ -261,9 +264,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>
+	
+// 	document.addEventListener('DOMContentLoaded', funtion(){
+// 		guarIsSignedIn();
+// 	});
+	
+	
 	$(document).ready(function() {
+
+	      // 拿取url中的變數
+	      let urlParam = new URLSearchParams(window.location.search);
+	      let queryValue = urlParam.get('animalId');
+    	
 		  $.ajax({
-		    url: "/animals/" + 4,
+		    url: "/animals/" + queryValue,
 		    type: "GET",
 		    success: function(response) {
 		      console.log("Data received successfully:", response);
@@ -349,7 +363,7 @@
 		  });
 
 		  function redirectToNextPage() {
-		    window.location.href = "/animal_39/Frontanimal/adoptapplication.html?#carousel-1";
+		    window.location.href = "/animal_39/Frontanimal/adoptapplication.html?animalId="+queryValue;
 		  }
 		});
 

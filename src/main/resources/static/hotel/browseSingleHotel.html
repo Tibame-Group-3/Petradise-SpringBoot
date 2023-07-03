@@ -161,9 +161,9 @@
                     <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                     <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                 </svg>
-                <button id="single-hotel-chat" name="single-hotel-chat"
-                        style=" padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;">即時聊天
-                </button>
+<!--                <a href="../owner/Chat.html" -->
+<!--    style="display: inline-block; padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; text-decoration: none;background-color:lightgray ">即時留言牆</a> -->
+<a class="chat-link" style="display: inline-block; padding: 3px 5px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; text-decoration: none;background-color:lightgray ">即時留言牆</a>
             </div>
         </div>
         <!-- 房型列表 -->
@@ -289,7 +289,22 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/login.js"></script>
 <script>
+    //按下直接訂房按鈕時 沒登入導向登入頁面 有登入導向結帳頁面
+    $(document).ready(function () {
+        $('#book').click(function () {
+            var memberId = getMemberId();
+            if (!memberId) {
+                //如果 memberId 為空，則導向登入頁面 然後跳到結帳
+                redirectToLogin('../f_27/cus-book-room.html');
+            } else {
+                //如果 memberId 不為空，導向結帳頁面(!!夏!!)
+                window.location.href = '../f_27/cus-book-room.html';
+            }
+        });
+    });
+
     // 文件載入時期要做的事
     $(document).ready(function () {
         var urlParams = new URLSearchParams(window.location.search); //取得查詢字串
@@ -301,8 +316,19 @@
         console.log(roomTypeId);
         console.log(inDay);
         console.log(outDay);
-        sessionStorage.setItem('inDay', inDay);
-        sessionStorage.setItem('outDay', outDay);
+        sessionStorage.setItem('checkInDate', inDay);
+        sessionStorage.setItem('checkOutDate', outDay);
+        sessionStorage.setItem('roomTypeId',roomTypeId);
+        
+        //聊天
+        $(".chat-link").on("click",function(e){
+        	e.preventDefault();
+        	console.log(hotelId);
+        	window.location.href="../owner/Chat.html?hotelId=" + hotelId;
+        	
+        });
+        
+        
         if (inDay === null || outDay === null) {
             console.error('inDay or outDay is null');
             return;
@@ -318,6 +344,8 @@
                 $("#price").html('<span class="priceStyle">' + res.roomTypePrice + '</span><span class="defaultStyle">元/一晚</span>');
                 $("#intro").text(res.roomTypeAbout);
                 console.log(res);
+                
+                
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -390,6 +418,11 @@
         });
     });
 
+    
+
+    
+    
+    
 
 </script>
 </body>

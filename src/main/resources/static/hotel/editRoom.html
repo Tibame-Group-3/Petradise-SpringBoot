@@ -188,7 +188,7 @@
         var hotelId = getHotelOwnerId();
 
         $.ajax({
-            url: `http://localhost:8080/roomTypes/hotelId/${hotelId}`,
+            url: `/roomTypes/hotelId/${hotelId}`,
             type: 'GET',
             success: function (data) {
                 roomTypeMapping = {};  // mapping對象
@@ -202,7 +202,7 @@
                 var urlParams = new URLSearchParams(window.location.search);
                 var roomId = urlParams.get('roomId');
                 $.ajax({
-                    url: 'http://localhost:8080/rooms/' + roomId,
+                    url: '/rooms/' + roomId,
                     type: 'GET',
                     success: function (room) {
                         // 填充表單
@@ -275,7 +275,7 @@
             var roomTypeId = selectedRoomTypeId;
 
             $.ajax({
-                url: 'http://localhost:8080/rooms/' + roomId + '/' + roomTypeId,
+                url: '/rooms/' + roomId + '/' + roomTypeId,
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(room),

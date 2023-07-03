@@ -1,32 +1,24 @@
 package tw.idv.petradisespringboot.mall.model.vo;
 
 import java.io.Serializable;
-import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
+@Embeddable
+@Component
 public class FavoriteCompositePK implements Serializable {
 	private static final long serialVersionUID = -7337370425866004595L;
 
+	@Column(name = "pd_id")
 	private Integer pdId;
+	
+	@Column(name = "mem_id")
 	private Integer memId;
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FavoriteCompositePK other = (FavoriteCompositePK) obj;
-		return Objects.equals(memId, other.memId) && Objects.equals(pdId, other.pdId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(memId, pdId);
-	}
 
 }

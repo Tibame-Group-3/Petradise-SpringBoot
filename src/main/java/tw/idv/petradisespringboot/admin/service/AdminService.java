@@ -23,3 +23,4 @@ public interface AdminService {
     Admin login(String account, String password);
 
 }
+

@@ -3,6 +3,7 @@ package tw.idv.petradisespringboot.mall.model.vo;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -17,28 +18,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Table(name = "favorite")
-@IdClass(FavoriteCompositePK.class)
 public class Favorite {
 	
-	@Id
-	@Column(name = "pd_id")
-	private Integer pdId;
-
-	@Id
-	@Column(name = "mem_id")
-	private Integer memId;
+	@EmbeddedId
+	private FavoriteCompositePK id;
 	
 	@Column(name = "fav_date")
 	private Date favDate;
-	
-	public String toString() {
-		return "Favorite {" +
-				"pdId=" + pdId +
-				"memId=" + memId +
-				"favDate=" + favDate +
-				'}';
-	}
 	
 }
