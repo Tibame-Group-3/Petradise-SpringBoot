@@ -24,3 +24,4 @@ Petradise-SpringBoot.iml
 spring.log
 .metadata
 bin
+sensitives.properties
