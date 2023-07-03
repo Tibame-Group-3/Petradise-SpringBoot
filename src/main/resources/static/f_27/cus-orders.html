@@ -10,6 +10,18 @@
     <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
+        .status-0 {
+            color: green;
+        }
+
+        .status-1 {
+            color: blue;
+        }
+
+        .status-2 {
+            color: red;
+        }
+
         #no-matches-message {
             display: none;
             text-align: center;
@@ -142,9 +154,9 @@
                                         <label class="form-label">訂單狀態:
                                             <select class="d-inline-block form-select form-select-sm">
                                                 <option selected="">全部</option>
-                                                <option>即將到來</option>
-                                                <option>已完成</option>
-                                                <option>已取消</option>
+                                                <option style="color: green;">即將到來</option>
+                                                <option style="color: blue;">已完成</option>
+                                                <option style="color: red">已取消</option>
                                             </select>&nbsp;
                                         </label>
                                     </div>
@@ -287,6 +299,7 @@
                         } else if (order.status === '2') {
                             statusText = '已取消';
                         }
+
                         // Display the "取消訂單" button based on the order status
                         if (order.status === '0') {
                             var cancelOrderButton = `<a class="btn btn-danger btn-sm" id="cancel-order-button-${order.id}" role="button">取消訂單</a>`;
@@ -294,13 +307,26 @@
                             var cancelOrderButton = ''; // Empty string if status is not '0'
                         }
 
+                        // Make an AJAX request to get the hotel name based on the orderId
+                        $.ajax({
+                            url: `http://localhost:8080/room-order/hotel-name/${order.id}`,
+                            method: 'GET',
+                            success: function (hotelName) {
+                                // Update the hotel name in the HTML
+                                $(`#hotel-name-${order.id}`).text(hotelName);
+                            },
+                            error: function () {
+                                console.log('Error loading hotel name for Order ID:', `${order.id}`);
+                            }
+                        });
+
                         var html = `
-                            <div class="container py-4 py-xl-5 order-item">
+                        <div class="container bg-secondary bg-opacity-10 border border-2 rounded py-4 py-xl-5 order-item" style="height: 550px;">
                             <div class="row gy-4 gy-md-0">
                                 <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
                                 <div style="max-width: 350px;">
-                                    <h5><span id="order-status">${statusText}</span></h5>
-                                    <h2 class="text-uppercase fw-bold">${order.hotelName}</h2>
+                                    <h5><span id="order-status" class="status-${order.status}">${statusText}</span></h5>
+                                    <h2 id="hotel-name-${order.id}" class="text-uppercase fw-bold"></h2>
                                     <p>訂單編號: <span id="order-id">${order.id}</span></p>
                                     <p>入住日期: <span id="check-in-date">${order.checkInDate}</span></p>
                                     <p>退房日期: <span id="check-out-date">${order.checkOutDate}</span></p>
@@ -327,7 +353,6 @@
                                         <form accept-charset="UTF-8">
                                         <textarea class="review-form" rows="4" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
                                         <div class="text-right">
-                                            <br>
                                             <button class="btn-indie-trans" type="submit">Publish</button>
                                         </div>
                                         </form>
@@ -336,12 +361,12 @@
                                 </div>
                                 </div>
                                 <div class="col-md-6">
-                                <div class="p-xl-5 m-xl-5">
-                                    <img href="" class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="assets/img/xxx.jpg">
-                                </div>
+                                    <div class="p-xl-5 m-xl-5">
+                                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="http://localhost:8080/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
+                        </div><br>
                         `;
                         $('#orders-section').append(html);
                         updateOrderCount();
@@ -403,7 +428,11 @@
                                                 'Cancelled!',
                                                 'Your order has been canceled.',
                                                 'success'
-                                            );
+                                            ).then((result) => {
+                                                if (result.dismiss === Swal.DismissReason.backdrop || Swal.DismissReason.close) {
+                                                    location.reload();
+                                                }
+                                            });
                                         })
                                         .catch(error => {
                                             console.error('Error updating order status:', error);

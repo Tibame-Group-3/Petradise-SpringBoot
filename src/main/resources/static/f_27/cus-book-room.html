@@ -108,9 +108,9 @@
                 </div>
                 <div class="card-body">
                     <label class="form-label">
-                        <select class="d-inline-block form-select form-select-sm">
-                            <option selected="">到店付款</option>
-                            <option>信用卡結帳</option>
+                        <select id="payment-method" class="d-inline-block form-select form-select-sm">
+                            <option value="0" selected="">到店付款</option>
+                            <option value="1">信用卡結帳</option>
                         </select><br>
                     </label>
                     <div class="form-group credit-card-fields">
@@ -187,9 +187,9 @@
             const memberId = getMemberId();
 
             // Retrieve the values from session storage
-            var checkInDate = "2023-06-29";     // sessionStorage.getItem('checkInDate');
-            var checkOutDate = "2023-06-30";    // sessionStorage.getItem('checkOutDate');
-            var roomTypeId = 5;                 // sessionStorage.getItem('roomTypeId');
+            const checkInDate = "2023-07-02";     // sessionStorage.getItem('checkInDate');
+            const checkOutDate = "2023-07-03";    // sessionStorage.getItem('checkOutDate');
+            const roomTypeId = 5;                 // sessionStorage.getItem('roomTypeId');
 
             // Update the corresponding elements with the retrieved values
             $('#check-in-date').text(checkInDate);
@@ -273,26 +273,30 @@
 
             // Add event listener to the "確認訂房&付款" button
             $('#confirm-pay').click(function () {
-                var petName = $('#pet-name').val();
+                const petName = $('#pet-name').val();
+                const status = '0';
+                const payMethod = $('#payment-method').val();
+                const price = $('#room-type-price').text();
+                const specialReq = $('#new-review').val();
+
                 if (petName.trim() !== '') {
 
                     // Create the data object with the required information
                     var data = {
                         memId: memberId,
-                        roomTypeId: 5, // Replace with the actual room type ID
-                        roomId: 2, // Replace with the actual room ID
-                        petName: petName, // Replace with the actual pet ID
+                        roomTypeId: roomTypeId,
+                        petName: petName,
                         checkInDate: checkInDate,
                         checkOutDate: checkOutDate,
-                        status: '0',
-                        payMethod: '0', // Replace with the actual payment method
-                        price: 180, // Replace with the actual final price
-                        specialReq: $('#new-review').val() // Get the special request from the textarea
+                        status: status,
+                        payMethod: payMethod,
+                        price: price,
+                        specialReq: specialReq
                     };
 
                     // Send the data to the specified endpoint
                     $.ajax({
-                        url: 'http://localhost:8080/room-order/customer/add', // Replace with the actual API endpoint
+                        url: 'http://localhost:8080/room-order/customer/add',
                         method: 'POST',
                         data: JSON.stringify(data),
                         contentType: 'application/json',
@@ -327,7 +331,7 @@
 
             // Add event listener to the payment method
             $('.form-select').on('change', function () {
-                $('.credit-card-fields').toggle($(this).val() === '信用卡結帳');
+                $('.credit-card-fields').toggle($(this).val() === "1");
             }).trigger('change');
 
         });
