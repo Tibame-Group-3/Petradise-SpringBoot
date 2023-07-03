@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.roomType.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Data
@@ -12,6 +12,6 @@ public class SingleHotelDTO {
     private String roomTypeName;
     private String roomTypeAbout;
     private Integer roomTypePrice;
-    private LocalDateTime inDay;
-    private LocalDateTime outDay;
+    private LocalDate inDay;
+    private LocalDate outDay;
 }

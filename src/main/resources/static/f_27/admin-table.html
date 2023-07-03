@@ -238,7 +238,7 @@
                             // AJAX request to add new employee
                             $.ajax({
                                 type: 'POST',
-                                url: 'http://localhost:8080/admin/add', // Replace with the actual URL
+                                url: '/admin/add', // Replace with the actual URL
                                 data: JSON.stringify(formData),
                                 contentType: 'application/json',
                                 success: function (response) {
@@ -287,7 +287,7 @@
             // Admin list table
             var table = $('#example').DataTable({
                 "ajax": {
-                    "url": "http://localhost:8080/admin/all",
+                    "url": "/admin/all",
                     "dataSrc": "" // The data is not wrapped in an object property
                 },
                 "columns": [

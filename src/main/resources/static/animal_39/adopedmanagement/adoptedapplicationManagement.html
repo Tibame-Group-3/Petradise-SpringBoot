@@ -93,14 +93,14 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span
-										class="d-none d-lg-inline me-2 text-gray-600 small">社團法人台灣寶貝動物協會</span></a>
+										data-bs-toggle="dropdown" href="#"><span id="owner-name"
+										class="d-none d-lg-inline me-2 text-gray-600 small"></span></a>
 
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
 										style="min-width: 110px;">
 										<a class="dropdown-item" href="#" onclick="logout()"><i
-											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout</a>
 									</div>
 								</div>
 							</li>
@@ -242,7 +242,7 @@
                     // 监听按钮点击事件
                     $('#applicationAddButton').click(function() {
                         // 执行页面重定向
-                        window.location.href = 'http://localhost:8080/animal_39/animalform/addapplicationManagement.html';
+                        window.location.href = '/animal_39/animalform/addapplicationManagement.html';
                     });
                 });
                 
@@ -258,7 +258,7 @@
 
                 function getAllAdoptedApplication() {
                     console.log('進入getAllAdoptedApplication()')
-                    fetch("http://localhost:8080/adopted_applications/all")
+                    fetch("/adopted_applications/all")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {

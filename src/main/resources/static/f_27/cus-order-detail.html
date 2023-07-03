@@ -20,7 +20,7 @@
             align-items-md-center justify-content-xl-center" style="margin: 0px;">
                 <div style="max-width:50%; margin-left: 100px;">
                     <h5><span id="order-status"></span></h5>
-                    <h2 class="text-uppercase fw-bold">XX 旅館</h2>
+                    <h2 class="text-uppercase fw-bold"><span id="hotel-name"></span></h2>
                     <div class="my-3"><br>
                         <div>訂單編號: <span id="order-id"></span></div>
                         <div>訂單日期: <span id="order-date"></span></div>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 60%; margin-left: 25%;">
+        <div style="width: 60%; margin-left: 23%;">
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">客房資訊</h5>
@@ -76,21 +76,37 @@
     <!-- <script src="assets/js/Simple-Slider.js"></script> -->
 
     <script>
+        $(document).ready(function () {
+            guardIsSignedIn();
+        });
+
 
         // Retrieve the order ID from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get('id');
 
+        // Fetch hotel name
+        fetch(`/room-order/hotel-name/${orderId}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('hotel-name').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error case
+            });
+
         // Fetch order details
-        fetch(`http://localhost:8080/room-order/id/${orderId}`)
+        fetch(`/room-order/id/${orderId}`)
             .then(response => response.json())
             .then(data => {
                 // Update the HTML elements with the order information
                 document.getElementById('order-id').textContent = data.id;
                 document.getElementById('order-status').textContent = getStatusText(data.status);
+
                 // Fetch additional member details
                 const memberId = data.memId;
-                const memberUrl = `http://localhost:8080/members/id=${memberId}`;
+                const memberUrl = `/members/id=${memberId}`;
                 fetch(memberUrl)
                     .then(response => response.json())
                     .then(memberData => {
@@ -100,9 +116,8 @@
 
                         // Fetch room details
                         const roomTypeId = data.roomTypeId;
-
                         $.ajax({
-                            url: `http://localhost:8080/roomTypes/${roomTypeId}`,
+                            url: `/roomTypes/${roomTypeId}`,
                             method: 'GET',
                             success: function (response) {
                                 // Get room-type-name
@@ -115,7 +130,7 @@
                         });
 
                         $.ajax({
-                            url: `http://localhost:8080/roomTypes/${roomTypeId}/images`,
+                            url: `/roomTypes/${roomTypeId}/images`,
                             method: 'GET',
                             success: function (response) {
                                 // Update the room image
@@ -141,7 +156,17 @@
                         document.getElementById('special-req').textContent = data.specialReq;
                         document.getElementById('pet-name').textContent = data.petName;
                         document.getElementById('payment-method').textContent = getMethodText(data.payMethod);
-                        document.getElementById('price').textContent = data.price;
+
+                        // Calculate the total price of stay
+                        const checkInDate = new Date(data.checkInDate);
+                        const checkOutDate = new Date(data.checkOutDate);
+                        const roomPrice = data.price;
+                        const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)); // Calculate the number of nights
+                        const totalPrice = roomPrice * nights;
+
+                        // Update the room type price with additional text
+                        const additionalText = ` x ${nights}晚 = ${totalPrice} 元`;
+                        document.getElementById('price').textContent = data.price + additionalText;
                     })
                     .catch(error => {
                         console.error('Error fetching member details:', error);

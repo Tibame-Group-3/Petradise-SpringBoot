@@ -22,6 +22,10 @@
 	text-align: center;
 	height: 200vh; /* 可根据需要进行调整 */
 }
+
+#animalList img {
+	width: 100%;
+}
 </style>
 </head>
 
@@ -256,13 +260,7 @@
 								<div class="invalid-tooltip">請輸入信箱</div>
 							</div>
 							
-							<div class="col-md-4 position-relative">
-								<label for="validationTooltip02" class="form-label">狀態
-									</label> <input type="text" class="form-control"
-									id="adopterEmail" value="" required>
-								<div class="invalid-tooltip"></div>
-							</div>
-							
+
 							
 							<div class="col-12 text-center">
 								<button class="btn btn-primary btn-dark" type="submit"  id="check">送出
@@ -326,18 +324,21 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 	//去localStorage撈ID
-	let memberrIDD = localStorage.getItem("memberId");
+	
 	
 	$(document).ready(function() {
 
+		  let urlParam = new URLSearchParams(window.location.search);
+	      let queryValue = urlParam.get('animalId');
+		
 		$.ajax({
-		  url: "/animals/" + 4,
+		  url: "/animals/" + queryValue,
 		  type: "GET",
 		  success: function(response) {
-			// console.log("Data received successfully:", response);
+// 			console.log("Data received successfully:", response);
 			var animal = response; // 單一動物的資料
 
-			var imageUrl = "data:image/jpeg;base64," + animal.animalpic;
+			var imageUrl = "data:image/jpeg;base64," + animal.animalPic ;
 			var cardHtml = '<div class="row row-cols-2 ">' +
 			  '<div class="col text-center justify-content-center">' +
 			  '<img src="' + imageUrl + '" class="rounded" alt="...">' +
@@ -348,42 +349,42 @@
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animalid +
+			  animal.animalId +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animalname +
+			  animal.animalName +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animalsex +
+			  animal.animalSex +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animalage +
+			  animal.animalAge +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animaltype +
+			  animal.animalType +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
 			  '<tr>' +
 			  '<td style="border-color: #f77f00; width: 200px; font-weight: bold; font-size: 20px;">' +
 			  '<span style="color: rgb(221, 117, 0); background-color: rgba(221, 117, 0, 0);">' +
-			  animal.animalinfo +
+			  animal.animalInfo +
 			  '</span>' +
 			  '</td>' +
 			  '</tr>' +
@@ -400,29 +401,83 @@
 		});
 	})
 	
+	let memberrIDD = localStorage.getItem("memberId");
 	$.ajax({
 	    url: `/members/id=${memberrIDD}`,
 	    method: "GET",
 	    dataType: "json",
 	    success: function (AdoptedApplication) {
-	    	// console.log(AdoptedApplication);
+	    	// 拿到會員資料
+	    	console.log(AdoptedApplication);
+	    	
+	    	// 拿取url中的變數
+	    	let urlParam = new URLSearchParams(window.location.search);
+	    	let queryValue = urlParam.get('animalId');
+	    	
 	        // 將取得的資料放在修改表單裡
-			console.log($("#animalList .caption-top tr:first-child td span"));
-	        // $("#animalId").val();
-	        $("#membId").val(AdoptedApplication.membId);
-	        // $("#animalId").val(AdoptedApplication.animalId);
-	        // $("#adopterIdNumber").val(AdoptedApplication.adopterIdNumber);
-	        // $("#adopterName").val(AdoptedApplication.adopterName);
-	        // $("#adopterAddress").val(AdoptedApplication.adopterAddress);
-	        // $("#adopterPhone").val(AdoptedApplication.adopterPhone);
-	        // $("#adopterJob").val(AdoptedApplication.adopterJob);
-	        // $("#adopterEmail").val(AdoptedApplication.adopterEmail);
-		    // $("#dopterStatus").find("option[value='" + AdoptedApplication.adopterStatus + "']").prop("selected", true);
+	        $("#animalId").val(queryValue);
+	        $("#membId").val(AdoptedApplication.id);
+	        $("#adopterName").val(AdoptedApplication.name);
+// 	        $("#adopterIdNumber").val(AdoptedApplication.adopterIdNumber);
+	        $("#adopterAddress").val(AdoptedApplication.address);
+	        $("#adopterPhone").val(AdoptedApplication.phone);
+	        $("#adopterEmail").val(AdoptedApplication.email);
 	    },
+	    
 	    error: function (error) {
 	        console.error("AJAX Error: " + error);
 	    }
 	});
+	
+	function getCurrentLoggedInMember() {
+	    var loggedInMember = localStorage.getItem('loggedInMember');
+	    if (loggedInMember) {
+	        return JSON.parse(loggedInMember);
+	    } else {
+	        return null;
+	    }
+	}
+	
+	 $("#check").click(function() {
+		 
+			let urlParam = new URLSearchParams(window.location.search);
+		    let queryValue = urlParam.get('animalId');
+	       
+	        var adoptedApplication = {
+// 	            adoptermembId: $("#adopteranimembId").val(),	
+	            membId: $("#membId").val(),	
+        		animalId: queryValue,	
+	            adopterIdNumber: $("#adopterIdNumber").val(),
+	            adopterName: $("#adopterName").val(),
+	            adopterAddress: $("#adopterAddress").val(),
+	            adopterPhone: $("#adopterPhone").val(),
+	            adopterJob: $("#adopterJob").val(),
+	            adopterEmail: $("#adopterEmail").val(),
+	            adopterStatus: 0
+	        };
+	       console.log(adoptedApplication);
+	        $.ajax({
+	            url: "/adopted_applications/create",
+	            method: "POST",
+	            contentType: "application/json",
+	            dataType: "text",
+	            data: JSON.stringify(adoptedApplication),
+	            success: function(response) {
+	                console.log("Adopted application saved successfully");
+	                
+	               // window.location.href ="";
+	              
+	            },
+	            error: function(error) {
+	                console.error("AJAX Error: " + error);
+	             
+	            }
+	        });
+	    });
+	
+	
+	
+	
 	
 	
 	$(function () {
@@ -465,7 +520,7 @@
 		      icon: 'success',
 		      confirmButtonText: '確定'
 		    }).then(function () {
-		      window.location.href = '/animal_39/Frontanimal/animalbrowse.html';
+// 		      window.location.href = '/animal_39/Frontanimal/animalbrowse.html';
 		    });
 		  } else {
 		    Swal.fire({

@@ -249,7 +249,7 @@
                     // 监听按钮点击事件
                     $('#promiseaddButton').click(function() {
                         // 执行页面重定向
-                        window.location.href = 'http://localhost:8080/animal_39/animal_addform/addpromise.html';
+                        window.location.href = '/animal_39/animal_addform/addpromise.html';
                     });
                 });
                 
@@ -265,7 +265,7 @@
 
                 function getAllPromiseList() {
                     console.log('進入getAllPromiseList()')
-                    fetch("http://localhost:8080/promise_lists/all")
+                    fetch("/promise_lists/all")
                         .then(function (response) {
                             // 檢查 API 响應的狀態碼
                             if (response.status !== 200) {

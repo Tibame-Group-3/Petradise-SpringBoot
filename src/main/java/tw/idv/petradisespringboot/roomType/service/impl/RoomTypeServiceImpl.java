@@ -1,13 +1,5 @@
 package tw.idv.petradisespringboot.roomType.service.impl;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +17,14 @@ import tw.idv.petradisespringboot.roomType.vo.RoomPic;
 import tw.idv.petradisespringboot.roomType.vo.RoomType;
 import tw.idv.petradisespringboot.roomreview.repo.RoomReviewRepository;
 import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomTypeServiceImpl implements RoomTypeService {
@@ -141,8 +141,8 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     @Override
     @Transactional
     public SingleHotelDTO getSingleHotel(Integer hotelId, Integer roomTypeId,
-                                         LocalDateTime inDay,
-                                         LocalDateTime outDay) {
+                                         LocalDate inDay,
+                                         LocalDate outDay) {
         SingleHotelDTO singleHotelDTO = new SingleHotelDTO();
         HotelOwnerVO hotelOwnerVO = hotelOwnerRepository.getReferenceById(hotelId);
         singleHotelDTO.setHotelName(hotelOwnerVO.getHotelName());
@@ -202,7 +202,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             }
 
             return allHotelDTO;
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()); //把stream中的元素放到集合中
 
         return allHotelDTOs;
     }

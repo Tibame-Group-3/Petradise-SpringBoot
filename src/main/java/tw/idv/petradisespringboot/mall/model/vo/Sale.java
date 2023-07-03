@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public class Sale {
     @JoinColumn(name = "pd_id", insertable = false, updatable=false)
     private Product product;
 	
+    @JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sale_pro_id", insertable = false, updatable=false)
 	private SaleProject saleProject;

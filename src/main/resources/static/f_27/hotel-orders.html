@@ -151,14 +151,14 @@
             const hotelId = getHotelOwnerId();
             var table = $('#example').DataTable({
                 "ajax": {
-                    "url": `http://localhost:8080/room-order/hotel-id/${hotelId}`,
+                    "url": `/room-order/hotel-id/${hotelId}`,
                     "dataSrc": "" // The data is not wrapped in an object property
                 },
                 "columns": [
                     {
                         "data": "id",
                         "render": function (data, type, row) {
-                            return '<a href="http://localhost:8080/f_27/hotel-order-detail.html?id=' + data + '" target="_blank">' + data + '</a>';
+                            return '<a href="/f_27/hotel-order-detail.html?id=' + data + '" target="_blank">' + data + '</a>';
                         }
                     },
                     {
@@ -169,7 +169,7 @@
 
                             // Fetch the member name using AJAX
                             $.ajax({
-                                url: `http://localhost:8080/members/id=${memberId}`,
+                                url: `/members/id=${memberId}`,
                                 method: "GET",
                                 async: false, // Set async to false to wait for the response
                                 success: function (response) {
@@ -200,7 +200,7 @@
 
                             // Fetch the room type name using AJAX
                             $.ajax({
-                                url: `http://localhost:8080/roomTypes/${roomTypeId}`,
+                                url: `/roomTypes/${roomTypeId}`,
                                 method: "GET",
                                 async: false, // Set async to false to wait for the response
                                 success: function (response) {
@@ -268,7 +268,7 @@
                     if (result.isConfirmed) {
                         // Make the AJAX request to change the room status
                         $.ajax({
-                            url: `http://localhost:8080/room-order/id/${orderId}/change-status`,
+                            url: `/room-order/id/${orderId}/change-status`,
                             method: 'PUT',
                             data: JSON.stringify({ "status": "1" }),
                             contentType: "application/json",
@@ -294,7 +294,7 @@
                     } else if (result.isDenied) {
                         // Make the AJAX request to change the room status
                         $.ajax({
-                            url: `http://localhost:8080/room-order/id/${orderId}/change-status`,
+                            url: `/room-order/id/${orderId}/change-status`,
                             method: 'PUT',
                             data: JSON.stringify({ "status": "2" }),
                             contentType: "application/json",
@@ -335,20 +335,6 @@
                 const [day, month, year] = formattedDate.split('/');
                 return `${year}-${month}-${day}`;
             }
-
-            // // Submit event listener for the form
-            // $("form").submit(function (event) {
-            //     event.preventDefault();
-            //     var roomId = $('#roomId').val();
-            //     var status = 2; // Set the status to 2 (cancelled)
-            //     // Additional code to submit the form data and update the status in the backend
-
-            //     // Update the status in the table
-            //     var rowData = table.row($(this).closest('tr')).data();
-            //     rowData.status = status;
-            //     table.row($(this).closest('tr')).data(rowData).invalidate();
-            // });
-
 
         });
     </script>
