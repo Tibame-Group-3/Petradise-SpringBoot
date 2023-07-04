@@ -33,7 +33,19 @@
 				'/member/post_record.html'
 			]
 		},
+        
+        {
+          name: '我的認養動物管理',
+          root: '/animal_39/Frontanimal/adoptionConfirmationForm.html',
+          links: [
+          
+                 '/animal_39/Frontanimal/adoptionConfirmationForm.html'
+          ]
+          
+          },
+          
     ]
+    
 
     let selectedIndex = navigationItems.findIndex(item => item.links.includes(window.location.pathname));
 
