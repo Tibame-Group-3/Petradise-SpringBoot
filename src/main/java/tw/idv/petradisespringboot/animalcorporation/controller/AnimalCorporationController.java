@@ -34,14 +34,14 @@ public class AnimalCorporationController {
 
 	@GetMapping("/all")
 	ResponseEntity<List<AnimalCorporation>> allWithout1(){
-		List<AnimalCorporation> animalCorporations = service.findAllWithStatusNot1();
+		List<AnimalCorporation> animalCorporations = service.findByStatus('2');
 		
 		return ResponseEntity.ok(animalCorporations);
 	}
 	
 	@GetMapping("/all/withDefault")
 	ResponseEntity<List<AnimalCorporation>> allWithDefault(){
-		List<AnimalCorporation> animalCorporations = service.findByStatus0();
+		List<AnimalCorporation> animalCorporations = service.findByStatus('0');
 		
 		return ResponseEntity.ok(animalCorporations);
 	}
