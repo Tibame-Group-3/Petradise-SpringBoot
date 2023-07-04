@@ -77,7 +77,7 @@ $("#submit").on('click', function (e) {
                 console.error(err);
             });
 
-        location.href = "Product.html";
+        location.href = "/news_product/Product.html";
 
     }
 
