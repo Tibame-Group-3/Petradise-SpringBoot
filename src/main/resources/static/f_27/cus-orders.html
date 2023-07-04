@@ -5,10 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>客戶-訂單管理</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/Articles-Badges-images.css"> -->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
     <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        .rating>input:checked~label,
+        .rating>label.selected {
+            color: #FFD700;
+        }
 
         .status-0 {
             color: green;
@@ -86,9 +91,8 @@
             color: #FFED85;
         }
 
-        /* --------------------------------------------------------------------------------------------- */
 
-        #star-count {
+        .star-count-class {
             color: darkgoldenrod;
             display: inline-block;
             vertical-align: bottom;
@@ -119,28 +123,124 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/index.html" style="position: sticky;top: 0;">
+                <img width="75" height="41" src="/assets/img/logo-only.png">
+            </a>
+
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
+                style="border-color: rgb(241,236,209);">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"
+                    style="--bs-primary: #fd780f;--bs-primary-rgb: 253,120,15;--bs-secondary: #e69609;--bs-secondary-rgb: 230,150,9;color: rgb(241,236,209);">
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navcol-3" style="background: #ffffff;">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" href="/index.html" style="margin: 10px 0px 0px;">關於我們</a>
+                        <div class="dropdown-menu"
+                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+                            <div class="dropdown-divider"
+                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+                            </div>
+                            <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
+                            <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">毛孩旅館</a>
+                        <div class="dropdown-menu"
+                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+
+                            <div class="dropdown-divider"
+                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+                            </div>
+                            <a class="dropdown-item" href="/hotel/searchHotel.html" style="font-size: 14px">預約訂房</a>
+                            <a class="dropdown-item join-hotelowner" href="/owner/SignUp.html"
+                                style="font-size: 14px;color: #fd780f;">加入我們</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
+                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">浪浪收容</a>
+                        <div class="dropdown-menu"
+                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
+                            <div class="dropdown-divider"
+                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
+                            </div>
+                            <a class="dropdown-item" href="/animal_39/Frontanimal/animalbrowse.html"
+                                style="font-size: 14px">浪浪認養</a>
+                            <a class="dropdown-item lostPet" href="/lostPet/lost.html" style="font-size: 14px">遺失協尋</a>
+                            <a class="dropdown-item" href="/animalCorporation/signup.html"
+                                style="font-size: 14px">加入我們</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item" style="height: 50px;width: 100px;margin: 0px 0px 0px 10px">
+                        <a class="nav-link" href="/front-product-list/front-product-list.html"
+                            style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
+                    </li>
+
+                    <!--          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">-->
+                    <!--            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"-->
+                    <!--              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>-->
+                    <!--            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">-->
+                    <!--              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">-->
+                    <!--              </div>-->
+                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>-->
+                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>-->
+                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>-->
+                    <!--            </div>-->
+                    <!--          </li>-->
+
+                </ul>
+
+                <!-- Shopping Cart -->
+                <div class="btn btn-primary cart"
+                    style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
+                    <span class="fas fa-shopping-cart"
+                        style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
+                    </span>
+                    <span class="shopping-cart-total"></span>
+                </div>
+
+                <!-- Member -->
+                <div class="btn-group" style="margin: 10px 0px 0px;">
+                    <a class="btn btn-primary" type="button"
+                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                            viewBox="0 0 16 16" class="bi bi-person-circle"
+                            style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
+                            </path>
+                        </svg>會員
+                    </a>
+                    <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                        aria-expanded="false" type="button"
+                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
+                    <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;">
+                        <a class="dropdown-item navigate-signin" href="#" style="color: #ffffff;">登入/註冊</a>
+                        <a class="dropdown-item navigate-member-center" href="#" style="color: #ffffff;">會員中心</a>
+                        <a class="dropdown-item logout" style="color: #ffffff;">登出</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
-                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
-                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                                            class="border rounded-circle img-profile"
-                                            src="assets/img/avatars/avatar1.jpeg"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
-                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
 
                 <div class="container-fluid">
                     <div class="card shadow">
@@ -178,9 +278,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-                                        顯示 1 到 10 筆，共 27 筆訂單
-                                    </p>
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
                                 </div>
                                 <div class="col-md-6">
                                     <nav
@@ -207,7 +305,7 @@
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
                 </div>
             </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -221,71 +319,10 @@
 
             guardIsSignedIn();
 
-            // Function to update the order count and total amount
-            function updateOrderCount() {
-                var visibleOrders = $('.order-item:visible').length;
-                var totalOrders = $('.order-item').length;
+            // Call the filterOrders function when the order status or search input changes
+            $('.form-select, #order-search-input').on('change input', filterOrders);
 
-                // Calculate the total amount based on the visible orders
-                var totalAmount = 0;
-                $('.order-item:visible').each(function () {
-                    var amount = parseFloat($(this).find('.order-amount').text().replace('$', ''));
-                    totalAmount += amount;
-                });
-
-                $('#dataTable_info').text(`顯示 1 到 ${visibleOrders} 筆，共 ${totalOrders} 筆訂單`);
-                $('#total-amount').text(`總金額: $${totalAmount.toFixed(2)}`);
-            }
-
-            // Function to filter orders based on the selected order status
-            $('.form-select').change(function () {
-                const selectedStatus = $(this).val();
-
-                // Show all orders if "全部" is selected
-                if (selectedStatus === '全部') {
-                    $('.order-item').show();
-                } else {
-                    $('.order-item').each(function () {
-                        const orderStatus = $(this).find('#order-status').text();
-
-                        // Show orders that match the selected status and hide the others
-                        if (selectedStatus === orderStatus) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    });
-                }
-
-                updateOrderCount();
-            });
-
-            // Function to filter orders based on the search input
-            $('#order-search-input').on('input', function () {
-                var searchValue = $(this).val().trim().toLowerCase();
-                var matchedOrders = 0;
-
-                $('.order-item').each(function () {
-                    var orderId = $(this).find('#order-id').text().trim().toLowerCase();
-
-                    if (orderId.includes(searchValue)) {
-                        $(this).show();
-                        matchedOrders++;
-                    } else {
-                        $(this).hide();
-                    }
-                });
-
-                if (matchedOrders === 0) {
-                    $('#no-matches-message').show();
-                } else {
-                    $('#no-matches-message').hide();
-                }
-
-                updateOrderCount();
-            });
-
-            var memberId = 1;
+            var memberId = localStorage.getItem('memberId');
 
             $.ajax({
                 url: `/room-order/customer/mem-id/${memberId}`,
@@ -293,6 +330,7 @@
                 success: function (data) {
                     $('#orders-section').empty();
 
+                    // Set status text
                     data.forEach(function (order) {
                         var statusText = '';
                         if (order.status === '0') {
@@ -308,6 +346,13 @@
                             var cancelOrderButton = `<a class="btn btn-danger btn-sm" id="cancel-order-button-${order.id}" role="button">取消訂單</a>`;
                         } else {
                             var cancelOrderButton = ''; // Empty string if status is not '0'
+                        }
+
+                        // Display the "留下評論" button only for orders with status code 1 (已完成)
+                        if (order.status === '1') {
+                            var reviewButton = `<a class="btn btn-primary btn-lg me-2 toggle-button-${order.id}" id="review-button-${order.id}" role="button">留下評論</a>`;
+                        } else {
+                            var reviewButton = ''; // Empty string if status is not 1 (已完成)
                         }
 
                         // Make an AJAX request to get the hotel name based on the orderId
@@ -327,41 +372,41 @@
                         <div class="container bg-secondary bg-opacity-10 border border-2 rounded py-4 py-xl-5 order-item" style="height: 550px;">
                             <div class="row gy-4 gy-md-0">
                                 <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                                <div style="max-width: 350px;">
-                                    <h5><span id="order-status" class="status-${order.status}">${statusText}</span></h5>
-                                    <h2 id="hotel-name-${order.id}" class="text-uppercase fw-bold"></h2>
-                                    <p>訂單編號: <span id="order-id">${order.id}</span></p>
-                                    <p>入住日期: <span id="check-in-date">${order.checkInDate}</span></p>
-                                    <p>退房日期: <span id="check-out-date">${order.checkOutDate}</span></p>
-                                    <br>
-                                    <a class="btn btn-primary btn-lg me-2" id="order-detail-button-${order.id}" role="button">查看詳情</a>
-                                    <a class="btn btn-primary btn-lg me-2 toggle-button" id="review-button-${order.id}" role="button">留下評論</a>
-                                    ${cancelOrderButton}
-                                    <br><br>
-                                    <div class="review-box" style="display: none;">
-                                    <fieldset class="rating">
-                                        <input type="radio" id="star5" name="rating" value="5" checked="checked" />
-                                        <label class="full" for="star5" title="Awesome - 5 stars"></label>
-                                        <input type="radio" id="star4" name="rating" value="4" />
-                                        <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                                        <input type="radio" id="star3" name="rating" value="3" />
-                                        <label class="full" for="star3" title="Meh - 3 stars"></label>
-                                        <input type="radio" id="star2" name="rating" value="2" />
-                                        <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                                        <input type="radio" id="star1" name="rating" value="1" />
-                                        <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                                    </fieldset>
-                                    <span id="star-count"></span><br>
-                                    <div class="col-md-6">
-                                        <form accept-charset="UTF-8">
-                                        <textarea class="review-form" rows="4" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-                                        <div class="text-right">
-                                            <button class="btn-indie-trans" type="submit">Publish</button>
+                                    <div style="max-width: 350px;">
+                                        <h5><span id="order-status" class="status-${order.status}">${statusText}</span></h5>
+                                        <h2 id="hotel-name-${order.id}" class="text-uppercase fw-bold"></h2>
+                                        <p>訂單編號: <span id="order-id">${order.id}</span></p>
+                                        <p>入住日期: <span id="check-in-date">${order.checkInDate}</span></p>
+                                        <p>退房日期: <span id="check-out-date">${order.checkOutDate}</span></p>
+                                        <br>
+                                        <a class="btn btn-primary btn-lg me-2" id="order-detail-button-${order.id}" role="button">查看詳情</a>
+                                        ${reviewButton}
+                                        ${cancelOrderButton}
+                                        <br><br>
+                                        <div class="review-box" style="display: none;">
+                                            <fieldset class="rating rating-${order.id}">
+                                                <input type="radio" id="star5-${order.id}" name="rating" value="5" checked="checked" />
+                                                <label class="full" for="star5-${order.id}" title="Awesome - 5 stars"></label>
+                                                <input type="radio" id="star4-${order.id}" name="rating" value="4" />
+                                                <label class="full" for="star4-${order.id}" title="Pretty good - 4 stars"></label>
+                                                <input type="radio" id="star3-${order.id}" name="rating" value="3" />
+                                                <label class="full" for="star3-${order.id}" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star2-${order.id}" name="rating" value="2" />
+                                                <label class="full" for="star2-${order.id}" title="Kinda bad - 2 stars"></label>
+                                                <input type="radio" id="star1-${order.id}" name="rating" value="1" />
+                                                <label class="full" for="star1-${order.id}" title="Sucks big time - 1 star"></label>
+                                            </fieldset>
+                                            <span id="star-count-${order.id}" class="star-count-class"></span><br>
+                                            <div class="col-md-6">
+                                                <form id="review-form-${order.id}" accept-charset="UTF-8">
+                                                    <textarea class="review-form" rows="4" cols="50" id="new-review-${order.id}" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+                                                    <div class="text-right">
+                                                        <button class="btn-indie-trans" id="publish-button-${order.id}" type="submit">Publish</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                        </form>
                                     </div>
-                                    </div>
-                                </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="p-xl-5 m-xl-5">
@@ -369,12 +414,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><br>
+                        </div>
                         `;
                         $('#orders-section').append(html);
                         updateOrderCount();
 
-                        // Example: Open a new page with the order ID from the URL
+                        // Open a new page with the order ID from the URL
                         $('#orders-section').on('click', `#order-detail-button-${order.id}`, function () {
                             console.log('Clicked "查看詳情" for Order ID:', `${order.id}`);
 
@@ -386,14 +431,18 @@
                         });
 
 
-                        // Example: Log the order ID when the "留下評論" button is clicked
+                        // Leaving review button
                         $('#orders-section').on('click', `#review-button-${order.id}`, function () {
                             console.log('Clicked "留下評論" for Order ID:', `${order.id}`);
 
-                            initReviewFunctionality();
+                            // Find the corresponding review box and toggle its visibility
+                            $(this).closest('.order-item').find('.review-box').slideToggle();
+
+                            // Initialize the review functionality for the specific order
+                            initReviewFunctionality(`${order.id}`);
                         });
 
-                        // Example: Perform an action when the "取消訂單" button is clicked
+                        // Cancel the order when the "取消訂單" button is clicked
                         $('#orders-section').on('click', `#cancel-order-button-${order.id}`, function () {
                             console.log('Clicked "取消訂單" for Order ID:', `${order.id}`);
 
@@ -448,109 +497,8 @@
                                 }
                             });
                         });
-
-
                     });
-
-                    // // Update the order count in the info section
-                    // var totalOrders = data.length;
-                    // var ordersPerPage = 10; // Assuming 10 orders per page
-                    // var currentPage = 1; // Assuming the current page is 1
-
-                    // var startOrder = (currentPage - 1) * ordersPerPage + 1;
-                    // var endOrder = Math.min(currentPage * ordersPerPage, totalOrders);
-
-                    // var infoText = `顯示 ${startOrder} 到 ${endOrder} 筆，共 ${totalOrders} 筆訂單`;
-                    // $('#dataTable_info').text(infoText);
-
-                    // 評論
-                    // toggle function
-                    // $(document).ready(function () {
-                    //     $(".toggle-button").click(function () {
-                    //         $(this).toggleClass("active");
-                    //         $(".review-box").slideToggle();
-                    //     });
-
-                    //     $("form").submit(function (event) {
-                    //         event.preventDefault();
-                    //         $(".toggle-button").text("感謝您的評論！");
-                    //         $(".toggle-button").removeClass("btn-primary").addClass("btn-warning");
-                    //         // Additional code to disable form elements if needed
-                    //     });
-                    // });
-
-                    // // JavaScript code to update the star count dynamically on hover and persist after clicking
-                    // const starLabels = document.querySelectorAll('.rating > label');
-                    // const starCount = document.querySelector('#star-count');
-                    // const publishButton = document.querySelector('.btn-indie-trans');
-                    // const textArea = document.querySelector('.review-form');
-                    // const form = document.querySelector('form');
-
-                    // let selectedCount = 5; // Set the default selected count to 5
-                    // starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
-
-                    // starLabels.forEach((label) => {
-                    //     label.addEventListener('mouseover', () => {
-                    //         const count = label.getAttribute('title').split(' - ')[1].split(' ')[0];
-                    //         starCount.textContent = `(${count})`;
-                    //     });
-
-                    //     label.addEventListener('click', () => {
-                    //         const count = parseFloat(label.getAttribute('title').split(' - ')[1].split(' ')[0]);
-                    //         selectedCount = count;
-                    //         starCount.textContent = `(${selectedCount})`;
-                    //     });
-
-                    //     label.addEventListener('mouseout', () => {
-                    //         starCount.textContent = `(${selectedCount})`; // Display the selected count when the mouse leaves
-                    //     });
-                    // });
-
-                    // form.addEventListener('submit', (event) => {
-                    //     event.preventDefault();
-                    //     const reviewText = document.querySelector('#new-review').value;
-                    //     console.log('Review Text:', reviewText);
-                    //     console.log('Rate:', selectedCount);
-
-                    //     const hotelId = 1;
-                    //     const roomOrderId = 1;
-                    //     var myHeaders = new Headers();
-                    //     myHeaders.append("Content-Type", "application/json");
-
-                    //     var raw = JSON.stringify({
-                    //         "hotelId": hotelId,
-                    //         "roomOrderId": roomOrderId,
-                    //         "score": selectedCount,
-                    //         "content": reviewText
-                    //     });
-
-                    //     var requestOptions = {
-                    //         method: 'POST',
-                    //         headers: myHeaders,
-                    //         body: raw,
-                    //         redirect: 'follow'
-                    //     };
-
-                    //     fetch("/roomreview/addReview", requestOptions)
-                    //         .then(response => response.text())
-                    //         .then(result => console.log(result))
-                    //         .catch(error => console.log('error', error));
-
-                    //     Swal.fire({
-                    //         title: 'Thanks for your review!',
-                    //         icon: 'success',
-                    //     });
-
-                    //     publishButton.style.display = "none";
-                    //     textArea.setAttribute("disabled", '');
-                    //     starLabels.forEach((label) => {
-                    //         label.style.pointerEvents = 'none';
-                    //     });
-
-                    // })
-
-                    // 評論-----------------------------------------------------------------------------------------------------------
-
+                    // 評論 桌面
                 },
                 error: function () {
                     $('#orders-section').html('<p>Error loading orders.</p>');
@@ -558,26 +506,62 @@
             });
         });
 
-        function initReviewFunctionality() {
-            // toggle function
-            $(".toggle-button").click(function () {
-                $(this).toggleClass("active");
-                $(".review-box").slideToggle();
+        // Function to update the order count
+        function updateOrderCount() {
+            var visibleOrders = $('.order-item:visible').length;
+            var totalOrders = $('.order-item').length;
+
+            if (visibleOrders === 0) {
+                $('#dataTable_info').text(`顯示 0 筆，共 0 筆訂單`);
+            } else {
+                $('#dataTable_info').text(`顯示 1 到 ${visibleOrders} 筆，共 ${visibleOrders} 筆訂單`);
+            }
+        }
+
+        // Function to filter orders based on the selected order status and search input
+        function filterOrders() {
+            const selectedStatus = $('.form-select').val();
+            const searchValue = $('#order-search-input').val().trim().toLowerCase();
+            let matchedOrders = 0;
+
+            $('.order-item').each(function () {
+                const orderStatus = $(this).find('#order-status').text().toLowerCase();
+                const orderId = $(this).find('#order-id').text().toLowerCase();
+
+                if ((selectedStatus === '全部' || selectedStatus === orderStatus) &&
+                    (searchValue === '' || orderId.includes(searchValue))) {
+                    $(this).show();
+                    matchedOrders++;
+                } else {
+                    $(this).hide();
+                }
             });
 
-            $("form").submit(function (event) {
+            if (matchedOrders === 0) {
+                $('#no-matches-message').show();
+            } else {
+                $('#no-matches-message').hide();
+            }
+
+            updateOrderCount();
+        }
+
+        // Review
+        function initReviewFunctionality(orderId) {
+
+            $(`#review-form-${orderId}`).submit(function (event) {
                 event.preventDefault();
-                $(".toggle-button").text("感謝您的評論！");
-                $(".toggle-button").removeClass("btn-primary").addClass("btn-warning");
+                $(`.toggle-button-${orderId}`).text("感謝您的評論！");
+                $(`.toggle-button-${orderId}`).removeClass("btn-primary").addClass("btn-warning");
                 // Additional code to disable form elements if needed
             });
 
             // JavaScript code to update the star count dynamically on hover and persist after clicking
-            const starLabels = document.querySelectorAll('.rating > label');
-            const starCount = document.querySelector('#star-count');
-            const publishButton = document.querySelector('.btn-indie-trans');
-            const textArea = document.querySelector('.review-form');
-            const form = document.querySelector('form');
+            const starLabels = document.querySelectorAll(`.rating-${orderId} > label`);
+            const starCount = document.querySelector(`#star-count-${orderId}`);
+            const publishButton = document.querySelector(`#publish-button-${orderId}`);
+            const textArea = document.querySelector(`#new-review-${orderId}`);
+            const form = document.querySelector(`#review-form-${orderId}`);
 
             let selectedCount = 5; // Set the default selected count to 5
             starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
@@ -601,12 +585,12 @@
 
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
-                const reviewText = document.querySelector('#new-review').value;
+                const reviewText = textArea.value;
                 console.log('Review Text:', reviewText);
                 console.log('Rate:', selectedCount);
 
-                const hotelId = 1;
-                const roomOrderId = 1;
+                const hotelId = 1; // Replace with the actual hotel ID
+                const roomOrderId = orderId;
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
@@ -624,7 +608,7 @@
                     redirect: 'follow'
                 };
 
-                fetch("/roomreview/addReview", requestOptions)
+                fetch("/roomreview/add-review", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -641,6 +625,34 @@
                 });
             });
         }
+
+
+        // ------------------購物車項目初始化------------------
+        let shoppingItem = sessionStorage.getItem("shoppingItem");
+        if (shoppingItem) {
+            shoppingItem = JSON.parse(shoppingItem);
+        } else {
+            shoppingItem = {};
+        }
+
+        // 更新購物車商品數
+        function updateCartIcon() {
+            let totalItems = 0;
+            for (const productId in shoppingItem) {
+                totalItems += shoppingItem[productId].quantity;
+            }
+            $(".shopping-cart-total").text(`(${totalItems})`);
+        }
+
+        // 初始化購物車圖示數量
+        updateCartIcon();
+
+
+        // ------------------前往購物車------------------
+        $(".cart").on('click', function () {
+            location.href = "/shopping/pd_page/Cart.html"
+        });
+
 
     </script>
 </body>

@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.email.EmailService;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
@@ -19,6 +17,7 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.EmailVerification;
 import tw.idv.petradisespringboot.member.vo.Member;
+import tw.idv.petradisespringboot.member.vo.MemberAccess;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -26,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -152,9 +152,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Page<MemberDTO> getAll(Pageable pageable) {
-        return repository.findAll(pageable)
-                .map(member -> mapper.map(member, MemberDTO.class));
+    public List<MemberDTO> getAll() {
+        return repository
+                .findAll()
+                .stream()
+                .map(m -> mapper.map(m, MemberDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MemberDTO changeAccess(Integer id, MemberAccess access) {
+        var member = repository
+                .findById(id)
+                .orElseThrow(() -> new MemberNotFoundException(id));
+        member.setAccess(access);
+        var saved = repository.save(member);
+        return mapper.map(saved, MemberDTO.class);
     }
 
     private Resource loadDistricts() {
