@@ -102,17 +102,22 @@
 <!--                        </div>-->
                     </div>
 
-
                     <hr class="diver">
-                    <span class="tol" style="color: #f8c544">訂購金額
-                        <span class="items-price">+ $ 0</span>
-                    </span>
-                    <span class="tol" style="color: #f8c544">運費
-                        <span class="ship-price">+ $ 0</span>
-                    </span>
-                    <span class="tol">付款總金額
-                        <span class="tol-price">= $ 0</span>
-                    </span>
+
+                    <div class="tol">
+                        <div style="color: #f8c544">訂購金額
+                            <span class="items-price">+ $ 0</span>
+                        </div>
+
+                        <div style="color: #f8c544">運費
+                            <span class="ship-price">+ $ 0</span>
+                        </div>
+
+                        <div>付款總金額
+                            <span class="tol-price">= $ 0</span>
+                        </div>
+                    </div>
+
                 </div>
 
 
@@ -183,8 +188,8 @@
                         <select id="sel2" class="form-control">
                             <option disabled="" selected="">-----請選擇-----</option>
                             <option value="home-delivery">宅配到府</option>
-                            <option value="pickup">711超商 取貨</option>
-                            <option value="pickup">全家超商 取貨</option>
+                            <option value="pickup-711">711超商 取貨</option>
+                            <option value="pickup-fami">全家超商 取貨</option>
                         </select>
                     </div>
 
@@ -203,20 +208,34 @@
                         </div>
                     </div>
 
-                    <div class="pickup -off">
+                    <div class="pickup-711 -off">
                         <div class="form-group">
-                            <label for="store-name">取貨門市名：</label>
-                            <input id="store-name" type="text" class="form-control" placeholder="EX. 中壢店">
+                            <label for="store-name-711">711取貨門市名：</label>
+                            <input id="store-name-711" type="text" class="form-control" placeholder="EX. 中壢店">
                         </div>
                         <div class="form-group">
                             <label>收件人姓名：</label>
-                            <input type="text" class="form-control recipient-name" placeholder="EX. David Wu">
+                            <input type="text" class="form-control recipient-name-711" placeholder="EX. David Wu">
                         </div>
                         <div class="form-group">
                             <label>收件人連絡電話：</label>
-                            <input type="tel" class="form-control recipient-phone" placeholder="EX. 0987654321">
+                            <input type="tel" class="form-control recipient-phone-711" placeholder="EX. 0987654321">
                         </div>
+                    </div>
 
+                    <div class="pickup-fami -off">
+                        <div class="form-group">
+                            <label for="store-name-fami">全家取貨門市名：</label>
+                            <input id="store-name-fami" type="text" class="form-control" placeholder="EX. 中壢店">
+                        </div>
+                        <div class="form-group">
+                            <label>收件人姓名：</label>
+                            <input type="text" class="form-control recipient-name-fami" placeholder="EX. David Wu">
+                        </div>
+                        <div class="form-group">
+                            <label>收件人連絡電話：</label>
+                            <input type="tel" class="form-control recipient-phone-fami" placeholder="EX. 0987654321">
+                        </div>
                     </div>
 
                     <div class="form-group">

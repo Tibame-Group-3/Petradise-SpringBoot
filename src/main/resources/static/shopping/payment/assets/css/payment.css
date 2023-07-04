@@ -88,25 +88,25 @@
 }
 
 .payment-body .tol {
-    width: 50%;
+    width: calc(100% - 130px);
     font-size: 18px;
     color: #fd780f;
     font-weight: 600;
-    margin-left: 44%
+    text-align: right
 }
 
 .payment-body .items-price {
-    margin-left: 184px;
+    margin-left: 200px;
     color: #f8c544
 }
 
 .payment-body .ship-price {
-    margin-left: 240px;
+    margin-left: 222px;
     color: #f8c544
 }
 
 .payment-body .tol-price {
-    margin-left: 165px
+    margin-left: 200px
 }
 
 .payment-body .checkout-items,
