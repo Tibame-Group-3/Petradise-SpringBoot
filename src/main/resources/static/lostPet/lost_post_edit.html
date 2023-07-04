@@ -278,7 +278,8 @@
 		let numberInput = document.getElementById('contactPhone');
 		let base64Image = "";
 		let jsonData = [];
-		let resLostPetPic = []; 		
+		let resLostPetPic = []; 	
+		guardIsSignedIn();
 		
 
 		
@@ -393,7 +394,7 @@
 			
 			const articleData = {
 					articleId: id ,
-					memId: 6,
+					memId: getMemberId(),
 					lostDate: $("#datetime").val(),
 					lostPlace: $("#lostPlace").val(),
 					chipNum: $("#chipNum").val(),
@@ -406,7 +407,6 @@
 					lostPetPic: resLostPetPic,
 			};
 			console.log(articleData);
-			console.log(articleData.lostPetPic);
 			
 			$.ajax({
 			  url: "/LostPetArticle/update",
