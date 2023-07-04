@@ -23,10 +23,10 @@ function redirectToIndex() {
 
 function redirectToLogin(redirectLink) {
     if(redirectLink){
-        window.location.href = '/member/signin.html?redirect=' + redirectLink;
+        window.location.href = '/member/signin.html?redirect=' + encodeURIComponent(redirectLink);
         return;
     }
-    window.location.href = '/member/signin.html?redirect=' + window.location.pathname;
+    window.location.href = '/member/signin.html?redirect=' + encodeURIComponent(window.location.pathname);
 }
 
 function logout() {

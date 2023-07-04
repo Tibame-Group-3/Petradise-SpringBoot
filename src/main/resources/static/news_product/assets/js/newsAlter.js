@@ -29,7 +29,7 @@ $("#submit").on('click', function (e) {
                 console.error(err);
             });
 
-        location.href = "News.html";
+        location.href = "/news_product/News.html";
 
     }
 

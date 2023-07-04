@@ -26,6 +26,8 @@ public interface AnimalService {
     List<Animal> findAnimalByAnimalTypeAndAnimalSex(String animalType, String animalSex);
 
     List<Animal> findByCorpId(Integer corpId);
+    
+    List<Animal> findBymemId(Integer memId);
 
 	
 

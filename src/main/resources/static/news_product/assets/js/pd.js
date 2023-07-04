@@ -53,6 +53,6 @@ $(document).on('click', "button.btn_update", function () {
     console.log(pdId);
 
     sessionStorage.setItem("pdId", pdId);
-    location.href = "PdUpdate.html";
+    location.href = "/news_product/PdUpdate.html";
 
 })
