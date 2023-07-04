@@ -4,7 +4,6 @@ $(document).ready(function () {
     setupNavigation(signedIn);
     setupHotelOwnerSignUpNavigation();
     $('.logout').on('click', logout);
-    setupLostPetNavigation();
 })
 
 function setupNavigation(isSignedIn) {
@@ -34,12 +33,6 @@ function setupMemberCenterNavigation(isSignedIn) {
 function setupSigninNavigation() {
     $('.navigate-signin')
         .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
-}
-
-// 遺失
-function setupLostPetNavigation() {
-	$('.lostPet')
-		.attr('href', '/lostPet/lost.html');
 }
 
 //毛孩旅館 加入我們
