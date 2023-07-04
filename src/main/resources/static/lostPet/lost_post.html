@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Lost</title>
+<title>遺失寵物發文</title>
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
@@ -164,21 +164,21 @@
 				<div class="col-md-8 ">
 					<div class="row">
 						<div class="mb-3">
-							<label for="post_tilte">文章標題</label> <input type="text"
-								class="form-control" name="title" id="title">
+							<label for="post_tilte">文章標題(必填)</label> <input type="text"
+								class="form-control" name="title" id="title" min="1" required >
 						</div>
 						<div class="mb-3">
-							<label for="lost_place">遺失地點</label> <input type="text"
-								class="form-control" name="lostPlace" id="lostPlace">
+							<label for="lost_place">遺失地點(必填)</label> <input type="text"
+								class="form-control" name="lostPlace" id="lostPlace" min="1" required >
 						</div>
 						<div class="mb-3">
 							<label for="chip_num">晶片號碼 <span class="text-muted">(選填)</span></label>
 							<input type="text" class="form-control" name="chipNum"
-								id="chipNum">
+								id="chipNum" min="8" pattern="[0-9]*" placeholder="請輸入數字">
 						</div>
 						<div class="mb-3">
-							<label for="species">品種 </label> <select name="species"
-								id="select-animal" class="form-control">
+							<label for="species" >品種 (必填)</label> <select name="species"
+								id="select-animal" class="form-control" >
 								<option>請選擇寵物種類</option>
 								<option>狗</option>
 								<option>貓</option>
@@ -187,31 +187,31 @@
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="color">毛色 </label> <input type="text" id="color"
-								class="form-control" name="color">
+							<label for="color">毛色 (必填)</label> <input type="text" id="color"
+								class="form-control" name="color" min="1" required >
 						</div>
 						<div class="mb-3">
-							<label for="date">遺失時間：</label> <input type="datetime-local"
-								class="form-control" id="datetime" name="lostDate">
+							<label for="date">遺失時間：(必填)</label> <input type="datetime-local"
+								class="form-control" id="datetime" name="lostDate" required>
 						</div>
 					</div>
 					<div class="mb-3">
-						<label for="feature">寵物特徵</label> <input type="text" id="feature"
-							class="form-control" name="feature">
+						<label for="feature">寵物特徵(必填)</label> <input type="text" id="feature"
+							class="form-control" name="feature" min="1" required >
 					</div>
 					<div class="mb-3">
 						<label for="contact_phone">聯絡電話</label><span class="text-muted">(選填)</span>
-						<input type="text" class="form-control" id="contactPhone">
+						<input type="text" class="form-control" id="contactPhone" min="8" pattern="[0-9]*" placeholder="請輸入數字">
 					</div>
 				</div>
 
 				<div class="row">
-					<label for="text">文章其他備註：</label><br>
+					<label for="text">文章其他備註：(選填)</label><br>
 					<textarea rows="10" cols="30" name="text" id="text"></textarea>
 				</div>
 
 				<div>
-					<label>寵物圖片：</label> <br> <input type="file" class="input"
+					<label>寵物圖片：(選填)</label> <br> <input type="file" class="input"
 						id="file" name="file" multiple="multiple" accept="image/*">
 					<br>
 					<output class="output"></output>
@@ -261,18 +261,36 @@
 			<p class="mb-0">Copyright © 2023 PETRADISE</p>
 		</div>
 	</footer>
+	<script src="../assets/js/login.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js'></script>
 
 	<script>
+		
 		const output = document.querySelector(".output");
 		const input = document.querySelector(".input");
 		let imagesArray = []
 		let numberInput = document.getElementById('contactPhone');
 		let base64Image = "";
 		let jsonData = [];
+		let chipNumInput = document.getElementById('chipNum');
+		
+		guardIsSignedIn();
+		
+		let inputs = document.querySelectorAll('input')
+		inputs.forEach ( input => {
+			input.addEventListener('input', function (){
+				if (input.checkValidity()){
+					input.classList.add('valid')
+					input.classList.remove('invalid')
+				} else {
+					input.classList.remove('valid')
+					input.classList.add('invalid')
+				}
+			})
+		})
 		input.addEventListener("change", async () => {
 		  const files = input.files;
 		  for (let i = 0; i < files.length; i++) {
@@ -305,7 +323,17 @@
 			imagesArray.splice(index, 1);
 			displayImages();
 		}
-
+		
+		chipNumInput.addEventListener('input', function(event) {
+			  let inputValue = event.target.value;
+			  if (!/^\d*$/.test(inputValue)) {
+			    event.target.value = inputValue.replace(/\D/g, '');
+			    Swal.fire({
+			      icon: 'error',
+			      title: '請輸入數字',
+			    });
+			  }
+			});
 		numberInput.addEventListener('input', function(event) {
 		  let inputValue = event.target.value;
 		  if (!/^\d*$/.test(inputValue)) {
@@ -330,7 +358,7 @@
 		async function submitForm() {
 			
 			const articleData = {
-				  memId: 6,
+				  memId: getMemberId(),
 				  lostDate: $("#datetime").val(),
 				  lostPlace: $("#lostPlace").val(),
 				  chipNum: $("#chipNum").val(),
@@ -360,6 +388,22 @@
 
 			$(".btn-submit").click(function(event) {
 			  event.preventDefault();
+			  // 欄位必填驗證
+			  const title = $("#title").val();
+			  const lostPlace = $("#lostPlace").val();
+			  const color = $("#color").val();
+			  const lostDate = $("#datetime").val();
+			  const feature = $("#feature").val();
+			  const species = $("#select-animal").val();
+			  
+			  if (!title || !lostPlace || !color || !lostDate || !feature || !species) {
+			    Swal.fire({
+			      title: '錯誤',
+			      text: '請填寫所有必填欄位',
+			      icon: 'error'
+			    });
+			    return;
+			  }
 			  submitForm();
 			});
 

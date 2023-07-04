@@ -17,6 +17,7 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.EmailVerification;
 import tw.idv.petradisespringboot.member.vo.Member;
+import tw.idv.petradisespringboot.member.vo.MemberAccess;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -90,15 +91,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDTO> getAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(m -> mapper.map(m, MemberDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public MemberDTO getById(Integer id) {
         return repository
                 .findById(id)
@@ -157,6 +149,25 @@ public class MemberServiceImpl implements MemberService {
         ObjectMapper mapper = new ObjectMapper();
         JavaType type = mapper.getTypeFactory().constructParametricType(List.class, AddressInfo.class);
         return mapper.readValue(resource.getInputStream(), type);
+    }
+
+    @Override
+    public List<MemberDTO> getAll() {
+        return repository
+                .findAll()
+                .stream()
+                .map(m -> mapper.map(m, MemberDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MemberDTO changeAccess(Integer id, MemberAccess access) {
+        var member = repository
+                .findById(id)
+                .orElseThrow(() -> new MemberNotFoundException(id));
+        member.setAccess(access);
+        var saved = repository.save(member);
+        return mapper.map(saved, MemberDTO.class);
     }
 
     private Resource loadDistricts() {

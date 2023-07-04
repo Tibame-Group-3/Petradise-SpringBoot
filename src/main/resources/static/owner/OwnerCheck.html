@@ -21,7 +21,7 @@
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
 	crossorigin="anonymous"></script>
-
+	<link rel="stylesheet" href="./css/all.css">
 
 <style>
 * {
@@ -57,7 +57,17 @@ div.search2 {
 .data-container tr > td{
 width : 15% ;
 }
-
+.reload{
+display: inline-block;
+width:auto;
+}
+.reload_btn{
+background: #ffe7dd;
+}
+.hotel_owner_text{
+display: inline-block;
+width:auto;
+}
 
 
 </style>
@@ -73,7 +83,7 @@ width : 15% ;
 					class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
 					href="#">
 					<div class="sidebar-brand-text mx-3">
-						<img width="59" height="33" src="img/avatars/logo-only.png">
+						<img width="59" height="33" src="/assets/img/logo-only.png">
 					</div>
 				</a>
 				<hr class="sidebar-divider my-0">
@@ -84,13 +94,13 @@ width : 15% ;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">網站管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="NewsAlter.html"
+							<a class="dropdown-item" href="/news_product/NewsAlter.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增最新消息</a><a
-								class="dropdown-item" href="NewsList.html"
+								class="dropdown-item" href="/news_product/News.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">最新消息列表</a><a
-								class="dropdown-item" href="blank.html"
+								class="dropdown-item" href="/lostPet/lost_record_back.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">協尋文章列表</a><a
-								class="dropdown-item" href="blank.html"
+								class="dropdown-item" href="/admin/member_manage.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">會員列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
@@ -101,13 +111,15 @@ width : 15% ;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">業主管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="../owner/OwnerCheck.html"
+							<a class="dropdown-item" href="/owner/OwnerCheck.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主審核</a><a
-								class="dropdown-item" href="../owner/OwnerManage.html#"
+								class="dropdown-item" href="/owner/OwnerManage.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主列表</a><a
-								class="dropdown-item" href="#"
+								class="dropdown-item"
+								href="/animalCorporation/AnimalCorporationCheck.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主審核</a><a
-								class="dropdown-item" href="#"
+								class="dropdown-item"
+								href="/animalCorporation/AnimalCorporationManage.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
@@ -118,15 +130,12 @@ width : 15% ;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">商城管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href	="ProductAlter.html"
+							<a class="dropdown-item" href="/news_product/NewsAlter.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
-								class="dropdown-item" href="Product.html"
+								class="dropdown-item" href="/news_product/Product.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
-								class="dropdown-item" href="SaleAlter.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增促銷專案</a><a
-								class="dropdown-item" href="SaleList.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">促銷專案列表</a><a
-								class="dropdown-item" href="#"
+								class="dropdown-item"
+								href="/back-order-master/back-order-master.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
@@ -137,12 +146,8 @@ width : 15% ;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增員工</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工權限</a>
+							<a class="dropdown-item" href="/f_27/admin-table.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -182,10 +187,11 @@ width : 15% ;
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">旅館業主資料審核</h3>
+					<h3 class="text-dark mb-4">旅館業主審核</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">旅館業主審核清單</p>
+							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">列表刷新</p></div>
+							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -257,6 +263,19 @@ width : 15% ;
 
 
 $(function() {
+	
+	//reload按鈕
+	$(".reload").hover(
+			function(){
+		//移入
+		$(this).find('i').addClass('fa-spin');
+			},
+			function(){
+				$(this).find('i').removeClass('fa-spin');
+			});
+	$(".reload").on("click",function(){
+		location.reload();
+	});
 	//重新整理畫面
 	function clearPage(){
 		location.reload();
@@ -271,6 +290,7 @@ $(function() {
 	    success: function(res) {
 	      console.log(res);
 	      
+	      console.log(res);
 	      
 	      for (let i = 0; i < res.length; i++) {
 	        $("tbody").append(`

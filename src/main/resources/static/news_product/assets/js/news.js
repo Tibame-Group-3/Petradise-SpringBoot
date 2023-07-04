@@ -51,6 +51,6 @@ $(document).on('click', "button#btn_update", function () {
     // data.newsContent = $(this).closest("tr").find("td.newsContent").text();
 
     sessionStorage.setItem("newsId", JSON.stringify(newsId));
-    location.href = "NewsUpdate.html";
+    location.href = "/news_product/NewsUpdate.html";
 
 })

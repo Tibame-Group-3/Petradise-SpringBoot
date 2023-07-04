@@ -1,6 +1,12 @@
 
 const sessionStorageKey = 'admin';
 
+function guardIsSignedIn() {
+    if (isSignedIn() === false) {
+        redirectToLogin();
+    }
+}
+
 function isSignedIn() {
     const vo = sessionStorage.getItem(sessionStorageKey);
     return !!vo; // Double negation turns a truthy or falsy value into actual true or false
@@ -27,15 +33,20 @@ function getAdminId() {
     return admin.id;
 }
 
-function redirectToSignin() {
+function redirectToLogin(redirectUrl) {
+    if (redirectUrl) {
+        window.location.href = '/admin/signin.html?redirect=' + encodeURIComponent(redirectUrl);
+        return;
+    }
     window.location.href = '/admin/signin.html?redirect=' + encodeURIComponent(window.location.href);
 }
 
 function redirectToIndex() {
     // 實作登入後畫面
+    window.location.href = '/admin_nav_test.html';
 }
 
 function logout() {
     sessionStorage.removeItem(sessionStorageKey);
-    redirectToSignin();
+    redirectToLogin();
 }
