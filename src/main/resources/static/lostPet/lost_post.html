@@ -165,11 +165,11 @@
 					<div class="row">
 						<div class="mb-3">
 							<label for="post_tilte">文章標題(必填)</label> <input type="text"
-								class="form-control" name="title" id="title" required>
+								class="form-control" name="title" id="title" min="1" required >
 						</div>
 						<div class="mb-3">
 							<label for="lost_place">遺失地點(必填)</label> <input type="text"
-								class="form-control" name="lostPlace" id="lostPlace" required>
+								class="form-control" name="lostPlace" id="lostPlace" min="1" required >
 						</div>
 						<div class="mb-3">
 							<label for="chip_num">晶片號碼 <span class="text-muted">(選填)</span></label>
@@ -188,7 +188,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="color">毛色 (必填)</label> <input type="text" id="color"
-								class="form-control" name="color" required>
+								class="form-control" name="color" min="1" required >
 						</div>
 						<div class="mb-3">
 							<label for="date">遺失時間：(必填)</label> <input type="datetime-local"
@@ -197,7 +197,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="feature">寵物特徵(必填)</label> <input type="text" id="feature"
-							class="form-control" name="feature" required>
+							class="form-control" name="feature" min="1" required >
 					</div>
 					<div class="mb-3">
 						<label for="contact_phone">聯絡電話</label><span class="text-muted">(選填)</span>
@@ -276,6 +276,7 @@
 		let base64Image = "";
 		let jsonData = [];
 		let chipNumInput = document.getElementById('chipNum');
+		
 		guardIsSignedIn();
 		
 		let inputs = document.querySelectorAll('input')
@@ -387,7 +388,7 @@
 
 			$(".btn-submit").click(function(event) {
 			  event.preventDefault();
-			// 欄位必填驗證
+			  // 欄位必填驗證
 			  const title = $("#title").val();
 			  const lostPlace = $("#lostPlace").val();
 			  const color = $("#color").val();
