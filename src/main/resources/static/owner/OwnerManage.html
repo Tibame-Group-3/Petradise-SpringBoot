@@ -23,7 +23,7 @@
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
 	crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="./css/all.css">
+<link rel="stylesheet" href="./css/all.css">
 
 
 <style>
@@ -62,16 +62,18 @@ div.search2 {
 	width: 15%;
 }
 
-.hotel_owner_text{
-display: inline-block;
-width:auto;
+.hotel_owner_text {
+	display: inline-block;
+	width: auto;
 }
-.reload{
-display: inline-block;
-width:auto;
+
+.reload {
+	display: inline-block;
+	width: auto;
 }
-.reload_btn{
-background: #ffe7dd;
+
+.reload_btn {
+	background: #ffe7dd;
 }
 </style>
 </head>
@@ -86,7 +88,7 @@ background: #ffe7dd;
 					class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
 					href="#">
 					<div class="sidebar-brand-text mx-3">
-						<img width="59" height="33" src="img/avatars/logo-only.png">
+						<img width="59" height="33" src="/assets/img/logo-only.png">
 					</div>
 				</a>
 				<hr class="sidebar-divider my-0">
@@ -137,7 +139,8 @@ background: #ffe7dd;
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
 								class="dropdown-item" href="/news_product/Product.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
-								class="dropdown-item" href="/back-order-master/back-order-master.html"
+								class="dropdown-item"
+								href="/back-order-master/back-order-master.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
@@ -148,12 +151,8 @@ background: #ffe7dd;
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增員工</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工權限</a>
+							<a class="dropdown-item" href="/f_27/admin-table.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -196,8 +195,14 @@ background: #ffe7dd;
 					<h3 class="text-dark mb-4">旅館業主列表</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">列表刷新</p></div>
-							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
+							<div class="hotel_owner_text">
+								<p class="text-primary m-0 fw-bold">列表刷新</p>
+							</div>
+							<div class="reload">
+								<button class="reload_btn">
+									<i class="fa-solid fa-rotate"></i>
+								</button>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -220,7 +225,8 @@ background: #ffe7dd;
 										name="option1" value="option1"> 停權
 									</label>
 									<!-- 圖標 -->
-									<button type="button" class="Access_btn" style="background: #ffe7dd">
+									<button type="button" class="Access_btn"
+										style="background: #ffe7dd">
 										<i class="fa-solid fa-magnifying-glass fa-beat-fade"
 											style="color: #4c51a4;"></i>
 									</button>
@@ -245,15 +251,15 @@ background: #ffe7dd;
 										</tr>
 									</thead>
 
-									<tbody class="data-container">									
+									<tbody class="data-container">
 									</tbody>
 									<tfoot>
 										<tr></tr>
 									</tfoot>
 								</table>
-								<div id="loading" >
-										<img src="../owner/img/loading.gif">
-									</div>
+								<div id="loading">
+									<img src="../owner/img/loading.gif">
+								</div>
 							</div>
 							<div class="row">
 
