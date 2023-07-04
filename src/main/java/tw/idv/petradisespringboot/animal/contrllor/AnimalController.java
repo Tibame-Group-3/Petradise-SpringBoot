@@ -97,7 +97,7 @@ public class AnimalController {
 //	}
 
 	@GetMapping("/search")
-	public List<Animal> searchByAnimalTypeSex(@RequestParam("animaltype") String animalType ,@RequestParam("animalsex")String animalSex ) {
+	public List<Animal> searchByAnimalTypeSex(@RequestParam("animalType") String animalType ,@RequestParam("animalSex")String animalSex ) {
 		System.out.println("種類: " + animalType + animalSex  );
 		List<Animal> animals = service.findAnimalByAnimalTypeAndAnimalSex(animalType, animalSex);
 		System.out.println("列表: "+animals);
@@ -112,5 +112,14 @@ public class AnimalController {
 	List<Animal> findByCorpId(@PathVariable Integer corpId){
 		return service.findByCorpId(corpId);
 	}
-
+	
+	@GetMapping("memId={memId}")
+	ResponseEntity<?> findBymemId(@PathVariable Integer memId){
+		List<Animal> animals = service.findBymemId(memId);
+		if (memId == null) {
+			ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(animals);
+	}
 }
