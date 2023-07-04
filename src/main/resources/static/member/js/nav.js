@@ -25,7 +25,14 @@
             links: [
                 '/member/orders.html'
             ]
-        }
+        },
+        {
+			name: '我的發文紀錄',
+			root: '/member/post_record.html',
+			links: [
+				'/member/post_record.html'
+			]
+		},
     ]
 
     let selectedIndex = navigationItems.findIndex(item => item.links.includes(window.location.pathname));
