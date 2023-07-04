@@ -199,7 +199,7 @@ width : 15% ;
 											<th style="text-align: center">收容業主</th>
 											<th>收容所名稱</th>
 											<th>業主資料</th>
-											<th>旅館資料</th>
+											<th>收容所資料</th>
 											<th>審核狀態</th>
 											<th></th>
 										</tr>
@@ -257,6 +257,9 @@ $(function() {
 	//重新整理畫面
 	function clearPage(){
 		location.reload();
+	}
+	function clearPageWithDelay() {
+		  setTimeout(clearPage, 3000); // 5000 milliseconds (5 seconds) delay
 	}
 	  $.ajax({
 	    url: "/animalCorporation/all/withDefault",
@@ -371,8 +374,8 @@ $(function() {
 	    	  });
 	     	
 	      } 
-	      clearPage();
-	    }).catch(function(error) {
+	      clearPageWithDelay()
+	      }).catch(function(error) {
 		      console.error(error);
 	    })
 	 }	   
