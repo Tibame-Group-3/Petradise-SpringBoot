@@ -231,11 +231,22 @@
                     // Handle error case for room order details
                 });
 
-
-            // Function to format date and time
+            // Function to format date and time and timezone
             function formatDateTime(dateTime) {
-                const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                return new Date(dateTime).toLocaleString(options);
+                const options = {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                };
+
+                // Convert the dateTime to GMT+8
+                const gmtDateTime = new Date(dateTime);
+                gmtDateTime.setUTCHours(gmtDateTime.getUTCHours() + 8);
+
+                return gmtDateTime.toLocaleString(options);
             }
 
             // Helper function to get the status text

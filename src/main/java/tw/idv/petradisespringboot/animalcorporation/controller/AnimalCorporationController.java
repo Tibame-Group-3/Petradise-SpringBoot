@@ -33,7 +33,7 @@ public class AnimalCorporationController {
 	}
 
 	@GetMapping("/all")
-	ResponseEntity<List<AnimalCorporation>> allWithout1(){
+	ResponseEntity<List<AnimalCorporation>> allWithStatus2(){
 		List<AnimalCorporation> animalCorporations = service.findByStatus('2');
 		
 		return ResponseEntity.ok(animalCorporations);
