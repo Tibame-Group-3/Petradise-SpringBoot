@@ -17,6 +17,7 @@ import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 import tw.idv.petradisespringboot.member.vo.EmailVerification;
 import tw.idv.petradisespringboot.member.vo.Member;
+import tw.idv.petradisespringboot.member.vo.MemberAccess;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -157,6 +158,16 @@ public class MemberServiceImpl implements MemberService {
                 .stream()
                 .map(m -> mapper.map(m, MemberDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public MemberDTO changeAccess(Integer id, MemberAccess access) {
+        var member = repository
+                .findById(id)
+                .orElseThrow(() -> new MemberNotFoundException(id));
+        member.setAccess(access);
+        var saved = repository.save(member);
+        return mapper.map(saved, MemberDTO.class);
     }
 
     private Resource loadDistricts() {

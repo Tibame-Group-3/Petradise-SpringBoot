@@ -62,6 +62,11 @@ class MemberController {
         return ResponseEntity.ok("密碼修改成功");
     }
 
+    @PutMapping("/change-access")
+    ResponseEntity<MemberDTO> changeAccess(@RequestBody ChangeAccessDTO dto) {
+        return ResponseEntity.ok(service.changeAccess(dto.getId(), dto.getAccess()));
+    }
+
     @GetMapping("/verify-email")
     ResponseEntity<String> verifyEmail(@RequestParam String token) {
         service.verifyEmail(token);

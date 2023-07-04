@@ -4,6 +4,7 @@ import tw.idv.petradisespringboot.member.dto.MemberDTO;
 import tw.idv.petradisespringboot.member.dto.SignUpDTO;
 import tw.idv.petradisespringboot.member.dto.UpdateDTO;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
+import tw.idv.petradisespringboot.member.vo.MemberAccess;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface MemberService {
     List<AddressInfo> getAddressInfo() throws Exception;
 
     List<MemberDTO> getAll();
+
+    MemberDTO changeAccess(Integer id, MemberAccess access);
 }
