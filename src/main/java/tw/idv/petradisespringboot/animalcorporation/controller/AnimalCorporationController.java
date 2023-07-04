@@ -114,7 +114,7 @@ public class AnimalCorporationController {
 							+ "您已成功通過帳號申請成為合作業主，\n"
 							+ "您的帳號是" +  animalCorporation.getCorpAccount() + "\n"
 							+ "您的密碼是" + animalCorporation.getCorpPassword() + "\n"
-							+ "請至 http://xxxxxxxx/ 登入服務\n"
+							+ "請至 http://localhost:8080/animalCorporation/signin.html 登入服務\n"
 							+ "Petradise團隊敬上");
 		} else if (appliedStatus == '1'){
 			emailService.sendEmail(animalCorporation.getContactEmail(), 
