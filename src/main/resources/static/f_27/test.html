@@ -2,44 +2,536 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>客戶-訂單管理</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/Articles-Badges-images.css"> -->
+    <style>
+        @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        .status-0 {
+            color: green;
+        }
+
+        .status-1 {
+            color: blue;
+        }
+
+        .status-2 {
+            color: red;
+        }
+
+        #no-matches-message {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        fieldset,
+        label {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 20px;
+        }
+
+
+        /****** Style Star Rating Widget *****/
+
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating>input {
+            display: none;
+        }
+
+        .rating>label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating>label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating>input:checked~label,
+        /* show gold star when clicked */
+        .rating:not(:checked)>label:hover,
+        /* hover current star */
+        .rating:not(:checked)>label:hover~label {
+            color: #FFD700;
+        }
+
+        /* hover previous stars in list */
+
+        .rating>input:checked+label:hover,
+        /* hover current star when changing rating */
+        .rating>input:checked~label:hover,
+        .rating>label:hover~input:checked~label,
+        /* lighten current selection */
+        .rating>input:checked~label:hover~label {
+            color: #FFED85;
+        }
+
+        /* --------------------------------------------------------------------------------------------- */
+
+        #star-count {
+            color: darkgoldenrod;
+            display: inline-block;
+            vertical-align: bottom;
+            margin-left: 1px;
+            margin-bottom: -8px;
+        }
+
+
+        textarea#new-review {
+            resize: none;
+            height: 100px;
+            width: auto;
+            box-sizing: border-box;
+        }
+
+        .btn-indie-trans {
+            background-color: transparent;
+            /* border-color: tan; */
+            /* color: tan; */
+            margin-left: 330px;
+            border-radius: 8px;
+        }
+
+        body {
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                                        style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
+                <div class="container-fluid">
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">訂單管理</p>
+                        </div>
+                        <div class="card-body filter">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label">訂單狀態:
+                                            <select class="d-inline-block form-select form-select-sm">
+                                                <option selected="">全部</option>
+                                                <option style="color: green;">即將到來</option>
+                                                <option style="color: blue;">已完成</option>
+                                                <option style="color: red">已取消</option>
+                                            </select>&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter">
+                                        <label class="form-label">
+                                            <input type="search" class="form-control form-control-sm"
+                                                aria-controls="dataTable" placeholder="Search" id="order-search-input">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="no-matches-message">找不到符合的訂單</div>
+
+                            <div id="orders-section">
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav
+                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
+                                                    href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
+                                                        aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/jquery/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/login.js"></script>
 
     <script>
-        // Swal.fire({
-        //     title: 'Do you want to save the changes?',
-        //     showDenyButton: true,
-        //     showCancelButton: true,
-        //     confirmButtonText: 'Save',
-        //     denyButtonText: `Don't save`,
-        // }).then((result) => {
-        //     /* Read more about isConfirmed, isDenied below */
-        //     if (result.isConfirmed) {
-        //         Swal.fire('Saved!', '', 'success')
-        //     } else if (result.isDenied) {
-        //         Swal.fire('Changes are not saved', '', 'info')
-        //     }
-        // })
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            // cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, cancel it!'
-        })
+        $(document).ready(function () {
+
+            guardIsSignedIn();
+
+            // Call the filterOrders function when the order status or search input changes
+            $('.form-select, #order-search-input').on('change input', filterOrders);
+
+            var memberId = localStorage.getItem('memberId');
+
+            $.ajax({
+                url: `/room-order/customer/mem-id/${memberId}`,
+                method: 'GET',
+                success: function (data) {
+                    $('#orders-section').empty();
+
+                    // Set status text
+                    data.forEach(function (order) {
+                        var statusText = '';
+                        if (order.status === '0') {
+                            statusText = '即將到來';
+                        } else if (order.status === '1') {
+                            statusText = '已完成';
+                        } else if (order.status === '2') {
+                            statusText = '已取消';
+                        }
+
+                        // Display the "取消訂單" button based on the order status
+                        if (order.status === '0') {
+                            var cancelOrderButton = `<a class="btn btn-danger btn-sm" id="cancel-order-button-${order.id}" role="button">取消訂單</a>`;
+                        } else {
+                            var cancelOrderButton = ''; // Empty string if status is not '0'
+                        }
+
+                        // Display the "留下評論" button only for orders with status code 1 (已完成)
+                        if (order.status === '1') {
+                            var reviewButton = `<a class="btn btn-primary btn-lg me-2 toggle-button" id="review-button-${order.id}" role="button">留下評論</a>`;
+                        } else {
+                            var reviewButton = ''; // Empty string if status is not 1 (已完成)
+                        }
+
+                        // Make an AJAX request to get the hotel name based on the orderId
+                        $.ajax({
+                            url: `/room-order/hotel-name/${order.id}`,
+                            method: 'GET',
+                            success: function (hotelName) {
+                                // Update the hotel name in the HTML
+                                $(`#hotel-name-${order.id}`).text(hotelName);
+                            },
+                            error: function () {
+                                console.log('Error loading hotel name for Order ID:', `${order.id}`);
+                            }
+                        });
+
+                        var html = `
+                        <div class="container bg-secondary bg-opacity-10 border border-2 rounded py-4 py-xl-5 order-item" style="height: 550px;">
+                            <div class="row gy-4 gy-md-0">
+                                <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
+                                <div style="max-width: 350px;">
+                                    <h5><span id="order-status" class="status-${order.status}">${statusText}</span></h5>
+                                    <h2 id="hotel-name-${order.id}" class="text-uppercase fw-bold"></h2>
+                                    <p>訂單編號: <span id="order-id">${order.id}</span></p>
+                                    <p>入住日期: <span id="check-in-date">${order.checkInDate}</span></p>
+                                    <p>退房日期: <span id="check-out-date">${order.checkOutDate}</span></p>
+                                    <br>
+                                    <a class="btn btn-primary btn-lg me-2" id="order-detail-button-${order.id}" role="button">查看詳情</a>
+                                    ${reviewButton}
+                                    ${cancelOrderButton}
+                                    <br><br>
+                                    <div class="review-box" style="display: none;">
+                                    <fieldset class="rating">
+                                        <input type="radio" id="star5" name="rating" value="5" checked="checked" />
+                                        <label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="star4" name="rating" value="4" />
+                                        <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="star3" name="rating" value="3" />
+                                        <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="star2" name="rating" value="2" />
+                                        <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="star1" name="rating" value="1" />
+                                        <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    </fieldset>
+                                    <span id="star-count"></span><br>
+                                    <div class="col-md-6">
+                                        <form accept-charset="UTF-8">
+                                        <textarea class="review-form" rows="4" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+                                        <div class="text-right">
+                                            <button class="btn-indie-trans" type="submit">Publish</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-xl-5 m-xl-5">
+                                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        $('#orders-section').append(html);
+                        updateOrderCount();
+
+                        // Open a new page with the order ID from the URL
+                        $('#orders-section').on('click', `#order-detail-button-${order.id}`, function () {
+                            console.log('Clicked "查看詳情" for Order ID:', `${order.id}`);
+
+                            // Construct the URL for the new page
+                            const orderDetailUrl = `/f_27/cus-order-detail.html?id=${order.id}`;
+
+                            // Open the new page
+                            window.open(orderDetailUrl, '_blank');
+                        });
+
+
+                        // Example: Log the order ID when the "留下評論" button is clicked
+                        $('#orders-section').on('click', `#review-button-${order.id}`, function () {
+                            console.log('Clicked "留下評論" for Order ID:', `${order.id}`);
+
+                            // Find the corresponding review box and toggle its visibility
+                            $(this).closest('.order-item').find('.review-box').slideToggle();
+
+                            // Initialize the review functionality for the specific order
+                            initReviewFunctionality();
+                        });
+
+                        // Cancel the order when the "取消訂單" button is clicked
+                        $('#orders-section').on('click', `#cancel-order-button-${order.id}`, function () {
+                            console.log('Clicked "取消訂單" for Order ID:', `${order.id}`);
+
+                            // Show a confirmation dialog
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, cancel it!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Remove the "取消訂單" button
+                                    $(this).remove();
+
+                                    // Call the API to change the order status
+                                    const apiUrl = `/room-order/id/${order.id}/change-status`;
+
+                                    fetch(apiUrl, {
+                                        method: 'PUT',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ status: '2' })
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log('Order status updated:', data);
+                                            // Perform your additional action here
+                                            console.log('Performing a new action for Order ID:', `${order.id}`);
+
+                                            Swal.fire(
+                                                'Cancelled!',
+                                                'Your order has been canceled.',
+                                                'success'
+                                            ).then((result) => {
+                                                if (result.dismiss === Swal.DismissReason.backdrop || Swal.DismissReason.close) {
+                                                    location.reload();
+                                                }
+                                            });
+                                        })
+                                        .catch(error => {
+                                            console.error('Error updating order status:', error);
+                                            Swal.fire(
+                                                'Error!',
+                                                'Failed to cancel the order.',
+                                                'error'
+                                            );
+                                        });
+                                }
+                            });
+                        });
+                    });
+                    // 評論 桌面
+                },
+                error: function () {
+                    $('#orders-section').html('<p>Error loading orders.</p>');
+                }
+            });
+        });
+
+        // Function to update the order count
+        function updateOrderCount() {
+            var visibleOrders = $('.order-item:visible').length;
+            var totalOrders = $('.order-item').length;
+
+            if (visibleOrders === 0) {
+                $('#dataTable_info').text(`顯示 0 筆，共 0 筆訂單`);
+            } else {
+                $('#dataTable_info').text(`顯示 1 到 ${visibleOrders} 筆，共 ${visibleOrders} 筆訂單`);
+            }
+        }
+
+        // Function to filter orders based on the selected order status and search input
+        function filterOrders() {
+            const selectedStatus = $('.form-select').val();
+            const searchValue = $('#order-search-input').val().trim().toLowerCase();
+            let matchedOrders = 0;
+
+            $('.order-item').each(function () {
+                const orderStatus = $(this).find('#order-status').text().toLowerCase();
+                const orderId = $(this).find('#order-id').text().toLowerCase();
+
+                if ((selectedStatus === '全部' || selectedStatus === orderStatus) &&
+                    (searchValue === '' || orderId.includes(searchValue))) {
+                    $(this).show();
+                    matchedOrders++;
+                } else {
+                    $(this).hide();
+                }
+            });
+
+            if (matchedOrders === 0) {
+                $('#no-matches-message').show();
+            } else {
+                $('#no-matches-message').hide();
+            }
+
+            updateOrderCount();
+        }
+
+        // Review
+        function initReviewFunctionality() {
+            // toggle function
+            $(".toggle-button").click(function () {
+                $(this).toggleClass("active");
+                $(".review-box").slideToggle();
+            });
+
+            $("form").submit(function (event) {
+                event.preventDefault();
+                $(".toggle-button").text("感謝您的評論！");
+                $(".toggle-button").removeClass("btn-primary").addClass("btn-warning");
+                // Additional code to disable form elements if needed
+            });
+
+            // JavaScript code to update the star count dynamically on hover and persist after clicking
+            const starLabels = document.querySelectorAll('.rating > label');
+            const starCount = document.querySelector('#star-count');
+            const publishButton = document.querySelector('.btn-indie-trans');
+            const textArea = document.querySelector('.review-form');
+            const form = document.querySelector('form');
+
+            let selectedCount = 5; // Set the default selected count to 5
+            starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
+
+            starLabels.forEach((label) => {
+                label.addEventListener('mouseover', () => {
+                    const count = label.getAttribute('title').split(' - ')[1].split(' ')[0];
+                    starCount.textContent = `(${count})`;
+                });
+
+                label.addEventListener('click', () => {
+                    const count = parseFloat(label.getAttribute('title').split(' - ')[1].split(' ')[0]);
+                    selectedCount = count;
+                    starCount.textContent = `(${selectedCount})`;
+                });
+
+                label.addEventListener('mouseout', () => {
+                    starCount.textContent = `(${selectedCount})`; // Display the selected count when the mouse leaves
+                });
+            });
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const reviewText = document.querySelector('#new-review').value;
+                console.log('Review Text:', reviewText);
+                console.log('Rate:', selectedCount);
+
+                const hotelId = 1;
+                const roomOrderId = 1;
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "hotelId": hotelId,
+                    "roomOrderId": roomOrderId,
+                    "score": selectedCount,
+                    "content": reviewText
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+
+                fetch("/roomreview/addReview", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+
+                Swal.fire({
+                    title: 'Thanks for your review!',
+                    icon: 'success',
+                });
+
+                publishButton.style.display = "none";
+                textArea.setAttribute("disabled", '');
+                starLabels.forEach((label) => {
+                    label.style.pointerEvents = 'none';
+                });
+            });
+        }
+
     </script>
-
-
 </body>
 
 </html>
