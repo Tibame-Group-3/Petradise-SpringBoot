@@ -2,7 +2,6 @@
 (() => {
     $(document).ready(function() {
         $('#memberTable').DataTable({
-            serverSide: true,
             ajax: {
                 url: '/members/all',
                 type: 'GET'
@@ -16,9 +15,17 @@
                 { data: 'email' },
                 { data: 'address' },
                 { data: 'access' },
-                { data: 'bonus' },
                 { data: 'isEmailVerified' }
             ]
         });
     });
+
+    function getAccessText(access) {
+        switch (access) {
+            case 0:
+                return '正常';
+            case 1:
+                return '停權';
+        }
+    }
 })();
