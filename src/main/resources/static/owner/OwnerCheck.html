@@ -21,7 +21,7 @@
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
 	crossorigin="anonymous"></script>
-
+	<link rel="stylesheet" href="./css/all.css">
 
 <style>
 * {
@@ -57,7 +57,17 @@ div.search2 {
 .data-container tr > td{
 width : 15% ;
 }
-
+.reload{
+display: inline-block;
+width:auto;
+}
+.reload_btn{
+background: #ffe7dd;
+}
+.hotel_owner_text{
+display: inline-block;
+width:auto;
+}
 
 
 </style>
@@ -182,10 +192,11 @@ width : 15% ;
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">旅館業主資料審核</h3>
+					<h3 class="text-dark mb-4">旅館業主審核</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<p class="text-primary m-0 fw-bold">旅館業主審核清單</p>
+							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">列表刷新</p></div>
+							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -257,6 +268,19 @@ width : 15% ;
 
 
 $(function() {
+	
+	//reload按鈕
+	$(".reload").hover(
+			function(){
+		//移入
+		$(this).find('i').addClass('fa-spin');
+			},
+			function(){
+				$(this).find('i').removeClass('fa-spin');
+			});
+	$(".reload").on("click",function(){
+		location.reload();
+	});
 	//重新整理畫面
 	function clearPage(){
 		location.reload();
@@ -271,6 +295,7 @@ $(function() {
 	    success: function(res) {
 	      console.log(res);
 	      
+	      console.log(res);
 	      
 	      for (let i = 0; i < res.length; i++) {
 	        $("tbody").append(`
