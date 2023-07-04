@@ -59,6 +59,11 @@ public class AnimalServiceImpl implements AnimalService {
 		return repository.findByCorpId(corpId);
 	}
 
+	@Override
+	public List<Animal> findBymemId(Integer memId) {
+		return repository.findBymemId(memId);
+	}
+
 }
 class AnimalNotFoundException extends RuntimeException {
 	AnimalNotFoundException(Integer id) {
