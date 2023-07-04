@@ -68,6 +68,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderMaster> findOrderByMemberId(Integer memId) {
 		return orderMasterRepository.findByMemId(memId);
 	}
+	
+	@Override
+	public List<OrderMaster> getByMemIdAndOdStatusNot(Integer memId, Character odStatus) {
+		return orderMasterRepository.findByMemIdAndOdStatusNot(memId, odStatus);
+	}
 
 //	@Override
 //	public List<AllOrderMasterDTO> findOrderByMemberId(Integer memId) {
@@ -88,6 +93,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderMaster updateOrderStatus() {
+		
 		return null;
 	}
 }

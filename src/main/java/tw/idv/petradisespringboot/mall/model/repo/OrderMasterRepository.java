@@ -25,5 +25,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, Intege
     List<AllOrderMasterDTO> findAllOrderMaster();
     
     List<OrderMaster> findByMemId(Integer memId);
+    
+    List<OrderMaster> findByMemIdAndOdStatusNot(Integer memId, Character odStatus);
 
 }

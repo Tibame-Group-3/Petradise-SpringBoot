@@ -2,6 +2,7 @@
     $(document).ready(function () {
         guardIsSignedIn();
         fetchOrderMaster();
+        deleteOrder();
     })
 
     $('#table_body').on('click', '#order_detail_check', function () {
@@ -9,8 +10,13 @@
         fetchOrderDetail(orderId);
     })
 
+    function deleteOrder() {
+        const deleteButton = document.querySelector('.delete_order');
+        deleteButton.addEventListener('click', showDeleteAlert());
+    }
+
     function fetchOrderMaster() {
-        fetch(`/order/memberId=${getMemberId()}`)
+        fetch(`/order/memberIdAndOrderdStatusNot=${getMemberId()}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,57 +32,64 @@
         console.log(jsonData);
         for (let i of jsonData) {
             const row = `
-            <tr>
-                <td class="order_id" data-order-id="${i.odId}" style="color: #a67c52;">${i.odId}</td>
-                <td class="order_date" style="color: #a67c52;">${i.odDate}</td>
-                <td class="price_od" style="color: #a67c52;">${i.priceOd}</td>
-                <td class="reci_name" style="color: #a67c52;">${i.reciName}</td>
-                <td class="reci_phone" style="color: #a67c52;">${i.reciPhone}</td>
-                <td class="order_status" style="color: #a67c52;">${convertOrderStatus(i.odStatus)}</td>
+                <tr>
+                    <td class="order_id" data-order-id="${i.odId}" style="color: #a67c52;">${i.odId}</td>
+                    <td class="order_date" style="color: #a67c52;">${i.odDate}</td>
+                    <td class="price_od" style="color: #a67c52;">${i.priceOd}</td>
+                    <td class="reci_name" style="color: #a67c52;">${i.reciName}</td>
+                    <td class="reci_phone" style="color: #a67c52;">${i.reciPhone}</td>
+                    <td class="order_status" style="color: #a67c52;">${convertOrderStatus(i.odStatus)}</td>
 
-                <!-- 查看訂單 -->
-                <td class="view_order_work">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="view_order" id="order_detail_check" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                        詳情
-                    </button>
+                    <!-- 查看訂單 -->
+                    <td class="view_order_work">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="view_order" id="order_detail_check" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            詳情
+                        </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop"
-                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop"
+                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
-                        <!-- Modal-dialog -->
-                        <div
-                            class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="staticBackdropLabel">
-                                        查看訂單詳情</h3>
-                                    <button type="button" class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
+                            <!-- Modal-dialog -->
+                            <div
+                                class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="staticBackdropLabel">
+                                            查看訂單詳情</h3>
+                                        <button type="button" class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
 
-                                <!-- Light-Box-Body -->
-                                <div class="modal-body">
+                                    <!-- Light-Box-Body -->
+                                    <div class="modal-body">
 
-                                    <table class="table" id="order_detail">
-                                        
-                                    </table>
+                                        <table class="table" id="order_detail">
 
-                                </div>
+                                        </table>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">確定</button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">確定</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>`
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-danger delete_order" data-order-id="${i.odId}">
+                            取消訂單
+                        </button>
+                    </td>
+
+                </tr>`
                 ;
             tableBody.innerHTML += row;
         }
@@ -167,6 +180,34 @@
         orderDetail.innerHTML = table;
 
     }
+
+    function showDeleteAlert(event) {
+        // any dash is replaced by the capitalization of the next letter, converting the name to camelcase.
+        const orderId = event.target.datadet.orderId; // HTMLElement.dataset.testValue
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                displayNoneOrder();
+            }
+        })
+    }
+
+    function displayNoneOrder() {
+        
+    }
+
 
     function convertOrderStatus(odStatus) {
         switch (odStatus) {

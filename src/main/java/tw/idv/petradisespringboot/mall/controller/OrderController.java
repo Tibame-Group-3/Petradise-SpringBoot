@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
@@ -34,6 +35,12 @@ public class OrderController {
     @GetMapping("/memberId={memberId}")
     public List<OrderMaster> findOrdersByMemberId(@PathVariable Integer memberId) {
         return orderService.findOrderByMemberId(memberId);
+    }
+    
+    @GetMapping("/memberIdAndOrderdStatusNot={memberId}")
+    public List<OrderMaster> getByMemIdAndOdStatusNot(@PathVariable Integer memberId) {
+    	Character orderStatus = '1';
+    	return orderService.getByMemIdAndOdStatusNot(memberId, orderStatus);
     }
     
 //    @GetMapping("/memberId={memberId}")

@@ -14,6 +14,10 @@ button.view_order:hover {
     background-color: #ffe7dd;
 }
 
-td.view_order_work {
+button.delete_order {
+    border-radius: 7px;
+}
+
+td.view_order_work, td.delete_order {
     text-align: center;
 }

@@ -15,8 +15,10 @@ public interface OrderService {
     
     List<OrderMaster> findOrderByMemberId(Integer memId);
     
+    List<OrderMaster> getByMemIdAndOdStatusNot(Integer memId, Character odStatus);
+
     List<OrderDetailDTO> findOrderDetailById(Integer id);
     
     OrderMaster updateOrderStatus();
-   
+    
 }
