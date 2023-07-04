@@ -102,3 +102,10 @@
 	border-radius: 10px;
 	background-color: #f1ecd1;
 }
+
+input.valid{
+  border:2px solid green;
+}
+input.invalid{
+  border:2px solid red;
+}

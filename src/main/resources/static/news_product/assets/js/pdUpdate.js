@@ -107,7 +107,7 @@ $("#submit").on('click', function (e) {
             });
 
         console.log(data);
-        location.href = "Product.html";
+        location.href = "/news_product/Product.html";
     }
 });
 
