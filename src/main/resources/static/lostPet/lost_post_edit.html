@@ -262,6 +262,7 @@
 			<p class="mb-0">Copyright © 2023 PETRADISE</p>
 		</div>
 	</footer>
+	<script src="../assets/js/login.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script
@@ -277,7 +278,8 @@
 		let numberInput = document.getElementById('contactPhone');
 		let base64Image = "";
 		let jsonData = [];
-		let resLostPetPic = []; 		
+		let resLostPetPic = []; 	
+		guardIsSignedIn();
 		
 
 		
@@ -392,7 +394,7 @@
 			
 			const articleData = {
 					articleId: id ,
-					memId: 6,
+					memId: getMemberId(),
 					lostDate: $("#datetime").val(),
 					lostPlace: $("#lostPlace").val(),
 					chipNum: $("#chipNum").val(),
@@ -405,7 +407,6 @@
 					lostPetPic: resLostPetPic,
 			};
 			console.log(articleData);
-			console.log(articleData.lostPetPic);
 			
 			$.ajax({
 			  url: "/LostPetArticle/update",

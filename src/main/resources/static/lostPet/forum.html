@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Lost</title>
+<title>遺失寵物文章</title>
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
@@ -164,7 +164,7 @@
 }
 
 .animal-pic .pic {
-  width: 70%; 
+  width: 50%; 
   margin-left: 65px;
   margin-bottom: 10px; 
 }
@@ -311,49 +311,6 @@
 	<div class="clip-border">
 		<div id="main-container">
 			<div id="main-content" class="bbs-screen bbs-content"></div>
-			<!-- <div class="article-metaline"><span class="article-meta-tag">作者</span><span
-                        class="article-meta-value">會員ID</span></div>
-                <div class="article-metaline"><span class="article-meta-tag">標題</span><span
-                        class="article-meta-value">標題</span></div>
-                <div class="article-metaline"><span class="article-meta-tag">時間</span><span
-                        class="article-meta-value">發文時間</span></div>
-                <div>
-                    <label for="lost_place">遺失地點：</label>
-                </div>
-                <div>
-                    <label for="chip_num">晶片號碼：</label>
-                </div>
-                <div>
-                    <label for="species">品種：</label>
-                </div>
-                <div>
-                    <label for="color">毛色：</label>
-                </div>
-                <div>
-                    <label for="datetime">遺失時間：</label>
-                </div>
-                <div>
-                    <label for="feature">寵物特徵：</label>
-                </div>
-                <div>
-                    <label for="contact_phone">聯絡電話：</label>
-                    
-                </div>
-                <div>
-                    <label for="text">文章其他備註：</label><br>
-
-                </div>
-                <div>
-                    <label>動物圖片：</label>
-
-                </div>
-                <div>
-                    補充內容內容內容++++++
-                    +++++++
-                    +++++++ -->
-
-
-
 			<div class="comment"></div>
 		</div>
 		<br>
@@ -418,40 +375,45 @@
 	        window.location.href = targetPageUrl;
 	    });
     	document.querySelector('.button-res').addEventListener("click", function () {
-			Swal.fire({
-		        title: '回覆文章ㄅ',
-		        input: 'textarea'
-		    }).then(function (result) {
-		    	 if (result.value != null && result.value.trim() !== ""){	            
-		    		 let text = result.value;
-		    		 let jsonData = {
-		    				 "articleId": id,
-		    				 "response": {
-		    					 "memId": 11,
-		    					 "responseContent": text,
-		    				 }
-		    		 };
-		    		 console.log(jsonData);
-		    		 $.ajax({
-		    			 url: "/LostPetRespose/add",
-		    			 method: "POST",
-		    			 contentType: "application/json",
-		    			 data: JSON.stringify(jsonData),
-		    		 }).then(function(response) {
-		    			 console.log(response);
-		    			 window.location.reload();
-		    		 }).catch(function(error) {
-		    			 console.error(error);
-		    		 });
-		    	 } else {
-		    		 Swal.fire({
-		    			 title: 'Error',
-		    			 text: 'Please enter something',
-		    			 icon: 'error'
-		    		 });
-		    	 }
-		    })
-		});
+    	    Swal.fire({
+    	        title: '回覆文章ㄅ',
+    	        input: 'textarea',
+    	        allowOutsideClick: true,
+    	        backdrop: true,
+    	    }).then(function (result) {
+    	        if (result.value != null) {
+    	            let text = result.value.trim(); // 檢查前先執行 trim()
+    	            if (text !== "") {
+    	                let jsonData = {
+    	                    "articleId": id,
+    	                    "response": {
+    	                        "memId": 1,
+    	                        "responseContent": text,
+    	                    }
+    	                };
+    	                console.log(jsonData);
+    	                $.ajax({
+    	                    url: "/LostPetRespose/add",
+    	                    method: "POST",
+    	                    contentType: "application/json",
+    	                    data: JSON.stringify(jsonData),
+    	                }).then(function(response) {
+    	                    console.log(response);
+    	                    window.location.reload();
+    	                }).catch(function(error) {
+    	                    console.error(error);
+    	                });
+    	            } else {
+    	                Swal.fire({
+    	                    title: 'Error',
+    	                    text: 'Please enter something',
+    	                    icon: 'error'
+    	                });
+    	            }
+    	        }
+    	    });
+    	});
+
 
         let conta = document.querySelector(".bbs-screen");
         let comment = document.querySelector(".comment");
