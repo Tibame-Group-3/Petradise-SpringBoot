@@ -79,8 +79,8 @@ public class AnimalCorporationServiceImpl implements AnimalCorporationService{
 		return vo;
 
 	}
-	public List<AnimalCorporation> findByStatus0() {
-		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatus('0');
+	public List<AnimalCorporation> findByStatus(Character appliedStatus) {
+		List<AnimalCorporation> animalCorporations = animalCorporationRepository.findByAppliedStatus(appliedStatus);
 		
 		return animalCorporations;
 	}

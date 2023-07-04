@@ -19,5 +19,5 @@ public interface AnimalCorporationService {
 
 	AnimalCorporation login(String account, String password);
 
-	List<AnimalCorporation> findByStatus0();
+	List<AnimalCorporation> findByStatus(Character appliedStatus);
 }
