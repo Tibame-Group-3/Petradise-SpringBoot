@@ -178,9 +178,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-                                        顯示 1 到 10 筆，共 27 筆訂單
-                                    </p>
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
                                 </div>
                                 <div class="col-md-6">
                                     <nav
@@ -285,7 +283,7 @@
                 updateOrderCount();
             });
 
-            var memberId = 1;
+            var memberId = localStorage.getItem('memberId');
 
             $.ajax({
                 url: `/room-order/customer/mem-id/${memberId}`,
