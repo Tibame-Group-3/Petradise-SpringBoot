@@ -2,10 +2,6 @@ package tw.idv.petradisespringboot.member.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +9,7 @@ import tw.idv.petradisespringboot.member.dto.*;
 import tw.idv.petradisespringboot.member.service.MemberService;
 import tw.idv.petradisespringboot.member.vo.AddressInfo;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/members")
@@ -28,23 +22,8 @@ class MemberController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Map<String, Object>> all(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "20") Integer size,
-            @RequestParam(defaultValue = "id") String sort,
-            @RequestParam(defaultValue = "asc") String order,
-            @RequestParam(required = false, name = "draw") Integer draw) {
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order), sort));
-        Page<MemberDTO> data = service.getAll(pageable);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("draw", draw);
-        response.put("recordsTotal", data.getTotalElements());
-        response.put("recordsFiltered", data.getTotalElements());
-        response.put("data", data.getContent());
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> all() {
+        return ResponseEntity.ok(service.getAll());
     }
 
 
@@ -90,5 +69,3 @@ class MemberController {
                 .ok("驗證成功");
     }
 }
-
-

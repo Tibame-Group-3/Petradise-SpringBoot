@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.email.EmailService;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
@@ -26,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -152,9 +151,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Page<MemberDTO> getAll(Pageable pageable) {
-        return repository.findAll(pageable)
-                .map(member -> mapper.map(member, MemberDTO.class));
+    public List<MemberDTO> getAll() {
+        return repository
+                .findAll()
+                .stream()
+                .map(m -> mapper.map(m, MemberDTO.class))
+                .collect(Collectors.toList());
     }
 
     private Resource loadDistricts() {

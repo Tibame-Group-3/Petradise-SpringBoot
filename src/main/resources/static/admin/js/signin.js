@@ -98,8 +98,9 @@
     function popBack() {
         const urlParams = new URLSearchParams(window.location.search);
         const redirect = urlParams.get('redirect');
+        const decoded = decodeURIComponent(redirect);
         if (redirect !== null) {
-            window.location.href = redirect;
+            window.location.href = decoded;
         } else {
             redirectToIndex();
         }
