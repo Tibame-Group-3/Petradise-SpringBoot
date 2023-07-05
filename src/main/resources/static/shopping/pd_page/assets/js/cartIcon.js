@@ -21,14 +21,6 @@ updateCartIcon();
 
 
 // ------------------前往購物車------------------
-function guardIsSignedIn() {
-    if (isSignedIn() === false) {
-        redirectToLogin();
-    } else {
-        location.href = "/shopping/pd_page/Cart.html";
-    }
-}
-
 $(".cart").on('click', function () {
-    guardIsSignedIn()
+    location.href = "/shopping/pd_page/Cart.html"
 });
