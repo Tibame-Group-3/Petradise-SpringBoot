@@ -15,7 +15,7 @@
   <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
        style="background: #f1ecd1;">
     <div class="container-fluid d-flex flex-column p-0"><a
-            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/f_27/admin-table.html">
       <div class="sidebar-brand-text mx-3"><img width="59" height="33"
                                                 src="/assets/img/logo-only.png"></div>
     </a>
@@ -91,11 +91,9 @@
             <li class="nav-item dropdown no-arrow">
               <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                                          aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
-                      class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                      class="border rounded-circle img-profile"
-                      src="/assets/img/avatars/avatar1.jpeg"></a>
+                      class="d-none d-lg-inline me-2 text-gray-600 small" id="admin-name">Valerie Luna</span></a>
                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-                     style="min-width: 110px;"><a class="dropdown-item" href="#"><i
+                     style="min-width: 110px;"><a class="dropdown-item" id="logout-button"><i
                         class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                 </div>
               </div>
@@ -114,13 +112,19 @@
     </footer>
   </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
+<script src="/assets/js/admin_login.js"></script>
+<script src="/assets/js/admin_nav.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="/assets/js/script.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    guardIsSignedIn();
+  });
+</script>
 </body>
 
 </html>
