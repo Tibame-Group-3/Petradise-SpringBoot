@@ -21,7 +21,7 @@
 <!-- font-awesome -->
 <script src="https://kit.fontawesome.com/2a44feb0d3.js"
 	crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="./css/all.css">
+<link rel="stylesheet" href="./css/all.css">
 
 <style>
 * {
@@ -54,144 +54,130 @@ div.search2 {
 	cursor: pointer;
 	color: blue;
 }
-.data-container tr > td{
-width : 15% ;
-}
-.reload{
-display: inline-block;
-width:auto;
-}
-.reload_btn{
-background: #ffe7dd;
-}
-.hotel_owner_text{
-display: inline-block;
-width:auto;
+
+.data-container tr>td {
+	width: 15%;
 }
 
+.reload {
+	display: inline-block;
+	width: auto;
+}
 
+.reload_btn {
+	background: #ffe7dd;
+}
+
+.hotel_owner_text {
+	display: inline-block;
+	width: auto;
+}
 </style>
 </head>
 
 <body id="page-top">
 	<div id="wrapper">
-		<nav
-			class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
-			style="background: #f1ecd1;">
-			<div class="container-fluid d-flex flex-column p-0">
-				<a
-					class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-					href="#">
-					<div class="sidebar-brand-text mx-3">
-						<img width="59" height="33" src="/assets/img/logo-only.png">
-					</div>
-				</a>
-				<hr class="sidebar-divider my-0">
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown show"><a
-						class="dropdown-toggle nav-link" aria-expanded="true"
-						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">網站管理</a>
-						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
-							<a class="dropdown-item" href="/news_product/NewsAlter.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增最新消息</a><a
-								class="dropdown-item" href="/news_product/News.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">最新消息列表</a><a
-								class="dropdown-item" href="/lostPet/lost_record_back.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">協尋文章列表</a><a
-								class="dropdown-item" href="/admin/member_manage.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">會員列表</a>
-							<div class="dropdown-divider"
-								style="border-color: rgb(255, 255, 255);"></div>
-						</div></li>
-					<li class="nav-item dropdown show"><a
-						class="dropdown-toggle nav-link" aria-expanded="true"
-						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">業主管理</a>
-						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="/owner/OwnerCheck.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主審核</a><a
-								class="dropdown-item" href="/owner/OwnerManage.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主列表</a><a
-								class="dropdown-item"
-								href="/animalCorporation/AnimalCorporationCheck.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主審核</a><a
-								class="dropdown-item"
-								href="/animalCorporation/AnimalCorporationManage.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主列表</a>
-							<div class="dropdown-divider"
-								style="border-color: rgb(255, 255, 255);"></div>
-						</div></li>
-					<li class="nav-item dropdown show"><a
-						class="dropdown-toggle nav-link" aria-expanded="true"
-						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">商城管理</a>
-						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="/news_product/NewsAlter.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
-								class="dropdown-item" href="/news_product/Product.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
-								class="dropdown-item"
-								href="/back-order-master/back-order-master.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
-							<div class="dropdown-divider"
-								style="border-color: rgb(255, 255, 255);"></div>
-						</div></li>
-					<li class="nav-item dropdown show"><a
-						class="dropdown-toggle nav-link" aria-expanded="true"
-						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
-						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
-						<div class="dropdown-menu show" data-bs-popper="none"
-							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="/f_27/admin-table.html"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a>
-							<div class="dropdown-divider"
-								style="border-color: rgb(255, 255, 255);"></div>
-						</div></li>
-				</ul>
-				<div class="text-center d-none d-md-inline">
-					<button class="btn rounded-circle border-0" id="sidebarToggle-1"
-						type="button"></button>
-				</div>
-			</div>
-		</nav>
-		<div class="d-flex flex-column" id="content-wrapper">
-			<div id="content">
-				<nav
-					class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-					<div class="container-fluid">
-						<button class="btn btn-link d-md-none rounded-circle me-3"
-							id="sidebarToggleTop" type="button">
-							<i class="fas fa-bars"></i>
-						</button>
-						<ul class="navbar-nav flex-nowrap ms-auto">
-							<li class="nav-item dropdown no-arrow">
-								<div class="nav-item dropdown no-arrow">
-									<a class="dropdown-toggle nav-link" aria-expanded="false"
-										data-bs-toggle="dropdown" href="#"><span
-										class="d-none d-lg-inline me-2 text-gray-600 small">厭世員工01</span><img
-										class="border rounded-circle img-profile"
-										src="img/avatars/avatar1.jpeg"></a>
-									<div
-										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
-										style="min-width: 110px;">
-										<a class="dropdown-item" href="#"><i
-											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</nav>
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+       style="background: #f1ecd1;">
+    <div class="container-fluid d-flex flex-column p-0"><a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/f_27/admin-table.html">
+      <div class="sidebar-brand-text mx-3"><img width="59" height="33"
+                                                src="/assets/img/logo-only.png"></div>
+    </a>
+      <hr class="sidebar-divider my-0">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                              data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                              style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">網站管理</a>
+          <div class="dropdown-menu show" data-bs-popper="none"
+               style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;">
+            <a class="dropdown-item" href="/news_product/NewsAlter.html"
+               style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增最新消息</a><a
+                  class="dropdown-item" href="/news_product/News.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">最新消息列表</a><a
+                  class="dropdown-item" href="/lostPet/lost_record_back.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">協尋文章列表</a><a
+                  class="dropdown-item" href="/admin/member_manage.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">會員列表</a>
+            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+          </div>
+        </li>
+        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                              data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                              style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">業主管理</a>
+          <div class="dropdown-menu show" data-bs-popper="none"
+               style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+            <a class="dropdown-item" href="/owner/OwnerCheck.html"
+               style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主審核</a><a
+                  class="dropdown-item" href="/owner/OwnerManage.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">旅館業主列表</a><a
+                  class="dropdown-item" href="/animalCorporation/AnimalCorporationCheck.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主審核</a><a
+                  class="dropdown-item" href="/animalCorporation/AnimalCorporationManage.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">收容業主列表</a>
+            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+          </div>
+        </li>
+        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                              data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                              style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">商城管理</a>
+          <div class="dropdown-menu show" data-bs-popper="none"
+               style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+            <a class="dropdown-item" href="/news_product/NewsAlter.html"
+               style="padding: 2px 30px;font-size: 13px;color: #574f36;">新增商品</a><a
+                  class="dropdown-item" href="/news_product/Product.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">商品列表</a><a
+                  class="dropdown-item" href="/back-order-master/back-order-master.html"
+                  style="padding: 2px 30px;font-size: 13px;color: #574f36;">訂單列表</a>
+            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+          </div>
+        </li>
+        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
+                                              data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+                                              style="color: #a67c52;padding: 5px 16px;font-weight: bold;font-size: 14px;">員工管理</a>
+          <div class="dropdown-menu show" data-bs-popper="none"
+               style="background: rgba(255,255,255,0);border-style: none;padding: 0px;margin: 0px;margin-bottom: 5px;color: #574f36;">
+            <a class="dropdown-item" href="/f_27/admin-table.html"
+               style="padding: 2px 30px;font-size: 13px;color: #574f36;">員工列表</a>
+            <div class="dropdown-divider" style="border-color: rgb(255,255,255);"></div>
+          </div>
+        </li>
+      </ul>
+      <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                                                          id="sidebarToggle-1" type="button"></button></div>
+    </div>
+  </nav>
+  <div class="d-flex flex-column" id="content-wrapper">
+    <div id="content">
+      <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+        <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                                             id="sidebarToggleTop-1" type="button"><i class="fas fa-bars"></i></button>
+          <ul class="navbar-nav flex-nowrap ms-auto">
+            <li class="nav-item dropdown no-arrow">
+              <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                      class="d-none d-lg-inline me-2 text-gray-600 small" id="admin-name">Valerie Luna</span></a>
+                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                     style="min-width: 110px;"><a class="dropdown-item" id="logout-button"><i
+                        class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
 				<div class="container-fluid">
 					<h3 class="text-dark mb-4">旅館業主審核</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
-							<div class="hotel_owner_text"><p class="text-primary m-0 fw-bold">列表刷新</p></div>
-							<div class ="reload"><button class="reload_btn"><i class="fa-solid fa-rotate"></i></button></div>
+							<div class="hotel_owner_text">
+								<p class="text-primary m-0 fw-bold">列表刷新</p>
+							</div>
+							<div class="reload">
+								<button class="reload_btn">
+									<i class="fa-solid fa-rotate"></i>
+								</button>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -221,6 +207,9 @@ width:auto;
 										<tr></tr>
 									</tfoot>
 								</table>
+								<div id="loading">
+									<img src="../owner/img/loading.gif">
+								</div>
 							</div>
 							<div class="row">
 
@@ -228,7 +217,7 @@ width:auto;
 									<nav
 										class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
 										<ul class="pagination">
-											
+
 										</ul>
 									</nav>
 								</div>
@@ -258,221 +247,8 @@ width:auto;
 <script src="../vendors/jquery/jquery-3.6.4.min.js"></script>
 <!-- sweatalert -->
 <script src="./sweetalert2/cdn"></script>
-
-<script>
-
-
-$(function() {
-	
-	//reload按鈕
-	$(".reload").hover(
-			function(){
-		//移入
-		$(this).find('i').addClass('fa-spin');
-			},
-			function(){
-				$(this).find('i').removeClass('fa-spin');
-			});
-	$(".reload").on("click",function(){
-		location.reload();
-	});
-	//重新整理畫面
-	function clearPage(){
-		location.reload();
-	}
-	var data ; //存回應資料的長度用(res.length)
-	var currentPage = 1; //起始頁
-	  $.ajax({
-	    url: "/ownerCheck/getAll",
-	    type: "GET",
-// 	    data: { hotelStatus: "0" }, //查詢未審核的資料
-	    dataType: "JSON",
-	    success: function(res) {
-	      console.log(res);
-	      
-	      console.log(res);
-	      
-	      for (let i = 0; i < res.length; i++) {
-	        $("tbody").append(`
-	          <tr>
-	            <td>${res[i].hotelId}</td>
-	            <td>${res[i].ownerName}</td>
-	            <td>${res[i].hotelName}</td>
-	            <td><button class="owner btn btn-primary" type="button" style="background: #f8c544;">📝</button></td>
-	            <td><button class="hotel btn btn-primary" type="button" style="background: #f8c544;">🏨</button></td>
-	            <td><button class="pic btn btn-primary" type="button" style="background: #f8c544;">🖼️</button></td>
-	            <td>
-	              <select class="hotelStatus" style="width:90px;">
-	                <optgroup label="權限更改"> 
-	                  ${res[i].hotelStatus === '0' ? `<option value="0" selected>審核中</option>` : `<option value="0">審核中</option>`}
-	                  ${res[i].hotelStatus === '1' ? `<option value="1" selected>未通過</option>` : `<option value="1">未通過</option>`}
-	                  ${res[i].hotelStatus === '2' ? `<option value="2" selected>通過</option>` : `<option value="2">通過</option>`}
-
-	                </optgroup>
-	              </select>
-	            </td>
-	          </tr>
-	        `);
-	      
-	        $("tbody").on("click", ".owner", function() {
-			      var click = parseInt($(this).closest("tr").find("td:first").text());
-
-			      var html = "";
-			      if (res[i].hotelId == click) {
-			        html += "<table>"
-			       	html += "<tr>" + "<td style='text-align: left;'>" + "業主名稱 : " + res[i].ownerName + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "會員帳號 : " + res[i].ownerAccount + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "聯絡電話 : " + res[i].ownerPhone + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "電子信箱 : " + res[i].ownerEmail + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "身分證字號 : " + res[i].ownerId + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "收款帳號 : " + res[i].ownerBank + "</td>" + "<tr>"
-			        html += "</table>"
-			        swal.fire({
-			          html: html
-			        });
-			      }
-			    }); 
-	        $("tbody").on("click", ".hotel", function() {
-			      var click = parseInt($(this).closest("tr").find("td:first").text());
-
-			      var html = "";
-			      if (res[i].hotelId == click) {
-			        html += "<table>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "旅館名稱 : " + res[i].hotelName + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "旅館地址 : " + res[i].hotelAddress + "</td>" + "<tr>"
-			        html += "<tr>" + "<td style='text-align: left;'>" + "許可證號 : " + res[i].hotelLicId + "</td>" + "<tr>"     
-			        html += "</table>"
-			        swal.fire({
-			          html: html
-			        });
-			      }
-			    });
-	        
-	        
-	        $("tbody").on("click", ".pic", function() {
-    			const index = $(this).closest("tr").index(); //找到最接近父元素的tr索引值,與資料庫一樣是從0開始
-    			const imageBase64 = res[index].imageBase64;
-    			Swal.fire({
-    				  title: '特定寵物業許可證',
-    				  width: '80%',
-    				  background: '#fff',
-    				  html: `<img src="data:image/octet-stream;base64,${imageBase64}">`
-    				});
-    		});
-	      }
-	      
-	    },
-	    error: function(xhr, status, error) {
-	      console.log("請求失敗");
-	      console.log(xhr.responseText);
-	    }
-	  });
-	
-	
-	
-	
-
-	
-	// 修改審核狀態
-// 		$("tbody").on("change",".hotelStatus",function(){
-// 			var selectBox = $(this);
-// 			var originalValue = selectBox.val();
-// 			 Swal.fire({	    
-// 		    	    html:`<img src= "./img/update.gif" style="with 300px; height:300px;">`,
-// 		    	    showCancelButton: true,
-// 		    	    confirmButtonText: "確定",
-// 		    	    cancelButtonText: "取消"
-		    	    
-// 		    	  })
-// 		    	  .then((result) => {
-// 		    		  if(result.isConfirmed){
-
-// 		    			  changeStatus(this);
-		    			  
-// 		    		  }else if(result.isDismissed){ 
-// 		    			  selectBox.val(originalValue);
-// 		    		  }
-// 		    	  })
-		    	  
-		    	  $("tbody").on("mousedown",".hotelStatus",function(){   //mousedown事件可以在確認更改前先保存原本的值
-    				var selectBox = $(this);
-    				var originalValue = selectBox.val();
-
-    					selectBox.one('change', function() {  //使用one方法一次性的change事件
-        				Swal.fire({     
-            				html:`<img src= "./img/update.gif" style="with 300px; height:300px;">`,
-            				showCancelButton: true,
-            				confirmButtonText: "確定",
-            				cancelButtonText: "取消"
-        				})
-        				.then((result) => {
-            				if(result.isConfirmed){
-                			changeStatus(this);
-            				}else if(result.isDismissed){
-                			selectBox.val(originalValue);
-            		}
-        		})
-    		});
-
-		    	  
-	function changeStatus(e){ 	  
-	  var selectedValue = $(e).val();
-		console.log(selectedValue);
-	  var $row = $(e).closest("tr"); // 抓到當前的行數
-	  var hotelId = $row.find("td:first").text();
-	  var hotelName = $row.find("td:eq(1)").text(); //:eq(1)1為索引值,從0開始 ,取第二個td的值
-
-	  $.ajax({
-	    url: "/ownerCheck/update",
-	    type: "POST",
-	    data: JSON.stringify({
-	      action: "update",
-	      hotelId: hotelId,
-	      hotelStatus: selectedValue,      
-	    }),
-	    contentType: "application/json",
-	    dataType: "text",
-	    success: function(res) {
-	      console.log("更新成功");
-	      console.log(res);
-	      if(parseInt(selectedValue) === 2){
-	      Swal.fire({
-	    	  iconHtml:`<img src= "./img/happy.gif" style="with 200px; height:200px;">`,
-	    	  title:"業主編號 : " + hotelId +"<br>" + "業主名稱 : "+  hotelName +"<br>" + "已成為合作業主!"
-	    	  }).then((result)=>{
-	    		  if(result.isConfirmed){
-	    		      clearPage();
-	    		  }else{
-	    			
-	    		  }
-	    	  });
-	     	
-	      }else if(parseInt(selectedValue) === 1){
-	    	  Swal.fire({
-		    	  iconHtml:`<img src= "./img/cry.gif" style="with 200px; height:200px;">`,
-		    	  title:"業主編號 : " + hotelId +"<br>" + "業主名稱 : "+  hotelName +"<br>" + "已刪除該筆資料"
-		    	  }).then((result)=>{
-		    		  if(result.isConfirmed){
-		    		      clearPage();
-		    		  }else {
-		    			
-		    		  }
-		    	  });
-	      }
-	    },
-	    error: function(xhr, status, error) {
-	      console.log("更新失敗");
-	      console.log(xhr.responseText);
-	    }
-	  });
-	 }	   
-	});
-
-});
-		    
-		    
-
-
-</script>
+<script src="./js/ownerCheck.js"></script>
+<script src="/assets/js/admin_login.js"></script>
+<script src="/assets/js/admin_nav.js"></script>
 
 </html>
