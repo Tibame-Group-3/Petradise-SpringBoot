@@ -419,7 +419,7 @@
                         $('#orders-section').append(html);
                         updateOrderCount();
 
-                        // Open a new page with the order ID from the URL
+                        // Open a new page with the order ID from the URL 查看詳情
                         $('#orders-section').on('click', `#order-detail-button-${order.id}`, function () {
                             console.log('Clicked "查看詳情" for Order ID:', `${order.id}`);
 
@@ -429,7 +429,6 @@
                             // Open the new page
                             window.open(orderDetailUrl, '_blank');
                         });
-
 
                         // Leaving review button
                         $('#orders-section').on('click', `#review-button-${order.id}`, function () {
@@ -498,7 +497,6 @@
                             });
                         });
                     });
-                    // 評論 桌面
                 },
                 error: function () {
                     $('#orders-section').html('<p>Error loading orders.</p>');
@@ -546,8 +544,10 @@
             updateOrderCount();
         }
 
-        // Review
+        // Review function
         function initReviewFunctionality(orderId) {
+
+
 
             $(`#review-form-${orderId}`).submit(function (event) {
                 event.preventDefault();
@@ -563,7 +563,7 @@
             const textArea = document.querySelector(`#new-review-${orderId}`);
             const form = document.querySelector(`#review-form-${orderId}`);
 
-            let selectedCount = 5; // Set the default selected count to 5
+            let selectedCount = 5; // Set the initial selected count to 5
             starCount.textContent = `(${selectedCount})`; // Display the default selected count initially
 
             starLabels.forEach((label) => {
@@ -586,43 +586,52 @@
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const reviewText = textArea.value;
-                console.log('Review Text:', reviewText);
-                console.log('Rate:', selectedCount);
-
-                const hotelId = 1; // Replace with the actual hotel ID
                 const roomOrderId = orderId;
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
 
-                var raw = JSON.stringify({
-                    "hotelId": hotelId,
-                    "roomOrderId": roomOrderId,
-                    "score": selectedCount,
-                    "content": reviewText
-                });
+                // Fetch the hotel ID from the server
+                fetch(`/room-order/get/hotel-id/${roomOrderId}`)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to get hotel ID');
+                        }
+                    })
+                    .then(hotelId => {
+                        hotelId = parseInt(hotelId); // Parse the response as an integer
+                        var myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
 
-                var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow'
-                };
+                        var raw = JSON.stringify({
+                            "hotelId": hotelId,
+                            "roomOrderId": roomOrderId,
+                            "score": selectedCount,
+                            "content": reviewText
+                        });
 
-                fetch("/roomreview/add-review", requestOptions)
-                    .then(response => response.text())
-                    .then(result => console.log(result))
-                    .catch(error => console.log('error', error));
+                        var requestOptions = {
+                            method: 'POST',
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: 'follow'
+                        };
 
-                Swal.fire({
-                    title: 'Thanks for your review!',
-                    icon: 'success',
-                });
+                        fetch("/roomreview/add-review", requestOptions)
+                            .then(response => response.text())
+                            .then(result => console.log(result))
+                            .catch(error => console.log('error', error));
 
-                publishButton.style.display = "none";
-                textArea.setAttribute("disabled", '');
-                starLabels.forEach((label) => {
-                    label.style.pointerEvents = 'none';
-                });
+                        Swal.fire({
+                            title: '感謝您的評論！',
+                            icon: 'success',
+                        });
+
+                        publishButton.style.display = "none";
+                        textArea.setAttribute("disabled", '');
+                        starLabels.forEach((label) => {
+                            label.style.pointerEvents = 'none';
+                        });
+                    })
             });
         }
 

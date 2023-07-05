@@ -25,6 +25,8 @@ public interface RoomOrderRepository extends JpaRepository<RoomOrder, Integer> {
     @Query("SELECT rp.roomPic FROM RoomOrder ro, RoomPic rp WHERE ro.roomTypeId = rp.roomTypeId AND ro.id = :roomOrderId")
     List<byte[]> findRoomPicturesByRoomOrderId(Integer roomOrderId);
 
+    @Query("SELECT h.hotelId FROM RoomOrder ro JOIN RoomType rt ON ro.roomTypeId = rt.roomTypeId JOIN HotelOwnerVO h ON rt.hotelId = h.hotelId WHERE ro.id = :roomOrderId")
+    Integer findHotelIdByRoomOrderId(Integer roomOrderId);
 
 
 

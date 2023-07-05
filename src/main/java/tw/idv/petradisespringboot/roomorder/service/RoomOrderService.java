@@ -23,5 +23,7 @@ public interface RoomOrderService {
 
     byte[] getRoomPicByRoomOrderId(Integer id);
 
+    Integer getHotelIdByRoomOrderId(Integer id);
+
 
 }

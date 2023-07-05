@@ -100,6 +100,10 @@ public class RoomOrderServiceImpl implements RoomOrderService {
         return null;
     }
 
+    @Override
+    public Integer getHotelIdByRoomOrderId(Integer id) {
+        return repository.findHotelIdByRoomOrderId(id);
+    }
 
 
 }

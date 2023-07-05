@@ -83,6 +83,10 @@ public class RoomOrderController {
         }
     }
 
+    @GetMapping("/get/hotel-id/{id}")
+    public Integer getHotelIdByRoomOrderId(@PathVariable Integer id) {
+        return service.getHotelIdByRoomOrderId(id);
+    }
 
 
 }
