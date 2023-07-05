@@ -3,7 +3,9 @@ package tw.idv.petradisespringboot.mall.model.repo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
@@ -24,6 +26,12 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, Intege
             "JOIN Member m ON m.id = om.memId")
     List<AllOrderMasterDTO> findAllOrderMaster();
     
-    List<OrderMaster> findByMemId(Integer memId);
+//    List<OrderMaster> findByMemId(Integer memId);
+    
+    List<OrderMaster> findByMemIdAndOdStatusNot(Integer memId, Character odStatus);
 
+    @Modifying
+    @Query("UPDATE OrderMaster o SET o.odStatus = :odStatus WHERE o.odId = :odId")
+    void updateOrderStatus(@Param("odId")Integer odId, 
+    					   @Param("odStatus") Character odStatus);
 }
