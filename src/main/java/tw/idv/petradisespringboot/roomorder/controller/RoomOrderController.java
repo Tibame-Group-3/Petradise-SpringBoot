@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO;
 import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
@@ -83,6 +84,14 @@ public class RoomOrderController {
         }
     }
 
+    @GetMapping("/get/hotel-id/{id}")
+    public Integer getHotelIdByRoomOrderId(@PathVariable Integer id) {
+        return service.getHotelIdByRoomOrderId(id);
+    }
 
 
+    @GetMapping("/manage-room-order")
+    public List<ManageRoomOrderDTO> getMangeRoomOrder() {
+        return service.getManageRoomOrderDTOs();
+    }
 }
