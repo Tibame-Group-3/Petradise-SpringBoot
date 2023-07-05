@@ -43,10 +43,10 @@ function redirectToLogin(redirectUrl) {
 
 function redirectToIndex() {
     // 實作登入後畫面
-    window.location.href = '/admin_nav_test.html';
+    window.location.href = '/f_27/admin-table.html';
 }
 
 function logout() {
     sessionStorage.removeItem(sessionStorageKey);
-    redirectToLogin();
+    window.location.href = '/admin/signin.html';
 }

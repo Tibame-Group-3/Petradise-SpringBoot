@@ -1,5 +1,4 @@
 	$(document).ready(function() {
-		
 	    var usernamePage = $('#username-page');
 	    var chatPage = $('#chat-page');
 	    var usernameForm = $('#usernameForm');
@@ -34,9 +33,11 @@
 	                if (res) {
 						console.log(res);
 	                    username ="✨" + res.ownerName; // 將用戶名設置為成功登入的帳號
+	                    hotelName = "✨" + res.hotelName;
 	                    hotelId = res.hotelId;
 	                    usernamePage.addClass('hidden');
 	                    chatPage.removeClass('hidden'); //顯示聊天畫面
+	                    window.location.href = "/owner/Chat.html?hotelId=" + hotelId + "&role=owner&hotelName=" + encodeURIComponent(hotelName);
 	                    $('h2').text(res.hotelName);
 	
 	                    // 預先已經寫好的websocket連接程式碼
@@ -45,6 +46,7 @@
 	
 	                    stompClient.connect({}, onConnected, onError);
 	                    loadMessages(hotelId);
+	                    
 	                } else {
 	                    alert(res); // 如果登入失敗，則顯示錯誤消息
 	                }
@@ -60,10 +62,10 @@
 //	    loadMessages();
 	
 	//消息拿出顯示到前端
-	function loadMessages() {
+	function loadMessages(hotelId) {
 	
 	    $.ajax({
-	        url: '/api/messages', 
+	        url: '/api/messages?hotelId= ' + hotelId, 
 	        method: 'GET',
 	        data:{
 				hotelId:hotelId
