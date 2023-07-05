@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>會員發文管理</title>
-<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
 <link rel="stylesheet"
@@ -289,30 +289,5 @@
 	      console.log(error);
 	    });
 
-		// ------------------購物車項目初始化------------------
-		let shoppingItem = sessionStorage.getItem("shoppingItem");
-		if (shoppingItem) {
-			shoppingItem = JSON.parse(shoppingItem);
-		} else {
-			shoppingItem = {};
-		}
-
-		// 更新購物車商品數
-		function updateCartIcon() {
-			let totalItems = 0;
-			for (const productId in shoppingItem) {
-				totalItems += shoppingItem[productId].quantity;
-			}
-			$(".shopping-cart-total").text(`(${totalItems})`);
-		}
-
-		// 初始化購物車圖示數量
-		updateCartIcon();
-
-
-		// ------------------前往購物車------------------
-		$(".cart").on('click', function () {
-			location.href = "/shopping/pd_page/Cart.html";
-		});
     </script>
 </html>
