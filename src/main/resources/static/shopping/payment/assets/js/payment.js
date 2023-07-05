@@ -239,9 +239,9 @@ function OrderDelivery(odShip) {
     switch (odShip) {
         case 'home-delivery':
             return '0';
-        case 'pickup':
+        case 'pickup-711':
             return '1';
-        case 'pickup':
+        case 'pickup-fami':
             return '2';
     }
 }
