@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.roomorder.service.impl;
 
 import org.springframework.stereotype.Service;
+import tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO;
 import tw.idv.petradisespringboot.roomorder.repo.RoomOrderRepository;
 import tw.idv.petradisespringboot.roomorder.service.RoomOrderService;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
@@ -106,4 +107,8 @@ public class RoomOrderServiceImpl implements RoomOrderService {
     }
 
 
+    @Override
+    public List<ManageRoomOrderDTO> getManageRoomOrderDTOs() {
+        return repository.findManageRoomOrderDTOAll();
+    }
 }

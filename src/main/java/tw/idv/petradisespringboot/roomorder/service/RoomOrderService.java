@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.roomorder.service;
 
+import tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
 import java.util.List;
@@ -25,5 +26,6 @@ public interface RoomOrderService {
 
     Integer getHotelIdByRoomOrderId(Integer id);
 
+    List<ManageRoomOrderDTO> getManageRoomOrderDTOs();
 
 }

@@ -3,6 +3,7 @@ package tw.idv.petradisespringboot.roomorder.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO;
 import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
 import java.time.LocalDate;
@@ -29,8 +30,6 @@ public interface RoomOrderRepository extends JpaRepository<RoomOrder, Integer> {
     Integer findHotelIdByRoomOrderId(Integer roomOrderId);
 
 
-
-
-
-
+    @Query("SELECT new tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO(ro.id, ro.member.name, ro.petName, ro.checkInDate, ro.checkOutDate, ro.roomType.roomTypeName, ro.status) FROM RoomOrder ro")
+    List<ManageRoomOrderDTO> findManageRoomOrderDTOAll();
 }
