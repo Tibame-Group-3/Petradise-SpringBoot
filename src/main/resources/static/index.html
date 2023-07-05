@@ -122,7 +122,7 @@
   <div class="carousel slide" data-bs-ride="carousel" id="carousel-1" style="height: 495px;">
 
     <div class="carousel-inner h-100">
-      <div class="carousel-item active h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
+      <div class="carousel-item active h-100" data-bs-interval="4000"><img class="w-100 d-block position-absolute h-100 fit-cover"
           src="assets/img/jamie-street-s9Tf1eBDFqw-unsplash%20(1).jpg" alt="Slide Image"
           style="z-index: -1;filter: brightness(80%);">
         <div class="container d-flex flex-column justify-content-center h-100">
@@ -145,7 +145,7 @@
         </div>
       </div>
 
-      <div class="carousel-item h-100"><img class="w-100 d-block position-absolute h-100 fit-cover"
+      <div class="carousel-item h-100" data-bs-interval="4000"><img class="w-100 d-block position-absolute h-100 fit-cover"
            src="assets/img/humberto-arellano-N_G2Sqdy9QY-unsplash.jpg" alt="Slide Image" style="z-index: -1;">
         <div class="container d-flex flex-column justify-content-center h-100">
             <div class="row">
@@ -167,7 +167,7 @@
         </div>
       </div>
 
-      <div class="carousel-item h-100"><img class="rounded w-100 d-block position-absolute h-100 fit-cover"
+      <div class="carousel-item h-100" data-bs-interval="4000"><img class="rounded w-100 d-block position-absolute h-100 fit-cover"
           style="z-index: -1;" src="assets/img/animal-gd8400bf6c_1920.jpg">
         <div class="container d-flex flex-column justify-content-center h-100">
           <div class="row">
@@ -372,7 +372,7 @@
             </svg>
           </div>
           <div class="px-3">
-            <h2 class="fw-bold mb-0" style="color: #e69609;">123+</h2>
+            <h2 id="num1" class="fw-bold mb-0" style="color: #e69609;"></h2>
             <p class="mb-0" style="color: #574f36;">合作旅館</p>
           </div>
           <div style="width: 255px;height: 150px;">
@@ -389,7 +389,7 @@
                     style="background: #fd780f;"><i class="fas fa-dog"></i>
             </div>
             <div class="px-3">
-                <h2 class="fw-bold mb-0" style="color: #e69609;">45+</h2>
+                <h2 id="num2" class="fw-bold mb-0" style="color: #e69609;"></h2>
                 <p class="mb-0" style="color: #574f36;">收容業者</p>
             </div>
             <div style="width: 255px;height: 150px;">
@@ -411,7 +411,7 @@
                 </svg>
             </div>
             <div class="px-3">
-                <h2 class="fw-bold mb-0" style="color: #e69609;">67+</h2>
+                <h2 id="num3" class="fw-bold mb-0" style="color: #e69609;"></h2>
                 <p class="mb-0" style="color: #574f36;">協尋貼文</p>
             </div>
             <div style="width: 255px;height: 150px;">
@@ -436,7 +436,7 @@
                 </svg>
             </div>
             <div class="px-3">
-                <h2 class="fw-bold mb-0" style="color: #e69609;">89<strong>+</strong><br></h2>
+                <h2 id="num4" class="fw-bold mb-0" style="color: #e69609;"></h2>
                 <p class="mb-0" style="color: #574f36;">豐富商品</p>
             </div>
             <div style="width: 255px;height: 150px;">
@@ -494,6 +494,7 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script src="assets/js/news.js"></script>
+    <script src="assets/js/countUp.js"></script>
     <!-- login -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>animalbrowse</title>
+<title>動物瀏覽畫面</title>
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
@@ -32,7 +32,9 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=B612+Mono&amp;display=swap">
 <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
 <style>
+
 .action-banner {
 	background-color: #fd780f;
 	padding-top: 0;
@@ -131,7 +133,7 @@ select {
 
 .search-button {
 	position: absolute;
-	bottom: 525px;
+	bottom: 495px;
 	right: 30px;
 }
 
@@ -142,7 +144,7 @@ select {
 .search-button button {
 	background-color: #f2f2f2;
 	border: 1px solid #ccc;
-	padding: 10px 20px;
+	padding: 10px 10px;
 	font-size: 14px;
 	color: #333;
 }
@@ -156,8 +158,8 @@ select {
 <body>
 	<nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html" style="position: sticky;top: 0;">
-        <img width="75" height="41" src="assets/img/logo-only.png">
+      <a class="navbar-brand d-flex align-items-center" href="/index.html" style="position: sticky;top: 0;">
+        <img width="75" height="41" src="/assets/img/logo-only.png">
       </a>
 
       <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
@@ -172,7 +174,7 @@ select {
         <ul class="navbar-nav mx-auto">
           <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
             <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-              data-bs-auto-close="outside" href="index.html" style="margin: 10px 0px 0px;">關於我們</a>
+              data-bs-auto-close="outside" href="/index.html" style="margin: 10px 0px 0px;">關於我們</a>
             <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
               <div class="dropdown-divider"
                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
@@ -189,8 +191,8 @@ select {
 
               <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
               </div>
-              <a class="dropdown-item" href="hotel/searchHotel.html" style="font-size: 14px">預約訂房</a>
-                <a class="dropdown-item join-hotelowner" href="#" style="font-size: 14px;color: #fd780f;">加入我們</a>
+              <a class="dropdown-item" href="/hotel/searchHotel.html" style="font-size: 14px">預約訂房</a>
+                <a class="dropdown-item join-hotelowner" href="/owner/SignUp.html" style="font-size: 14px;color: #fd780f;">加入我們</a>
             </div>
           </li>
 
@@ -201,16 +203,28 @@ select {
               <div class="dropdown-divider"
                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
               </div>
-              <a class="dropdown-item" href="#" style="font-size: 14px">服務說明</a>
-              <a class="dropdown-item" href="#" style="font-size: 14px">浪浪認養</a>
-              <a class="dropdown-item lostPet" href="#" style="font-size: 14px">遺失協尋</a>
-              <a class="dropdown-item" href="animalCorporation/signup.html" style="font-size: 14px">加入我們</a>
+              <a class="dropdown-item" href="/animal_39/Frontanimal/animalbrowse.html" style="font-size: 14px">浪浪認養</a>
+              <a class="dropdown-item lostPet" href="/lostPet/lost.html" style="font-size: 14px">遺失協尋</a>
+              <a class="dropdown-item" href="/animalCorporation/signup.html" style="font-size: 14px">加入我們</a>
             </div>
           </li>
 
           <li class="nav-item" style="height: 50px;width: 100px;margin: 0px 0px 0px 10px">
-            <a class="nav-link" href="front-product-list/front-product-list.html" style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
+            <a class="nav-link" href="/front-product-list/front-product-list.html" style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
           </li>
+
+<!--          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">-->
+<!--            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"-->
+<!--              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>-->
+<!--            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">-->
+<!--              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">-->
+<!--              </div>-->
+<!--              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>-->
+<!--              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>-->
+<!--              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>-->
+<!--            </div>-->
+<!--          </li>-->
+
         </ul>
 
         <!-- Shopping Cart -->
@@ -246,6 +260,7 @@ select {
 
     </div>
 </nav>
+
 	<!-- uploadedphoto need to resize -->
 	<form class="row g-3">
 		<div class="container-md">
@@ -358,7 +373,8 @@ select {
 
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
+	<script src="../../assets/js/login.js"></script>
+	<script src="../../index/js/index.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -421,34 +437,44 @@ select {
                 // 清空原列表
                 $('#animalList').empty();
 
-                // response
+                // 在这里处理接收到的动物列表（response）
                 data.forEach(function(animal) {
-                    var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
-                    var nextPageUrl = 'animal_39/Frontanimal/PET_adopt.html';
-                    var cardHtml =
-                        '<div class="col-12 col-md-6 col-lg-3">' +
-                        '<div class="card">' +
-                        '<a href="' +
-                        nextPageUrl +
-                        '"><img class="card-img-top" src="' +
-                        imageUrl +
-                        '" alt="Card image cap"></a>' +
-                        '<div class="card-body">' +
-                        '<div class="card-title"><a href="#">' +
-                        animal.animalName +
-                        '</a></div>' +
-                        '<div class="card-text">' +
-                        animal.animalInfo +
-                        '</div>' +
-                        '<div class="image-container"><img src=""></div>' +
-                        '</div></div></div>';
-                    $('#animalList').append(cardHtml);
+//                     var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+//                     var nextPageUrl = 'PET_adopt.html';
+//                     var cardHtml =
+//                         '<div class="col-12 col-md-6 col-lg-3">' +
+//                         '<div class="card">' +
+//                         '<a href="' +
+//                         nextPageUrl +
+//                         '"><img class="card-img-top" src="' +
+//                         imageUrl +
+//                         '" alt="Card image cap"></a>' +
+//                         '<div class="card-body">' +
+//                         '<div class="card-title"><a href="#">' +
+//                         animal.animalName +
+//                         '</a></div>' +
+//                         '<div class="card-text">' +
+//                         animal.animalInfo +
+//                         '</div>' +
+//                         '<div class="image-container"><img src=""></div>' +
+//                         '</div></div></div>';
+//                     $('#animalList').append(cardHtml);
+                	  var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+                      var nextPageUrl = 'PET_adopt.html';
+                      var cardHtml = '<div class="col-12 col-md-6 col-lg-3">' +
+                          '<div class="card">' +
+                          '<a href="' + nextPageUrl + '?animalId=' + animal.animalId + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +
+                          '<div class="card-body">' +
+                          '<div class="card-title"><a href="#">' + animal.animalName + '</a></div>' +
+                          '<div class="card-text">' + animal.animalInfo + '</div>' +
+                          '<div class="image-container"><img src=""></div>' +
+                          '</div></div></div>';
+                      $('#animalList').append(cardHtml);
                 });
 
                 $('.card-img-top').on('click', function() {
                     var nextPageUrl = $(this).parent().attr('href');
                     window.location.href = nextPageUrl;
-                   
                 });
 
                 $('.card-img-top').off('click');
