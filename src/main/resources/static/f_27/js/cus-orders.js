@@ -3,7 +3,6 @@
 
     $(document).ready(function () {
         guardIsSignedIn();
-        initShoppingCart();
         addSearchListener();
         fetchRoomOrders();
     });
@@ -227,7 +226,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="p-xl-5 m-xl-5">
-                                        <img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
+                                        <img class="rounded img-fluid" style="min-height: 300px;" src="/room-order/${order.id}/room-picture" onerror="this.onerror=null;this.src='../assets/img/logo-only.png';" alt="Room Picture">
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +261,7 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({status: '2'})
+                        body: JSON.stringify({ status: '2' })
                     })
                         .then(response => response.json())
                         .then(data => {
@@ -323,32 +322,6 @@
 
     function emptyOrderSection() {
         $('#orders-section').empty();
-    }
-
-    function initShoppingCart() {
-        // ------------------購物車項目初始化------------------
-        let shoppingItem = sessionStorage.getItem("shoppingItem");
-        if (shoppingItem) {
-            shoppingItem = JSON.parse(shoppingItem);
-        } else {
-            shoppingItem = {};
-        }
-
-        // 更新購物車商品數
-        function updateCartIcon() {
-            let totalItems = 0;
-            for (const productId in shoppingItem) {
-                totalItems += shoppingItem[productId].quantity;
-            }
-            $(".shopping-cart-total").text(`(${totalItems})`);
-        }
-
-        // 初始化購物車圖示數量
-        updateCartIcon();
-        // ------------------前往購物車------------------
-        $(".cart").on('click', function () {
-            location.href = "/shopping/pd_page/Cart.html"
-        });
     }
 
     function getStatusText(status) {

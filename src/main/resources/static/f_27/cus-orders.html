@@ -5,8 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>客戶-訂單管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/member/css/nav.css">
+
     <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
@@ -40,11 +44,6 @@
             margin: 0;
             padding: 0;
         }
-
-        body {
-            margin: 20px;
-        }
-
 
         /****** Style Star Rating Widget *****/
 
@@ -123,188 +122,62 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/index.html" style="position: sticky;top: 0;">
-                <img width="75" height="41" src="/assets/img/logo-only.png">
-            </a>
 
-            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
-                style="border-color: rgb(241,236,209);">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"
-                    style="--bs-primary: #fd780f;--bs-primary-rgb: 253,120,15;--bs-secondary: #e69609;--bs-secondary-rgb: 230,150,9;color: rgb(241,236,209);">
-                </span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navcol-3" style="background: #ffffff;">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" href="/index.html" style="margin: 10px 0px 0px;">關於我們</a>
-                        <div class="dropdown-menu"
-                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-                            <div class="dropdown-divider"
-                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-                            </div>
-                            <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
-                            <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+    <div class="content">
+        <!-- <div class="container"> -->
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold">訂單管理</p>
+            </div>
+            <div class="card-body filter">
+                <div class="row">
+                    <div class="col-md-6 text-nowrap">
+                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+                            <label class="form-label">訂單狀態:
+                                <select class="d-inline-block form-select form-select-sm">
+                                    <option selected="">全部</option>
+                                    <option style="color: green;">即將到來</option>
+                                    <option style="color: blue;">已完成</option>
+                                    <option style="color: red">已取消</option>
+                                </select>&nbsp;
+                            </label>
                         </div>
-                    </li>
-
-                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">毛孩旅館</a>
-                        <div class="dropdown-menu"
-                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-
-                            <div class="dropdown-divider"
-                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-                            </div>
-                            <a class="dropdown-item" href="/hotel/searchHotel.html" style="font-size: 14px">預約訂房</a>
-                            <a class="dropdown-item join-hotelowner" href="/owner/SignUp.html"
-                                style="font-size: 14px;color: #fd780f;">加入我們</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end dataTables_filter" id="dataTable_filter">
+                            <label class="form-label">
+                                <input type="search" class="form-control form-control-sm" aria-controls="dataTable"
+                                    placeholder="Search" id="order-search-input">
+                            </label>
                         </div>
-                    </li>
-
-                    <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">浪浪收容</a>
-                        <div class="dropdown-menu"
-                            style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-                            <div class="dropdown-divider"
-                                style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-                            </div>
-                            <a class="dropdown-item" href="/animal_39/Frontanimal/animalbrowse.html"
-                                style="font-size: 14px">浪浪認養</a>
-                            <a class="dropdown-item lostPet" href="/lostPet/lost.html" style="font-size: 14px">遺失協尋</a>
-                            <a class="dropdown-item" href="/animalCorporation/signup.html"
-                                style="font-size: 14px">加入我們</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item" style="height: 50px;width: 100px;margin: 0px 0px 0px 10px">
-                        <a class="nav-link" href="/front-product-list/front-product-list.html"
-                            style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
-                    </li>
-
-                    <!--          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">-->
-                    <!--            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"-->
-                    <!--              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>-->
-                    <!--            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">-->
-                    <!--              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">-->
-                    <!--              </div>-->
-                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>-->
-                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>-->
-                    <!--              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>-->
-                    <!--            </div>-->
-                    <!--          </li>-->
-
-                </ul>
-
-                <!-- Shopping Cart -->
-                <div class="btn btn-primary cart"
-                    style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
-                    <span class="fas fa-shopping-cart"
-                        style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
-                    </span>
-                    <span class="shopping-cart-total"></span>
-                </div>
-
-                <!-- Member -->
-                <div class="btn-group" style="margin: 10px 0px 0px;">
-                    <a class="btn btn-primary" type="button"
-                        style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                            viewBox="0 0 16 16" class="bi bi-person-circle"
-                            style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
-                            </path>
-                        </svg>會員
-                    </a>
-                    <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-                        aria-expanded="false" type="button"
-                        style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
-                    <div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;">
-                        <a class="dropdown-item navigate-signin" href="#" style="color: #ffffff;">登入/註冊</a>
-                        <a class="dropdown-item navigate-member-center" href="#" style="color: #ffffff;">會員中心</a>
-                        <a class="dropdown-item logout" style="color: #ffffff;">登出</a>
                     </div>
                 </div>
 
-            </div>
+                <div id="no-matches-message">找不到符合的訂單</div>
 
-        </div>
-    </nav>
-    <div id="wrapper">
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
+                <div id="orders-section">
 
-                <div class="container-fluid">
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">訂單管理</p>
-                        </div>
-                        <div class="card-body filter">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-                                        <label class="form-label">訂單狀態:
-                                            <select class="d-inline-block form-select form-select-sm">
-                                                <option selected="">全部</option>
-                                                <option style="color: green;">即將到來</option>
-                                                <option style="color: blue;">已完成</option>
-                                                <option style="color: red">已取消</option>
-                                            </select>&nbsp;
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter">
-                                        <label class="form-label">
-                                            <input type="search" class="form-control form-control-sm"
-                                                aria-controls="dataTable" placeholder="Search" id="order-search-input">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="no-matches-message">找不到符合的訂單</div>
-
-                            <div id="orders-section">
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav
-                                        class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous"
-                                                    href="#"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
-                                                        aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span
+                                            aria-hidden="true">«</span></a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
+                                            aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
-
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
-                </div>
-            </footer>
+            <!-- </div> -->
         </div>
     </div>
 
@@ -313,6 +186,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/login.js"></script>
     <script src="./js/cus-orders.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+    <!-- Add nav bar -->
+    <script src="/member/js/nav.js"></script>
 </body>
 
 </html>
