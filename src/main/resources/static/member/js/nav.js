@@ -1,4 +1,3 @@
-
 (() => {
 
     const navigationItems = [
@@ -20,32 +19,37 @@
             ]
         },
         {
-            name: '我的訂單',
+            name: '商城訂單',
             root: '/member/orders.html',
             links: [
                 '/member/orders.html'
             ]
         },
         {
-			name: '我的發文紀錄',
-			root: '/member/post_record.html',
-			links: [
-				'/member/post_record.html'
-			]
-		},
-        
+            name: '旅館訂單',
+            root: '/f_27/cus-orders.html',
+            links: [
+                '/f_27/cus-orders.html'
+            ]
+        },
         {
-          name: '我的認養動物管理',
-          root: '/animal_39/Frontanimal/adoptionConfirmationForm.html',
-          links: [
-          
-                 '/animal_39/Frontanimal/adoptionConfirmationForm.html'
-          ]
-          
-          },
-          
+            name: '我的發文紀錄',
+            root: '/member/post_record.html',
+            links: [
+                '/member/post_record.html'
+            ]
+        },
+
+        {
+            name: '我的認養動物管理',
+            root: '/animal_39/Frontanimal/adoptionConfirmationForm.html',
+            links: [
+
+                '/animal_39/Frontanimal/adoptionConfirmationForm.html'
+            ]
+        },
     ]
-    
+
 
     let selectedIndex = navigationItems.findIndex(item => item.links.includes(window.location.pathname));
 
@@ -84,7 +88,6 @@
         }
 
 
-
         function addActiveStateListener() {
             const navLinks = document.querySelectorAll('.sidebar a');
             navLinks.forEach((link, index) => {
@@ -113,7 +116,7 @@
         function createLogoutButton() {
             const logoutButton = document.createElement('button');
             logoutButton.textContent = '登出';
-            logoutButton.classList.add('btn', 'btn-primary', 'btn-lg', 'logout-btn','mb-3', 'border-0');
+            logoutButton.classList.add('btn', 'btn-primary', 'btn-lg', 'logout-btn', 'mb-3', 'border-0');
             logoutButton.addEventListener('click', function () {
                 logout();
             });
