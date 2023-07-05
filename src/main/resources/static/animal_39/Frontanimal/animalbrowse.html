@@ -439,26 +439,37 @@ select {
 
                 // 在这里处理接收到的动物列表（response）
                 data.forEach(function(animal) {
-                    var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
-                    var nextPageUrl = 'animal_39/Frontanimal/PET_adopt.html';
-                    var cardHtml =
-                        '<div class="col-12 col-md-6 col-lg-3">' +
-                        '<div class="card">' +
-                        '<a href="' +
-                        nextPageUrl +
-                        '"><img class="card-img-top" src="' +
-                        imageUrl +
-                        '" alt="Card image cap"></a>' +
-                        '<div class="card-body">' +
-                        '<div class="card-title"><a href="#">' +
-                        animal.animalName +
-                        '</a></div>' +
-                        '<div class="card-text">' +
-                        animal.animalInfo +
-                        '</div>' +
-                        '<div class="image-container"><img src=""></div>' +
-                        '</div></div></div>';
-                    $('#animalList').append(cardHtml);
+//                     var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+//                     var nextPageUrl = 'PET_adopt.html';
+//                     var cardHtml =
+//                         '<div class="col-12 col-md-6 col-lg-3">' +
+//                         '<div class="card">' +
+//                         '<a href="' +
+//                         nextPageUrl +
+//                         '"><img class="card-img-top" src="' +
+//                         imageUrl +
+//                         '" alt="Card image cap"></a>' +
+//                         '<div class="card-body">' +
+//                         '<div class="card-title"><a href="#">' +
+//                         animal.animalName +
+//                         '</a></div>' +
+//                         '<div class="card-text">' +
+//                         animal.animalInfo +
+//                         '</div>' +
+//                         '<div class="image-container"><img src=""></div>' +
+//                         '</div></div></div>';
+//                     $('#animalList').append(cardHtml);
+                	  var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+                      var nextPageUrl = 'PET_adopt.html';
+                      var cardHtml = '<div class="col-12 col-md-6 col-lg-3">' +
+                          '<div class="card">' +
+                          '<a href="' + nextPageUrl + '?animalId=' + animal.animalId + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +
+                          '<div class="card-body">' +
+                          '<div class="card-title"><a href="#">' + animal.animalName + '</a></div>' +
+                          '<div class="card-text">' + animal.animalInfo + '</div>' +
+                          '<div class="image-container"><img src=""></div>' +
+                          '</div></div></div>';
+                      $('#animalList').append(cardHtml);
                 });
 
                 $('.card-img-top').on('click', function() {
