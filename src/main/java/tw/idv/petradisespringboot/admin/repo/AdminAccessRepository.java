@@ -7,4 +7,5 @@ import tw.idv.petradisespringboot.admin.vo.AdminAccessId;
 
 @Repository
 public interface AdminAccessRepository extends JpaRepository<AdminAccess, AdminAccessId> {
+    void deleteAllByAdminId(Integer adminId);
 }
