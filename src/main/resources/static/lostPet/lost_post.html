@@ -261,7 +261,6 @@
 		
 		let inputs = document.querySelectorAll('input')
 		
-		function validCheck(){
 			inputs.forEach ( input => {
 				input.addEventListener('input', function (){
 					if (input.checkValidity()){
@@ -273,9 +272,7 @@
 					}
 				})
 			})
-		}
 		
-		function photoConvert(){
 			input.addEventListener("change", async () => {
 				  const files = input.files;
 				  for (let i = 0; i < files.length; i++) {
@@ -286,7 +283,7 @@
 				  }
 				  displayImages();
 			});
-		}
+		
 		
 
 		function displayImages() {
@@ -321,7 +318,7 @@
 			      title: '請輸入數字',
 			    });
 			  }
-			});
+		});
 		numberInput.addEventListener('input', function(event) {
 		  let inputValue = event.target.value;
 		  if (!/^\d*$/.test(inputValue)) {
