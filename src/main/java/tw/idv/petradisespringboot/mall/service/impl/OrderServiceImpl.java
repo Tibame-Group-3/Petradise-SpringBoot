@@ -1,24 +1,22 @@
 package tw.idv.petradisespringboot.mall.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
+import tw.idv.petradisespringboot.mall.NotFoundException4OrderMaster;
+import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
 import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
 import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
-import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
 import tw.idv.petradisespringboot.mall.model.repo.OrderDetailRepository;
 import tw.idv.petradisespringboot.mall.model.repo.OrderMasterRepository;
-import tw.idv.petradisespringboot.mall.model.repo.ProductDAO;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetail;
 import tw.idv.petradisespringboot.mall.model.vo.OrderDetailCompositePK;
 import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
-import tw.idv.petradisespringboot.mall.model.vo.Product;
 import tw.idv.petradisespringboot.mall.service.OrderService;
-import tw.idv.petradisespringboot.member.repo.MemberRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -64,22 +62,15 @@ public class OrderServiceImpl implements OrderService {
 		return orderMasterRepository.findAllOrderMaster();
 	}
 
-	@Override
-	public List<OrderMaster> findOrderByMemberId(Integer memId) {
-		return orderMasterRepository.findByMemId(memId);
-	}
-
 //	@Override
-//	public List<AllOrderMasterDTO> findOrderByMemberId(Integer memId) {
-//		List<OrderMaster> orderMasters = orderMasterRepository.findAllByMemId(memId);
-//		
-	// convert OrderMaster to AllOrderMasterDTO and return!
-//		return orderMasters.stream().map(this::convertToAllOrderMasterDTO).collect(Collectors.toList());
+//	public List<OrderMaster> findOrderByMemberId(Integer memId) {
+//		return orderMasterRepository.findByMemId(memId);
 //	}
-//	
-//    private AllOrderMasterDTO convertToAllOrderMasterDTO(OrderMaster orderMaster) {
-//        
-//    }
+	
+	@Override
+	public List<OrderMaster> getByMemIdAndOdStatusNot(Integer memId, Character odStatus) {
+		return orderMasterRepository.findByMemIdAndOdStatusNot(memId, odStatus);
+	}
 
 	@Override
 	public List<OrderDetailDTO> findOrderDetailById(Integer id) {
@@ -87,7 +78,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderMaster updateOrderStatus() {
-		return null;
+	public void updateOrderStatus(Integer odId, Character odStatus) {
+		Optional<OrderMaster> orderMasterOptional = orderMasterRepository.findById(odId);
+		if (orderMasterOptional.isPresent()) {
+			OrderMaster orderMaster = orderMasterOptional.get();
+			orderMaster.setOdStatus(odStatus);
+			orderMasterRepository.save(orderMaster);
+		} else {
+			throw new NotFoundException4OrderMaster("OrderMaster not found with id :" + odId);
+		}
 	}
+	
 }
