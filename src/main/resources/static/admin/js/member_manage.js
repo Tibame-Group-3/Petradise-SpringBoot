@@ -1,6 +1,7 @@
 let members = [];
 
 $(document).ready(function () {
+    guardIsSignedIn();
     fetchMembers();
 });
 
