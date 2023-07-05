@@ -37,7 +37,9 @@
 	                    hotelId = res.hotelId;
 	                    usernamePage.addClass('hidden');
 	                    chatPage.removeClass('hidden'); //顯示聊天畫面
+
 	                    window.location.href = "/owner/Chat.html?hotelId=" + hotelId + "&role=owner&hotelName=" + encodeURIComponent(hotelName);
+
 	                    $('h2').text(res.hotelName);
 	
 	                    // 預先已經寫好的websocket連接程式碼

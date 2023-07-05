@@ -145,4 +145,10 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 		return vo;
 	}
 
+	@Override
+	public List<HotelOwnerVO> findByAccess(HotelOwnerAccess ownerAccess) {
+
+		return hotelOwnerRepository.findByOwnerAccess(ownerAccess);
+	}
+
 }
