@@ -79,6 +79,42 @@
             border-radius: 5px;
             width: 100px;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.5em 1em;
+            margin-left: 0.5em;
+            color: #333;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color:  #333;
+            border: 1px solid #ddd;
+            background-color: #f1ecd1;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1ecd1), color-stop(100%, #f1ecd1));
+            background: -webkit-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -moz-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -ms-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -o-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: linear-gradient(to bottom, #f1ecd1 0%, #f1ecd1 100%);
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            color:  #333 !important;
+            border: 1px solid #979797;
+            background-color: #f1ecd1;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1ecd1), color-stop(100%, #f1ecd1));
+            background: -webkit-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -moz-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -ms-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: -o-linear-gradient(top, #f1ecd1 0%, #f1ecd1 100%);
+            background: linear-gradient(to bottom, #f1ecd1 0%, #f1ecd1 100%);
+        }
+
     </style>
 </head>
 
@@ -353,7 +389,7 @@
                     }
                 ],
                 "language": {
-                    "zeroRecords": "未找到任何資料",
+                    "zeroRecords": "loading...",
                     "info": "顯示頁數 _PAGE_ / _PAGES_",
                     "infoEmpty": "沒有任何資訊",
                     "infoFiltered": "(從 _MAX_ 條資料中篩選)",
