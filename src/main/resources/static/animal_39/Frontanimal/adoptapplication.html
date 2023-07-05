@@ -14,7 +14,7 @@
 	href="/assets/css/styles.min.css?h=a9799302f9cfd639f515d7bd2dc3681b">
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
 <style>
 .centered-content {
 	display: flex;
@@ -330,10 +330,23 @@
 	
 	
 	$(document).ready(function() {
-
 		  let urlParam = new URLSearchParams(window.location.search);
 	      let queryValue = urlParam.get('animalId');
-		
+		if(!queryValue) {
+			queryValue = localStorage.getItem('animalId');
+			localStorage.removeItem('animalId');
+			let url = window.location.href;
+			let currentUrl = new URL(url);
+			
+			let params = new URLSearchParams(currentUrl.search);
+			params.set('animalId', queryValue);
+			currentUrl.search = params.toString();
+			let newURL = currentUrl.toString();
+			window.history.replaceState({}, '', newURL);
+		} else {
+// 			localStorage.removeItem('animalId');
+		}
+
 		$.ajax({
 		  url: "/animals/" + queryValue,
 		  type: "GET",
@@ -402,35 +415,42 @@
 			console.log("Error occurred:", error);
 		  }
 		});
+		
+	
+		let memberrIDD = localStorage.getItem("memberId");
+		$.ajax({
+			url: `/members/id=${memberrIDD}`,
+			method: "GET",
+			dataType: "json",
+			success: function (AdoptedApplication) {
+				// 拿到會員資料
+				console.log(AdoptedApplication);
+				
+				// 拿取url中的變數
+				// let urlParam = new URLSearchParams(window.location.search);
+				// let queryValue = urlParam.get('animalId');
+				
+				// 將取得的資料放在修改表單裡
+				$("#animalId").val(queryValue);
+				$("#membId").val(AdoptedApplication.id);
+				$("#adopterName").val(AdoptedApplication.name);
+	// 	        $("#adopterIdNumber").val(AdoptedApplication.adopterIdNumber);
+				$("#adopterAddress").val(AdoptedApplication.address);
+				$("#adopterPhone").val(AdoptedApplication.phone);
+				$("#adopterEmail").val(AdoptedApplication.email);
+			},
+			
+			error: function (error) {
+				console.error("AJAX Error: " + error);
+			}
+		});
 	})
 	
-	let memberrIDD = localStorage.getItem("memberId");
-	$.ajax({
-	    url: `/members/id=${memberrIDD}`,
-	    method: "GET",
-	    dataType: "json",
-	    success: function (AdoptedApplication) {
-	    	// 拿到會員資料
-	    	console.log(AdoptedApplication);
-	    	
-	    	// 拿取url中的變數
-	    	let urlParam = new URLSearchParams(window.location.search);
-	    	let queryValue = urlParam.get('animalId');
-	    	
-	        // 將取得的資料放在修改表單裡
-	        $("#animalId").val(queryValue);
-	        $("#membId").val(AdoptedApplication.id);
-	        $("#adopterName").val(AdoptedApplication.name);
-// 	        $("#adopterIdNumber").val(AdoptedApplication.adopterIdNumber);
-	        $("#adopterAddress").val(AdoptedApplication.address);
-	        $("#adopterPhone").val(AdoptedApplication.phone);
-	        $("#adopterEmail").val(AdoptedApplication.email);
-	    },
-	    
-	    error: function (error) {
-	        console.error("AJAX Error: " + error);
-	    }
-	});
+	
+	document.addEventListener('DOMContentLoaded', function() {
+		  guardIsSignedIn();
+		});
+	
 	
 	function getCurrentLoggedInMember() {
 	    var loggedInMember = localStorage.getItem('loggedInMember');
