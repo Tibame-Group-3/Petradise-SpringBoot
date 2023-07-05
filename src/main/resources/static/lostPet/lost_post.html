@@ -32,7 +32,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=B612+Mono&amp;display=swap">
 <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-<link rel="stylesheet" href="./lost_post.css">
+<link rel="stylesheet" href="./css/lost_post.css">
 </head>
 
 <body>
@@ -59,8 +59,8 @@
               <div class="dropdown-divider"
                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
               </div>
-              <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
-              <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+              <a class="dropdown-item" href="/index.html#news-contain" style="font-size: 14px;">最新消息</a>
+              <a class="dropdown-item" href="/index.html#aboutMe-contain" style="font-size: 14px;">關於我們</a>
             </div>
           </li>
 
@@ -247,6 +247,7 @@
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js'></script>
 
 	<script>
+	
 		guardIsSignedIn();
 
 		
@@ -391,6 +392,32 @@
 			  }
 			  submitForm();
 			});
+
+		// ------------------購物車項目初始化------------------
+		let shoppingItem = sessionStorage.getItem("shoppingItem");
+		if (shoppingItem) {
+			shoppingItem = JSON.parse(shoppingItem);
+		} else {
+			shoppingItem = {};
+		}
+
+		// 更新購物車商品數
+		function updateCartIcon() {
+			let totalItems = 0;
+			for (const productId in shoppingItem) {
+				totalItems += shoppingItem[productId].quantity;
+			}
+			$(".shopping-cart-total").text(`(${totalItems})`);
+		}
+
+		// 初始化購物車圖示數量
+		updateCartIcon();
+
+
+		// ------------------前往購物車------------------
+		$(".cart").on('click', function () {
+			location.href = "/shopping/pd_page/Cart.html";
+		});
 
 	</script>
 
