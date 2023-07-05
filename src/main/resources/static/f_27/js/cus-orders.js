@@ -202,15 +202,15 @@
                                         <br><br>
                                         <div class="review-box" style="display: none;">
                                             <fieldset class="rating rating-${order.id}">
-                                                <input type="radio" id="star5-${order.id}" name="rating" value="5" checked="checked" />
+                                                <input type="radio" id="star5-${order.id}" name="rating-${order.id}" value="5" checked="checked" />
                                                 <label class="full" for="star5-${order.id}" title="Awesome - 5 stars"></label>
-                                                <input type="radio" id="star4-${order.id}" name="rating" value="4" />
+                                                <input type="radio" id="star4-${order.id}" name="rating-${order.id}" value="4" />
                                                 <label class="full" for="star4-${order.id}" title="Pretty good - 4 stars"></label>
-                                                <input type="radio" id="star3-${order.id}" name="rating" value="3" />
+                                                <input type="radio" id="star3-${order.id}" name="rating-${order.id}" value="3" />
                                                 <label class="full" for="star3-${order.id}" title="Meh - 3 stars"></label>
-                                                <input type="radio" id="star2-${order.id}" name="rating" value="2" />
+                                                <input type="radio" id="star2-${order.id}" name="rating-${order.id}" value="2" />
                                                 <label class="full" for="star2-${order.id}" title="Kinda bad - 2 stars"></label>
-                                                <input type="radio" id="star1-${order.id}" name="rating" value="1" />
+                                                <input type="radio" id="star1-${order.id}" name="rating-${order.id}" value="1" />
                                                 <label class="full" for="star1-${order.id}" title="Sucks big time - 1 star"></label>
                                             </fieldset>
                                             <span id="star-count-${order.id}" class="star-count-class"></span><br>
