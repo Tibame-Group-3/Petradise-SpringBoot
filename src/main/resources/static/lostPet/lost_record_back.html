@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>協尋文章列表</title>
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
 <link rel="stylesheet" href="css/Font%20Awesome%205%20Brands.css">
@@ -26,112 +26,116 @@
 
 <body>
 	<div id="wrapper">
-		<nav class="navbar navbar-light navbar-expand-md py-3" data-aos="zoom-in" data-aos-duration="1500">
-			<div class="container">
-				<a class="navbar-brand d-flex align-items-center" href="/index.html" style="position: sticky;top: 0;">
-					<img width="75" height="41" src="/assets/img/logo-only.png">
+		<nav
+			class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+			style="background: #f1ecd1;">
+			<div class="container-fluid d-flex flex-column p-0">
+				<a
+					class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+					href="/f_27/admin-table.html">
+					<div class="sidebar-brand-text mx-3">
+						<img width="59" height="33" src="/assets/img/logo-only.png">
+					</div>
 				</a>
-
-				<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"
-						style="border-color: rgb(241,236,209);">
-					<span class="visually-hidden">Toggle navigation</span>
-					<span class="navbar-toggler-icon"
-						  style="--bs-primary: #fd780f;--bs-primary-rgb: 253,120,15;--bs-secondary: #e69609;--bs-secondary-rgb: 230,150,9;color: rgb(241,236,209);">
-        </span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navcol-3" style="background: #ffffff;">
-					<ul class="navbar-nav mx-auto">
-						<li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-							   data-bs-auto-close="outside" href="/index.html" style="margin: 10px 0px 0px;">關於我們</a>
-							<div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-								<div class="dropdown-divider"
-									 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-								</div>
-								<a class="dropdown-item" href="/index.html#news-contain" style="font-size: 14px;">最新消息</a>
-								<a class="dropdown-item" href="/index.html#aboutMe-contain" style="font-size: 14px;">關於我們</a>
-							</div>
-						</li>
-
-						<li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-							   data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">毛孩旅館</a>
-							<div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-
-								<div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-								</div>
-								<a class="dropdown-item" href="/hotel/searchHotel.html" style="font-size: 14px">預約訂房</a>
-								<a class="dropdown-item join-hotelowner" href="/owner/SignUp.html" style="font-size: 14px;color: #fd780f;">加入我們</a>
-							</div>
-						</li>
-
-						<li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">
-							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-							   data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;">浪浪收容</a>
-							<div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">
-								<div class="dropdown-divider"
-									 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
-								</div>
-								<a class="dropdown-item" href="/animal_39/Frontanimal/animalbrowse.html" style="font-size: 14px">浪浪認養</a>
-								<a class="dropdown-item lostPet" href="/lostPet/lost.html" style="font-size: 14px">遺失協尋</a>
-								<a class="dropdown-item" href="/animalCorporation/signup.html" style="font-size: 14px">加入我們</a>
-							</div>
-						</li>
-
-						<li class="nav-item" style="height: 50px;width: 100px;margin: 0px 0px 0px 10px">
-							<a class="nav-link" href="/front-product-list/front-product-list.html" style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
-						</li>
-
-						<!--          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">-->
-						<!--            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"-->
-						<!--              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>-->
-						<!--            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">-->
-						<!--              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">-->
-						<!--              </div>-->
-						<!--              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>-->
-						<!--              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>-->
-						<!--              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>-->
-						<!--            </div>-->
-						<!--          </li>-->
-
-					</ul>
-
-					<!-- Shopping Cart -->
-					<div class="btn btn-primary cart" style="cursor: pointer;margin-top: 10px;margin-right: 10px;border-style: none;background: rgb(255,255,255);color: #fd780f;height: 38px;width: 100px;">
-            <span class="fas fa-shopping-cart"
-				  style="margin: 9px 5px 0px -12px;padding: 0px;font-size: 24px;color: #fd780f;height: 26px;width: 26px;margin-top: 0px;margin-right: 3px;margin-bottom: 3px;margin-left: 3px;">
-            </span>
-						<span class="shopping-cart-total"></span>
-					</div>
-
-					<!-- Member -->
-					<div class="btn-group" style="margin: 10px 0px 0px;">
-						<a class="btn btn-primary" type="button" style="height: 38px;width: 90px;background: #fd780f;border-color: rgb(255, 255, 255);padding-top: 6px">
-							<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
-								 class="bi bi-person-circle" style="margin: 0px 3px 3px;padding: 0px;font-size: 26px;">
-								<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-								<path fill-rule="evenodd"
-									  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
-								</path>
-							</svg>會員
-						</a>
-						<button class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-								data-bs-toggle="dropdown" aria-expanded="false" type="button"
-								style="background: #fd780f;border-color: rgb(255, 255, 255);width: 29.5833px;"></button>
-						<div class="dropdown-menu" style="min-width: 118px;background: #fd780f;margin: 1px 0px 0px;">
-							<a class="dropdown-item navigate-signin" href="#" style="color: #ffffff;">登入/註冊</a>
-							<a class="dropdown-item navigate-member-center" href="#" style="color: #ffffff;">會員中心</a>
-							<a class="dropdown-item logout" style="color: #ffffff;">登出</a>
-						</div>
-					</div>
-
+				<hr class="sidebar-divider my-0">
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown show"><a
+						class="dropdown-toggle nav-link" aria-expanded="true"
+						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">網站管理</a>
+						<div class="dropdown-menu show" data-bs-popper="none"
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
+							<a class="dropdown-item" href="/news_product/NewsAlter.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增最新消息</a><a
+								class="dropdown-item" href="/news_product/News.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">最新消息列表</a><a
+								class="dropdown-item" href="/lostPet/lost_record_back.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">協尋文章列表</a><a
+								class="dropdown-item" href="/admin/member_manage.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">會員列表</a>
+							<div class="dropdown-divider"
+								style="border-color: rgb(255, 255, 255);"></div>
+						</div></li>
+					<li class="nav-item dropdown show"><a
+						class="dropdown-toggle nav-link" aria-expanded="true"
+						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">業主管理</a>
+						<div class="dropdown-menu show" data-bs-popper="none"
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
+							<a class="dropdown-item" href="/owner/OwnerCheck.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主審核</a><a
+								class="dropdown-item" href="/owner/OwnerManage.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">旅館業主列表</a><a
+								class="dropdown-item"
+								href="/animalCorporation/AnimalCorporationCheck.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主審核</a><a
+								class="dropdown-item"
+								href="/animalCorporation/AnimalCorporationManage.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">收容業主列表</a>
+							<div class="dropdown-divider"
+								style="border-color: rgb(255, 255, 255);"></div>
+						</div></li>
+					<li class="nav-item dropdown show"><a
+						class="dropdown-toggle nav-link" aria-expanded="true"
+						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">商城管理</a>
+						<div class="dropdown-menu show" data-bs-popper="none"
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
+							<a class="dropdown-item" href="/news_product/NewsAlter.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
+								class="dropdown-item" href="/news_product/Product.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
+								class="dropdown-item"
+								href="/back-order-master/back-order-master.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
+							<div class="dropdown-divider"
+								style="border-color: rgb(255, 255, 255);"></div>
+						</div></li>
+					<li class="nav-item dropdown show"><a
+						class="dropdown-toggle nav-link" aria-expanded="true"
+						data-bs-toggle="dropdown" data-bs-auto-close="false" href="#"
+						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
+						<div class="dropdown-menu show" data-bs-popper="none"
+							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
+							<a class="dropdown-item" href="/f_27/admin-table.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a>
+							<div class="dropdown-divider"
+								style="border-color: rgb(255, 255, 255);"></div>
+						</div></li>
+				</ul>
+				<div class="text-center d-none d-md-inline">
+					<button class="btn rounded-circle border-0" id="sidebarToggle-1"
+						type="button"></button>
 				</div>
-
 			</div>
 		</nav>
-
-
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<nav
+					class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+					<div class="container-fluid">
+						<button class="btn btn-link d-md-none rounded-circle me-3"
+							id="sidebarToggleTop-1" type="button">
+							<i class="fas fa-bars"></i>
+						</button>
+						<ul class="navbar-nav flex-nowrap ms-auto">
+							<li class="nav-item dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false"
+										data-bs-toggle="dropdown" href="#"><span
+										class="d-none d-lg-inline me-2 text-gray-600 small"
+										id="admin-name"></span></a>
+									<div
+										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+										style="min-width: 110px;">
+										<a class="dropdown-item" id="logout-button"><i
+											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
 				<div class="container-fluid">
 					<h3 class="text-dark mb-4">協尋文章列表</h3>
 					<div class="card shadow">
@@ -173,11 +177,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
-
 				<footer class="bg-white sticky-footer">
 					<div class="container my-auto">
 						<div class="text-center my-auto copyright">
@@ -186,11 +185,11 @@
 					</div>
 				</footer>
 			</div>
-			<a class="border rounded d-inline scroll-to-top" href="#page-top"><i
-				class="fas fa-angle-up"></i></a>
-
 		</div>
 	</div>
+	<a class="border rounded d-inline scroll-to-top" href="#page-top"><i
+		class="fas fa-angle-up"></i></a>
+
 </body>
 <script src="/assets/js/admin_login.js"></script>
 <script src="/assets/js/admin_nav.js"></script>

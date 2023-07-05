@@ -12,7 +12,6 @@ public class LostPetResposeController {
    
 
 	public LostPetResposeController(LostPetResponseService responseService) {
-		super();
 		this.responseService = responseService;
 	}
 
