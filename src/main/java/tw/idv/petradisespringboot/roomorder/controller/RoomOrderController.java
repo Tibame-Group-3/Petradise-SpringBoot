@@ -90,8 +90,8 @@ public class RoomOrderController {
     }
 
 
-    @GetMapping("/manage-room-order")
-    public List<ManageRoomOrderDTO> getMangeRoomOrder() {
-        return service.getManageRoomOrderDTOs();
+    @GetMapping("/manage-room-order/{hotelId}")
+    public List<ManageRoomOrderDTO> getMangeRoomOrder(@PathVariable Integer hotelId) {
+        return service.getManageRoomOrderDTOs(hotelId);
     }
 }

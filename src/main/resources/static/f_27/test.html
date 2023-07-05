@@ -531,6 +531,35 @@
             });
         }
 
+        $(document).ready(function () {
+            const hotelId = getHotelOwnerId();
+            var table = $('#example').DataTable({
+                "ajax": {
+                    "url": `/room-order/manage-room-order/${hotelId}`,
+                    "dataSrc": "" // The data is not wrapped in an object property
+                },
+                "columns": [
+                    // ... 省略其他設定 ...
+                ],
+                "language": {
+                    "lengthMenu": "顯示 _MENU_ 條",
+                    "zeroRecords": "未找到任何資料",
+                    "info": "顯示頁數 _PAGE_ / _PAGES_",
+                    "infoEmpty": "沒有任何資訊",
+                    "infoFiltered": "(從 _MAX_ 條資料中篩選)",
+                    "search": "搜尋:",
+                    "paginate": {
+                        "first": "第一頁",
+                        "last": "最後一頁",
+                        "next": "下一頁",
+                        "previous": "上一頁"
+                    },
+                }
+            });
+
+            // ... 省略其他程式碼 ...
+        });
+
     </script>
 </body>
 

@@ -58,7 +58,7 @@
                             style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px;">
                             <a class="dropdown-item" href="../hotel/roomType.html"
                                 style="padding: 2px 30px; font-size: 13px;">房型資訊</a><a class="dropdown-item"
-                                                                                           href="../hotel/room.html" style="padding: 2px 30px; font-size: 13px;">房間資訊</a>
+                                href="../hotel/room.html" style="padding: 2px 30px; font-size: 13px;">房間資訊</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link" aria-expanded="true"
@@ -100,7 +100,7 @@
             </div>
 
             <div>
-                <table id="example" class="display" style="width:100%">
+                <table id="example" class="display">
                     <thead>
                         <tr>
                             <th>訂單編號</th>
@@ -151,7 +151,7 @@
             const hotelId = getHotelOwnerId();
             var table = $('#example').DataTable({
                 "ajax": {
-                    "url": `/room-order/hotel-id/${hotelId}`,
+                    "url": `/room-order/manage-room-order/${hotelId}`,
                     "dataSrc": "" // The data is not wrapped in an object property
                 },
                 "columns": [
@@ -162,26 +162,7 @@
                         }
                     },
                     {
-                        "data": "memId",
-                        "render": function (data, type, row) {
-                            var memberId = data;
-                            var memberName = ""; // Variable to store the member name
-
-                            // Fetch the member name using AJAX
-                            $.ajax({
-                                url: `/members/id=${memberId}`,
-                                method: "GET",
-                                async: false, // Set async to false to wait for the response
-                                success: function (response) {
-                                    memberName = response.name;
-                                },
-                                error: function (error) {
-                                    console.error("Error:", error);
-                                    // Handle the error case
-                                }
-                            });
-                            return memberName;
-                        }
+                        "data": "memberName",
                     },
                     { "data": "petName" },
                     {
@@ -193,26 +174,7 @@
                         }
                     },
                     {
-                        "data": "roomTypeId",
-                        "render": function (data, type, row) {
-                            var roomTypeId = data;
-                            var roomTypeName = ""; // Variable to store the room type name
-
-                            // Fetch the room type name using AJAX
-                            $.ajax({
-                                url: `/roomTypes/${roomTypeId}`,
-                                method: "GET",
-                                async: false, // Set async to false to wait for the response
-                                success: function (response) {
-                                    roomTypeName = response.roomTypeName;
-                                },
-                                error: function (error) {
-                                    console.error("Error:", error);
-                                    // Handle the error case
-                                }
-                            });
-                            return roomTypeName;
-                        }
+                        "data": "roomTypeName",
                     },
                     {
                         "data": "status",
@@ -245,7 +207,20 @@
                             return cancelButton;
                         }
                     }
-                ]
+                ],
+                "language": {
+                    "zeroRecords": "未找到任何資料",
+                    "info": "顯示頁數 _PAGE_ / _PAGES_",
+                    "infoEmpty": "沒有任何資訊",
+                    "infoFiltered": "(從 _MAX_ 條資料中篩選)",
+                    "search": "搜尋:",
+                    "paginate": {
+                        "first": "第一頁",
+                        "last": "最後一頁",
+                        "next": "下一頁",
+                        "previous": "上一頁"
+                    },
+                }
             });
 
             // Add event listener for "編輯" button click

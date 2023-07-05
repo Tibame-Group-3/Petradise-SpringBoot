@@ -26,6 +26,6 @@ public interface RoomOrderService {
 
     Integer getHotelIdByRoomOrderId(Integer id);
 
-    List<ManageRoomOrderDTO> getManageRoomOrderDTOs();
+    List<ManageRoomOrderDTO> getManageRoomOrderDTOs(Integer hotelId);
 
 }
