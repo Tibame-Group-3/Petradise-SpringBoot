@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Table - Brand</title>
+<title>收容業主列表</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -70,9 +70,9 @@ div.search2 {
 			<div class="container-fluid d-flex flex-column p-0">
 				<a
 					class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-					href="#">
+					href="/f_27/admin-table.html">
 					<div class="sidebar-brand-text mx-3">
-						<img width="59" height="33" src="img/logo-only.png">
+						<img width="59" height="33" src="/assets/img/logo-only.png">
 					</div>
 				</a>
 				<hr class="sidebar-divider my-0">
@@ -123,7 +123,8 @@ div.search2 {
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增商品</a><a
 								class="dropdown-item" href="/news_product/Product.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">商品列表</a><a
-								class="dropdown-item" href="/back-order-master/back-order-master.html"
+								class="dropdown-item"
+								href="/back-order-master/back-order-master.html"
 								style="padding: 2px 30px; font-size: 13px; color: #574f36;">訂單列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
@@ -134,12 +135,8 @@ div.search2 {
 						style="color: #a67c52; padding: 5px 16px; font-weight: bold; font-size: 14px;">員工管理</a>
 						<div class="dropdown-menu show" data-bs-popper="none"
 							style="background: rgba(255, 255, 255, 0); border-style: none; padding: 0px; margin: 0px; margin-bottom: 5px; color: #574f36;">
-							<a class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">新增員工</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a><a
-								class="dropdown-item" href="#"
-								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工權限</a>
+							<a class="dropdown-item" href="/f_27/admin-table.html"
+								style="padding: 2px 30px; font-size: 13px; color: #574f36;">員工列表</a>
 							<div class="dropdown-divider"
 								style="border-color: rgb(255, 255, 255);"></div>
 						</div></li>
@@ -156,7 +153,7 @@ div.search2 {
 					class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
 					<div class="container-fluid">
 						<button class="btn btn-link d-md-none rounded-circle me-3"
-							id="sidebarToggleTop" type="button">
+							id="sidebarToggleTop-1" type="button">
 							<i class="fas fa-bars"></i>
 						</button>
 						<ul class="navbar-nav flex-nowrap ms-auto">
@@ -164,13 +161,12 @@ div.search2 {
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false"
 										data-bs-toggle="dropdown" href="#"><span
-										class="d-none d-lg-inline me-2 text-gray-600 small">厭世員工01</span><img
-										class="border rounded-circle img-profile"
-										src="img/avatars/avatar1.jpeg"></a>
+										class="d-none d-lg-inline me-2 text-gray-600 small"
+										id="admin-name"></span></a>
 									<div
 										class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
 										style="min-width: 110px;">
-										<a class="dropdown-item" href="#"><i
+										<a class="dropdown-item" id="logout-button"><i
 											class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
 									</div>
 								</div>
@@ -179,7 +175,7 @@ div.search2 {
 					</div>
 				</nav>
 				<div class="container-fluid">
-					<h3 class="text-dark mb-4">收容業主資料管理</h3>
+					<h3 class="text-dark mb-4">收容業主管理</h3>
 					<div class="card shadow">
 						<div class="card-header py-3">
 							<p class="text-primary m-0 fw-bold">收容業主列表</p>
@@ -236,9 +232,9 @@ div.search2 {
 										<tr></tr>
 									</tfoot>
 								</table>
-									<div id="loading" >
-										<img src="./img/loading.gif">
-									</div>
+								<div id="loading">
+									<img src="./img/loading.gif">
+								</div>
 							</div>
 							<div class="row">
 
@@ -267,7 +263,8 @@ div.search2 {
 			class="fas fa-angle-up"></i></a>
 	</div>
 </body>
-
+<script src="/assets/js/admin_login.js"></script>
+<script src="/assets/js/admin_nav.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="./js/bs-init.js"></script>
 <script src="./js/theme-1-1.js"></script>
@@ -288,7 +285,7 @@ div.search2 {
 
 
 $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}))
-	
+	guardIsSignedIn();
 
 	let data ; //存回應資料的長度用(res.length)
 	let currentPage = 1; //起始頁
@@ -630,7 +627,7 @@ $(function(){	//文檔載入後的jquery寫法(同$(document).ready(function(){}
     	    	  title:"業主編號 : " + corpId +"<br>" + "業主名稱 : "+  corpName +"<br>" + "權限已完成更新"});
     	      setTimeout(function() {
     	    	  location.reload();
-    	    	}, 5000);
+    	    	}, 3000);
     	    },
     	    
     	    
