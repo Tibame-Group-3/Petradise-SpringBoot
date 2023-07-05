@@ -53,6 +53,147 @@
 <link rel="stylesheet" href="./css/styles.min.css">
 
 
+<style>
+/* Reset */
+* {
+	box-sizing: border-box;
+}
+
+h1 {
+	margin: 15px 0 15px 0;
+	font-weight: 1000;
+	color: white;
+}
+
+/* Utility Classes */
+.form_container {
+	max-width: 1100px;
+	margin: auto;
+	padding: 50px;
+}
+
+.btn_set {
+	border: none;
+	border-radius: 5px;
+	margin: 25px 0;
+	padding: 20px;
+	width: 100%;
+	background: goldenrod;
+	color: #FFF;
+}
+
+.btn_set:hover {
+	background: rgb(80, 159, 190);;
+	color: #333;;
+	cursor: pointer;
+}
+
+/* Main Styling */
+html, body {
+	font-size: 16px;
+	background: white;
+	color: black;
+}
+
+/* Form Styling */
+#form-wrap {
+	margin: auto;
+	background: rgba(230, 150, 9, 0.5);
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 80%;
+}
+
+#form-wrap h1, #form-wrap p {
+	text-align: center;
+	padding: 5px 0;
+}
+
+#form-wrap .form-group label {
+	display: block;
+	padding: 0;
+	margin-top: 30px;
+}
+
+#form-wrap .form-group input {
+	width: 100%;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.gender input {
+	display: inline;
+}
+
+#form-wrap .form-group input:focus {
+	outline: none;
+	border: 1px solid rgb(210, 134, 12);
+}
+
+#form-wrap .bottom-text {
+	font-size: 12px;
+}
+
+.mark {
+	display: block;
+	width: 30%;
+	background-color: #5fcf80;
+	color: white;
+	padding: 0.5rem;
+	padding-right: 1rem;
+	text-shadow: 1px 1px 2px grey;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+	font-size: 25px;
+}
+
+legend>span {
+	font-family: 'Noto Serif TC', serif;
+	text-shadow: 2px 2px gray;
+}
+
+div.picture>label {
+	border: 1px solid black;
+	display: flex;
+	width: 100px;
+	height: 100px;
+}
+
+
+
+.contact_form {
+	padding: 20px;
+	border: 15px solid transparent;
+	border-image: url(img/cat.gif ) 35 round;
+}
+
+
+/* bootstrap樣式更改 */
+.help-block {
+	margin: 0;
+	color: red;
+}
+
+.navbar-collapse {
+	padding-left: 0;
+}
+
+.btn_set[disabled] {
+	pointer-events: auto !important;
+	cursor: not-allowed !important;
+	opacity: 1 !important;
+	background-color: gray;
+}
+
+ul.navbar {
+	display: inline-block;
+}
+
+div.collapse {
+	padding: 0;
+}
+</style>
+
 </head>
 
 <body>
@@ -273,12 +414,11 @@
 
 </body>
 <!-- jquery -->
+<script src="./jquery/jquery3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../index/js/index.js"></script>
 <script src="../assets/js/login.js"></script>
-<script src="./bootstrap/js/bootstrap.min.js"></script>
-<script src="./jquery/jquery3.6.4.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
