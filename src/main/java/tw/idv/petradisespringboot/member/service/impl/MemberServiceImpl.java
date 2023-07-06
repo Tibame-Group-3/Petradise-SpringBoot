@@ -66,14 +66,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     @Override
-    public MemberDTO signUp(SignUpDTO dto) {
+    public MemberDTO signUp(String host, SignUpDTO dto) {
         Member newMember = mapper.map(dto, Member.class);
         if (repository.findByAccount(newMember.getAccount()).isPresent()) {
             throw new AccountAlreadyExistsException("Account already exists: " + newMember.getAccount());
         }
         var member = repository.save(newMember);
         String token = saveEmailVerification(member);
-        sendVerificationEmail(member.getEmail(), token);
+        sendVerificationEmail(host, member.getEmail(), token);
         return mapper.map(member, MemberDTO.class);
     }
 
@@ -84,9 +84,9 @@ public class MemberServiceImpl implements MemberService {
         return token;
     }
 
-    private void sendVerificationEmail(String emailAddress, String token) {
+    private void sendVerificationEmail(String host, String emailAddress, String token) {
         String subject = "請驗證您的電子郵件";
-        String text = "請點擊以下連結驗證您的電子郵件: http://localhost:8080/member/verify.html?token=" + token;
+        String text = "請點擊以下連結驗證您的電子郵件: http://" + host + "/member/verify.html?token=" + token;
         emailService.sendEmail(emailAddress, subject, text);
     }
 
