@@ -11,7 +11,7 @@ import java.util.List;
 public interface MemberService {
     MemberDTO login(String account, String password);
 
-    MemberDTO signUp(SignUpDTO dto);
+    MemberDTO signUp(String host, SignUpDTO dto);
 
     MemberDTO getById(Integer id);
 

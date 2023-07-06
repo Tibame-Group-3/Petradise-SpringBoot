@@ -29,7 +29,8 @@
             name: '旅館訂單',
             root: '/f_27/cus-orders.html',
             links: [
-                '/f_27/cus-orders.html'
+                '/f_27/cus-orders.html',
+                '/f_27/cus-order-detail.html'
             ]
         },
         {
@@ -44,7 +45,6 @@
             name: '我的認養動物管理',
             root: '/animal_39/Frontanimal/adoptionConfirmationForm.html',
             links: [
-
                 '/animal_39/Frontanimal/adoptionConfirmationForm.html'
             ]
         },

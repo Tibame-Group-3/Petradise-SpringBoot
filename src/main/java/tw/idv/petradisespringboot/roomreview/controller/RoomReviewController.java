@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.roomreview.controller;
 
 import org.springframework.web.bind.annotation.*;
+import tw.idv.petradisespringboot.roomreview.RoomReviewDTO;
 import tw.idv.petradisespringboot.roomreview.service.RoomReviewService;
 import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
 
@@ -35,5 +36,10 @@ public class RoomReviewController {
         return service.findRoomReviewByHotelIdAndScore(hotelId, score);
     }
 
+
+    @GetMapping("/roomreview/hotel-id/{hotelId}/dto")
+    List<RoomReviewDTO> findReviewByHotelId(@PathVariable Integer hotelId){
+        return service.findReviewByHotelId(hotelId);
+    }
 
 }

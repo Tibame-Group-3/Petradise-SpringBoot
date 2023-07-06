@@ -1,4 +1,3 @@
-
 // ------------------購物車項目初始化------------------
 let shoppingItem = sessionStorage.getItem("shoppingItem");
 if (shoppingItem) {

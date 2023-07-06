@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.mall.service;
 
 import java.util.List;
 
-import tw.idv.petradisespringboot.mall.model.vo.Product;
+import tw.idv.petradisespringboot.mall.vo.Product;
 
 public interface ProductService {
     Product insert(Product newProduct);
