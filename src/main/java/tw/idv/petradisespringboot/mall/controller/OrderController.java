@@ -1,23 +1,17 @@
 package tw.idv.petradisespringboot.mall.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.mall.NotFoundException4OrderMaster;
-import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
-import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
-import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
-import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
+import tw.idv.petradisespringboot.mall.dto.AllOrderMasterDTO;
+import tw.idv.petradisespringboot.mall.dto.ChangeOrderStatusDTO;
+import tw.idv.petradisespringboot.mall.dto.CreateOrderDTO;
+import tw.idv.petradisespringboot.mall.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.vo.OrderMaster;
 import tw.idv.petradisespringboot.mall.service.OrderService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -55,11 +49,10 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.createOrder(dto));
 	}
 
-	@PostMapping(value="/updateOrderStatus", consumes = { "multipart/form-data" })
-	public ResponseEntity<?> updateOrderStatus(@RequestParam("odId") Integer odId,
-											   @RequestParam("odStatus") Character odStatus) {
+	@PostMapping("/updateOrderStatus")
+	public ResponseEntity<?> updateOrderStatus(@RequestBody ChangeOrderStatusDTO dto) {
 		try {
-			orderService.updateOrderStatus(odId, odStatus);
+			orderService.updateOrderStatus(dto.getOdId(), dto.getOdStatus());
 			return ResponseEntity.ok("Order status updated successfully!");
 		} catch (NotFoundException4OrderMaster exception) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());

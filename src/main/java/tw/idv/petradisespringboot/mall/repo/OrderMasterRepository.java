@@ -1,20 +1,19 @@
-package tw.idv.petradisespringboot.mall.model.repo;
-
-import java.util.List;
+package tw.idv.petradisespringboot.mall.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import tw.idv.petradisespringboot.mall.dto.AllOrderMasterDTO;
+import tw.idv.petradisespringboot.mall.vo.OrderMaster;
 
-import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
-import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
+import java.util.List;
 
 @Repository
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, Integer> {
 	
-    @Query("SELECT new tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO(" +
+    @Query("SELECT new tw.idv.petradisespringboot.mall.dto.AllOrderMasterDTO(" +
             "om.odId, " +
             "m.name, " +
             "om.odDate, " +

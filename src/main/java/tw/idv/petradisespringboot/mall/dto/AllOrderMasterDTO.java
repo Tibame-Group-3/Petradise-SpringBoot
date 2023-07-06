@@ -1,9 +1,9 @@
-package tw.idv.petradisespringboot.mall.model.dto;
-
-import java.util.Date;
+package tw.idv.petradisespringboot.mall.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
