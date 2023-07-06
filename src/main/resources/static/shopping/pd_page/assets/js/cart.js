@@ -3,28 +3,18 @@ $(document).ready(function () {
 
     // ------------------拿session資料----------------------------------------------------
     // 初始化 shoppingItem ----------------------------------------------------
-    let shoppingItem = sessionStorage.getItem("shoppingItem");
-    if (shoppingItem) {
-        shoppingItem = JSON.parse(shoppingItem);
-    } else {
-        shoppingItem = {};
-    }
+    // cartIcon.js宣告過了
     // console.log(shoppingItem);
 
     // 更新購物車商品數
-    function updateCartIcon() {
-        let totalItems = 0;
-        for (const productId in shoppingItem) {
-            totalItems += shoppingItem[productId].quantity;
-        }
-        $(".shopping-cart-total").text(`(${totalItems})`);
-    }
+    // cartIcon.js宣告過了
 
     // 初始化購物車圖示數量
-    updateCartIcon();
+    // cartIcon.js宣告過了
 
     // 初始化 checkoutItem ----------------------------------------------------
     const checkoutItem = {};
+    sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
 
     // ------------------渲染購物車項目----------------------------------------------------
     let totalItems = 0;
@@ -283,6 +273,18 @@ $(document).ready(function () {
 
     // ------------------前往結帳----------------------------------------------------
     $(".button-pay").on("click", function () {
+        let checkExist = JSON.parse(sessionStorage.getItem("checkoutItem"));
+        // console.log(checkExist);
+
+        if (!checkExist || $.isEmptyObject(checkExist)) {
+            Swal.fire({
+                icon: 'warning',
+                title: '喔喔...',
+                text: '請先勾選商品再結帳喔~',
+            });
+            return;
+        }
+
         // 從 checkbox 中取得被勾選的項目的產品 ID----------------------------------------------------
         const checkedItems = $(".cart-items input[type='checkbox']:checked");
         checkedItems.closest(".cart-items").fadeOut(1000, function () {
