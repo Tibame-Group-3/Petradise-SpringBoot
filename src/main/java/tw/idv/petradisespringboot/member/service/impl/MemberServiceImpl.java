@@ -98,6 +98,7 @@ public class MemberServiceImpl implements MemberService {
                 .orElseThrow(() -> new MemberNotFoundException(id));
     }
 
+    @Transactional
     @Override
     public MemberDTO update(UpdateDTO dto) {
         Optional<Member> memberOptional = repository.findById(dto.getId());
@@ -114,6 +115,7 @@ public class MemberServiceImpl implements MemberService {
         return mapper.map(saved, MemberDTO.class);
     }
 
+    @Transactional
     @Override
     public void changePassword(Integer id, String oldPassword, String newPassword) {
 
@@ -160,6 +162,7 @@ public class MemberServiceImpl implements MemberService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public MemberDTO changeAccess(Integer id, MemberAccess access) {
         var member = repository
