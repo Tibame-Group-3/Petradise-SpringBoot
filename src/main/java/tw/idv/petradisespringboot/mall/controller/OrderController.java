@@ -49,7 +49,7 @@ public class OrderController {
 		return ResponseEntity.ok(orderService.createOrder(dto));
 	}
 
-	@PostMapping(value="/updateOrderStatus")
+	@PostMapping("/updateOrderStatus")
 	public ResponseEntity<?> updateOrderStatus(@RequestBody ChangeOrderStatusDTO dto) {
 		try {
 			orderService.updateOrderStatus(dto.getOdId(), dto.getOdStatus());

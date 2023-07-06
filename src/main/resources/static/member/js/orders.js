@@ -206,13 +206,12 @@
                     'success'
                 )
                 updateOrderStatus(orderId);
+
             }
         })
     }
 
-    // x-www-form-urlencoded
     function updateOrderStatus(orderId) {
-        // Construct the FormData object
         const data = {
             odId: orderId,
             odStatus: '1'
@@ -220,7 +219,6 @@
 
         fetch('/order/updateOrderStatus', {
             method: 'POST',
-            // if sending request using the FormData, it will be automatically set to this.
             headers: {
                 'Content-Type': 'application/json'
           },
@@ -229,6 +227,7 @@
             .then(response => {
                 if (response.ok) {
                     console.log('Order status updated seccessfully.');
+                    location.reload();
                 } else {
                     console.log('Failed to update order status.');
                 }
