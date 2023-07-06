@@ -4,6 +4,7 @@ package tw.idv.petradisespringboot.admin.service.impl;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.admin.controller.AdminDTO;
+import tw.idv.petradisespringboot.admin.controller.UpdateAdminDTO;
 import tw.idv.petradisespringboot.admin.repo.AccessFunctionRepository;
 import tw.idv.petradisespringboot.admin.repo.AdminAccessRepository;
 import tw.idv.petradisespringboot.admin.repo.AdminRepository;
@@ -18,6 +19,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -61,20 +63,41 @@ public class AdminServiceImpl implements AdminService {
         return newAdmin;
     }
 
+    @Transactional
     @Override
-    public Admin modify(Integer id, Admin updatedAdmin) {
-        return adminRepository.findById(id).map(existingAdmin -> {
-            existingAdmin.setName(updatedAdmin.getName());
-//            existingAdmin.setAccount(updatedAdmin.getAccount());
-            existingAdmin.setPassword(updatedAdmin.getPassword());
-            existingAdmin.setPhone(updatedAdmin.getPhone());
-            existingAdmin.setAddress(updatedAdmin.getAddress());
-            existingAdmin.setEmail(updatedAdmin.getEmail());
-            existingAdmin.setTitle(updatedAdmin.getTitle());
-            existingAdmin.setStatus(updatedAdmin.getStatus());
-//            existingAdmin.setAccesses(updatedAdmin.getAccesses());
-            return adminRepository.save(existingAdmin);
-        }).orElse(null);
+    public Admin modify(UpdateAdminDTO dto) {
+        final var optionalAdmin = adminRepository
+                .findById(dto.getId());
+        if (optionalAdmin.isEmpty()) {
+            throw new AdminNotFoundException(dto.getId());
+        }
+        // 先更新Admin
+        final var admin = optionalAdmin.get();
+        admin.setName(dto.getName());
+        admin.setPassword(dto.getPassword());
+        admin.setPhone(dto.getPhone());
+        admin.setAddress(dto.getAddress());
+        admin.setEmail(dto.getEmail());
+        admin.setTitle(dto.getTitle());
+        admin.setStatus(dto.getStatus());
+        adminRepository.save(admin);
+        // 更新AdminAccess
+
+        // 刪除AdminID 的全部AdminAccess
+        adminAccessRepository.deleteAllByAdminId(dto.getId());
+
+        final var functionIds = dto.getFunctionIds();
+        final var newAccesses = functionIds.stream().map(functionId -> {
+            final var access = new AdminAccess();
+            final var accessId = new AdminAccessId(dto.getId(), functionId);
+            access.setId(accessId);
+            access.setAdmin(admin);
+            access.setAccessFunction(accessFunctionRepository.findById(functionId).orElse(null));
+            return access;
+        }).collect(Collectors.toList());
+        adminAccessRepository.saveAll(newAccesses);
+        admin.setAccesses(newAccesses);
+        return admin;
     }
 
     @Override

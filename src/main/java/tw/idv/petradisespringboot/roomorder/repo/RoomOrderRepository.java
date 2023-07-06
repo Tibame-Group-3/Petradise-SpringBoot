@@ -30,6 +30,6 @@ public interface RoomOrderRepository extends JpaRepository<RoomOrder, Integer> {
     Integer findHotelIdByRoomOrderId(Integer roomOrderId);
 
 
-    @Query("SELECT new tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO(ro.id, ro.member.name, ro.petName, ro.checkInDate, ro.checkOutDate, ro.roomType.roomTypeName, ro.status) FROM RoomOrder ro")
-    List<ManageRoomOrderDTO> findManageRoomOrderDTOAll();
+    @Query("SELECT new tw.idv.petradisespringboot.roomorder.dto.ManageRoomOrderDTO(ro.id, ro.member.name, ro.petName, ro.checkInDate, ro.checkOutDate, ro.roomType.roomTypeName, ro.status) FROM RoomOrder ro WHERE ro.roomType.hotelId = :hotelId")
+    List<ManageRoomOrderDTO> findManageRoomOrderDTOAll(Integer hotelId);
 }

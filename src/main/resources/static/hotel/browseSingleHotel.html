@@ -389,7 +389,7 @@
         }
 
         $.ajax({
-            url: '/roomTypes/hotels/' + hotelId + '/reviews',
+            url: `/roomreview/hotel-id/${hotelId}/dto`,
             type: 'GET',
             success: function (reviews) {
                 console.log(reviews);
@@ -400,7 +400,7 @@
                         var reviewElement = `
                     <div class="card-body card-body-custom">
                         <div style="display: inline;">
-                            <h5 class="card-title" style="display: inline-block;">匿名 </h5>
+                            <h5 class="card-title" style="display: inline-block;">${review.memberName}</h5>
                           <h5 class="card-score" style="display: inline-block; margin-left: 10px;">
                                 <span class="stars">${generateStars(review.score)}</span>
                                <span class="review-score">${review.score}</span></h5>
@@ -418,11 +418,6 @@
         });
     });
 
-    
-
-    
-    
-    
 
 </script>
 </body>

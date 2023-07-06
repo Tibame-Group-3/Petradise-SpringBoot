@@ -115,8 +115,8 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 				String stars = "*".repeat(password.length() - 4);
 				String maskedPassword = front + stars + back;
 				emailService.sendEmail(vo.getOwnerEmail(), "Petradise註冊通知信(註冊成功)", "親愛的業主: " + vo.getOwnerName()
-						+ "您好,\n恭喜您完成審核並成為我們的業主!\n" + "這是您的管理頁面登入網址:http://localhost:8080/Owner/signin.html\n"
-						+ "聊天室的登入網址:http://localhost:8080/owner/OwnerChatRoom.html\n" + "請使用當初所註冊之帳號(統一編號)及密碼登入\n"
+						+ "您好,\n恭喜您完成審核並成為我們的業主!\n" + "這是您的管理頁面登入網址:http://34.81.60.7:8080/Owner/signin.html\n"
+						+ "聊天室的登入網址:http://34.81.60.7:8080/owner/OwnerChatRoom.html\n" + "請使用當初所註冊之帳號(統一編號)及密碼登入\n"
 						+ "帳號:" + vo.getOwnerAccount() + "\n" + "密碼:" + maskedPassword);
 			} else if ("1".equals(hotelStatus)) {
 				emailService.sendEmail(vo.getOwnerEmail(), "Petradise註冊通知信(註冊失敗)",

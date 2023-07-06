@@ -113,8 +113,8 @@
                             <div class="dropdown-divider"
                                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
                             </div>
-                            <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
-                            <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+                            <a class="dropdown-item" href="/index.html#news-contain" style="font-size: 14px;">最新消息</a>
+                            <a class="dropdown-item" href="/index.html#aboutMe-contain" style="font-size: 14px;">關於我們</a>
                         </div>
                     </li>
 
@@ -292,6 +292,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/login.js"></script>
 
+    <script src="/assets/js/news.js"></script>
+    <script src="/assets/js/countUp.js"></script>
+    <!-- login -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/index/js/index.js"></script>
+
     <script>
 
         $(document).ready(function () {
@@ -440,7 +447,7 @@
                         success: function (response) {
                             // Show the success message using SweetAlert
                             Swal.fire({
-                                title: '感謝您的預定!',
+                                title: '感謝您的預定！',
                                 imageUrl: 'https://unsplash.it/400/200',
                                 imageWidth: 400,
                                 imageHeight: 200,
@@ -461,7 +468,7 @@
                     $('#pet-name').addClass('is-invalid'); // Add a CSS class to indicate the error
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Please enter a pet name.'
+                        title: '寵物名稱忘了打喔 ~'
                     })
                 }
             });
