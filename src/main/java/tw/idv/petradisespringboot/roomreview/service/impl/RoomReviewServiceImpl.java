@@ -1,6 +1,7 @@
 package tw.idv.petradisespringboot.roomreview.service.impl;
 
 import org.springframework.stereotype.Service;
+import tw.idv.petradisespringboot.roomreview.RoomReviewDTO;
 import tw.idv.petradisespringboot.roomreview.repo.RoomReviewRepository;
 import tw.idv.petradisespringboot.roomreview.service.RoomReviewService;
 import tw.idv.petradisespringboot.roomreview.vo.RoomReview;
@@ -39,5 +40,10 @@ public class RoomReviewServiceImpl implements RoomReviewService {
     @Override
     public List<RoomReview> findRoomReviewByHotelIdAndScore(Integer hotelId, Integer score) {
         return repository.findByHotelIdAndScore(hotelId, score);
+    }
+
+    @Override
+    public List<RoomReviewDTO> findReviewByHotelId(Integer hotelId) {
+        return repository.findRoomReviewByHotelID(hotelId);
     }
 }
