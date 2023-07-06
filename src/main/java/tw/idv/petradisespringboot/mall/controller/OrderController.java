@@ -4,11 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.idv.petradisespringboot.mall.NotFoundException4OrderMaster;
-import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
-import tw.idv.petradisespringboot.mall.model.dto.ChangeOrderStatusDTO;
-import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
-import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
-import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
+import tw.idv.petradisespringboot.mall.dto.AllOrderMasterDTO;
+import tw.idv.petradisespringboot.mall.dto.ChangeOrderStatusDTO;
+import tw.idv.petradisespringboot.mall.dto.CreateOrderDTO;
+import tw.idv.petradisespringboot.mall.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.vo.OrderMaster;
 import tw.idv.petradisespringboot.mall.service.OrderService;
 
 import java.util.List;

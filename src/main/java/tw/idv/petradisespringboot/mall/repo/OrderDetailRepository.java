@@ -1,19 +1,18 @@
-package tw.idv.petradisespringboot.mall.model.repo;
-
-import java.util.List;
+package tw.idv.petradisespringboot.mall.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import tw.idv.petradisespringboot.mall.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.vo.OrderDetail;
 
-import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
-import tw.idv.petradisespringboot.mall.model.vo.OrderDetail;
+import java.util.List;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
 	
-    @Query("SELECT new tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO(" +
+    @Query("SELECT new tw.idv.petradisespringboot.mall.dto.OrderDetailDTO(" +
     		"od.id.odId, " +
             "m.name, " +
             "p.pdName, " +

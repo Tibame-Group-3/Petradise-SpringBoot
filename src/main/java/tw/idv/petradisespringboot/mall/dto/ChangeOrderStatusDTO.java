@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.mall.model.dto;
+package tw.idv.petradisespringboot.mall.dto;
 
 import lombok.Data;
 

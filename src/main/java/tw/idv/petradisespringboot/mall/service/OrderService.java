@@ -2,10 +2,10 @@ package tw.idv.petradisespringboot.mall.service;
 
 import java.util.List;
 
-import tw.idv.petradisespringboot.mall.model.dto.AllOrderMasterDTO;
-import tw.idv.petradisespringboot.mall.model.dto.CreateOrderDTO;
-import tw.idv.petradisespringboot.mall.model.dto.OrderDetailDTO;
-import tw.idv.petradisespringboot.mall.model.vo.OrderMaster;
+import tw.idv.petradisespringboot.mall.dto.AllOrderMasterDTO;
+import tw.idv.petradisespringboot.mall.dto.CreateOrderDTO;
+import tw.idv.petradisespringboot.mall.dto.OrderDetailDTO;
+import tw.idv.petradisespringboot.mall.vo.OrderMaster;
 
 public interface OrderService {
 
