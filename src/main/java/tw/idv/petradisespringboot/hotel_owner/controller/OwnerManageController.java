@@ -1,18 +1,26 @@
 package tw.idv.petradisespringboot.hotel_owner.controller;
 
-import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
-import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerAccess;
-import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+
+import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerAccess;
+import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 // 業主管理
 @RestController
@@ -93,5 +101,12 @@ public class OwnerManageController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<?> searchAccess(@RequestParam HotelOwnerAccess ownerAccess) {
+		List<HotelOwnerVO> result = hotelOwnerServiceImpl.findByAccess(ownerAccess);
+		return ResponseEntity.ok(result);
+
 	}
 }

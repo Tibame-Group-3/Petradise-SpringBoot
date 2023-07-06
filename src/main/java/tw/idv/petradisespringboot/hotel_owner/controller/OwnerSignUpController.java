@@ -75,8 +75,8 @@ public class OwnerSignUpController {
 		String email = (String) session.getAttribute("email");
 
 		if (token.equals(storedToken)) {
-			String subject = "註冊成功通知";
-			String text = "請耐心等候審核通知～";
+			String subject = "Petradise註冊通知";
+			String text = "親愛的業主您好,這裡已收到您的註冊申請表單,目前正在審核中,請耐心等候審核通知～";
 			emailService.sendEmail(email, subject, text);
 
 			return "信箱驗證成功";

@@ -32,102 +32,8 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=B612+Mono&amp;display=swap">
 <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-<style>
-.action-banner {
-	background-color: #574f36;
-	padding-top: 0;
-	padding-bottom: 0;
-	color: #fff;
-	font-weight: 700;
-	margin-top: 30px;
-}
-
-.action-banner:after, .action-banner:before {
-	content: "";
-	display: table
-}
-
-.action-banner:after {
-	clear: both
-}
-
-.action-banner .block-facets {
-	float: left;
-	width: 24%;
-	margin-right: 1%;
-	margin-bottom: 20px
-}
-
-.action-banner .block-facets select, .action-banner .block-facets input,
-	.action-banner .block-facets .js-fake-select-input {
-	width: 100%;
-	font-weight: 400;
-	color: #303030;
-	text-transform: capitalize;
-	border-radius: 3px
-}
-
-.card {
-	margin-bottom: 1rem;
-}
-
-.card-body {
-	position: relative;
-	background-color: #ccc;
-}
-
-select {
-	-moz-appearance: none;
-	appearance: none;
-	height: 40px;
-	border: 1px solid #bbccd7;
-	background-color: #fff;
-	border-radius: 0;
-	line-height: 1.5;
-	padding: 0 20px 0 10px;
-	background-image:
-		url(https://www.animalhumanesociety.org/themes/ahs/images/arrow_dropdown.svg);
-	background-repeat: no-repeat;
-	background-position: center right;
-	background-size: 25px 25px;
-}
-
-.container .card .card-img-top {
-	height: 250px;
-}
-
-.body-container {
-	display: flex;
-	justify-content: flex-end;
-	padding-right: 30px;
-}
-
-.image-container {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-}
-
-.btn-create {
-	display: flex;
-	align-items: center;
-	background-color: #fd780f;
-	color: #fff;
-	text-decoration: none;
-	padding: 10px 15px;
-	border-radius: 4px;
-	border: none;
-	margin-right: 40px;
-}
-
-.btn-create img {
-	margin-right: 5px;
-}
-
-.page-title {
-	padding-left: 10px;
-}
-</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="./css/lost.css">
 </head>
 
 <body>
@@ -154,8 +60,8 @@ select {
               <div class="dropdown-divider"
                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
               </div>
-              <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
-              <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+              <a class="dropdown-item" href="/index.html#news-contain" style="font-size: 14px;">最新消息</a>
+              <a class="dropdown-item" href="/index.html#aboutMe-contain" style="font-size: 14px;">關於我們</a>
             </div>
           </li>
 
@@ -244,17 +150,17 @@ select {
 					</div>
 				</div>
 
-				<div class="text-center">
+				<!-- <div class="text-center">
 					<div class="clear-both block-facets">
 						<select class="lostPlace" style="display: block; margin: 0 auto;">
-							<option value="#">全部地區</option>
-							<option value="#">北</option>
-							<option value="#">中</option>
-							<option value="#">南</option>
-							<option value="#">東</option>
+							<option value="全部">全部地區</option>
+							<option value="北">北</option>
+							<option value="中">中</option>
+							<option value="南">南</option>
+							<option value="東">東</option>
 						</select>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -313,259 +219,13 @@ select {
     <script src="../index/js/index.js"></script>
     <script src="../assets/js/login.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- cart icon -->
+	<script src="/shopping/pd_page/assets/js/cartIcon.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
 		integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script type="text/javascript">
-	        const btn_create = document.querySelector('.btn-create');
-	        const option_dog = document.querySelector("#dog");
-	        const option_cat = document.querySelector("#cat");
-	        const option_bird = document.querySelector("#bird");
-	        const option_other = document.querySelector("#other");
-		    btn_create.addEventListener('click', () => {
-		        const targetPageUrl = './lost_post.html';
-		        window.location.href = targetPageUrl;
-		    });
-		    
-		    axios.get("/LostPetArticle/all")
-		    .then(response => {
-		      const jsonData = response.data;
-		      const parentContainer = document.querySelector('.row');
-		      console.log(jsonData);
-
-		      jsonData.forEach(data => {
-		        const base64Images = data.lostPetPic.map(pic => {
-		          return `data:image/*;base64,${pic.lostPetPic}`;
-		        });
-
-		        const imageSrc = base64Images.length > 0 ? base64Images[0] : 'https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg';
-
-		        const card = document.createElement('div');
-		        card.classList.add('col-12', 'col-md-6', 'col-lg-3');
-		        card.innerHTML = `
-		          <div class="card">
-		        	<a href="/lostPet/forum.html?id=${data.articleId}">
-		              <img class="card-img-top" src="${imageSrc}" alt="image">
-		            </a>
-		            <div class="card-body">
-		              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-		              <div class="card-text">${data.text}</div>
-		            </div>
-		          </div>
-		        `;
-		        parentContainer.appendChild(card);
-		      });
-		    })
-		    .catch(error => {
-		      console.error(error);
-		    });
-		    
-		    $(document).ready(function() {
-	    	  $("#speciesSelect").change(function() {
-	    	    var selectedValue = $(this).val();
-	    	    
-	    	    if (selectedValue === "AllType") {
-	    	    	const parentContainer = document.querySelector('.row');
-	    	    	parentContainer.innerHTML = ''; // 清空
-						
-	    	    	axios.get("/LostPetArticle/all")
-	    		    .then(response => {
-	    		      const jsonData = response.data;
-	    		      const parentContainer = document.querySelector('.row');
-	    		      console.log(jsonData);
-
-	    		      jsonData.forEach(data => {
-	    		        const base64Images = data.lostPetPic.map(pic => {
-	    		          return `data:image/*;base64,${pic.lostPetPic}`;
-	    		        });
-
-	    		        const imageSrc = base64Images.length > 0 ? base64Images[0] : 'https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg';
-
-	    		        const card = document.createElement('div');
-	    		        card.classList.add('col-12', 'col-md-6', 'col-lg-3');
-	    		        card.innerHTML = `
-	    		          <div class="card">
-	    		        	<a href="/lostPet/forum.html?id=${data.articleId}">
-	    		              <img class="card-img-top" src="${imageSrc}" alt="image">
-	    		            </a>
-	    		            <div class="card-body">
-	    		              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-	    		              <div class="card-text">${data.text}</div>
-	    		            </div>
-	    		          </div>
-	    		        `;
-	    		        parentContainer.appendChild(card);
-	    		      });
-	    		    })
-	    		    .catch(error => {
-	    		      console.error(error);
-	    		    });
-	    	    } else if (selectedValue === "Dogs") {
-	    	    	const parentContainer = document.querySelector('.row');
-	    	    	parentContainer.innerHTML = ''; // 清空
-	    	    	axios
-	    	    	.get("/LostPetArticle/selectBySpecies", {
-	    	    		params: { species: "狗" },
-	    	    	})
-	    	    	.then(function (response) {
-	    	    		const jsonData = response.data;
-	    	    		const parentContainer = document.querySelector(".row");
-	    	    		console.log(jsonData);
-	    	    		jsonData.forEach((data) => {
-	    	    			const base64Images = data.lostPetPic.map((pic) => {
-	    	    				return `data:image/*;base64,${pic.lostPetPic}`;
-	    	    			});
-	    	    			const imageSrc =
-	    	    				base64Images.length > 0
-	    	    				? base64Images[0]
-	    	    				: "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
-	    	    				const card = document.createElement("div");
-	    	    				card.classList.add("col-12", "col-md-6", "col-lg-3");
-	    	    				card.innerHTML = `
-		    	    	          <div class="card">
-		    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
-		    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
-		    	    	            </a>
-		    	    	            <div class="card-body">
-		    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-		    	    	              <div class="card-text">${data.text}</div>
-		    	    	            </div>
-		    	    	          </div>
-		    	    	        `;
-		    	    	        parentContainer.appendChild(card);
-	    	    		});
-	    	    		console.log(response.data);
-	    	    	})
-	    	    	.catch(function (error) {
-	    	    		console.error(error);
-	    	    	});
-	    	    } else if (selectedValue === "Cats") {
-	    	    	const parentContainer = document.querySelector('.row');
-	    	    	parentContainer.innerHTML = ''; // 清空
-	    	    	axios
-    	    	    .get("/LostPetArticle/selectBySpecies", {
-    	    	      params: { species: "貓" },
-    	    	    })
-    	    	    .then(function (response) {
-    	    	      const jsonData = response.data;
-    	    	      const parentContainer = document.querySelector(".row");
-    	    	      console.log(jsonData);
-    	    	      jsonData.forEach((data) => {
-    	    	        const base64Images = data.lostPetPic.map((pic) => {
-    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
-    	    	        });
-    	    	        const imageSrc =
-    	    	          base64Images.length > 0
-    	    	            ? base64Images[0]
-    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
-    	    	        const card = document.createElement("div");
-    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
-    	    	        card.innerHTML = `
-    	    	          <div class="card">
-    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
-    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
-    	    	            </a>
-    	    	            <div class="card-body">
-    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-    	    	              <div class="card-text">${data.text}</div>
-    	    	            </div>
-    	    	          </div>
-    	    	        `;
-    	    	        parentContainer.appendChild(card);
-    	    	      });
-    	    	      console.log(response.data);
-    	    	    })
-    	    	    .catch(function (error) {
-    	    	      console.error(error);
-    	    	    });
-	    	    	
-	    	    } else if (selectedValue === "Birds") {
-	    	    	const parentContainer = document.querySelector('.row');
-	    	    	parentContainer.innerHTML = ''; // 清空
-	    	    	axios
-    	    	    .get("/LostPetArticle/selectBySpecies", {
-    	    	      params: { species: "鳥" },
-    	    	    })
-    	    	    .then(function (response) {
-    	    	      const jsonData = response.data;
-    	    	      const parentContainer = document.querySelector(".row");
-    	    	      console.log(jsonData);
-    	    	      jsonData.forEach((data) => {
-    	    	        const base64Images = data.lostPetPic.map((pic) => {
-    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
-    	    	        });
-    	    	        const imageSrc =
-    	    	          base64Images.length > 0
-    	    	            ? base64Images[0]
-    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
-    	    	        const card = document.createElement("div");
-    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
-    	    	        card.innerHTML = `
-    	    	          <div class="card">
-    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
-    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
-    	    	            </a>
-    	    	            <div class="card-body">
-    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-    	    	              <div class="card-text">${data.text}</div>
-    	    	            </div>
-    	    	          </div>
-    	    	        `;
-    	    	        parentContainer.appendChild(card);
-    	    	      });
-    	    	      console.log(response.data);
-    	    	    })
-    	    	    .catch(function (error) {
-    	    	      console.error(error);
-    	    	    });
-	    	    	
-	    	    } else if (selectedValue === "Others") {
-	    	    	const parentContainer = document.querySelector('.row');
-	    	    	parentContainer.innerHTML = ''; // 清空
-	    	    	axios
-    	    	    .get("/LostPetArticle/selectBySpecies", {
-    	    	      params: { species: "其他" },
-    	    	    })
-    	    	    .then(function (response) {
-    	    	      const jsonData = response.data;
-    	    	      const parentContainer = document.querySelector(".row");
-    	    	      console.log(jsonData);
-    	    	      jsonData.forEach((data) => {
-    	    	        const base64Images = data.lostPetPic.map((pic) => {
-    	    	          return `data:image/*;base64,${pic.lostPetPic}`;
-    	    	        });
-    	    	        const imageSrc =
-    	    	          base64Images.length > 0
-    	    	            ? base64Images[0]
-    	    	            : "https://www.mindvan.com/dbp/files/cooljobz/cooljobz.com_2111021450.628.jpg";
-    	    	        const card = document.createElement("div");
-    	    	        card.classList.add("col-12", "col-md-6", "col-lg-3");
-    	    	        card.innerHTML = `
-    	    	          <div class="card">
-    	    	            <a href="/lostPet/forum.html?id=${data.articleId}">
-    	    	              <img class="card-img-top" src="${imageSrc}" alt="image">
-    	    	            </a>
-    	    	            <div class="card-body">
-    	    	              <div class="card-title"><a href="/lostPet/forum.html?id=${data.articleId}">${data.title}</a></div>
-    	    	              <div class="card-text">${data.text}</div>
-    	    	            </div>
-    	    	          </div>
-    	    	        `;
-    	    	        parentContainer.appendChild(card);
-    	    	      });
-    	    	      console.log(response.data);
-    	    	    })
-    	    	    .catch(function (error) {
-    	    	      console.error(error);
-    	    	    });
-	    	    }
-	    	  });
-	    	});
-
-
-
-        </script>
+	<script src="./js/lost.js"></script>
 </body>
 
 </html>

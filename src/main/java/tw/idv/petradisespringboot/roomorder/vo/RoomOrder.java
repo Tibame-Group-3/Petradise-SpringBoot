@@ -1,8 +1,11 @@
 package tw.idv.petradisespringboot.roomorder.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tw.idv.petradisespringboot.member.vo.Member;
+import tw.idv.petradisespringboot.roomType.vo.RoomType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -43,4 +46,12 @@ public class RoomOrder {
     @Column(name = "room_od_special_req")
     private String specialReq;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mem_id", insertable = false, updatable = false)
+    private Member member;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_type_id", insertable = false, updatable = false)
+    private RoomType roomType;
 }

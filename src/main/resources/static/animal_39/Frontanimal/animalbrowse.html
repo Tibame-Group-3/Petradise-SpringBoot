@@ -33,6 +33,7 @@
 	href="https://fonts.googleapis.com/css?family=B612+Mono&amp;display=swap">
 <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
 <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+<link rel="shortcut icon" href="/assets/img/fav_icon.png" type="image/x-icon">
 <style>
 
 .action-banner {
@@ -179,8 +180,8 @@ select {
               <div class="dropdown-divider"
                 style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">
               </div>
-              <a class="dropdown-item" href="#news-contain" style="font-size: 14px;">最新消息</a>
-              <a class="dropdown-item" href="#aboutMe-contain" style="font-size: 14px;">關於我們</a>
+              <a class="dropdown-item" href="/index.html#news-contain" style="font-size: 14px;">最新消息</a>
+              <a class="dropdown-item" href="/index.html#aboutMe-contain" style="font-size: 14px;">關於我們</a>
             </div>
           </li>
 
@@ -288,8 +289,7 @@ select {
 							</div>
 						</div>
 						<div
-							class="facet-inactive block-facet--dropdown block block-facets py-4"
-							id="">
+							class="facet-inactive block-facet--dropdown block block-facets py-4">
 							<div class="">
 								<div class="" id="animalSexInput">
 									<select id="animalSex">
@@ -301,8 +301,7 @@ select {
 							</div>
 						</div>
 						<div
-							class="facet-inactive block-facet--dropdown block block-facets block-facet-blockage-group-cats block-block-agegroupcats block- py-4"
-							id="">
+							class="facet-inactive block-facet--dropdown block block-facets block-facet-blockage-group-cats block-block-agegroupcats block- py-4">
 							<div class="f">
 								<div class="" id="animalAgeInput">
 									<select>
@@ -375,6 +374,8 @@ select {
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../../assets/js/login.js"></script>
 	<script src="../../index/js/index.js"></script>
+	<!-- cart icon -->
+	<script src="/shopping/pd_page/assets/js/cartIcon.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -439,26 +440,37 @@ select {
 
                 // 在这里处理接收到的动物列表（response）
                 data.forEach(function(animal) {
-                    var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
-                    var nextPageUrl = 'animal_39/Frontanimal/PET_adopt.html';
-                    var cardHtml =
-                        '<div class="col-12 col-md-6 col-lg-3">' +
-                        '<div class="card">' +
-                        '<a href="' +
-                        nextPageUrl +
-                        '"><img class="card-img-top" src="' +
-                        imageUrl +
-                        '" alt="Card image cap"></a>' +
-                        '<div class="card-body">' +
-                        '<div class="card-title"><a href="#">' +
-                        animal.animalName +
-                        '</a></div>' +
-                        '<div class="card-text">' +
-                        animal.animalInfo +
-                        '</div>' +
-                        '<div class="image-container"><img src=""></div>' +
-                        '</div></div></div>';
-                    $('#animalList').append(cardHtml);
+//                     var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+//                     var nextPageUrl = 'PET_adopt.html';
+//                     var cardHtml =
+//                         '<div class="col-12 col-md-6 col-lg-3">' +
+//                         '<div class="card">' +
+//                         '<a href="' +
+//                         nextPageUrl +
+//                         '"><img class="card-img-top" src="' +
+//                         imageUrl +
+//                         '" alt="Card image cap"></a>' +
+//                         '<div class="card-body">' +
+//                         '<div class="card-title"><a href="#">' +
+//                         animal.animalName +
+//                         '</a></div>' +
+//                         '<div class="card-text">' +
+//                         animal.animalInfo +
+//                         '</div>' +
+//                         '<div class="image-container"><img src=""></div>' +
+//                         '</div></div></div>';
+//                     $('#animalList').append(cardHtml);
+                	  var imageUrl = "data:image/jpeg;base64," + animal.animalPic;
+                      var nextPageUrl = 'PET_adopt.html';
+                      var cardHtml = '<div class="col-12 col-md-6 col-lg-3">' +
+                          '<div class="card">' +
+                          '<a href="' + nextPageUrl + '?animalId=' + animal.animalId + '"><img class="card-img-top" src="' + imageUrl + '" alt="Card image cap"></a>' +
+                          '<div class="card-body">' +
+                          '<div class="card-title"><a href="#">' + animal.animalName + '</a></div>' +
+                          '<div class="card-text">' + animal.animalInfo + '</div>' +
+                          '<div class="image-container"><img src=""></div>' +
+                          '</div></div></div>';
+                      $('#animalList').append(cardHtml);
                 });
 
                 $('.card-img-top').on('click', function() {

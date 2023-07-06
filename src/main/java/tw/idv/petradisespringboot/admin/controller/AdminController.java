@@ -23,9 +23,9 @@ public class AdminController {
     public Admin addAdmin(@RequestBody AdminDTO adminDTO) {
         return service.add(adminDTO);
     }
-    @PutMapping("/id/{id}/modify")
-    Admin modifyAdmin(@PathVariable Integer id, @RequestBody Admin updatedAdmin) {
-        return service.modify(id, updatedAdmin);
+    @PutMapping("/modify")
+    Admin modifyAdmin(@RequestBody UpdateAdminDTO dto) {
+        return service.modify(dto);
     }
     @GetMapping("/id/{id}")
     Admin findById(@PathVariable Integer id){

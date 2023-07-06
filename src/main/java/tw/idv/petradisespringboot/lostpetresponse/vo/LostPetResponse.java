@@ -35,9 +35,6 @@ public class LostPetResponse {
 	@Column(name = "response_id")
 	private Integer responseId;
 	
-	@Column(name = "mem_id")
-	private Integer memId;
-	
 	@ToString.Exclude
 	@JsonBackReference
 	@ManyToOne

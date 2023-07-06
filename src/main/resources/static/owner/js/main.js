@@ -2,11 +2,13 @@ $(document).ready(function() {
 
 	var usernamePage = $('#username-page');
 	var chatPage = $('#chat-page');
+
 	var hotelName = getQueryParam('hotelName');
 	var role = getQueryVariable("role");
 	if (role === "owner") {
 		$("#name").prop("readonly",true).css("background-color","lightgray");
 		$("#name").val(hotelName);
+
 	
 	}
 

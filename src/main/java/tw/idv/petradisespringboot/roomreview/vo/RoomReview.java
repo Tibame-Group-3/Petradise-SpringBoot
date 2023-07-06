@@ -1,6 +1,8 @@
 package tw.idv.petradisespringboot.roomreview.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import tw.idv.petradisespringboot.roomorder.vo.RoomOrder;
 
 import javax.persistence.*;
 
@@ -25,6 +27,12 @@ public class RoomReview {
     private Integer score;
     @Column(name = "room_review_content")
     private String content;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_order_id", insertable = false, updatable = false)
+    private RoomOrder roomOrder;
+
 
     @Override
     public String toString() {
