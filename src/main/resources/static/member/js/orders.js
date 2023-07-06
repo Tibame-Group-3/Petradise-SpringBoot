@@ -84,7 +84,7 @@
                     </td>
 
                 </tr>`
-            ;
+                ;
             tableBody.innerHTML += row;
         }
         addDeleteListener();
@@ -221,8 +221,8 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
+            },
+            body: JSON.stringify(data)
         })
             .then(response => {
                 if (response.ok) {
@@ -240,19 +240,9 @@
     function convertOrderStatus(odStatus) {
         switch (odStatus) {
             case '0':
-                return '待結帳';
+                return '訂單成立';
             case '1':
                 return '訂單失效';
-            case '2':
-                return '訂單成立';
-            case '3':
-                return '備貨中';
-            case '4':
-                return '已出貨';
-            case '5':
-                return '已送達';
-            case '6':
-                return '訂單完成';
         }
     }
 
@@ -284,7 +274,7 @@
 // ===========================================================================================================
 // JQuery
 // (() => {
-//     (() => {        
+//     (() => {
 //         $(document).ready(function () {
 //             guardIsSignedIn();
 //             fetchOrderMaster();
@@ -453,7 +443,7 @@
 //                     <tr>
 //                         <th scope="row" style="color: #a67c52;">收件地址</th>
 //                         <td id="reci_add">${orderJsonData[0].reciAdd}</td>
-//                     </tr>             
+//                     </tr>
 //                 ` : ''}
 
 //             </tbody>
