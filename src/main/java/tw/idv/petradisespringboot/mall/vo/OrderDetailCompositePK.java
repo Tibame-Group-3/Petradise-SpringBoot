@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.mall.model.vo;
+package tw.idv.petradisespringboot.mall.vo;
 
 import java.io.Serializable;
 import java.util.Objects;

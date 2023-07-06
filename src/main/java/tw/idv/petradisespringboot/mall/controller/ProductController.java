@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.mall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tw.idv.petradisespringboot.mall.model.vo.Product;
+import tw.idv.petradisespringboot.mall.vo.Product;
 import tw.idv.petradisespringboot.mall.service.ProductService;
 
 import java.util.List;
