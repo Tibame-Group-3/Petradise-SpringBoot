@@ -180,13 +180,14 @@
                 <div form-container>
                     <form id="AnimalCorporation" form action="#" method="#"
                           class="contact_form">
+                         <!-- <input name="AnimalCorporation" hidden>-->
                         <!-- <div class="form-row"> -->
                         <div class="form-group ">
 
                             <label for="owner_name">
                                 <div class="text">姓名:</div>
                             </label> <input id="owner_name" class="form-control" type="owner_name" readonly
-                                            placeholder="業主姓名" name="owner_name">
+                                             name="owner_name">
                             <div class="messages"></div>
                         </div>
                         <div class="form-group ">
@@ -194,7 +195,7 @@
                             <label for="owner_id">
                                 <div class="text">帳號:</div>
                             </label> <input id="corpAccount" class="form-control" type="corpAccount" readonly
-                                            placeholder="帳號" name="corpAccount">
+                                             name="corpAccount">
                             <div class="messages"></div>
                         </div>
 
@@ -203,7 +204,7 @@
                             <label for="email">
                                 <div class="text">Email:</div>
                             </label> <input id="email" class="form-control" type="email" readonly
-                                            autocomplete="username" placeholder="Email">
+                                            autocomplete="username" >
                             <div id="errorContainer"></div>
 
 
@@ -213,7 +214,7 @@
                             <label for="password">
                                 <div class="text">密碼:</div>
                             </label> <input id="password" class="form-control" type="password" readonly
-                                            placeholder="Password" name="密碼"
+                                             name="密碼"
                                             autocomplete="current-password">
 
                         </div>
@@ -223,7 +224,7 @@
                             <label for="phone">
                                 <div class="text">電話:</div>
                             </label> <input id="phone" class="form-control" type="text" readonly
-                                            placeholder="0912-345-678" name="電話">
+                                             name="電話">
                             <div class="messages"></div>
                         </div>
                         <!-- </div> -->
@@ -232,7 +233,7 @@
                             <label for="corpName">
                                 <div class="text">法人名稱:</div>
                             </label> <input id="corpName" class="form-control" type="text" readonly
-                                            placeholder="填入名稱" name="corpName">
+                                            name="corpName">
                             <div class="messages"></div>
                         </div>
 
@@ -241,14 +242,14 @@
                                 <div class="text">法人登記案號:</div>
                             </label> <input type="text" readonly class="form-control" name="corpRegisteredId"
                                             id="corpRegisteredId" maxlength="30"
-                                            placeholder="請輸入法人登記案號"></span>
+                                          ></span>
                         </div>
 
                         <div class="form-group">
                             <label for="address">
                                 <div class="text">收容地址:</div>
                             </label> <input type="text" readonly class="form-control" name="address"
-                                            id="address" maxlength="100" placeholder="請輸入登記之地址">
+                                            id="address" maxlength="100" >
                         </div>
 
 
@@ -333,7 +334,7 @@
   
     var id = getAnimalCorporationId();
     console.log(id);
-
+	let AnimalCorp;
     // 先取得原資料並渲染於修改表單
     $.ajax({
         url: "/animalCorporation/id=" + id,
@@ -351,7 +352,7 @@
             $("#corpRegisteredId").val(AnimalCorporation.corpRegisteredId);
 
             $("#address").val(AnimalCorporation.corpAddress);
-
+            AnimalCorp=AnimalCorporation;
 
         },
         error: function (error) {
@@ -371,15 +372,19 @@
             corpName: $("#corpName").val(),
             corpRegisteredId: $("#corpRegisteredId").val(),
             corpAddress: $("#address").val(),
+            appliedStatus:AnimalCorp.appliedStatus,
+            corpAccess:AnimalCorp.corpAccess
         };
 
+        
+        
         $.ajax({
             url: "/animalCorporation/update",
             type: "POST",
             data: JSON.stringify(updateanimal),
             contentType: "application/json",
             success: function (response) {
-                alert("確認修改?");
+                //alert("確認修改?");
 
             },
             error: function (error) {
@@ -391,7 +396,8 @@
     //編輯
     document.getElementById("editButton").addEventListener("click", enableEdit);
 
-    function enableEdit() {
+    function enableEdit(e) {
+    	e.preventDefault();
         //可编辑狀態
         document.getElementById("owner_name").readOnly = false;
         document.getElementById("corpAccount").readOnly = true;

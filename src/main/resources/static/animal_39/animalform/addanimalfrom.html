@@ -237,14 +237,14 @@ div.text {
 					<br>
 					<output class="output" id="imageOutput"></output>
 				</div>
-							
+
 
 
 							<div class="button-container">
-								
 								<button class="save-button" type="submit">新增</button>
 								<button id="submitButton" class="save-button" type="button">送出</button>
-                            </div>
+							</div>
+
 						</form>
 					</div>
 				</div>
@@ -325,9 +325,11 @@ $('#animalForm').submit(function(e) {
                 });
             }
 
-            // 绑定点击事件
-//             $('#submitButton').on('click', submitAnimal);
-//         };
+            //绑定点击事件
+            $('#submitButton').on('click', submitAnimal);
+           
+                  };
+
 
         reader.readAsDataURL(files[0]);
     }

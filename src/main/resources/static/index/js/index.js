@@ -32,7 +32,7 @@ function setupMemberCenterNavigation(isSignedIn) {
 
 function setupSigninNavigation() {
     $('.navigate-signin')
-        .attr('href', `/member/signin.html?redirect=${window.location.pathname}`);
+        .attr('href', `/member/signin.html?redirect=${encodeURIComponent(window.location.href)}`);
 }
 
 //毛孩旅館 加入我們
