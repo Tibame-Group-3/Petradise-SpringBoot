@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
         }
         var member = repository.save(newMember);
         String token = saveEmailVerification(member);
-        sendVerificationEmail(host, member.getEmail(), token);
+        sendVerificationEmail(host, member, token);
         return mapper.map(member, MemberDTO.class);
     }
 
@@ -84,10 +84,13 @@ public class MemberServiceImpl implements MemberService {
         return token;
     }
 
-    private void sendVerificationEmail(String host, String emailAddress, String token) {
-        String subject = "請驗證您的電子郵件";
-        String text = "請點擊以下連結驗證您的電子郵件: http://" + host + "/member/verify.html?token=" + token;
-        emailService.sendEmail(emailAddress, subject, text);
+    private void sendVerificationEmail(String host, Member member, String token) {
+        String subject = "Petradise - 會員電子郵件驗證";
+        String text = "Petradise會員 " +
+                member.getAccount() +
+                " 您好，\n" +
+                "請點擊以下連結驗證您的電子郵件: http://" + host + "/member/verify.html?token=" + token;
+        emailService.sendEmail(member.getEmail(), subject, text);
     }
 
     @Override
