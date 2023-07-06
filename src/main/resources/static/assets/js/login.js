@@ -26,7 +26,7 @@ function redirectToLogin(redirectLink) {
         window.location.href = '/member/signin.html?redirect=' + encodeURIComponent(redirectLink);
         return;
     }
-    window.location.href = '/member/signin.html?redirect=' + encodeURIComponent(window.location.pathname);
+    window.location.href = '/member/signin.html?redirect=' + encodeURIComponent(window.location.href);
 }
 
 function logout() {
