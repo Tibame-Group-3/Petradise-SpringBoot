@@ -4,6 +4,7 @@
     const nameElement = document.getElementById('name');
     const accountElement = document.getElementById('account');
     const passwordElement = document.getElementById('password');
+    const confirmPasswordElement = document.getElementById('password-confirm');
     const birthdayElement = document.getElementById('birthday');
     const phoneElement = document.getElementById('phone');
     const emailElement = document.getElementById('email');
@@ -63,9 +64,11 @@
             [nameElement, '請輸入姓名'],
             [accountElement, '請輸入帳號'],
             [passwordElement, '請輸入密碼'],
+            // New validation for password
+            [passwordElement, '請輸入至少八個字符的密碼，並且包含數字和英文字母', /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/],
             [birthdayElement, '請輸入生日'],
-            [phoneElement, '請輸入電話號碼'],
-            [phoneElement, '請輸入符合格式的台灣電話號碼', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
+            [phoneElement, '請輸入行動電話號碼'],
+            [phoneElement, '請輸入符合格式的台灣行動電話號碼(09開頭並包含十個字元)', /^(\+886\-|\(02\)|09)[0-9\-]{7,10}$/],
             [emailElement, '請輸入電子郵件'],
             [emailElement, '請輸入符合格式的電子郵件', /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/],
             [addressElement, '請輸入地址']
@@ -83,6 +86,13 @@
         if (citySelectElement.selectedIndex === -1 || districtSelectElement.selectedIndex === -1) {
             showInvalidFeedback(citySelectElement, 'Please select your city.');
             showInvalidFeedback(districtSelectElement, 'Please select your district.');
+            isFormValid = false;
+            return isFormValid;
+        }
+
+        // Check password confirmation
+        if (passwordElement.value !== confirmPasswordElement.value) {
+            showInvalidFeedback(confirmPasswordElement, '確認密碼與密碼不符');
             isFormValid = false;
             return isFormValid;
         }

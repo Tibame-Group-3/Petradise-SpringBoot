@@ -162,6 +162,9 @@ button:active {
 	cursor:url('./img/graycat.png');
 	
 }
+#owner_id{
+cursor:not-allowed;
+}
 
 
 </style>
@@ -729,14 +732,14 @@ button:active {
                 html: `
                 <div style="position: relative;"> 
                     <label style="width: 70px">新密碼</label>    
-                         <input id ="new_password" name="new_password"  type="password" maxlength="20" style="width: 200px">
+                         <input id ="new_password" name="new_password"  type="password" maxlength="20" style="width: 200px" placeholder="8~20字元數字、英文">
                          <i class="toggle-password-icon fas fa-eye" style="position: absolute; right: 50px; cursor:pointer"></i>
                             
                 </div>
                 <br>
                 <div>
                     <label style="width: 70px">確認密碼</label>    
-                         <input  id ="re_password" name="re_password"  type="password" maxlength="20" style="width: 200px">           
+                         <input  id ="re_password" name="re_password"  type="password" maxlength="20" style="width: 200px" placeholder="請再輸入一次密碼">           
                 </div>`
 
             }).then((result)=>{

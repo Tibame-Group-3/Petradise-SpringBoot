@@ -202,16 +202,16 @@ $(document).ready(function () {
             if (result.isConfirmed) {
 
                 // 從session的 shoppingItem checkoutItem清掉----------------------------------
-                const shoppingItem = JSON.parse(sessionStorage.getItem("shoppingItem"));
+                let shoppingItem = JSON.parse(sessionStorage.getItem("shoppingItem"));
                 delete shoppingItem[productId];
                 sessionStorage.setItem("shoppingItem", JSON.stringify(shoppingItem));
 
                 // 取消勾選被移除的 checkbox
-                const checkbox = $(".cart-items").closest(`#${productId}`).find("input[type='checkbox']");
+                let checkbox = $(".cart-items").closest(`#${productId}`).find("input[type='checkbox']");
                 if (checkbox.prop("checked")) {
                     // alert(checkbox);
                     checkbox.prop("checked", false);
-                    const checkoutItem = JSON.parse(sessionStorage.getItem("checkoutItem"));
+                    let checkoutItem = JSON.parse(sessionStorage.getItem("checkoutItem"));
                     delete checkoutItem[productId];
                     sessionStorage.setItem("checkoutItem", JSON.stringify(checkoutItem));
                 }
