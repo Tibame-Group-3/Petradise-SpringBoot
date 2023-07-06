@@ -2,7 +2,7 @@ package tw.idv.petradisespringboot.mall.service;
 
 import java.util.List;
 
-import tw.idv.petradisespringboot.mall.model.vo.Sale;
+import tw.idv.petradisespringboot.mall.vo.Sale;
 
 public interface SaleService {
 	

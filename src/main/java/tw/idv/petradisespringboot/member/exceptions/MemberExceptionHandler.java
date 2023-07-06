@@ -48,7 +48,7 @@ public class MemberExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> buildErrorResponse(Exception ex, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
+        body.put("message", "伺服器出現未知錯誤，請通知開發人員");
         return new ResponseEntity<>(body, status);
     }
 

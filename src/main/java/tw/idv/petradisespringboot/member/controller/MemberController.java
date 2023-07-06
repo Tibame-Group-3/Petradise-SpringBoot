@@ -33,8 +33,8 @@ class MemberController {
     }
 
     @PostMapping("/sign-up")
-    ResponseEntity<MemberDTO> signUp(@RequestBody SignUpDTO dto) {
-        return new ResponseEntity<>(service.signUp(dto), HttpStatus.CREATED);
+    ResponseEntity<MemberDTO> signUp(@RequestHeader String host, @RequestBody SignUpDTO dto) {
+        return new ResponseEntity<>(service.signUp(host, dto), HttpStatus.CREATED);
     }
 
     @GetMapping("/id={id}")

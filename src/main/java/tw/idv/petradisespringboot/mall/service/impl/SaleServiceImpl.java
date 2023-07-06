@@ -1,23 +1,11 @@
 package tw.idv.petradisespringboot.mall.service.impl;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-import javax.persistence.EntityNotFoundException;
-
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
-import tw.idv.petradisespringboot.mall.model.dto.SaleDTO;
-import tw.idv.petradisespringboot.mall.model.repo.ProductDAO;
-import tw.idv.petradisespringboot.mall.model.repo.SaleProjectRepository;
-import tw.idv.petradisespringboot.mall.model.repo.SaleRepository;
-import tw.idv.petradisespringboot.mall.model.vo.Product;
-import tw.idv.petradisespringboot.mall.model.vo.Sale;
-import tw.idv.petradisespringboot.mall.model.vo.SaleCompositePK;
-import tw.idv.petradisespringboot.mall.model.vo.SaleProject;
+import tw.idv.petradisespringboot.mall.repo.SaleRepository;
+import tw.idv.petradisespringboot.mall.vo.Sale;
 import tw.idv.petradisespringboot.mall.service.SaleService;
 
 @Service

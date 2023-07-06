@@ -3,8 +3,8 @@ package tw.idv.petradisespringboot.mall.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.idv.petradisespringboot.mall.model.repo.ProductDAO;
-import tw.idv.petradisespringboot.mall.model.vo.Product;
+import tw.idv.petradisespringboot.mall.repo.ProductDAO;
+import tw.idv.petradisespringboot.mall.vo.Product;
 import tw.idv.petradisespringboot.mall.service.ProductService;
 
 import java.util.List;

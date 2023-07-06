@@ -171,19 +171,9 @@
     function convertOrderStatus(odStatus) {
         switch (odStatus) {
             case '0':
-                return '待結帳';
+                return '訂單成立';
             case '1':
                 return '訂單失效';
-            case '2':
-                return '訂單成立';
-            case '3':
-                return '備貨中';
-            case '4':
-                return '已出貨';
-            case '5':
-                return '已送達';
-            case '6':
-                return '訂單完成';
         }
     }
 

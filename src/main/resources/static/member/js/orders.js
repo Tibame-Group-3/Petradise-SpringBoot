@@ -3,7 +3,7 @@
         guardIsSignedIn();
         fetchOrderMaster();
     });
-    
+
     $('#table_body').on('click', '#order_detail_check', function () {
         const orderId = $(this).closest('tr').find('.order_id').data('order-id');
         fetchOrderDetail(orderId);
@@ -87,7 +87,7 @@
                 ;
             tableBody.innerHTML += row;
         }
-        deleteOrder();
+        addDeleteListener();
     }
 
     function fetchOrderDetail(orderId) {
@@ -176,11 +176,13 @@
 
     }
 
-    function deleteOrder() {
-        const deleteButton = document.getElementById('#delete_order');
+    function addDeleteListener() {
+        const deleteButton = document.querySelectorAll('#delete_order');
+        console.log('delete buttons: ' + deleteButton);
         Array.from(deleteButton).forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
                 // any dash is replaced by the capitalization of the next letter, converting the name to camelcase.
+                console.log(e);
                 const orderId = button.dataset.orderId; // HTMLElement.dataset.testValue
                 showDeleteAlert(orderId);
             });
@@ -204,54 +206,43 @@
                     'success'
                 )
                 updateOrderStatus(orderId);
+
             }
         })
     }
 
-    // x-www-form-urlencoded
     function updateOrderStatus(orderId) {
-        // Construct the FormData object
-        const formData = new FormData();
-        formData.append('orderId', orderId);
-        formData.append('odStatus', '1');
-      
-        fetch('/updateOrderStatus', {
-          method: 'POST',
+        const data = {
+            odId: orderId,
+            odStatus: '1'
+        }
 
-          // if sending request using the FormData, it will be automatically set to this.
+        fetch('/order/updateOrderStatus', {
+            method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data'
-          },
-          body: formData
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-          .then(response => {
-            if (response.ok) {
-              console.log('Order status updated seccessfully.');
-            } else {
-              console.log('Failed to update order status.');
-            }
-          })
-          .catch(error => {
-            console.error(error => console.error('There was a problem with the fetch operation', error));
-          });
-      }
+            .then(response => {
+                if (response.ok) {
+                    console.log('Order status updated seccessfully.');
+                    location.reload();
+                } else {
+                    console.log('Failed to update order status.');
+                }
+            })
+            .catch(error => {
+                console.error(error => console.error('There was a problem with the fetch operation', error));
+            });
+    }
 
     function convertOrderStatus(odStatus) {
         switch (odStatus) {
             case '0':
-                return '待結帳';
+                return '訂單成立';
             case '1':
                 return '訂單失效';
-            case '2':
-                return '訂單成立';
-            case '3':
-                return '備貨中';
-            case '4':
-                return '已出貨';
-            case '5':
-                return '已送達';
-            case '6':
-                return '訂單完成';
         }
     }
 
@@ -276,26 +267,25 @@
                 return '全家取貨';
         }
     }
-    
-})();
 
+})();
 
 
 // ===========================================================================================================
 // JQuery
 // (() => {
-//     (() => {        
+//     (() => {
 //         $(document).ready(function () {
 //             guardIsSignedIn();
 //             fetchOrderMaster();
 //             deleteOrder();
 //         })
-    
+
 //         $('#table_body').on('click', '#order_detail_check', function () {
 //             const orderId = $(this).closest('tr').find('.order_id').data('order-id');
 //             fetchOrderDetail(orderId);
 //         })
-    
+
 //         function fetchOrderMaster() {
 //             fetch(`/order/memberIdAndOrderdStatusNot=${getMemberId()}`)
 //                 .then(response => {
@@ -307,7 +297,7 @@
 //                 .then(onReceivedJSON)
 //                 .catch(error => console.error('There was a problem with the fetch operation', error));
 //         }
-    
+
 //         function onReceivedJSON(jsonData) {
 //             const tableBody = document.getElementById('table_body');
 //             console.log(jsonData);
@@ -320,7 +310,7 @@
 //                         <td class="reci_name" style="color: #a67c52;">${i.reciName}</td>
 //                         <td class="reci_phone" style="color: #a67c52;">${i.reciPhone}</td>
 //                         <td class="order_status" style="color: #a67c52;">${convertOrderStatus(i.odStatus)}</td>
-    
+
 //                         <!-- 查看訂單 -->
 //                         <td class="view_order_work">
 //                             <!-- Button trigger modal -->
@@ -328,12 +318,12 @@
 //                                 data-bs-target="#staticBackdrop">
 //                                 詳情
 //                             </button>
-    
+
 //                             <!-- Modal -->
 //                             <div class="modal fade" id="staticBackdrop"
 //                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 //                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    
+
 //                                 <!-- Modal-dialog -->
 //                                 <div
 //                                     class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -345,16 +335,16 @@
 //                                                 data-bs-dismiss="modal"
 //                                                 aria-label="Close"></button>
 //                                         </div>
-    
+
 //                                         <!-- Light-Box-Body -->
 //                                         <div class="modal-body">
-    
+
 //                                             <table class="table" id="order_detail">
-    
+
 //                                             </table>
-    
+
 //                                         </div>
-    
+
 //                                         <div class="modal-footer">
 //                                             <button type="button" class="btn btn-primary"
 //                                                 data-bs-dismiss="modal">確定</button>
@@ -363,19 +353,19 @@
 //                                 </div>
 //                             </div>
 //                         </td>
-    
+
 //                         <td>
 //                             <button type="button" class="btn btn-danger delete_order" data-order-id="${i.odId}">
 //                                 取消訂單
 //                             </button>
 //                         </td>
-    
+
 //                     </tr>`
 //                     ;
 //                 tableBody.innerHTML += row;
 //             }
 //         }
-    
+
 //         function fetchOrderDetail(orderId) {
 //             fetch(`/order/showOrderDetail/id=${orderId}`, {
 //                 method: 'GET'
@@ -389,12 +379,12 @@
 //                 .then(onReceivedOrderDetailJson)
 //                 .catch(error => console.error('There was a problem with the fetch operation', error));
 //         }
-    
+
 //         function onReceivedOrderDetailJson(orderJsonData) {
 //             console.log(orderJsonData);
 //             const orderDetail = document.getElementById('order_detail');
 //             const productInfo = orderJsonData.map(order => `${order.pdName} x ${order.pdAmount}`).join(' / ');
-    
+
 //             const table = `
 //             <thead>
 //                 <tr>
@@ -453,20 +443,20 @@
 //                     <tr>
 //                         <th scope="row" style="color: #a67c52;">收件地址</th>
 //                         <td id="reci_add">${orderJsonData[0].reciAdd}</td>
-//                     </tr>             
+//                     </tr>
 //                 ` : ''}
-    
+
 //             </tbody>
 //         `;
 //             orderDetail.innerHTML = table;
-    
+
 //         }
-    
+
 //         function deleteOrder() {
 //             const deleteButton = document.querySelector('.delete_order');
 //             deleteButton.addEventListener('click', showDeleteAlert());
 //         }
-    
+
 //         function showDeleteAlert(event) {
 //             // any dash is replaced by the capitalization of the next letter, converting the name to camelcase.
 //             const orderId = event.target.datadet.orderId; // HTMLElement.dataset.testValue
@@ -489,12 +479,12 @@
 //                 }
 //             })
 //         }
-    
+
 //         function displayNoneOrder() {
-            
+
 //         }
-    
-    
+
+
 //         function convertOrderStatus(odStatus) {
 //             switch (odStatus) {
 //                 case '0':
@@ -513,7 +503,7 @@
 //                     return '訂單完成';
 //             }
 //         }
-    
+
 //         function convertOrderPayment(odPay) {
 //             switch (odPay) {
 //                 case '0':
@@ -524,7 +514,7 @@
 //                     return '匯款轉帳';
 //             }
 //         }
-    
+
 //         function convertOrderDelivery(odShip) {
 //             switch (odShip) {
 //                 case '0':
@@ -535,7 +525,7 @@
 //                     return '全家取貨';
 //             }
 //         }
-    
+
 //         function initDataTable() {
 //             $('#my_table').DataTable({
 //                 // JSON cannot use ''

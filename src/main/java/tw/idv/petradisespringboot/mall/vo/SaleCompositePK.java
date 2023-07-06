@@ -1,4 +1,4 @@
-package tw.idv.petradisespringboot.mall.model.vo;
+package tw.idv.petradisespringboot.mall.vo;
 
 import java.io.Serializable;
 
@@ -12,13 +12,13 @@ import lombok.Data;
 @Data
 @Embeddable
 @Component
-public class FavoriteCompositePK implements Serializable {
-	private static final long serialVersionUID = -7337370425866004595L;
+public class SaleCompositePK implements Serializable {
+	private static final long serialVersionUID = 86256744017994317L;
 
 	@Column(name = "pd_id")
 	private Integer pdId;
 	
-	@Column(name = "mem_id")
-	private Integer memId;
+	@Column(name = "sale_pro_id")
+	private Integer saleProId;
 
 }

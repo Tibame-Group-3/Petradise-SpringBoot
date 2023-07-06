@@ -54,10 +54,10 @@ public class AnimalController {
 //	}
 
 	// 更新动物信息
-	@PostMapping("/update/{id}")
-	public Animal updateAnimal(@PathVariable Integer id, @RequestBody Animal animal) {
+	@PostMapping("/update/{animalId}")
+	public Animal updateAnimal(@PathVariable Integer animalId, @RequestBody Animal animal) {
 		// 先通过ID查找要更新的动物
-		Animal existingAnimal = service.findAnimalById(id);
+		Animal existingAnimal = service.findAnimalById(animalId);
 		if (existingAnimal != null) {
 			// 更新动物的相关属性
 			existingAnimal.setAnimalName(animal.getAnimalName());
@@ -72,6 +72,10 @@ public class AnimalController {
 			return null;
 		}
 	}
+	
+	
+	
+	
 
 //	@GetMapping("/search")
 //	public List<Animal> searchAnimals(@RequestParam(value = "animaltype", required = false) String animalType,
