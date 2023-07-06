@@ -8,6 +8,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="./fonts/fontawesome-all.min.css">
+    <link rel="shortcut icon" href="/assets/img/fav_icon.png" type="image/x-icon">
 
     <style>
         * {
@@ -279,13 +280,17 @@
     });
 </script>
 <script>
+var id = getAnimalCorporationId();
+console.log(id);
+
+const urlParams = new URLSearchParams(window.location.search);
+const animalId = urlParams.get('id');
+console.log(animalId);
 
 
-   
-    var id = getAnimalCorporationId();
     // 先取得原資料並渲染於修改表單
     $.ajax({
-        url: `/animals/${id}`,
+        url: `/animals/${animalId}`,
         method: "GET",
         dataType: "json",
         success: function (animal) {
@@ -330,56 +335,6 @@
         });
     });
 	
-	
-	
-	var urlParams = new URLSearchParams(window.location.search);
-	var id = urlParams.get('id');
-	// 先取得原資料並渲染於修改表單
-	$.ajax({
-	    url: "/animals/"+ id,
-	    method: "GET",
-	    dataType: "json",
-	    success: function (animal) {
-	    	console.log(animal);
-	        // 將取得的資料放在修改表單裡
-	        $("#corpid").val(animal.corpId);
-	        $("#animalname").val(animal.animalName);
-	        $("#animal_type").val(animal.animalType);
-	        $("#animalsex").find("option[value='" + animal.animalSex + "']").prop("selected", true);
-	        $("#animalage").val(animal.animalAge);
-	        $("#animalstatus").find("option[value='" + animal.animalStatus + "']").prop("selected", true);
-	    },
-	    error: function (error) {
-	        console.error("AJAX Error: " + error);
-	    }
-	});
-	
-	// 更新Animal
-	$("#updateanimalForm").submit(function (event) {
-	    event.preventDefault();
-	    const updateanimal = {
-	        corpId: $("input[name='corpid']").val(),
-	        animalName: $("input[name='animalname']").val(),
-	        animalType: $("#animal_type").val(),
-	        animalSex: $("select[name='animalsex']").val(),
-	        animalAge: $("#animalage").val(),
-	        animalStatus: $("select[name='animalstatus']").val(),
-	    };
-	
-	    $.ajax({
-	        url: "/animals/update/" + id,
-	        type: "POST",
-	        data: JSON.stringify(updateanimal),
-	        contentType: "application/json",
-	        success: function (response) {
-	            alert("確認修改?");
-	            window.location.href = "/animal_39/adopedmanagement/adoptedAnimal.html";
-	        },
-	        error: function (xhr, status, error) {
-	            console.log("AJAX Error: " + error);
-	        }
-	    });
-	});
 
 
 </script>
