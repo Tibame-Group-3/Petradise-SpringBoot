@@ -108,7 +108,7 @@ public class RoomOrderServiceImpl implements RoomOrderService {
 
 
     @Override
-    public List<ManageRoomOrderDTO> getManageRoomOrderDTOs() {
-        return repository.findManageRoomOrderDTOAll();
+    public List<ManageRoomOrderDTO> getManageRoomOrderDTOs(Integer hotelId) {
+        return repository.findManageRoomOrderDTOAll(hotelId);
     }
 }

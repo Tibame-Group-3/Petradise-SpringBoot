@@ -32,6 +32,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=B612+Mono&amp;display=swap">
 <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 <link rel="stylesheet" href="./css/forum.css">
 </head>
 
@@ -93,17 +94,6 @@
                     <a class="nav-link" href="/front-product-list/front-product-list.html" style="width: 100px;margin: 10px 0px 0px;">寵物商城</a>
                 </li>
 
-                <!--          <li class="nav-item dropdown" style="width: 100px;margin: 0px 0px 0px 10px">-->
-                <!--            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"-->
-                <!--              data-bs-auto-close="outside" href="#" style="margin: 10px 0px 0px;" target="_parent">客服中心</a>-->
-                <!--            <div class="dropdown-menu" style="min-width: 110px;margin: 1px 0px 0px;border: 0px none rgba(33,37,41,0);">-->
-                <!--              <div class="dropdown-divider" style="color: rgba(33,37,41,0);margin: 4px 0px;border-color: rgb(241,236,209);">-->
-                <!--              </div>-->
-                <!--              <a class="dropdown-item" href="#" style="font-size: 14px">常見問題</a>-->
-                <!--              <a class="dropdown-item" href="#" style="font-size: 14px">服務認證</a>-->
-                <!--              <a class="dropdown-item" href="#" style="font-size: 14px">聯絡我們</a>-->
-                <!--            </div>-->
-                <!--          </li>-->
 
             </ul>
 
@@ -201,7 +191,7 @@
     <script src="../index/js/index.js"></script>
     <script src="../assets/js/login.js"></script>
     <!-- cart icon -->
-    <script src="/shopping/pd_page/assets/js/cartIcon.js"></script>
+    <script src="../shopping/pd_page/assets/js/cartIcon.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
@@ -216,10 +206,7 @@
 	        const targetPageUrl = './lost.html';
 	        window.location.href = targetPageUrl;
 	    });
-    	
-    		
     		document.querySelector('.button-res').addEventListener("click", function () {
-    			guardIsSignedIn();
         	    Swal.fire({
         	        title: '回覆文章ㄅ',
         	        input: 'textarea',
@@ -232,7 +219,6 @@
         	                let jsonData = {
         	                    "articleId": id,
         	                    "response": {
-        	                        "memId": 1,
         	                        "responseContent": text,
         	                    }
         	                };
@@ -284,8 +270,7 @@
 			
 
           const articleHTML = `
-            <div class="article-metaline"><span class="article-meta-tag">作者</span><span class="article-meta-value">${data.memId}</span></div>
-            <div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value">${data.title}</span></div>
+            <div class="article-metaline"><span class="article-meta-tag">標題</span><span class="article-meta-value">[求助] ${data.title}</span></div>
             <div class="article-metaline"><span class="article-meta-tag">時間</span><span class="article-meta-value">${data.update}</span></div>
             <div>
                 <label for="lost_place">遺失地點：${data.lostPlace}</label>
