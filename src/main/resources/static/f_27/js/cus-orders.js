@@ -241,13 +241,13 @@
 
             // Show a confirmation dialog
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Sure about that?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, cancel it!'
+                confirmButtonColor: '#dd6b55',
+                cancelButtonColor: '#aaa',
+                cancelButtonText: '再想一下下',
+                confirmButtonText: '確認取消'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Remove the "取消訂單" button
