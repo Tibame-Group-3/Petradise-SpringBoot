@@ -67,6 +67,11 @@ public class PetController {
         }
     }
 
+    @GetMapping("/options")
+    ResponseEntity<?> getPetOptions() {
+        return ResponseEntity.ok(service.getPetOptions());
+    }
+
 }
 
 class PetNotFoundException extends RuntimeException {
