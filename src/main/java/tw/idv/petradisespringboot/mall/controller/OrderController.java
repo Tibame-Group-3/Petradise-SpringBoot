@@ -44,7 +44,7 @@ public class OrderController {
 		return orderService.findOrderDetailById(id);
 	}
 
-	@PostMapping(value = "/add", consumes = { "application/json" })
+	@PutMapping(value = "/add", consumes = { "application/json" }) // default. Cuz using REST API.
 	public ResponseEntity<?> addOrder(@RequestBody CreateOrderDTO dto) {
 		return ResponseEntity.ok(orderService.createOrder(dto));
 	}
