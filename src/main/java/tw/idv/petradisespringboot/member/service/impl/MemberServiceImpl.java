@@ -61,6 +61,9 @@ public class MemberServiceImpl implements MemberService {
         if (!dto.getIsEmailVerified()) {
             throw new MemberNotVerifiedException("請先驗證電子郵件");
         }
+        if (Objects.equals(dto.getAccess(), MemberAccess.INACTIVE)) {
+            throw new LoginException("帳號已被停權");
+        }
         return dto;
     }
 
