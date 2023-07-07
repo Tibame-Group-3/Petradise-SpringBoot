@@ -7,7 +7,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.email.EmailService;
-import tw.idv.petradisespringboot.hotel_owner.exceptions.AccountNotFoundException;
 import tw.idv.petradisespringboot.member.dto.MemberDTO;
 import tw.idv.petradisespringboot.member.dto.SignUpDTO;
 import tw.idv.petradisespringboot.member.dto.UpdateDTO;
@@ -63,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
             throw new MemberNotVerifiedException("請先驗證電子郵件");
         }
         if (Objects.equals(dto.getAccess(), MemberAccess.INACTIVE)) {
-            throw new AccountNotFoundException("帳號已被停權");
+            throw new LoginException("帳號已被停權");
         }
         return dto;
     }
