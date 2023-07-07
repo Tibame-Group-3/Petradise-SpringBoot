@@ -44,6 +44,11 @@ public class OwnerSignUpController {
 			session.setAttribute("hotel_owner", hotelOwnerVO);
 			System.out.println("Image data: " + Arrays.toString(imgData));
 			hotelOwnerServiceImpl.insert(hotelOwnerVO);
+			String email = (String) session.getAttribute("email");
+			String subject = "Petradise註冊通知";
+			String text = "親愛的業主您好,這裡已收到您的註冊申請表單,目前正在審核中,請耐心等候審核通知～";
+			emailService.sendEmail(email, subject, text);
+
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -72,12 +77,12 @@ public class OwnerSignUpController {
 		HttpSession session = req.getSession();
 
 		String storedToken = (String) session.getAttribute("email_verification_token");
-		String email = (String) session.getAttribute("email");
+//		String email = (String) session.getAttribute("email");
 
 		if (token.equals(storedToken)) {
-			String subject = "Petradise註冊通知";
-			String text = "親愛的業主您好,這裡已收到您的註冊申請表單,目前正在審核中,請耐心等候審核通知～";
-			emailService.sendEmail(email, subject, text);
+//			String subject = "Petradise信箱驗證通知";
+//			String text = "親愛的業主您好,此信箱已完成驗證,請接續完成表單";
+//			emailService.sendEmail(email, subject, text);
 
 			return "信箱驗證成功";
 		}

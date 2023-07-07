@@ -321,7 +321,7 @@ console.log(animalId);
         };
 
         $.ajax({
-            url: "/animals/update/" + id,
+            url: "/animals/update/" + animalId,
             type: "POST",
             data: JSON.stringify(updateanimal),
             contentType: "application/json",

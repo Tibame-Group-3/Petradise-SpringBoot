@@ -45,10 +45,23 @@ public class MemberExceptionHandler extends ResponseEntityExceptionHandler {
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler({
+            Exception.class
+    })
+    public ResponseEntity<?> handleUnknownException(
+            Exception ex,
+            WebRequest request
+    ) {
+        return buildErrorResponse("伺服器出現未知錯誤，請通知開發人員", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private ResponseEntity<?> buildErrorResponse(Exception ex, HttpStatus status) {
+        return buildErrorResponse(ex.getMessage(), status);
+    }
+     private ResponseEntity<?> buildErrorResponse(String message, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
+        body.put("message", message);
         return new ResponseEntity<>(body, status);
     }
 
