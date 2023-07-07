@@ -49,13 +49,16 @@
 	                    stompClient.connect({}, onConnected, onError);
 	                    loadMessages(hotelId);
 	                    
-	                } else {
-	                    alert(res); // 如果登入失敗，則顯示錯誤消息
-	                }
+	                } 
 	            },
 	            error: function(xhr, status, error) {
 	                // 在此處處理錯誤
 	                console.error('Failed to login:', error);
+	                Swal.fire({
+						icon:'error',
+						title:'帳號或密碼錯誤',
+						
+					})
 	            }
 	        });
 	    }
