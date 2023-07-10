@@ -113,9 +113,32 @@ button.accent {
     text-align: center;
 }
 
+/* .username-page-container { */
+/*     background: #fff; */
+/*     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); */
+/*     border-radius: 2px; */
+/*     width: 100%; */
+/*     max-width: 500px; */
+/*     display: inline-block; */
+/*     margin-top: 42px; */
+/*     vertical-align: middle; */
+/*     position: relative; */
+/*     padding: 35px 55px 35px; */
+/*     min-height: 250px; */
+/*     position: absolute; */
+/*     top: 50%; */
+/*     left: 0; */
+/*     right: 0; */
+/*     margin: 0 auto; */
+/*     margin-top: -160px; */
+/* } */
+
 .username-page-container {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border: 10px solid; 
+    border-image-source: linear-gradient(45deg, #f3ec78, #af4261);
+    border-image-slice: 1;
     border-radius: 2px;
     width: 100%;
     max-width: 500px;
@@ -131,6 +154,19 @@ button.accent {
     right: 0;
     margin: 0 auto;
     margin-top: -160px;
+    animation: animate 2s linear infinite; /* Add animation */
+}
+
+@keyframes animate {
+    0% {
+        border-image-source: linear-gradient(45deg, #f8c544, #ffe7dd);
+    }
+    50% {
+        border-image-source: linear-gradient(45deg, #ffe7dd, #f8c544);
+    }
+    100% {
+        border-image-source: linear-gradient(45deg, #f8c544, #ffe7dd);
+    }
 }
 
 .username-page-container .username-submit {
@@ -142,16 +178,43 @@ button.accent {
     height: 100%;
 }
 
+/* .chat-container { */
+/*     max-width: 700px; */
+/*     margin-left: auto; */
+/*     margin-right: auto; */
+/*     background-color: #fff; */
+/*     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); */
+/*     margin-top: 30px; */
+/*     height: calc(100% - 60px); */
+/*     max-height: 600px; */
+/*     position: relative; */
+/* } */
 .chat-container {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #fff;
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     margin-top: 30px;
     height: calc(100% - 60px);
     max-height: 600px;
     position: relative;
+    border: 10px solid;
+    border-image-source: linear-gradient(45deg, #f3ec78, #af4261);
+    border-image-slice: 1;
+    animation: boxGlow 2s infinite;
+}
+
+@keyframes boxGlow {
+    0% {
+        border-image-source: linear-gradient(45deg, #f8c544, #ffe7dd);
+    }
+    50% {
+        border-image-source: linear-gradient(45deg, #ffe7dd, #f8c544);
+    }
+    100% {
+        border-image-source: linear-gradient(45deg, #f8c544, #ffe7dd);
+    }
 }
 
 #chat-page ul {
@@ -345,6 +408,7 @@ button.accent {
 .messageBox{
 	border:1px solid black;
 	display: inline-block;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 	padding:5px 10px;
 	background-color:lightgreen;
   	border-radius: 10px; /* 设置边框圆角半径为20像素 */

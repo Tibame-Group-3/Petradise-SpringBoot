@@ -1,5 +1,6 @@
 package tw.idv.petradisespringboot.lostpetarticle.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import tw.idv.petradisespringboot.lostpetarticle.repo.LostPetArticleRepository;
 import tw.idv.petradisespringboot.lostpetarticle.service.LostPetArticleService;
 import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetArticle;
-import tw.idv.petradisespringboot.lostpetarticle.vo.LostPetPic;
 
 @Service
 public class LostPetArticleServiceImpl implements LostPetArticleService{
@@ -22,10 +22,21 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 
 	@Override
 	public List<LostPetArticle> getArticlesWithStatus() {
+//	    List<LostPetArticle> articles = lostPetArticleRepository.findAll();
+//	    List<LostPetArticle> filteredArticles = articles.stream()
+//	            .filter(article -> "0".equals(article.getArticleStatus()))
+//	            .collect(Collectors.toList());
+		
 	    List<LostPetArticle> articles = lostPetArticleRepository.findAll();
-	    List<LostPetArticle> filteredArticles = articles.stream()
-	            .filter(article -> "0".equals(article.getArticleStatus()))
-	            .collect(Collectors.toList());
+	    List<LostPetArticle> filteredArticles = new ArrayList<>();
+
+	    for (LostPetArticle article : articles) {
+	        if ("0".equals(article.getArticleStatus())) {
+	            filteredArticles.add(article);
+	        }
+	    }
+
+
 	    return filteredArticles;
 	}
 	
@@ -76,13 +87,38 @@ public class LostPetArticleServiceImpl implements LostPetArticleService{
 
 	@Override
 	public List<LostPetArticle> findBySpecies(String species) {
-	    return lostPetArticleRepository.findBySpecies(species);
+	    List<LostPetArticle> articles = lostPetArticleRepository.findBySpecies(species);
+	    List<LostPetArticle> filteredArticles = new ArrayList<>();
+
+	    for (LostPetArticle article : articles) {
+	        if ("0".equals(article.getArticleStatus())) {
+	            filteredArticles.add(article);
+	        }
+	    }
+
+	    return filteredArticles;
 	}
 
 	@Override
 	public List<LostPetArticle> findByMemId(Integer memId) {
-		return lostPetArticleRepository.findByMemId(memId);
+	    List<LostPetArticle> articles = lostPetArticleRepository.findByMemId(memId);
+	    List<LostPetArticle> filteredArticles = new ArrayList<>();
+
+	    for (LostPetArticle article : articles) {
+	        if (article.getArticleStatus().equals("0")) {
+	            filteredArticles.add(article);
+	        }
+	    }
+//	    List<LostPetArticle> articles = lostPetArticleRepository.findByMemId(memId);
+//
+//	    List<LostPetArticle> filteredArticles = articles.stream()
+//	        .filter(article -> article.getStatus().equals("0"))
+//	        .collect(Collectors.toList());
+
+
+	    return filteredArticles;
 	}
+
 
 	@Override
 	public LostPetArticle findById(Integer id) {

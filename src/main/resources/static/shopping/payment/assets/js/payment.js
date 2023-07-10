@@ -178,7 +178,7 @@ $('.confirm-payment').on('click', function () {
     }
 
     fetch('/order/add', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },

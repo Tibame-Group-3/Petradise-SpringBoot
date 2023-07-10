@@ -171,7 +171,7 @@ $(function() {
 	     	
 	      }else if(parseInt(selectedValue) === 1){
 	    	  Swal.fire({
-		    	  iconHtml:`<img src= "./img/cry.gif" style="with 200px; height:200px;">`,
+		    	  iconHtml:`<img src= "./img/cry.gif" style="with 100px; height:100px;">`,
 		    	  title:"業主編號 : " + hotelId +"<br>" + "業主名稱 : "+  hotelName +"<br>" + "已刪除該筆資料"
 		    	  }).then((result)=>{
 		    		  if(result.isConfirmed){
