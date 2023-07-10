@@ -138,7 +138,9 @@
         $.ajax({
             url: `/room-order/hotel-name/${id}`,
             method: 'GET',
-            success: onReceivedHotelName,
+            success: function (name) {
+                onReceivedHotelName(id, name);
+            },
             error: function () {
                 console.log('Error loading hotel name for Order ID:', `${id}`);
             }
