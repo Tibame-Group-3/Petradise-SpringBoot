@@ -27,9 +27,13 @@ public interface HotelOwnerService {
 	// 查詢權限
 	List<HotelOwnerVO> getStatus();
 
+	List<HotelOwnerVO> getStatus2();
+
 	List<HotelOwnerVO> findByAccess(HotelOwnerAccess ownerAccess);
 
 	void updateOwnerStatus(Integer hotelId, String hotelStatus);
 
 	HotelOwnerVO login(String account, String password);
+
+	List<HotelOwnerVO> findKeyword(String keyword);
 }

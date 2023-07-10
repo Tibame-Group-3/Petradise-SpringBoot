@@ -17,4 +17,6 @@ public interface HotelOwnerRepository extends JpaRepository<HotelOwnerVO, Intege
 	List<HotelOwnerVO> findByhotelId(Integer hotelId);
 
 	List<HotelOwnerVO> findByOwnerAccess(HotelOwnerAccess ownerAccess);
+
+	List<HotelOwnerVO> findAll();
 }
