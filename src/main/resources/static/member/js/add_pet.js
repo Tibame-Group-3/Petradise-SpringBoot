@@ -1,11 +1,79 @@
 (() => {
+
+    const petTypeSelect = document.querySelector('#type');
+    const petSizeSelect = document.querySelector('#size');
+
     document.addEventListener('DOMContentLoaded', function() {
         guardIsSignedIn();
-        setupPetPicPreview();
+        fetchPetOptions();
+        createPetPicPreview();
         setupFormSubmit();
     });
 
-    function setupPetPicPreview() {
+    async function fetchPetOptions() {
+        try {
+            const response = await fetch('/pets/options');
+            const options = await response.json();
+            const petTypes = options.petType;
+            const petSizes = options.petSize;
+            populatePetTypeOptions(petTypes);
+            populatePetSizeOptions(petSizes);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function populatePetTypeOptions(petTypes) {
+        petTypes.forEach(petType => {
+            petTypeSelect.appendChild(createPetTypeOption(petType));
+        });
+    }
+
+    function populatePetSizeOptions(petSizes) {
+        petSizes.forEach(petSize => {
+            petSizeSelect.appendChild(createPetSizeOption(petSize));
+        });
+    }
+
+    function createPetTypeOption(petType) {
+        const option = document.createElement('option');
+        option.value = petType;
+        option.textContent = getPetTypeText(petType);
+        return option;
+    }
+
+    function createPetSizeOption(petSize) {
+        const option = document.createElement('option');
+        option.value = petSize;
+        option.textContent = getPetSizeText(petSize);
+        return option;
+    }
+
+    function getPetTypeText(petType) {
+        switch (petType.toUpperCase()) {
+            case 'DOG':
+                return '狗';
+            case 'CAT':
+                return '貓';
+            case 'BIRD':
+                return '鳥';
+            case 'OTHER':
+                return '其他';
+        }
+    }
+
+    function getPetSizeText(petSize) {
+        switch (petSize.toUpperCase()) {
+            case 'S':
+                return '小型';
+            case 'M':
+                return '中型';
+            case 'L':
+                return '大型';
+        }
+    }
+
+    function createPetPicPreview() {
         let petPicsInput = document.querySelector('#petPics');
         let imagePreview = document.querySelector('#imagePreview');
 
@@ -41,7 +109,7 @@
                 size: formData.get('size'),
                 memberId: Number(getMemberId()),
             };
-            let petPics = Array.from(formData.getAll('petPics')).map(pic => {
+            let petPicPromises = Array.from(formData.getAll('petPics')).map(pic => {
                 return new Promise((resolve, reject) => {
                     let fileReader = new FileReader();
                     fileReader.readAsDataURL(pic);
@@ -55,7 +123,7 @@
                 });
             });
 
-            Promise.all(petPics)
+            Promise.all(petPicPromises)
                 .then(results => {
                     const data = { pet, pics: results };
                     return fetch('/pets/add', {

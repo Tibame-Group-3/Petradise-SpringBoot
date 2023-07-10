@@ -1,13 +1,16 @@
 package tw.idv.petradisespringboot.pet.service.impl;
 
 import org.springframework.stereotype.Service;
+import tw.idv.petradisespringboot.pet.dto.PetOptionsDTO;
 import tw.idv.petradisespringboot.pet.repo.PetPicRepository;
 import tw.idv.petradisespringboot.pet.repo.PetRepository;
 import tw.idv.petradisespringboot.pet.service.PetService;
 import tw.idv.petradisespringboot.pet.dto.NewPetDTO;
 import tw.idv.petradisespringboot.pet.vo.Pet;
 import tw.idv.petradisespringboot.pet.vo.PetPic;
+import tw.idv.petradisespringboot.pet.vo.enums.PetSize;
 import tw.idv.petradisespringboot.pet.vo.enums.PetStatus;
+import tw.idv.petradisespringboot.pet.vo.enums.PetType;
 
 import javax.transaction.Transactional;
 import java.util.Base64;
@@ -84,4 +87,8 @@ public class PetServiceImpl implements PetService {
         }
     }
 
+    @Override
+    public PetOptionsDTO getPetOptions() {
+        return new PetOptionsDTO(PetType.values(), PetSize.values());
+    }
 }
