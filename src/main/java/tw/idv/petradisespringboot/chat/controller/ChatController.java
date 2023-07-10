@@ -37,7 +37,6 @@ public class ChatController {
 	@GetMapping("/api/messages")
 	@ResponseBody
 	public List<ChatMessage> getRecentMessages(@RequestParam String hotelId) {
-//	public List<ChatMessage> getRecentMessages(@RequestParam String hotelName) {
 		System.out.println(hotelId);
 		List<ChatMessage> messages = new ArrayList<>(chatMessageRepository.findAll());
 
@@ -65,7 +64,6 @@ public class ChatController {
 		chatMessage.setChatType(ChatType.CHAT);
 		chatMessage.setHotelId(hotelId);
 		chatMessageRepository.save(chatMessage);
-//		chatMessage.setHotelName(chatMessage.getHotelName());
 		return chatMessage; // 返回時會將訊息送至/topic/public
 	}
 

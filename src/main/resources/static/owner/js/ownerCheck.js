@@ -175,7 +175,7 @@ $(function() {
 		    	  title:"業主編號 : " + hotelId +"<br>" + "業主名稱 : "+  hotelName +"<br>" + "已刪除該筆資料"
 		    	  }).then((result)=>{
 		    		  if(result.isConfirmed){
-		    		      clearPage();
+		    	
 		    		  }else {
 		    			
 		    		  }
