@@ -190,26 +190,12 @@ $(document).ready(function() {
 		return false;
 	}
 
-	/**
-	 * 從後端接受訊息後要進行的處理
-	 * @param payload 後端送來的訊息
-	 * @returns
-	 */
 	function onMessageReceived(payload) {
 		var message = JSON.parse(payload.body);
 		appendMessage(message);
 		messageArea.scrollTop(messageArea[0].scrollHeight);
 	}
 
-
-
-
-
-	/**
-	 * 取得使用者名稱的元素
-	 * @param sender 使用者名稱
-	 * @returns
-	 */
 	function getUsernameElement(sender) {
 		var usernameElement = document.createElement('span');
 		var usernameText = document.createTextNode(sender);
