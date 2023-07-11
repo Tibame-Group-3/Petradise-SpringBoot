@@ -11,25 +11,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tw.idv.petradisespringboot.hotel_owner.service.impl.HotelOwnerServiceImpl;
+import tw.idv.petradisespringboot.hotel_owner.service.HotelOwnerService;
 import tw.idv.petradisespringboot.hotel_owner.vo.HotelOwnerVO;
 
 @RestController
 @RequestMapping("/ownerAccount")
 public class HotelOwnerAccount {
 
-//	@Autowired
-//	private HttpSession session;
-
 	@Autowired
-	private HotelOwnerServiceImpl hotelOwnerServiceImpl;
+	private HotelOwnerService hotelOwnerService;
 
 //	查是哪個業主登入
 	@GetMapping("/{hotelId}")
 	public ResponseEntity<HotelOwnerVO> getHotelOwner(@PathVariable("hotelId") Integer hotelId) {
-
 //			個人測試
-		HotelOwnerVO hotelOwnerVO = hotelOwnerServiceImpl.findByPrimaryKey(hotelId);
+		HotelOwnerVO hotelOwnerVO = hotelOwnerService.findByPrimaryKey(hotelId);
 
 		// 回應前端
 		if (hotelOwnerVO != null) {
@@ -51,7 +47,7 @@ public class HotelOwnerAccount {
 	// 修改業主資料
 	@PostMapping("/{hotelId}")
 	public ResponseEntity<String> updateHotelOwner(@PathVariable int hotelId, @RequestBody HotelOwnerVO hotelOwnerVO) {
-		HotelOwnerVO updateOwner = hotelOwnerServiceImpl.findByPrimaryKey(hotelId);
+		HotelOwnerVO updateOwner = hotelOwnerService.findByPrimaryKey(hotelId);
 
 		updateOwner.setOwnerName(hotelOwnerVO.getOwnerName());
 		updateOwner.setOwnerEmail(hotelOwnerVO.getOwnerEmail());
@@ -64,7 +60,7 @@ public class HotelOwnerAccount {
 			updateOwner.setOwnerPassword(hotelOwnerVO.getOwnerPassword());
 		}
 		// 執行更新操作
-		hotelOwnerServiceImpl.update(updateOwner);
+		hotelOwnerService.update(updateOwner);
 		return ResponseEntity.ok("更新成功");
 	}
 }

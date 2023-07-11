@@ -491,8 +491,11 @@
                     }
                 });
 
-                // Event listener for edit confirm button click
-                $('.edit-confirm-button').submit(function () {
+                // // Event listener for edit confirm button click
+                // $('.edit-confirm-button').submit(function () {
+                // Event listener for edit form submission
+                $('.edit-form').submit(function (event) {
+                    event.preventDefault(); // Prevent form submission
                     var editedData = {
                         id: data.id,
                         name: $('#edit-name').val(),
@@ -512,7 +515,7 @@
 
                     // Make an AJAX request to the server
                     $.ajax({
-                        url: 'http://localhost:8080/admin/modify',
+                        url: '/admin/modify',
                         type: 'PUT',
                         contentType: 'application/json',
                         data: JSON.stringify(editedData),

@@ -151,4 +151,24 @@ public class HotelOwnerServiceImpl implements HotelOwnerService {
 		return hotelOwnerRepository.findByOwnerAccess(ownerAccess);
 	}
 
+	@Override
+	public List<HotelOwnerVO> getStatus2() {
+
+		List<HotelOwnerVO> list = hotelOwnerRepository.findAll();
+		list = list.stream().filter(vo -> "2".equals(vo.getHotelStatus())).collect(Collectors.toList());
+		return list;
+
+	}
+
+	@Override
+	public List<HotelOwnerVO> findKeyword(String keyword) {
+		List<HotelOwnerVO> list = getStatus2();
+		if (keyword != null) {
+			list = list.stream()
+					.filter(vo -> vo.getOwnerName().contains(keyword) || vo.getHotelName().contains(keyword))
+					.collect(Collectors.toList());
+		}
+		return list;
+
+	}
 }

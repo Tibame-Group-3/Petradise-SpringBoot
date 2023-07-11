@@ -17,7 +17,7 @@ body {
     font-size: 1rem;
     line-height: 1.58;
     color: #333;
-    background-image:url('../img/chatback.gif');
+    background-image:url('../img/animal-gd8400bf6c_1920.jpg');
     background-repeat: no-repeat; /* 設定背景圖片不重複 */
   	background-position: left; /* 將背景圖片置中 */
   	background-size: bottom; /* 確保圖片完整顯示在背景區域內 */
@@ -26,16 +26,7 @@ body {
     height: 100%;
 }
 
-/* body:before { */
-/*     height: 50%; */
-/*     width: 100%; */
-/*     position: absolute; */
-/*     top: 0; */
-/*     left: 0; */
-/*     background: #008080; */
-/*     content: ""; */
-/*     z-index: 0; */
-/* } */
+
 
 .clearfix:after {
     display: block;
@@ -113,25 +104,7 @@ button.accent {
     text-align: center;
 }
 
-/* .username-page-container { */
-/*     background: #fff; */
-/*     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); */
-/*     border-radius: 2px; */
-/*     width: 100%; */
-/*     max-width: 500px; */
-/*     display: inline-block; */
-/*     margin-top: 42px; */
-/*     vertical-align: middle; */
-/*     position: relative; */
-/*     padding: 35px 55px 35px; */
-/*     min-height: 250px; */
-/*     position: absolute; */
-/*     top: 50%; */
-/*     left: 0; */
-/*     right: 0; */
-/*     margin: 0 auto; */
-/*     margin-top: -160px; */
-/* } */
+
 
 .username-page-container {
     background: #fff;
@@ -178,17 +151,7 @@ button.accent {
     height: 100%;
 }
 
-/* .chat-container { */
-/*     max-width: 700px; */
-/*     margin-left: auto; */
-/*     margin-right: auto; */
-/*     background-color: #fff; */
-/*     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27); */
-/*     margin-top: 30px; */
-/*     height: calc(100% - 60px); */
-/*     max-height: 600px; */
-/*     position: relative; */
-/* } */
+
 .chat-container {
     max-width: 700px;
     margin-left: auto;
@@ -375,7 +338,7 @@ button.accent {
     margin-left: -80px;
 }
 
-/* Popup arrow */
+
 .popup .popuptext::after {
     content: "";
     position: absolute;
@@ -387,14 +350,12 @@ button.accent {
     border-color: #ff8080 transparent transparent transparent;
 }
 
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 0.5s;
     animation: fadeIn 0.5s
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
     from {opacity: 0;} 
     to {opacity: 1;}
@@ -411,7 +372,7 @@ button.accent {
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 	padding:5px 10px;
 	background-color:lightgreen;
-  	border-radius: 10px; /* 设置边框圆角半径为20像素 */
+  	border-radius: 10px;
 
 }
 h2{

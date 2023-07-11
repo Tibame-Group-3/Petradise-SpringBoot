@@ -1,17 +1,23 @@
 (() => {
     let member;
+    let districtData;
 
     const nameInput = document.getElementById('name');
     const birthdayInput = document.getElementById('birthday');
     const phoneInput = document.getElementById('phone');
     const emailInput = document.getElementById('email');
+    const citySelectElement = document.getElementById('city');
+    const districtSelectElement = document.getElementById('district');
     const addressInput = document.getElementById('address');
 
     document.addEventListener('DOMContentLoaded', function () {
         guardIsSignedIn();
         preventSpaceInput();
-        fetchMember();
+        Promise.all([fetchMember(), fetchDistrictData()]).then(() => {
+            initSelectedAddress(member, districtData);
+        });
         document.getElementById('form').addEventListener('submit', handleSubmit);
+        citySelectElement.addEventListener('change', handleCityChange);
     });
 
     function preventSpaceInput() {
@@ -25,13 +31,16 @@
         });
     }
 
-    function fetchMember() {
+    async function fetchMember() {
         const memberId = getMemberId();
         const url = `/members/id=${memberId}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(json => member = json)
-            .then(() => displayMember(member));
+        try {
+            const response = await fetch(url);
+            member = await response.json();
+            displayMember(member);
+        } catch(e) {
+            console.log("Error: " + e);
+        }
     }
 
     function displayMember(member) {
@@ -40,7 +49,6 @@
         birthdayInput.value = member.birthday;
         phoneInput.value = member.phone;
         emailInput.value = member.email;
-        addressInput.value = member.address;
         // Continue for all fields
     }
 
@@ -56,7 +64,9 @@
         const birthday = birthdayInput.value;
         const phone = phoneInput.value;
         const email = emailInput.value;
-        const address = addressInput.value;
+        const address = citySelectElement.options[citySelectElement.selectedIndex].text
+            + districtSelectElement.value
+            + addressInput.value;
 
         const newMember = member;
         newMember.name = name;
@@ -147,6 +157,14 @@
             }
         }
 
+        // Select validation
+        if (citySelectElement.selectedIndex === -1 || districtSelectElement.selectedIndex === -1) {
+            showInvalidFeedback(citySelectElement, 'Please select your city.');
+            showInvalidFeedback(districtSelectElement, 'Please select your district.');
+            isFormValid = false;
+            return isFormValid;
+        }
+
         return isFormValid;
     }
 
@@ -187,4 +205,47 @@
         window.location.href = "/member/profile.html";
     }
 
+    async function fetchDistrictData() {
+        try {
+            const response = await fetch('/members/districts');
+            const data = await response.json();
+            districtData = data;
+            populateCitySelect(data);
+        } catch(e) {
+            console.log("Error:" + e);
+        }
+    }
+
+    function populateCitySelect(data) {
+        const cityOptions = data.map((cityInfo, index) => `<option value=${index}>${cityInfo.name}</option>`);
+        citySelectElement.innerHTML = cityOptions.join('');
+        handleCityChange();
+    }
+
+    function handleCityChange() {
+        const cityIndex = citySelectElement.value;
+        const districtInfo = districtData[cityIndex];
+        populateDistrictSelect(districtInfo);
+    }
+
+    function populateDistrictSelect(districtInfo) {
+        const districtOptions = districtInfo.districts.map(district => `<option value=${district.name}>${district.name}</option>`);
+        districtSelectElement.innerHTML = districtOptions.join('');
+    }
+
+    function initSelectedAddress(member, districtData) {
+        const cityIndex = districtData.findIndex(cityInfo => member.address.includes(cityInfo.name));
+        if (cityIndex !== -1) {
+            citySelectElement.value = cityIndex;
+            handleCityChange();
+            const districtIndex = districtData[cityIndex].districts.findIndex(district => member.address.includes(district.name));
+            if (districtIndex !== -1) {
+                districtSelectElement.value = districtData[cityIndex].districts[districtIndex].name;
+                const cityName = districtData[cityIndex].name;
+                const districtName = districtData[cityIndex].districts[districtIndex].name;
+                const cityDistrictName = cityName + districtName;
+                addressInput.value = member.address.replace(`${cityDistrictName}`, '');
+            }
+        }
+    }
 })();
