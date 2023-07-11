@@ -44,12 +44,12 @@ public class OrderController {
 		return orderService.findOrderDetailById(id);
 	}
 
-	@PutMapping(value = "/add", consumes = { "application/json" }) // default. Cuz using REST API.
+	@PostMapping(value = "/add", consumes = { "application/json" }) // default. Cuz using REST API.
 	public ResponseEntity<?> addOrder(@RequestBody CreateOrderDTO dto) {
 		return ResponseEntity.ok(orderService.createOrder(dto));
 	}
 
-	@PostMapping("/updateOrderStatus")
+	@PatchMapping("/updateOrderStatus")
 	public ResponseEntity<?> updateOrderStatus(@RequestBody ChangeOrderStatusDTO dto) {
 		try {
 			orderService.updateOrderStatus(dto.getOdId(), dto.getOdStatus());

@@ -218,7 +218,7 @@
         }
 
         fetch('/order/updateOrderStatus', {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },

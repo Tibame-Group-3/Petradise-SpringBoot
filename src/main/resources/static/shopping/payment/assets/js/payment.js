@@ -160,16 +160,17 @@ $('.confirm-payment').on('click', function () {
 
         orderJsonData = {
             orderMaster: {
-                // memId: $(memId).val(), // ...
-                memId: 1,
+                memId: +(localStorage.getItem('memberId')), // ...
+                // memId: 45,
                 priceOri: +priceOri,
                 priceShip: 60,
                 priceOd: +priceOri + 60,
                 odPay: OrderPayment($('#sel1').val()),
                 odShip: OrderDelivery($('#sel2').val()),
-                reciName: $('.recipient-name').val(),
-                reciPhone: $('.recipient-phone').val(),
-                reciAdd: $('#recipient-address').val()
+                reciName: $('.reci-name').val(),
+                reciPhone: $('.reci-phone').val(),
+                reciAdd: $('#recipient-address').val(), 
+                reciStore: $('.reci-store').val()
             },
             products: []
         };
@@ -178,7 +179,7 @@ $('.confirm-payment').on('click', function () {
     }
 
     fetch('/order/add', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
