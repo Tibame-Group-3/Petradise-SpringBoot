@@ -77,7 +77,7 @@ public class LostPetArticleController {
 
 	@GetMapping("/selectBySpecies")
 	ResponseEntity<List<LostPetArticle>> findBySpecies(@RequestParam("species") String species) {
-	    List<LostPetArticle> articles;
+	    List<LostPetArticle> articles = lostPetArticleService.getArticlesWithStatus();
 	    
 	    switch (species) {
 	    case "貓":
